@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import BoardList from '../views/BoardList.vue'
 import BoardDetails from '../views/BoardDetails.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,16 @@ Vue.use(VueRouter)
     path: '/board',
     name: 'BoardList',
     component: BoardList
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: Login
   },
   {
     path: '/board/:id',
