@@ -1,6 +1,6 @@
 <template>
   <div class="board-preview">
-      <pre>{{board.name}}</pre>
+      <pre>{{board.title}}</pre>
   </div>
 </template>
 

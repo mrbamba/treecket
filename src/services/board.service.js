@@ -4,7 +4,7 @@ export const boardService = {
     query,
     getById,
     update,
-    getEmptyBoard,
+    getNewBoard,
     addBoard,
 };
 
@@ -20,15 +20,14 @@ function update(board) {
     return httpService.put(`board/${board._id}`, board)
 }
 
-async function addBoard(board) {
-    return await httpService.post(`board`, board)
+function addBoard(board) {
+    return httpService.post(`board`, board)
 }
 
-function getEmptyBoard() {
+function getNewBoard(boardSettings) {
     return {
-        "_id": "qeovinerv",
-        "name": "FrontEnd",
-        "background": "#fff",
+        "title": boardSettings.title,
+        "background": boardSettings.background,
         "nextId": {
             "activities": 102,
             "labels": 102,

@@ -14,24 +14,18 @@ export default {
     name:"BoardList",
     data() {
       return {
-        showAddBoard: false,
-        boards: [
-          {
-            name:"board 1",
-            _id:1234
-          },
-          {
-             name:"board 2",
-            _id:456
-          },
-          {
-            name:"board 3",
-            _id:9876
-          }
-        ]
+        showAddBoard: false
       }
     },
-    components:{
+    created() {      
+        this.$store.dispatch('loadBoards');
+    },
+    computed: {
+      boards() {
+        return this.$store.getters.boards;
+      }
+    },
+    components: {
         BoardPreview,
         AddBoard
     }

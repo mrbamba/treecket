@@ -1,6 +1,6 @@
 <template>
     <div class="add-board">
-        <input @keyup.enter="addBoard" type="text" placeholder="Add board title">
+        <input @keyup.enter="addBoard" v-model="boardSettings.title" type="text" placeholder="Add board title" />
     </div>
 </template>
 
@@ -8,10 +8,18 @@
 import { boardService } from "../services/board.service.js";
 export default {
     name: "AddBoard",
+    data() {
+        return {
+            boardSettings: {
+                title: '',
+                background: '#eee'
+            }
+        }
+    },
     methods: {
         addBoard() {
-            // Get board title and board color
-            console.log('Add new board')
+            const newBoard = boardService.getNewBoard(this.boardSettings);
+            this.$store.dispatch('addBoard', newBoard);
         }
     }
 }

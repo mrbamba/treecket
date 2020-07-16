@@ -9,19 +9,26 @@ export default {
     },
   },
   getters: {
+    boards(state) {
+      console.log(state.boards)
+      return state.boards;
+    },
     currBoard(state) {
       return state.currBoard;
     },
   },
   mutations: {
+    setBoards(state, { boards }) {
+      state.boards = boards;
+    },
+    setBoard(state, { board }) {
+      state.currBoard = board;
+    },
     addBoard(state, { board }) {
       state.boards.push(board);
     },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
-    },
-    setBoard(state, { board }) {
-      state.currBoard = board;
     },
     removeTicket(state, { id }) {
       const ticketIndex = state.board.group.ticket.findIndex(
@@ -40,10 +47,19 @@ export default {
     },
   },
   actions: {
+    async loadBoards({ commit }) {
+      const boards = await boardService.query();
+      commit({type: 'setBoards', boards})
+    },
     async loadBoard({ commit }, boardId ) {
       const board = await boardService.getById(boardId);
       commit({type: 'setBoard', board})
     },
+    async addBoard({ commit, state }, board) {
+      console.log('adding:', {board})
+      await boardService.addBoard(board);
+      commit({ type: 'addBoard', board });
+    }
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')
     //     socket.emit('sendMsg', msg)
