@@ -1,12 +1,26 @@
 <template>
-  <div>
+  <div class="board-list">
       <h1>BoardList</h1>
+      <board-preview v-for="board in boards" :board="board" :key="board._id"/>
   </div>
 </template>
 
 <script>
+import BoardPreview from "@/components/BoardPreview.vue"
 export default {
-    name:"BoardList"
+    name:"BoardList",
+    props:{
+      boards:{
+        type:Array,
+        require:true
+      }
+    },
+    components:{
+      BoardPreview
+    },
+    created(){
+      console.log(this.boards)
+    }
 
 }
 </script>
