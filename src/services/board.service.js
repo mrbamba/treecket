@@ -30,10 +30,10 @@ function getEmptyBoard(){
         "name": "FrontEnd",
         "background": "#fff",
         "nextId":{
-            "activities":"a101",
-            "labels":"l101",
-            "groups":"g101",
-            "tickets":"t101"
+            "activities":102,
+            "labels":102,
+            "groups":102,
+            "tickets":102
         },
         "members": [
             {
