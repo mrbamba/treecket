@@ -1,6 +1,7 @@
 <template>
-  <div class="treecket-app">
-    <board-list :boards="boards" />
+  <div class="boards-list">
+    <h2>BoardList</h2>
+      <board-preview v-for="board in boards" :board="board" :key="board._id"/>
   </div>
 </template>
 
@@ -27,10 +28,11 @@ export default {
       }
     },
     components:{
-        BoardList,
+        BoardPreview,
     }
 }
 </script>
 
 <style>
 </style>
+

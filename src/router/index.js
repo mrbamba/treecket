@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import TreecketApp from '../views/TreecketApp.vue'
+import BoardList from '../views/BoardList.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +14,7 @@ Vue.use(VueRouter)
   {
     path: '/boards',
     name: 'TreecketApp',
-    component: TreecketApp
+    component: BoardList
   },
   {
     path: '/about',
