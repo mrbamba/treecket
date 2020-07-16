@@ -2,7 +2,8 @@ import { boardService } from "../services/board.service.js";
 
 export default {
   state: {
-    board: [],
+    boards: [],
+    currBoard: {},
     filterBy: {
       txt: "",
     },
@@ -21,7 +22,7 @@ export default {
     },
     removeTicket(state, { id }) {
       const ticketIndex = state.board.group.ticket.findIndex(
-        (currTicket) => currTicket.id === id
+        currTicket => currTicket.id === id
       );
       state.board.group.ticket.splice(ticketIndex, 1);
     },
@@ -38,6 +39,7 @@ export default {
   actions: {
     async loadBoard({ commit, state }) {
       const board = await boardService.query(state.filterBy);
+      await commit({type: 'setBoard', board})
     },
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')

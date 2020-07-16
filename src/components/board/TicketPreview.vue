@@ -1,9 +1,9 @@
 <template>
-    <section @onclick.self="TicketClick(ticket.id)">
+    <section @click="TicketClick(ticket)">
         <h4>
             {{ ticket.title }}
         </h4>
-        <button @click.self="onTicketOptions(ticket.id)"></button>
+        <button @click.stop="onTicketOptions(ticket.id)"></button>
     </section>
 </template>
 
@@ -11,12 +11,16 @@
 export default {
     props:['ticket'],
     methods: {
-        TicketClick(id){
-            console.log('show ticket');
+        TicketClick(ticket){
+            this.$emit('openTicket', ticket)
         },
+        
         onTicketOptions(id){
+            console.log('ticket id', id);
             console.log('show ticket editing options');
         }
+    },
+    created(){
     }
 }
 </script>

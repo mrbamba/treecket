@@ -2,22 +2,27 @@
     <section>
         <section>
         <h5>{{ group.name }}</h5>
-        <button class="optionsButton"></button>
+        <button>☰</button>
         </section>
-        <ticket-preview v-for="ticket in group.tickets" :key="ticket.id" :ticket="ticket" />
+        <ticket-preview v-for="ticket in group.tickets" :key="ticket.id" :ticket="ticket" @openTicket="emitOpenTicket" />
         <button>Add another card</button>      
     </section>
 </template>
 
 <script>
-import ticketPreview from './TicketPreview.vue'
+import TicketPreview from './TicketPreview.vue';
 export default {
-    props:['group']
+    methods: {
+        emitOpenTicket(ticket){
+            this.$emit('openTicket',ticket)
+        }
+    },
+    props:['group'],
+    components: {
+        TicketPreview
+    }
 }
 </script>
 
 <style>
-    .optionsButton::before {
-        content: "\E94E";
-    }
 </style>
