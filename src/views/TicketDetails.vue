@@ -12,9 +12,8 @@
                 Checklist id: {{ checklist.id }}
                 <ul>
                     <li v-for="(item, idx) in checklist.items" :key="idx">
+                        <input type="checkbox" v-model="item.isDone" />
                         <h4 :class="{done: item.isDone}">{{ item.txt }}</h4>
-                        <input type="checkbox" :checked="item.isDone"/>
-                        {{ item.isDone }}
                     </li>
                 </ul>
             </section>
