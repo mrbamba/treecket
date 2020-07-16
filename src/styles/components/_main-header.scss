@@ -1,0 +1,18 @@
+.main-header {
+    .main-header-logo {
+        display: flex;
+        flex-direction: row;
+        padding: 5px 10px;
+    }
+    h1 {
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: rem(3px);
+    }
+    img {
+        height: rem(60px);
+    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

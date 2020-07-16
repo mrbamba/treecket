@@ -1,8 +1,8 @@
 <template>
   <div class="main-header">
     <div class="main-header-logo">
-        <img src="@/assets/treecket.png" alt="" />
-        <h1> Treecket</h1>
+        <img src="@/assets/logo.png" alt="" />
+        <h1>Treecket</h1>
         </div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
