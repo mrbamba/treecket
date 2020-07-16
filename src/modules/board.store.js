@@ -14,6 +14,9 @@ export default {
     },
   },
   mutations: {
+    addBoard(state, { board }) {
+      state.boards.push(board);
+    },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },

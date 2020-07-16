@@ -1,17 +1,21 @@
 <template>
   <div class="boards-list">
-    <h2>BoardList</h2>
-      <board-preview v-for="board in boards" :board="board" :key="board._id"/>
+    <h2>Boards</h2>
+      <button @click="showAddBoard = true">+ Create new board</button>
+      <add-board v-if="showAddBoard" />
+      <board-preview v-for="board in boards" :board="board" :key="board._id" />
   </div>
 </template>
 
 <script>
-import BoardPreview from '@/components/BoardPreview.vue'
+import BoardPreview from '@/components/BoardPreview.vue';
+import AddBoard from '@/components/AddBoard.vue';
 export default {
-    name:"TreecketApp",
-    data(){
-      return{
-        boards:[
+    name:"BoardList",
+    data() {
+      return {
+        showAddBoard: false,
+        boards: [
           {
             name:"board 1",
             _id:1234
@@ -29,6 +33,7 @@ export default {
     },
     components:{
         BoardPreview,
+        AddBoard
     }
 }
 </script>
