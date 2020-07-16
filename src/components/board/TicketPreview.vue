@@ -3,7 +3,7 @@
         <h4>
             {{ ticket.title }}
         </h4>
-        <button @click.stop="onTicketOptions(ticket.id)"></button>
+        <button @click.stop="onTicketOptions(ticket.id)">/</button>
     </section>
 </template>
 

@@ -5,6 +5,19 @@
             <h3>Description</h3>
             <textarea v-model="description" @blur="saveDescription" name="" id="" cols="30" rows="10">
             </textarea>
+            <section v-for="attachment in ticket.attacments" :key="attachment.id">
+                {{ attachment }}
+            </section>
+            <section v-for="checklist in ticket.checklists" :key="checklist.id">
+                Checklist id: {{ checklist.id }}
+                <ul>
+                    <li v-for="(item, idx) in checklist.items" :key="idx">
+                        <h4 :class="{done: item.isDone}">{{ item.txt }}</h4>
+                        <input type="checkbox" :checked="item.isDone"/>
+                        {{ item.isDone }}
+                    </li>
+                </ul>
+            </section>
         </section>
     </div>
 </template>
@@ -27,5 +40,7 @@ export default {
 </script>
 
 <style>
-
+    .done{
+        text-decoration: line-through;
+    }
 </style>

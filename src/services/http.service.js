@@ -3,7 +3,8 @@ import store from '@/store'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
-    : '//localhost:3000/api/'
+    : '//localhost:3000/'
+    // add 'api/' after switching to mongoDB locally
 
 
 import Axios from 'axios';

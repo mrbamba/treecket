@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ getBoard.title }}
     <ticket-group
       v-for="group in getBoard.groups"
       :key="group._id"
@@ -22,13 +23,13 @@ export default {
 
   computed: {
     getBoard() {
-      const board = this.$store.getters.board;
+      const board = this.$store.getters.currBoard;
       return board;
     }
   },
 
   created() {
-    this.$store.dispatch("loadBoard");
+    this.$store.dispatch("loadBoard", this.$route.params.id);
   },
 
   methods: {

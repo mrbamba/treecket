@@ -9,8 +9,8 @@ export default {
     },
   },
   getters: {
-    board(state) {
-      return state.board;
+    currBoard(state) {
+      return state.currBoard;
     },
   },
   mutations: {
@@ -18,7 +18,7 @@ export default {
       state.filterBy = filterBy;
     },
     setBoard(state, { board }) {
-      state.board = board;
+      state.currBoard = board;
     },
     removeTicket(state, { id }) {
       const ticketIndex = state.board.group.ticket.findIndex(
@@ -37,9 +37,9 @@ export default {
     },
   },
   actions: {
-    async loadBoard({ commit, state }) {
-      const board = await boardService.query(state.filterBy);
-      await commit({type: 'setBoard', board})
+    async loadBoard({ commit }, boardId ) {
+      const board = await boardService.getById(boardId);
+      commit({type: 'setBoard', board})
     },
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')

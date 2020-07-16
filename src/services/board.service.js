@@ -1,39 +1,39 @@
 import httpService from './http.service'
 
 export const boardService = {
-  query,
-  getById,
-  update,
-  getEmptyBoard,
-  addBoard,
+    query,
+    getById,
+    update,
+    getEmptyBoard,
+    addBoard,
 };
 
 function query(filterBy) {
-    return httpService.get('board',filterBy)
+    return httpService.get('board')
 }
 
-function getById(boardId){
+function getById(boardId) {
     return httpService.get(`board/${boardId}`)
 }
 
-function update(board){
-    return httpService.put(`board/${board._id}`,board)
+function update(board) {
+    return httpService.put(`board/${board._id}`, board)
 }
 
-async function addBoard(board){
-    return await httpService.post(`board`,board)
+async function addBoard(board) {
+    return await httpService.post(`board`, board)
 }
 
-function getEmptyBoard(){
+function getEmptyBoard() {
     return {
         "_id": "qeovinerv",
         "name": "FrontEnd",
         "background": "#fff",
-        "nextId":{
-            "activities":102,
-            "labels":102,
-            "groups":102,
-            "tickets":102
+        "nextId": {
+            "activities": 102,
+            "labels": 102,
+            "groups": 102,
+            "tickets": 102
         },
         "members": [
             {
@@ -97,7 +97,7 @@ function getEmptyBoard(){
                         },
                         "comments": [
                             {
-                                "id":100,
+                                "id": 100,
                                 "txt": "Need to push this to next sprint",
                                 "createdAt": 1234567890,
                                 "by": {
@@ -109,7 +109,7 @@ function getEmptyBoard(){
                         ],
                         "checklists": [
                             {
-                                "id":100,
+                                "id": 100,
                                 "title": "UX",
                                 "items": [
                                     {
@@ -123,7 +123,7 @@ function getEmptyBoard(){
                                 ]
                             },
                             {
-                                "id":101,
+                                "id": 101,
                                 "title": "Backend",
                                 "items": [
                                     {
@@ -139,17 +139,17 @@ function getEmptyBoard(){
                         ],
                         "attachments": [
                             {
-                                "id":100,
+                                "id": 100,
                                 "src": "https://bla.blabla.com/shmulik.jpg",
                                 "type": "img"
                             },
                             {
-                                "id":101,
+                                "id": 101,
                                 "src": "https://bla.blabla.com/",
                                 "type": "link"
                             },
                             {
-                                "id":102,
+                                "id": 102,
                                 "src": "https://bla.blabla.com/",
                                 "type": "video"
                             }
