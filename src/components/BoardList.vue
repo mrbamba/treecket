@@ -1,6 +1,6 @@
 <template>
   <div class="board-list">
-      <h1>BoardList</h1>
+      <h2>BoardList</h2>
       <board-preview v-for="board in boards" :board="board" :key="board._id"/>
   </div>
 </template>

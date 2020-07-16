@@ -4,3 +4,12 @@
 // VIEWS
 @import 'views/home';
 @import 'views/treecket-app';
+
+// SETUP
+@import 'setup/typogrophy';
+@import 'setup/variables';
+@import 'setup/mixins';
+@import 'setup/functions';
+
+// BASE
+@import 'basics/base';
