@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import BoardList from '@/components/BoardList.vue'
 import BoardPreview from '@/components/BoardPreview.vue'
 export default {
     name:"TreecketApp",

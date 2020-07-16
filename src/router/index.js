@@ -13,7 +13,7 @@ Vue.use(VueRouter)
   },
   {
     path: '/boards',
-    name: 'TreecketApp',
+    name: 'BoardList',
     component: BoardList
   },
   {
