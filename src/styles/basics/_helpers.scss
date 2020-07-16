@@ -1,0 +1,29 @@
+.screener {
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+// Font Sizes
+// .fs12 { font-size: rem(12px); }
+// .fs14 { font-size: rem(14px); }
+// .fs16 { font-size: rem(16px); }
+// .fs18 { font-size: rem(18px); }
+// .fs20 { font-size: rem(20px); }
+// .fs24 { font-size: rem(24px); }
+// .fs28 { font-size: rem(28px); }
+// .fs30 { font-size: rem(30px); }
+
+// media-helpers
+// .square-ratio {
+//     @include aspect-ratio(1, 1);
+// }
+// .video-ratio {
+//     @include aspect-ratio(16, 9);
+// }
+// .poster-ratio {
+//     @include aspect-ratio(1, 1.5);
+// }

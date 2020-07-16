@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <main-header/>
-    <router-view/>
+  <div id="app" :class="{screener: showScreener}">
+      <main-header/>
+      <router-view/>
   </div>
 </template>
 
@@ -30,6 +30,12 @@
 <script>
 import MainHeader from '@/components/MainHeader.vue'
 export default {
+  computed: {
+    showScreener() {
+      // return true; // Testing - TO DELETE
+      // return this.$store.getters.showScreener;
+    }
+  },
   components:{
     MainHeader,
   }

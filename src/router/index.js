@@ -20,12 +20,12 @@ Vue.use(VueRouter)
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: Login
   },
   {
     path: '/signup',
-    name: 'signup',
+    name: 'Signup',
     component: Login
   },
   {
