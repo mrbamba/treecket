@@ -59,6 +59,9 @@ export default {
       console.log('adding:', {board})
       await boardService.addBoard(board);
       commit({ type: 'addBoard', board });
+    },
+    async addTicket({commit},  {ticket, groupId}){
+      
     }
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')
