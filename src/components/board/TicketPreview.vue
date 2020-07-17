@@ -1,5 +1,5 @@
 <template>
-    <section @click="TicketClick(ticket)">
+    <section @click="TicketClick(ticket)" class="ticket-preview">
         <div :style="{backgroundColor: ticket.color}">{{ ticket.title }}</div>
         <!-- <button @click.stop="onTicketOptions(ticket.id)">/</button> -->
     </section>

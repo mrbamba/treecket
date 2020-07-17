@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div class="board-details">
         {{ getBoard.title }}
+        <div class="groups-container">
         <ticket-group
             v-for="group in getBoard.groups"
             :key="group._id"
@@ -8,7 +9,9 @@
             @openTicket="openTicket"
             @addTicket="addNewTicket"
         />
-        <ticket-details v-if="openingTicket" :ticket="openingTicket" @ticketSaved="saveBoard" />
+        </div>
+        <ticket-details v-if="openingTicket" :ticket="openingTicket" @closeTicket="closeTicket"
+        @ticketSaved="saveBoard" />
     </div>
 </template>
 
@@ -37,12 +40,20 @@ export default {
         openTicket(ticket) {
             this.openingTicket = ticket;
         },
+
+        closeTicket(){
+            this.openingTicket = null
+        },
+
         addNewTicket({ ticket, groupId }) {
             const board = this.$store.getters.currBoard
             const currGroupIdx = board.groups.findIndex(group => group.id === groupId);
             board.groups[currGroupIdx].tickets.push(ticket)
-            console.log(board.groups[currGroupIdx].tickets);
             this.$store.dispatch('updateBoard', board);
+        },
+
+        saveBoard(){
+            console.log('save board');
         }
     },
     components: {

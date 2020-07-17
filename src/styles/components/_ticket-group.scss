@@ -1,0 +1,22 @@
+.ticket-group {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0px 10px;
+    width: 280px;
+    height: fit-content;
+    max-height: 100%;
+    background-color: #ebecf0;
+    &:hover {
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+    }
+    .group-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 3px;
+        :first-child {
+            margin-inline-start: 3px;
+        }
+    }
+}

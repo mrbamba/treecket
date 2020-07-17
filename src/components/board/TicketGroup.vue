@@ -1,8 +1,11 @@
 <template>
-    <section>
+    <section class="ticket-group">
         <section>
-            <h5>{{ group.title }}</h5>
+            <div class="group-header">
+            <h3>{{ group.title }}</h3>
+            <h4>{{ group.tickets.length }}</h4>
             <button>☰</button>
+            </div>
         </section>
         <ticket-preview
             v-for="ticket in group.tickets"
@@ -13,10 +16,8 @@
         <div v-if="isOnAddingTicket">
             <textarea
                 v-model="ticketTitle"
-                name
-                id
                 cols="30"
-                rows="10"
+                rows="5"
                 placeholder="Enter a title for this ticket"
             />
             <button @click.stop="addTicket">Add Ticket</button>
@@ -65,6 +66,3 @@ export default {
     }
 };
 </script>
-
-<style>
-</style>

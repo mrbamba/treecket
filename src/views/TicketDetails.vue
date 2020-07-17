@@ -1,8 +1,9 @@
 <template>
     <div>
+        <button @click="closeCompnenet">X</button>
         <h3>{{ ticket.title }}</h3>
         <section>
-            <h3>Description</h3>
+            <h3>Description:</h3>
             <textarea v-model="description" @blur="saveDescription" name="" id="" cols="30" rows="10">
             </textarea>
             <section v-for="attachment in ticket.attacments" :key="attachment.id">
@@ -33,6 +34,10 @@ export default {
         saveDescription(){
             this.ticket.description = this.description
             this.$emit('ticketSaved', this.ticket)
+        },
+
+        closeCompnenet(){
+            this.$emit('closeTicket')
         }
     }
 }
