@@ -2,9 +2,9 @@
     <section class="ticket-group">
         <section>
             <div class="group-header">
-            <h3>{{ group.title }}</h3>
-            <h4>{{ group.tickets.length }}</h4>
-            <button>☰</button>
+                <h3>{{ group.title }}</h3>
+                <h4>{{ group.tickets.length }}</h4>
+                <button>☰</button>
             </div>
         </section>
         <ticket-preview
@@ -13,7 +13,7 @@
             :ticket="ticket"
             @openTicket="emitOpenTicket"
         />
-        <div v-if="isOnAddingTicket">
+        <div v-if="showAddTicket">
             <textarea
                 v-model="ticketTitle"
                 cols="30"
@@ -23,7 +23,7 @@
             <button @click.stop="addTicket">Add Ticket</button>
             <button @click.stop="onCloseTicket">X</button>
         </div>
-        <button @click.stop="onAddTicket" v-else>Add another card</button>
+        <button @click.stop="onAddTicket" v-else>Add another Ticket</button>
     </section>
 </template>
 
@@ -34,29 +34,33 @@ export default {
     data() {
         return {
             ticketTitle: '',
-            isOnAddingTicket: false,
+            showAddTicket: false,
             newGroup: this.group
         };
     },
 
     methods: {
         emitOpenTicket(ticket) {
-            this.$emit("openTicket", ticket);
+            this.$emit("openTicket", { ticket, groupId: this.group.id });
         },
 
         onAddTicket() {
-            this.isOnAddingTicket = true;
+            this.showAddTicket = true;
         },
 
         onCloseTicket() {
-            this.isOnAddingTicket = false;
+            this.showAddTicket = false;
+        },
+
+        emitDeleteTicket(ticketId) {
+            this.$emit('deleteTicket', { ticketId, groupId: this.group.id })
         },
 
         addTicket() {
             const newTicket = boardService.getNewTicket(this.ticketTitle);
             this.$emit('addTicket', { ticket: newTicket, groupId: this.group.id });
             this.ticketTitle = '';
-            this.isOnAddingTicket = false;
+            this.showAddTicket = false;
 
         }
     },

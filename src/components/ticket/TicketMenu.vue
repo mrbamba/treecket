@@ -1,7 +1,10 @@
 <template>
     <div class="ticket-menu">
         <h3>ADD TO CARD</h3>
-        <member-selector v-if="show.memberSelector" @click="show.memberSelector=!show.memberSelector">Members</member-selector>
+        <!-- <member-selector
+            v-if="show.memberSelector"
+            @click="show.memberSelector=!show.memberSelector"
+        >Members</member-selector> -->
         <button>Labels</button>
         <button>Checklist</button>
         <button>Due Date</button>
@@ -13,6 +16,7 @@
         <button>Copy</button>
         <button>Watch</button>
         <button>Share</button>
+        <button @click.stop="emitDeleteTicket(ticket.id)">&#128465; Delete</button>
     </div>
 </template>
 
@@ -30,19 +34,29 @@ export default {
             type: Object,
             required: true
         },
-        users: {
-            type: Array,
+        groupId: {
             require: true
-        },
-        show: {
-            memberSelector:false,
-            labelSelector:false,
-            checklistCreator:false,
-            dateSelector:false,
-            attachmentTool:false,
-            coverTool:false
+        }
+        // users: {
+        //     type: Array,
+        //     require: true
+        // },
+        // show: {
+        //     memberSelector: false,
+        //     labelSelector: false,
+        //     checklistCreator: false,
+        //     dateSelector: false,
+        //     attachmentTool: false,
+        //     coverTool: false
+        // }
+    },
+    methods: {
+        emitDeleteTicket(id) {
+            console.log(this.groupId);
+            this.$emit('deleteTicket', {ticketId: id, groupId: this.groupId})
         }
     },
+
     components: {
         MemberSelector,
         LabelSelector,

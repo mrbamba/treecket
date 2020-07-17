@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="closeCompnenet">X</button>
+        <button @click="toggleTicketDetails">X</button>
         <h3>{{ ticket.title }}</h3>
         <section>
             <h3>Description:</h3>
@@ -19,16 +19,21 @@
                 </ul>
             </section>
         </section>
+        <ticket-menu @deleteTicket="emitDeleteTicket" :ticket="ticket" :groupId="groupId"/>
     </div>
 </template>
 
 <script>
+import TicketMenu from "@/components/ticket/TicketMenu.vue";
 export default {
-    props: ['ticket'],
+    props: ['ticket', 'groupId'],
     data(){
         return {
             description: this.ticket.description
         }
+    },
+    components: {
+        TicketMenu
     },
     methods: {
         saveDescription(){
@@ -36,9 +41,16 @@ export default {
             this.$emit('ticketSaved', this.ticket)
         },
 
-        closeCompnenet(){
-            this.$emit('closeTicket')
+        toggleTicketDetails(){
+            this.$emit('closeTicket', {ticket: null, groupId: ''})
+        },
+
+        emitDeleteTicket(id){
+            this.$emit('deleteTicket', id)
         }
+    },
+
+    created(){
     }
 }
 </script>
