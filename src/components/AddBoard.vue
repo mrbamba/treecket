@@ -1,6 +1,6 @@
 <template>
     <div class="add-board">
-        <input @keyup.enter="addBoard" v-model="boardSettings.title" type="text" placeholder="Add board title" />
+        <input @keyup.enter="addBoard" v-model="boardPrefs.title" type="text" placeholder="Add board title" />
     </div>
 </template>
 
@@ -10,15 +10,15 @@ export default {
     name: "AddBoard",
     data() {
         return {
-            boardSettings: {
+            boardPrefs: {
                 title: '',
-                background: '#eee'
+                background: '#eeeeee'
             }
         }
     },
     methods: {
         addBoard() {
-            const newBoard = boardService.getNewBoard(this.boardSettings);
+            const newBoard = boardService.getNewBoard(this.boardPrefs);
             this.$store.dispatch('addBoard', newBoard);
         }
     }
