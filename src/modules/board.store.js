@@ -49,19 +49,22 @@ export default {
   actions: {
     async loadBoards({ commit }) {
       const boards = await boardService.query();
-      commit({type: 'setBoards', boards})
+      commit({ type: 'setBoards', boards })
     },
-    async loadBoard({ commit }, boardId ) {
+    async loadBoard({ commit }, boardId) {
       const board = await boardService.getById(boardId);
-      commit({type: 'setBoard', board})
+      commit({ type: 'setBoard', board })
     },
+
     async addBoard({ commit, state }, board) {
-      console.log('adding:', {board})
+      console.log('adding:', { board })
       await boardService.addBoard(board);
       commit({ type: 'addBoard', board });
     },
-    async addTicket({commit},  {ticket, groupId}){
-      
+
+    async updateBoard({ commit }, board) {
+      const newBoard = await boardService.update(board);
+      commit({ type: 'setBoard', board: newBoard });
     }
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')

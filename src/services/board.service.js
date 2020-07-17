@@ -1,4 +1,5 @@
 import httpService from './http.service'
+import utilService from './util.service'
 
 export const boardService = {
     query,
@@ -18,15 +19,16 @@ function getById(boardId) {
 }
 
 function update(board) {
-    return httpService.put(`board/${board._id}`, board)
+    return httpService.put(`board/${board._id}`, board);
 }
 
 function addBoard(board) {
     return httpService.post(`board`, board)
 }
 
-function getNewTicket(title){
+function getNewTicket(title) {
     return {
+        "id": utilService.makeId(),
         "title": title,
         "description": "",
         "color": "#fff",

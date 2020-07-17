@@ -10,12 +10,19 @@
             :ticket="ticket"
             @openTicket="emitOpenTicket"
         />
-        <form @submit.prevent v-if="isOnAddingTicket">
-            <textarea v-model="ticketTitle" name id cols="30" rows="10" placeholder="Enter a title for this ticket" />
-            <button @click="addTicket">Add Ticket</button>
-            <button @click="onCloseTicket">X</button>
-        </form>
-        <button @click="onAddTicket" v-else>Add another card</button>
+        <div v-if="isOnAddingTicket">
+            <textarea
+                v-model="ticketTitle"
+                name
+                id
+                cols="30"
+                rows="10"
+                placeholder="Enter a title for this ticket"
+            />
+            <button @click.stop="addTicket">Add Ticket</button>
+            <button @click.stop="onCloseTicket">X</button>
+        </div>
+        <button @click.stop="onAddTicket" v-else>Add another card</button>
     </section>
 </template>
 
@@ -45,8 +52,11 @@ export default {
         },
 
         addTicket() {
-            const newTicket = boardService.getNewTicket(this.ticketTitle)
-            this.$emit('addTicket', {ticket: newTicket, groupId: this.group.id})
+            const newTicket = boardService.getNewTicket(this.ticketTitle);
+            this.$emit('addTicket', { ticket: newTicket, groupId: this.group.id });
+            this.ticketTitle = '';
+            this.isOnAddingTicket = false;
+
         }
     },
     props: ["group"],
