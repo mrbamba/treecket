@@ -6,6 +6,7 @@
       :key="group._id"
       :group="group"
       @openTicket="openTicket"
+      @addTicket="addNewTicket"
     />
     <ticket-details v-if="openingTicket" :ticket="openingTicket" @ticketSaved="saveBoard" />
   </div>
@@ -36,8 +37,9 @@ export default {
     openTicket(ticket) {
       this.openingTicket = ticket;
     },
-    saveBoard(ticket){
-        // console.log(this.);
+    addNewTicket({ticket, groupId}){
+      const board = getBoard()
+      // const currGroup = board.find.
     }
   },
   components: {

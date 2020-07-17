@@ -6,6 +6,7 @@ export const boardService = {
     update,
     getNewBoard,
     addBoard,
+    getNewTicket
 };
 
 function query(filterBy) {
@@ -22,6 +23,21 @@ function update(board) {
 
 function addBoard(board) {
     return httpService.post(`board`, board)
+}
+
+function getNewTicket(title){
+    return {
+        "title": title,
+        "description": "",
+        "color": "#fff",
+        "members": [],
+        "labels": [],
+        "createdAt": Date.now(),
+        "by": {},
+        "comments": [],
+        "checklists": [],
+        "attachments": []
+    }
 }
 
 function getNewBoard(boardSettings) {
