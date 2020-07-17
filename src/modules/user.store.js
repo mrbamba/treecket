@@ -5,21 +5,21 @@ if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 
 export default {
     state: {
-        loggedinUser : localLoggedinUser,
+        loggedInUser : localLoggedinUser,
         users: []
     },
     getters: {
         users(state) {
             return state.users;
         },
-        loggedinUser(state) {
-            console.log(state.loggedinUser)
-            return state.loggedinUser
+        loggedInUser(state) {
+            console.log(state.loggedInUser)
+            return state.loggedInUser
         }
     },
     mutations: {
         setUser(state, {user}) {
-            state.loggedinUser = user;
+            state.loggedInUser = user;
         },
         setUsers(state, {users}) {
             state.users = users;

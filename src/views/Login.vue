@@ -2,10 +2,10 @@
   <div class="about">
     <h2>{{ msg }}</h2>
 
-    <div v-if="loggedinUser">
+    <div v-if="loggedInUser">
       <h3>
         Loggedin User:
-        {{ loggedinUser.username }}
+        {{ loggedInUser.username }}
         <form @submit.prevent="updateUser">
           <input type="text" v-model="userToEdit.username" />
         </form>
@@ -71,12 +71,12 @@ export default {
     users() {
       return this.$store.getters.users;
     },
-    loggedinUser() {
-      return this.$store.getters.loggedinUser;
+    loggedInUser() {
+      return this.$store.getters.loggedInUser;
     }
   },
   created() {
-    console.log("this.loggedinUser", this.loggedinUser);
+    console.log("this.loggedInUser", this.loggedInUser);
     // console.log('Route name',this.$route.name)
     this.setPage()
   },
@@ -111,8 +111,8 @@ export default {
     }
   },
   watch: {
-    loggedinUser() {
-      this.userToEdit = { ...this.loggedinUser };
+    loggedInUser() {
+      this.userToEdit = { ...this.loggedInUser };
     },
     '$route'(to, from) {
         this.setPage()
