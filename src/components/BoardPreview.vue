@@ -1,7 +1,7 @@
 <template>
-  <div class="board-preview">
-      <pre>{{board.title}}</pre>
-  </div>
+  <router-link :to="'board/' + board._id" class="board-preview">
+      <div>{{board.title}}</div>
+  </router-link>
 </template>
 
 <script>
@@ -13,7 +13,6 @@ export default {
             require:true
         }
     }
-
 }
 </script>
 
