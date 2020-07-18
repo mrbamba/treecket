@@ -72,7 +72,6 @@ export default {
       updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
       updatedBoard = await boardService.update(updatedBoard);
       commit({ type: 'setBoard', board: updatedBoard });
-      
     }
 
     // sendMsg(context, {msg}) {

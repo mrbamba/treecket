@@ -51,7 +51,6 @@ export default {
         deleteTicket({ ticketId, groupId }) {
             this.$store.dispatch("deleteTicket", { ticketId, groupId });
             this.closeTicketDetails();
-            this.$router.push(`/board/${this.board._id}`);
         },
         saveBoard() {
             console.log("save board");
