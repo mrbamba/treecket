@@ -27,7 +27,7 @@ export default {
     data() {
         return {
             selectedTicket: null,
-            selectedGroupId: null,
+            selectedGroupId: null
             // board: null
         };
     },
@@ -38,6 +38,7 @@ export default {
         closeTicketDetails() {
             this.selectedTicket = null;
             this.selectedGroupId = null;
+            this.$router.push(`/board/${this.board._id}`);
         },
         addNewTicket({ ticket, groupId }) {
             const board = this.$store.getters.currBoard;
@@ -50,12 +51,11 @@ export default {
         deleteTicket({ ticketId, groupId }) {
             this.$store.dispatch("deleteTicket", { ticketId, groupId });
             this.closeTicketDetails();
-            this.$router.push(`/board/${this.board._id}`)
+            this.$router.push(`/board/${this.board._id}`);
         },
-         saveBoard() {
+        saveBoard() {
             console.log("save board");
-            this.$store.dispatch('updateBoard', this.board);
-            // this.loadBoard();
+            this.$store.dispatch("updateBoard", this.board);
         },
         async loadBoard() {
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
@@ -63,15 +63,19 @@ export default {
 
             // Sets selectedTicket and selectedGroupId
             if (this.$route.params.ticketId) {
-                this.selectedGroupId = this.board.groups.find(group =>
-                    this.selectedTicket = group.tickets.find(ticket => ticket.id === this.$route.params.ticketId)).id;
+                this.selectedGroupId = this.board.groups.find(
+                    group =>
+                        (this.selectedTicket = group.tickets.find(
+                            ticket => ticket.id === this.$route.params.ticketId
+                        ))
+                ).id;
             }
         }
     },
     computed: {
         currBoard() {
             return this.$store.getters.currBoard;
-        },
+        }
         // currTicket(){
 
         // }
@@ -81,7 +85,7 @@ export default {
         TicketDetails
     },
     watch: {
-        async '$route'(to, from) {
+        async $route(to, from) {
             this.loadBoard();
         }
     }
