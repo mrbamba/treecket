@@ -7,7 +7,6 @@ import store from './store'
 // STYLES
 import "./styles/main.scss";
 
-
 Vue.config.productionTip = false
 
 new Vue({

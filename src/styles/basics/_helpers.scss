@@ -1,11 +1,13 @@
-.screener {
+.overlay {
     position: fixed;
-    z-index: 1;
-    height: 100%;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 3;
 }
-
 
 // Font Sizes
 // .fs12 { font-size: rem(12px); }
@@ -23,6 +25,9 @@
 // }
 // .video-ratio {
 //     @include aspect-ratio(16, 9);
+// }
+// .desktop-browser-ratio {
+//     @include aspect-ratio(15, 8);
 // }
 // .poster-ratio {
 //     @include aspect-ratio(1, 1.5);

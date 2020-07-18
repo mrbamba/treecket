@@ -1,18 +1,20 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-::selection{
-    background-color: $clr3;
+::selection {
+    color: #fff;
+    background-color: $color-brand;
 }
 
 html {
-    font-family: Roboto;
-    line-height: 2;
-    color: $clr2;
+    font-family: Roboto, sans-serif;
+    div {
+        font-family: inherit;
+    }
 }
 
-body{
+body {
     margin: 0px;
 }
 
@@ -23,9 +25,17 @@ body{
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-weight: normal;
-    font-family: Roboto, serif;
 }
 
-h1 {
-    font-size: rem(40px);
+button,
+select {
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+input,
+textarea {
+  outline: none;
+  font-family: inherit;
 }

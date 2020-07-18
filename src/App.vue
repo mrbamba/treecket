@@ -1,21 +1,18 @@
 <template>
-  <div id="app" :class="{screener: showScreener}">
-      <main-header/>
-      <router-view/>
+  <div id="app">
+      <main-header />
+      <router-view />
+      <div :class="{ overlay }"></div>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
-  padding: 30px;
+  padding: 10px;
 
   a {
     font-weight: bold;
@@ -31,9 +28,9 @@
 import MainHeader from '@/components/MainHeader.vue'
 export default {
   computed: {
-    showScreener() {
+    overlay() {
       // return true; // Testing - TO DELETE
-      // return this.$store.getters.showScreener;
+      return this.$store.getters.overlay;
     }
   },
   components:{

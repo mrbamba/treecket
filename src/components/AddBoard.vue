@@ -1,6 +1,12 @@
 <template>
     <div class="add-board">
-        <input @keyup.enter="addBoard" v-model="boardPrefs.title" type="text" placeholder="Add board title" />
+        <input
+            @keyup.enter="addBoard"
+            v-model="boardPrefs.title"
+            type="text"
+            placeholder="Add board title"
+            maxlength="32"
+        />
     </div>
 </template>
 
@@ -8,11 +14,12 @@
 import { boardService } from "../services/board.service.js";
 export default {
     name: "AddBoard",
+    props: ['board'],
     data() {
         return {
             boardPrefs: {
                 title: '',
-                background: '#eeeeee'
+                background: '#72eedd'
             }
         }
     },
@@ -20,10 +27,8 @@ export default {
         addBoard() {
             const newBoard = boardService.getNewBoard(this.boardPrefs);
             this.$store.dispatch('addBoard', newBoard);
+            this.$emit('toggleAddBoard');
         }
     }
 }
 </script>
-
-<style>
-</style>

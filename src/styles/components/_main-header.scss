@@ -1,16 +1,20 @@
 .main-header {
+    box-shadow: 0 2px 2px rgba(10, 30, 60, 0.1);
     .main-header-logo {
         display: flex;
         flex-direction: row;
-        padding: 5px 10px;
+        align-items: flex-end;
+        padding: rem(8px);
     }
     h1 {
         font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: rem(3px);
+        letter-spacing: rem(2px);
+        padding-inline-start: rem(4px);
+        line-height: 1;
     }
     img {
-        height: rem(60px);
+        height: rem(40px);
     }
     display: flex;
     flex-direction: row;

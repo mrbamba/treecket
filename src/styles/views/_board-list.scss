@@ -1,0 +1,30 @@
+.boards-list {
+    h2 {
+        margin: 2rem 0;
+        font-weight: 500;
+    }
+    section {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 930px;
+        margin: 0 auto;
+    }
+}
+
+.add-board-btn {
+    background-color: $color-brand;
+    color: #fff;
+    border: none;
+    padding: rem(8px) rem(16px);
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    font-weight: 500;
+    transition: background-color 0.1s;
+    &:hover {
+        background-color: lighten($color-brand, 3);
+    }
+    &:active {
+        background-color: lighten($color-brand, 5);
+    }
+}

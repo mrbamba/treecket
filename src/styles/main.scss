@@ -10,9 +10,11 @@
 
 // COMPONENTS
 @import 'components/main-header';
+@import 'components/board-preview';
 @import 'components/ticket-group';
 @import 'components/ticket-preview';
 
 // VIEWS
 @import 'views/home';
+@import 'views/board-list';
 @import 'views/board-details';

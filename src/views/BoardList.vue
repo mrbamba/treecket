@@ -1,29 +1,36 @@
 <template>
-  <div class="boards-list">
-    <h2>Boards</h2>
-      <button @click="showAddBoard = true">+ Create new board</button>
-      <add-board v-if="showAddBoard" />
-      <board-preview v-for="board in boards" :board="board" :key="board._id" />
-  </div>
+    <div class="boards-list">
+        <h2>Boards</h2>
+        <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
+        <add-board v-if="showAddBoard" @toggleAddBoard="toggleAddBoard" />
+        <section>
+            <board-preview v-for="board in boards" :board="board" :key="board._id" />
+        </section>
+    </div>
 </template>
 
 <script>
 import BoardPreview from '@/components/BoardPreview.vue';
 import AddBoard from '@/components/AddBoard.vue';
 export default {
-    name:"BoardList",
+    name: "BoardList",
     data() {
-      return {
-        showAddBoard: false
-      }
+        return {
+            showAddBoard: false
+        }
     },
-    created() {      
+    created() {
         this.$store.dispatch('loadBoards');
     },
     computed: {
-      boards() {
-        return this.$store.getters.boards;
-      }
+        boards() {
+            return this.$store.getters.boards;
+        }
+    },
+    methods: {
+        toggleAddBoard() {
+            this.showAddBoard = !this.showAddBoard;
+        },
     },
     components: {
         BoardPreview,
@@ -31,7 +38,4 @@ export default {
     }
 }
 </script>
-
-<style>
-</style>
 

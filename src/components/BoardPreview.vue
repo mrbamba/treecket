@@ -1,21 +1,25 @@
 <template>
-  <router-link :to="'board/' + board._id" class="board-preview">
-      <div>{{board.title}}</div>
-  </router-link>
+    <router-link
+        :to="'board/' + board._id"
+        class="board-preview"
+        :style="{ background }">
+        <div>{{ board.title }}</div>
+    </router-link>
 </template>
 
 <script>
 export default {
-    name:"BoardPreview",
-    props:{
-        board:{
-            type:Object,
-            require:true
+    name: "BoardPreview",
+    props: {
+        board: {
+            type: Object,
+            require: true
+        }
+    },
+    computed: {
+        background() {
+            return this.board.background + ((this.board.background.includes('url')) ? 'center / contain' : '');
         }
     }
 }
 </script>
-
-<style>
-
-</style>
