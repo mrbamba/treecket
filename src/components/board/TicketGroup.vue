@@ -42,19 +42,12 @@ export default {
         emitOpenTicket(ticket) {
             this.$emit("openTicket", { ticket, groupId: this.group.id });
         },
-
         onAddTicket() {
             this.showAddTicket = true;
         },
-
         onCloseTicket() {
             this.showAddTicket = false;
         },
-
-        // emitDeleteTicket(ticketId) {
-        //     this.$emit('deleteTicket', { ticketId, groupId: this.group.id })
-        // },
-
         addTicket() {
             const newTicket = boardService.getNewTicket(this.ticketTitle);
             this.$emit('addTicket', { ticket: newTicket, groupId: this.group.id });

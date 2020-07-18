@@ -16,7 +16,7 @@
         <button>Copy</button>
         <button>Watch</button>
         <button>Share</button>
-        <button @click.stop="emitDeleteTicket(ticket.id)">&#128465; Delete</button>
+        <button @click.stop="onTicketDelete(ticket.id)">&#128465; Delete</button>
     </div>
 </template>
 
@@ -34,9 +34,6 @@ export default {
             type: Object,
             required: true
         },
-        groupId: {
-            require: true
-        }
         // users: {
         //     type: Array,
         //     require: true
@@ -51,12 +48,10 @@ export default {
         // }
     },
     methods: {
-        emitDeleteTicket(id) {
-            console.log(this.groupId);
-            this.$emit('deleteTicket', {ticketId: id, groupId: this.groupId})
+        onTicketDelete(ticketId) {
+            this.$emit('deleteTicket', ticketId)
         }
     },
-
     components: {
         MemberSelector,
         LabelSelector,

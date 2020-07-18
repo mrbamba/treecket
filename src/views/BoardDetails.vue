@@ -1,9 +1,9 @@
 <template>
-    <div class="board-details" v-if="board">
-        {{ board.title }}
+    <div class="board-details" v-if="currBoard">
+        {{ currBoard.title }}
         <div class="groups-container">
             <ticket-group
-                v-for="group in board.groups"
+                v-for="group in currBoard.groups"
                 :key="group._id"
                 :group="group"
                 @addTicket="addNewTicket"
@@ -13,7 +13,7 @@
             v-if="selectedTicket"
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
-            @toggleTicketDetails="toggleTicketDetails"
+            @closeTicketDetails="closeTicketDetails"
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
         />
@@ -27,19 +27,17 @@ export default {
     data() {
         return {
             selectedTicket: null,
-            selectedGroupId: "",
-            board: null
+            selectedGroupId: null,
+            // board: null
         };
     },
     async created() {
-        // await this.$store.dispatch("loadBoard", this.$route.params.boardId);
         this.loadBoard();
-        // this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
     },
     methods: {
-        toggleTicketDetails({ ticket, groupId }) {
-            this.selectedTicket = ticket;
-            this.selectedGroupId = groupId;
+        closeTicketDetails() {
+            this.selectedTicket = null;
+            this.selectedGroupId = null;
         },
         addNewTicket({ ticket, groupId }) {
             const board = this.$store.getters.currBoard;
@@ -49,16 +47,16 @@ export default {
             board.groups[currGroupIdx].tickets.push(ticket);
             this.$store.dispatch("updateBoard", board);
         },
-
         deleteTicket({ ticketId, groupId }) {
-            const board = this.$store.getters.currBoard;
-            const currGroupIdx = board.groups.findIndex(
-                group => group.id === groupId
-            );
-            board.groups[currGroupIdx].tickets.splice(ticketId, 1);
-            this.$store.dispatch("updateBoard", board);
-        },
+            const groupIdx = this.board.groups.findIndex(group => group.id === groupId);
+            const ticketIdx = this.board.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+            if (groupIdx < 0 || ticketIdx < 0) return;
 
+            this.board.groups[groupIdx].tickets.splice(ticketIdx, 1);
+            this.$store.dispatch("updateBoard", this.board);
+            this.closeTicketDetails();
+            this.$router.push(`/board/${this.board._id}`)
+        },
         saveBoard() {
             console.log("save board");
             this.$store.dispatch('updateBoard', this.board);
@@ -67,13 +65,17 @@ export default {
         async loadBoard() {
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
             this.board = _.cloneDeep(this.$store.getters.currBoard);
+
+            // Sets selectedTicket and selectedGroupId
             if (this.$route.params.ticketId) {
-                this.board.groups.find(group =>
-                    this.selectedTicket = group.tickets.find(ticket =>
-                        ticket.id === this.$route.params.ticketId));
-                console.log(this.selectedTicket)
-                this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
+                this.selectedGroupId = this.board.groups.find(group =>
+                    this.selectedTicket = group.tickets.find(ticket => ticket.id === this.$route.params.ticketId)).id;
             }
+        }
+    },
+    computed: {
+        currBoard() {
+            return this.$store.getters.currBoard;
         }
     },
     components: {
@@ -82,16 +84,7 @@ export default {
     },
     watch: {
         async '$route'(to, from) {
-            // await this.$store.dispatch("loadBoard", this.$route.params.boardId);
             this.loadBoard();
-
-            // if (this.$route.params.ticketId) {
-            //     this.board.groups.find(group =>
-            //         this.selectedTicket = group.tickets.find(ticket =>
-            //             ticket.id === this.$route.params.ticketId));
-            //     console.log(this.selectedTicket)
-            //     this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
-            // }
         }
     }
 };

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="toggleTicketDetails">X</button>
+        <button @click="closeTicketDetails">X</button>
         <h3>{{ ticket.title }}</h3>
         <section>
             <h3>Description:</h3>
@@ -19,7 +19,7 @@
                 </ul>
             </section>
         </section>
-        <ticket-menu @deleteTicket="emitDeleteTicket" :ticket="ticket" :groupId="groupId"/>
+        <ticket-menu @deleteTicket="deleteTicket" :ticket="ticket" />
     </div>
 </template>
 
@@ -39,15 +39,13 @@ export default {
         saveTicket(){
             this.$emit('saveTicket', this.ticket)
         },
-        toggleTicketDetails(){
-            this.$emit('toggleTicketDetails', { ticket: null, groupId: null })
+        closeTicketDetails(){
+            this.$emit('closeTicketDetails')
         },
-        emitDeleteTicket(id){
-            this.$emit('deleteTicket', id)
+        deleteTicket(ticketId){
+            console.log('TicketDetails params:', ticketId, this.groupId)
+            this.$emit('deleteTicket', { ticketId, groupId: this.groupId })
         }
-    },
-
-    created(){
     }
 }
 </script>
