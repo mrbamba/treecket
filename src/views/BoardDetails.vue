@@ -1,9 +1,9 @@
 <template>
-    <div class="board-details">
-        {{ getBoard.title }}
+    <div class="board-details" v-if="board">
+        {{ board.title }}
         <div class="groups-container">
             <ticket-group
-                v-for="group in getBoard.groups"
+                v-for="group in board.groups"
                 :key="group._id"
                 :group="group"
                 @openTicket="toggleTicketDetails"
@@ -28,48 +28,55 @@ export default {
     data() {
         return {
             selectedTicket: null,
-            selectedGroupId: ''
+            selectedGroupId: "",
+            board: null
         };
     },
-
-    computed: {
-        getBoard() {
-            const board = this.$store.getters.currBoard;
-            return board;
-        }
-    },
-
-    created() {
-        this.$store.dispatch("loadBoard", this.$route.params.id);
+    async created() {
+        await this.$store.dispatch("loadBoard", this.$route.params.id);
+        this.loadBoard();
     },
 
     methods: {
         toggleTicketDetails({ ticket, groupId }) {
-            this.selectedGroupId = groupId
-            this.selectedTicket = ticket
+            this.selectedGroupId = groupId;
+            this.selectedTicket = ticket;
         },
 
         addNewTicket({ ticket, groupId }) {
-            const board = this.$store.getters.currBoard
-            const currGroupIdx = board.groups.findIndex(group => group.id === groupId);
-            board.groups[currGroupIdx].tickets.push(ticket)
-            this.$store.dispatch('updateBoard', board);
+            const board = this.$store.getters.currBoard;
+            const currGroupIdx = board.groups.findIndex(
+                group => group.id === groupId
+            );
+            board.groups[currGroupIdx].tickets.push(ticket);
+            this.$store.dispatch("updateBoard", board);
         },
 
         deleteTicket({ ticketId, groupId }) {
-            const board = this.$store.getters.currBoard
-            const currGroupIdx = board.groups.findIndex(group => group.id === groupId);
-            board.groups[currGroupIdx].tickets.splice(ticketId, 1)
-            this.$store.dispatch('updateBoard', board);
+            const board = this.$store.getters.currBoard;
+            const currGroupIdx = board.groups.findIndex(
+                group => group.id === groupId
+            );
+            board.groups[currGroupIdx].tickets.splice(ticketId, 1);
+            this.$store.dispatch("updateBoard", board);
         },
 
         saveBoard() {
-            console.log('save board');
+            console.log("save board");
+        },
+        loadBoard() {
+            this.board = _.cloneDeep(this.$store.getters.currBoard);
         }
     },
     components: {
         TicketGroup,
         TicketDetails
+    },
+    watch:{
+        async '$route'(to, from){
+            await this.$store.dispatch("loadBoard", this.$route.params.id);
+            this.loadBoard();
+        }
     }
 };
 </script>

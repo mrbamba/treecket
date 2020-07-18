@@ -3,6 +3,10 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+// const cloneDeep = require('lodash/cloneDeep');
+import _ from 'lodash';    
+
+
 
 // STYLES
 import "./styles/main.scss";
