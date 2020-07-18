@@ -4,7 +4,7 @@
         <h3>{{ ticket.title }}</h3>
         <section>
             <h3>Description:</h3>
-            <textarea v-model="description" @blur="saveDescription" name="" id="" cols="30" rows="10">
+            <textarea v-model="ticket.description" @blur="saveTicket" name="" id="" cols="30" rows="10">
             </textarea>
             <section v-for="attachment in ticket.attacments" :key="attachment.id">
                 {{ attachment }}
@@ -27,24 +27,21 @@
 import TicketMenu from "@/components/ticket/TicketMenu.vue";
 export default {
     props: ['ticket', 'groupId'],
-    data(){
-        return {
-            description: this.ticket.description
-        }
-    },
+    // data(){
+        // return {
+        //     description: this.ticket.description
+        // }
+    // },
     components: {
         TicketMenu
     },
     methods: {
-        saveDescription(){
-            this.ticket.description = this.description
-            this.$emit('ticketSaved', this.ticket)
+        saveTicket(){
+            this.$emit('saveTicket', this.ticket)
         },
-
         toggleTicketDetails(){
-            this.$emit('closeTicket', {ticket: null, groupId: ''})
+            this.$emit('toggleTicketDetails', { ticket: null, groupId: null })
         },
-
         emitDeleteTicket(id){
             this.$emit('deleteTicket', id)
         }

@@ -1,5 +1,5 @@
 <template>
-    <section @click="TicketClick(ticket)" class="ticket-preview">
+    <section @click="openTicket(ticket)" class="ticket-preview">
         <div :style="{backgroundColor: ticket.color}">{{ ticket.title }}</div>
     </section>
 </template>
@@ -8,8 +8,12 @@
 export default {
     props: ['ticket'],
     methods: {
-        TicketClick(ticket) {
-            this.$emit('openTicket', ticket);
+        openTicket(ticket) {
+            const newPath = `/board/${this.$route.params.boardId}/ticket/${ticket.id}`;
+            
+            if (this.$route.path !== newPath) {
+                this.$router.push(newPath);
+            }
         },
     },
     created() {

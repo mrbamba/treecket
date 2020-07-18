@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import BoardList from '../views/BoardList.vue'
 import BoardDetails from '../views/BoardDetails.vue'
+import TicketDetails from '../components/board/TicketDetails.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
@@ -29,10 +30,15 @@ Vue.use(VueRouter)
     component: Login
   },
   {
-    path: '/board/:id',
+    path: '/board/:boardId',
     name: 'BoardDetails',
     component: BoardDetails,
-    // children: 
+    children: [
+      {
+        path: 'ticket/:ticketId',
+        component: TicketDetails
+      }
+    ]
   },
   {
     path: '/about',

@@ -6,7 +6,6 @@
                 v-for="group in board.groups"
                 :key="group._id"
                 :group="group"
-                @openTicket="toggleTicketDetails"
                 @addTicket="addNewTicket"
             />
         </div>
@@ -14,8 +13,8 @@
             v-if="selectedTicket"
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
-            @closeTicket="toggleTicketDetails"
-            @ticketSaved="saveBoard"
+            @toggleTicketDetails="toggleTicketDetails"
+            @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
         />
     </div>
@@ -23,7 +22,7 @@
 
 <script>
 import TicketGroup from "@/components/board/TicketGroup.vue";
-import TicketDetails from "@/views/TicketDetails.vue";
+import TicketDetails from "@/components/board/TicketDetails.vue";
 export default {
     data() {
         return {
@@ -33,16 +32,15 @@ export default {
         };
     },
     async created() {
-        await this.$store.dispatch("loadBoard", this.$route.params.id);
+        // await this.$store.dispatch("loadBoard", this.$route.params.boardId);
         this.loadBoard();
+        // this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
     },
-
     methods: {
         toggleTicketDetails({ ticket, groupId }) {
-            this.selectedGroupId = groupId;
             this.selectedTicket = ticket;
+            this.selectedGroupId = groupId;
         },
-
         addNewTicket({ ticket, groupId }) {
             const board = this.$store.getters.currBoard;
             const currGroupIdx = board.groups.findIndex(
@@ -63,19 +61,37 @@ export default {
 
         saveBoard() {
             console.log("save board");
+            this.$store.dispatch('updateBoard', this.board);
+            this.loadBoard();
         },
-        loadBoard() {
+        async loadBoard() {
+            await this.$store.dispatch("loadBoard", this.$route.params.boardId);
             this.board = _.cloneDeep(this.$store.getters.currBoard);
+            if (this.$route.params.ticketId) {
+                this.board.groups.find(group =>
+                    this.selectedTicket = group.tickets.find(ticket =>
+                        ticket.id === this.$route.params.ticketId));
+                console.log(this.selectedTicket)
+                this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
+            }
         }
     },
     components: {
         TicketGroup,
         TicketDetails
     },
-    watch:{
-        async '$route'(to, from){
-            await this.$store.dispatch("loadBoard", this.$route.params.id);
+    watch: {
+        async '$route'(to, from) {
+            // await this.$store.dispatch("loadBoard", this.$route.params.boardId);
             this.loadBoard();
+
+            // if (this.$route.params.ticketId) {
+            //     this.board.groups.find(group =>
+            //         this.selectedTicket = group.tickets.find(ticket =>
+            //             ticket.id === this.$route.params.ticketId));
+            //     console.log(this.selectedTicket)
+            //     this.toggleTicketDetails({ ticket: this.selectedTicket, groupId: this.selectedGroupId });
+            // }
         }
     }
 };

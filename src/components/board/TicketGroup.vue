@@ -11,7 +11,6 @@
             v-for="ticket in group.tickets"
             :key="ticket.id"
             :ticket="ticket"
-            @openTicket="emitOpenTicket"
         />
         <div v-if="showAddTicket">
             <textarea
@@ -52,9 +51,9 @@ export default {
             this.showAddTicket = false;
         },
 
-        emitDeleteTicket(ticketId) {
-            this.$emit('deleteTicket', { ticketId, groupId: this.group.id })
-        },
+        // emitDeleteTicket(ticketId) {
+        //     this.$emit('deleteTicket', { ticketId, groupId: this.group.id })
+        // },
 
         addTicket() {
             const newTicket = boardService.getNewTicket(this.ticketTitle);

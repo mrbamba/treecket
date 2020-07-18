@@ -3,7 +3,8 @@ import { boardService } from "../services/board.service.js";
 export default {
   state: {
     boards: [],
-    currBoard: {},
+    currBoard: null,
+    currTicket: null,
     filterBy: {
       txt: "",
     },
@@ -16,6 +17,9 @@ export default {
     currBoard(state) {
       return state.currBoard;
     },
+    currTicket(state) {
+      return state.currTicket;
+    }
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -29,6 +33,9 @@ export default {
     },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
+    },
+    setCurrTicket(state, { ticketId }) {
+      state.currBoard.groups.find(group => state.currTicket = group.tickets.find(ticket => (ticket.id === ticketId)));
     },
     removeTicket(state, { id }) {
       const ticketIndex = state.board.group.ticket.findIndex(
@@ -63,9 +70,13 @@ export default {
     },
 
     async updateBoard({ commit }, board) {
+      console.log({board})
       const newBoard = await boardService.update(board);
+      console.log({newBoard})
       commit({ type: 'setBoard', board: newBoard });
     }
+    
+
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')
     //     socket.emit('sendMsg', msg)
