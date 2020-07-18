@@ -48,19 +48,14 @@ export default {
             this.$store.dispatch("updateBoard", board);
         },
         deleteTicket({ ticketId, groupId }) {
-            const groupIdx = this.board.groups.findIndex(group => group.id === groupId);
-            const ticketIdx = this.board.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
-            if (groupIdx < 0 || ticketIdx < 0) return;
-
-            this.board.groups[groupIdx].tickets.splice(ticketIdx, 1);
-            this.$store.dispatch("updateBoard", this.board);
+            this.$store.dispatch("deleteTicket", { ticketId, groupId });
             this.closeTicketDetails();
             this.$router.push(`/board/${this.board._id}`)
         },
-        saveBoard() {
+         saveBoard() {
             console.log("save board");
             this.$store.dispatch('updateBoard', this.board);
-            this.loadBoard();
+            // this.loadBoard();
         },
         async loadBoard() {
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
@@ -76,7 +71,10 @@ export default {
     computed: {
         currBoard() {
             return this.$store.getters.currBoard;
-        }
+        },
+        // currTicket(){
+
+        // }
     },
     components: {
         TicketGroup,

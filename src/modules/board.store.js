@@ -31,7 +31,7 @@ export default {
     },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
-    }
+    },
     // removeTicket(state, { id }) {
     //   const ticketIndex = state.board.group.ticket.findIndex(
     //     currTicket => currTicket.id === id
@@ -62,6 +62,17 @@ export default {
     async updateBoard({ commit }, board) {
       const newBoard = await boardService.update(board);
       commit({ type: 'setBoard', board: newBoard });
+    },
+    async deleteTicket({state,commit},{ticketId, groupId}){
+      var updatedBoard = _.cloneDeep(state.currBoard)
+      const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
+      const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+      if (groupIdx < 0 || ticketIdx < 0) return;
+
+      updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
+      updatedBoard = await boardService.update(updatedBoard);
+      commit({ type: 'setBoard', board: updatedBoard });
+      
     }
 
     // sendMsg(context, {msg}) {
