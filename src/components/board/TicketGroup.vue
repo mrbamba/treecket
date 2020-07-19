@@ -86,7 +86,7 @@ export default {
 
         onBlur(ev) {
             console.log('BLUR!!!');
-            if (ev.relatedTarget.dataset.preventBlur === 'true') {
+            if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === 'true') {
                 this.ticketTitle = '';
                 this.toggleAddTicket();
                 return;
