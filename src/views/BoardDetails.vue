@@ -11,7 +11,7 @@
             <Draggable v-for="group in currBoard.groups" :key="group._id">
                 <ticket-group
                     :group="group"
-                    @addTicket="addNewTicket"
+                    @addTicket="addTicket"
                     @updateTickets="updateTickets"
                 />
             </Draggable>
@@ -66,7 +66,7 @@ export default {
             this.selectedGroupId = null;
             this.$router.push(`/board/${this.currBoard._id}`);
         },
-        addNewTicket({ ticket, groupId }) {
+        addTicket({ ticket, groupId }) {
             const board = this.currBoard;
             const currGroupIdx = board.groups.findIndex(
                 group => group.id === groupId

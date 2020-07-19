@@ -23,16 +23,16 @@
 
         <div v-if="showAddTicket">
             <textarea
-                ref="addTicket"
-                @blur="toggleAddTicket"
-                @keyup="addTicket"
+                @blur="onBlur"
+                @keyup.enter="addTicket"
                 v-model="ticketTitle"
+                ref="newTicketTitle"
                 cols="30"
                 rows="5"
-                placeholder="Enter a title for this ticket"
+                placeholder="Enter a title for this ticket..."
             />
             <button @click.stop="addTicket">Add Ticket</button>
-            <button @click.stop="toggleAddTicket">X</button>
+            <button @click.stop="console.log('X')" data-prevent-blur="true">X</button>
         </div>
         <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>+ Add another ticket</button>
     </section>
@@ -50,7 +50,7 @@ export default {
     props: ["group"],
     data() {
         return {
-            ticketTitle: "",
+            ticketTitle: '',
             showAddTicket: false,
             newGroup: this.group,
 
@@ -68,20 +68,35 @@ export default {
     },
     methods: {
         emitOpenTicket(ticket) {
-            this.$emit("openTicket", { ticket, groupId: this.group.id });
+            this.$emit('openTicket', { ticket, groupId: this.group.id });
         },
         toggleAddTicket() {
             this.showAddTicket = !this.showAddTicket;
         },
-        addTicket(ev) {
-            if (ev.key === 'Enter' || !ev.key) {
-                const newTicket = boardService.getNewTicket(this.ticketTitle);
-                this.$emit("addTicket", {
-                    ticket: newTicket,
-                    groupId: this.group.id
-                });
-                this.ticketTitle = "";
+
+        addTicket() {
+            if (!this.ticketTitle) return;
+            const ticket = boardService.getNewTicket(this.ticketTitle);
+            this.$emit('addTicket', {
+                ticket,
+                groupId: this.group.id
+            });
+            this.ticketTitle = '';
+        },
+
+        onBlur(ev) {
+            console.log('BLUR!!!');
+            if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === 'true') {
+                this.ticketTitle = '';
+                this.toggleAddTicket();
+                return;
+            };
+            if (!this.ticketTitle) {
+                this.ticketTitle = '';
+            } else {
+                this.addTicket();
             }
+            this.toggleAddTicket();
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
