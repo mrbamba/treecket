@@ -1,20 +1,34 @@
 .ticket-group {
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
     margin: 0px 10px;
-    min-width: 280px;
-    max-width: 280px;
+    width: 280px;
     height: fit-content;
     max-height: 100%;
     background-color: #ebecf0;
-    padding: 5px;
+    padding: rem(8px);
+    border-radius: 3px;
     .group-header {
+        font-size: rem(12px);
         display: flex;
         justify-content: space-between;
-        margin-bottom: 3px;
+        padding: rem(8px);
+        color: #172b4d;
         :first-child {
             text-transform: uppercase;
+        }
+        h3 {
+            font-weight: 500;
+        }
+    }
+    .add-ticket-btn {
+        border: none;
+        text-align: start;
+        padding: rem(8px);
+        border-radius: 3px;
+        color: #5e6c84;
+        &:hover {
+            background-color: rgba(9,30,66,.08);
         }
     }
 }

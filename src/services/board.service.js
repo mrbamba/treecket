@@ -7,7 +7,8 @@ export const boardService = {
     update,
     getNewBoard,
     addBoard,
-    getNewTicket
+    getNewTicket,
+    getNewGroup
 };
 
 function query(filterBy) {
@@ -40,6 +41,15 @@ function getNewTicket(title) {
         "checklists": [],
         "attachments": []
     }
+}
+
+function getNewGroup(title){
+  return{
+          "id": utilService.makeId(),
+          "title":title,
+          "color": "#eeeeee",
+          "tickets":[]
+  }
 }
 
 function getNewBoard(prefs) {

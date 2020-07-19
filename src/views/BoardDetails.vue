@@ -15,6 +15,19 @@
                     @updateTickets="updateTickets"
                 />
             </Draggable>
+        <div
+            class=" ticket-group"
+            @click="addNewGroup = true"
+        >
+            <span v-if="addNewGroup === false"> + Add column</span>
+            <div v-if="addNewGroup">
+                <input type="text" v-model="newGroupName" v-if="addNewGroup" />
+                <div>
+                    <button @click="addGroup">Add Section</button>
+                    <button @click.stop="addNewGroup = false">X</button>
+                </div>
+            </div>
+        </div>
         </Container>
 
         <ticket-details
@@ -31,6 +44,7 @@
 <script>
 import TicketGroup from "@/components/board/TicketGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
+import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag, generateItems } from "@/services/dnd.service.js";
@@ -40,6 +54,8 @@ export default {
         return {
             selectedTicket: null,
             selectedGroupId: null,
+            addNewGroup: false,
+            newGroupName: "",
 
             upperDropPlaceholderOptions: {
                 className: "cards-drop-preview",
@@ -65,7 +81,9 @@ export default {
         },
         addTicket({ ticket, groupId }) {
             const board = this.currBoard;
-            const currGroupIdx = board.groups.findIndex(group => group.id === groupId);
+            const currGroupIdx = board.groups.findIndex(
+                group => group.id === groupId
+            );
             board.groups[currGroupIdx].tickets.push(ticket);
             this.$store.dispatch("updateBoard", board);
         },
@@ -79,7 +97,9 @@ export default {
         },
         updateTickets({ newTickets, groupId }) {
             const newBoard = this.currBoard;
-            const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+            const groupIdx = newBoard.groups.findIndex(
+                group => group.id === groupId
+            );
             if (groupIdx < 0) return;
 
             newBoard.groups[groupIdx].tickets = newTickets;
@@ -90,16 +110,16 @@ export default {
 
             // Sets selectedTicket and selectedGroupId
             if (this.$route.params.ticketId) {
-                this.selectedGroupId = this.currBoard.groups.find(group =>
-                    (this.selectedTicket = group.tickets.find(ticket =>
-                        ticket.id === this.$route.params.ticketId))).id;
+                this.selectedGroupId = this.currBoard.groups.find(
+                    group =>
+                        (this.selectedTicket = group.tickets.find(
+                            ticket => ticket.id === this.$route.params.ticketId
+                        ))
+                ).id;
             }
         },
         onGroupDrop(dropResult) {
-            const newGroups = applyDrag(
-                this.currBoard.groups,
-                dropResult
-            );
+            const newGroups = applyDrag(this.currBoard.groups, dropResult);
             const newBoard = this.currBoard;
             newBoard.groups = newGroups;
 
@@ -108,6 +128,14 @@ export default {
         getGroupPayload(idx) {
             console.log("Group Payload!:", this.currBoard.groups[idx]);
             return this.currBoard.groups[idx];
+        },
+        addGroup() {
+            if(!this.newGroupName)return;
+            let updatedBorad = this.currBoard;
+            let group = boardService.getNewGroup(this.newGroupName);
+            this.newGroupName=''
+            updatedBorad.groups.push(group);
+            this.$store.dispatch("updateBoard", updatedBorad);
         }
     },
     computed: {
