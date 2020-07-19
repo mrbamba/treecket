@@ -7,9 +7,9 @@
 </template>
 
 <style lang="scss">
-#app {
-  text-align: center;
-}
+// #app {
+//   text-align: center;
+// }
 
 #nav {
   padding: 10px;
