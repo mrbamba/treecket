@@ -31,8 +31,8 @@
                 rows="5"
                 placeholder="Enter a title for this ticket..."
             />
-            <button @click.stop="addTicket">Add Ticket</button>
-            <button @click.stop="console.log('X')" data-prevent-blur="true">X</button>
+            <button @click.stop="addTicket" data-prevent-blur="add">Add Ticket</button>
+            <button @click.stop="toggleAddTicket" data-prevent-blur="close">X</button>
         </div>
         <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>+ Add another ticket</button>
     </section>
@@ -72,6 +72,8 @@ export default {
         },
         toggleAddTicket() {
             this.showAddTicket = !this.showAddTicket;
+            this.ticketTitle = '';
+            if (this.showAddTicket) setTimeout(() => { this.$refs.newTicketTitle.focus() }, 0)
         },
 
         addTicket() {
@@ -85,11 +87,15 @@ export default {
         },
 
         onBlur(ev) {
-            console.log('BLUR!!!');
-            if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === 'true') {
-                this.ticketTitle = '';
-                this.toggleAddTicket();
-                return;
+            if (ev.relatedTarget) {
+                if (ev.relatedTarget.dataset.preventBlur === 'close') {
+                    this.toggleAddTicket();
+                    return;
+                } else if (ev.relatedTarget.dataset.preventBlur === 'add') {
+                    this.addTicket();
+                    this.$refs.newTicketTitle.focus()
+                    return;
+                }
             };
             if (!this.ticketTitle) {
                 this.ticketTitle = '';
@@ -98,6 +104,7 @@ export default {
             }
             this.toggleAddTicket();
         },
+
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
             if (
@@ -107,6 +114,7 @@ export default {
                 this.$emit('updateTickets', { newTickets, groupId: this.group.id })
             }
         },
+
         getTicketPayload(idx) {
             return this.group.tickets[idx];
         }
