@@ -1,5 +1,7 @@
 .main-header {
     box-shadow: 0 2px 2px rgba(10, 30, 60, 0.1);
+    background-color: rgba(0, 0, 0, .2);
+    backdrop-filter: blur(4px);
     .main-header-logo {
         display: flex;
         flex-direction: row;

@@ -1,6 +1,5 @@
 <template>
     <div id="app" :style="{ background }">
-        <main-header />
         <router-view />
         <div :class="{ overlay }" @click.self="hideOverlay"></div>
     </div>

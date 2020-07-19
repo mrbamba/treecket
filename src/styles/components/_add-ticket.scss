@@ -1,0 +1,12 @@
+.add-ticket-btn {
+    border: none;
+    background-color: transparent;
+    text-align: start;
+    padding: rem(8px);
+    border-radius: 3px;
+    color: #5e6c84;
+    width: 100%;
+    &:hover {
+        background-color: rgba(9,30,66,.08);
+    }
+}

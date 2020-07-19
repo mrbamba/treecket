@@ -8,31 +8,31 @@
     background-color: #ebecf0;
     padding: rem(8px);
     border-radius: 3px;
+
     .group-header {
         font-size: rem(12px);
         display: flex;
         justify-content: space-between;
         padding: rem(8px);
-        color: #172b4d;
+        color: #5e6c84;
+
         :first-child {
             text-transform: uppercase;
         }
+
         h3 {
             font-weight: 500;
         }
     }
-    &:last-of-type() {
-        cursor: pointer;
-    }
-    .add-ticket-btn {
-        border: none;
-        background-color: transparent;
-        text-align: start;
-        padding: rem(8px);
-        border-radius: 3px;
-        color: #5e6c84;
-        &:hover {
-            background-color: rgba(9,30,66,.08);
-        }
+}
+
+.add-group {
+    background-color: rgba(255, 255, 255, .24);
+    color: white;
+    font-size: rem(14px);
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .32);
     }
 }

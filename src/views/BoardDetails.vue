@@ -1,7 +1,9 @@
 <template>
-    <div class="board-details" v-if="currBoard">
+    <div class="board-details" v-if="currBoard" style="{width: fit-content}">
+        <main-header />
         {{ currBoard.title }}
         <Container
+            non-drag-area-selector=".add-ticket-btn"
             class="groups-container"
             orientation="horizontal"
             @drop="onGroupDrop($event)"
@@ -33,6 +35,7 @@
 import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
+import MainHeader from "@/components/MainHeader.vue";
 import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -46,7 +49,7 @@ export default {
 
             upperDropPlaceholderOptions: {
                 className: "cards-drop-preview",
-                animationDuration: "150",
+                animationDuration: "50",
                 showOnTop: true
             },
             dropPlaceholderOptions: {
@@ -134,6 +137,7 @@ export default {
         Container,
         Draggable,
         AddGroup,
+        MainHeader
     },
     watch: {
         async $route(to, from) {
