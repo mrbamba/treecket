@@ -21,16 +21,9 @@
                 <section
                     v-for="attachment in ticket.attacments"
                     :key="attachment.id"
-                >{{ attachment }}</section>
-                <section v-for="checklist in ticket.checklists" :key="checklist.id">
-                    Checklist id: {{ checklist.id }}
-                    <ul>
-                        <li v-for="(item, idx) in checklist.items" :key="idx">
-                            <input type="checkbox" v-model="item.isDone" />
-                            <h4 :class="{done: item.isDone}">{{ item.txt }}</h4>
-                        </li>
-                    </ul>
+                >{{ attachment }}
                 </section>
+                <ticket-checklists :ticket="ticket" />
             </section>
         </div>
         <ticket-menu @deleteTicket="deleteTicket" :ticket="ticket" />
@@ -39,10 +32,12 @@
 
 <script>
 import TicketMenu from "@/components/ticket/TicketMenu.vue";
+import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 export default {
     props: ['ticket', 'groupId'],
     components: {
-        TicketMenu
+        TicketMenu,
+        TicketChecklists
     },
     computed: {
         overlay() {
