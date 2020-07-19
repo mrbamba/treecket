@@ -15,19 +15,7 @@
                     @updateTickets="updateTickets"
                 />
             </Draggable>
-        <div
-            class=" ticket-group"
-            @click="addNewGroup = true"
-        >
-            <span v-if="addNewGroup === false"> + Add column</span>
-            <div v-if="addNewGroup">
-                <input type="text" v-model="newGroupName" v-if="addNewGroup" />
-                <div>
-                    <button @click="addGroup">Add Section</button>
-                    <button @click.stop="addNewGroup = false">X</button>
-                </div>
-            </div>
-        </div>
+        <add-group @addGroup="addGroup"/>
         </Container>
 
         <ticket-details
@@ -43,6 +31,7 @@
 
 <script>
 import TicketGroup from "@/components/board/TicketGroup.vue";
+import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
 import { boardService } from "@/services/board.service.js";
 
@@ -54,8 +43,6 @@ export default {
         return {
             selectedTicket: null,
             selectedGroupId: null,
-            addNewGroup: false,
-            newGroupName: "",
 
             upperDropPlaceholderOptions: {
                 className: "cards-drop-preview",
@@ -129,13 +116,11 @@ export default {
             console.log("Group Payload!:", this.currBoard.groups[idx]);
             return this.currBoard.groups[idx];
         },
-        addGroup() {
-            if(!this.newGroupName)return;
-            let updatedBorad = this.currBoard;
-            let group = boardService.getNewGroup(this.newGroupName);
-            this.newGroupName=''
-            updatedBorad.groups.push(group);
-            this.$store.dispatch("updateBoard", updatedBorad);
+        addGroup(newGroupName) {
+            let updatedBoard = this.currBoard;
+            let group = boardService.getNewGroup(newGroupName);
+            updatedBoard.groups.push(group);
+            this.$store.dispatch("updateBoard", updatedBoard);
         }
     },
     computed: {
@@ -147,7 +132,8 @@ export default {
         TicketGroup,
         TicketDetails,
         Container,
-        Draggable
+        Draggable,
+        AddGroup,
     },
     watch: {
         async $route(to, from) {
