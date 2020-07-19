@@ -1,7 +1,9 @@
 <template>
     <div class="boards-list">
-        <h2>Boards</h2>
-        <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
+        <div class="boards-list-header">
+            <h2>Boards</h2>
+            <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
+        </div>
         <add-board v-if="showAddBoard" @toggleAddBoard="toggleAddBoard" />
         <section>
             <board-preview v-for="board in boards" :board="board" :key="board._id" />

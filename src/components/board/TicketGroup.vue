@@ -9,8 +9,11 @@
         </section>
 
         <container
-            @drop="e => onCardDrop(group.id, e)"
+            group-name="col"
+            @drop="onTicketDrop"
             :get-child-payload="getTicketPayload"
+            drag-class="card-ghost"
+            drop-class="card-ghost-drop"
             :drop-placeholder="dropPlaceholderOptions"
         >
             <Draggable v-for="ticket in group.tickets" :key="ticket.id">
@@ -40,6 +43,8 @@ import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag, generateItems } from '@/services/dnd.service.js'
 
 export default {
+    name: 'TicketGroup',
+    props: ["group"],
     data() {
         return {
             ticketTitle: "",
@@ -58,7 +63,6 @@ export default {
             }
         };
     },
-
     methods: {
         emitOpenTicket(ticket) {
             this.$emit("openTicket", { ticket, groupId: this.group.id });
@@ -78,32 +82,23 @@ export default {
             this.ticketTitle = "";
             this.showAddTicket = false;
         },
-        onCardDrop(groupId, dropResult) {
-            var newBoard = applyDrag(_.cloneDeep(this.group.tickets), dropResult);
+        onTicketDrop(dropResult) {
+            const newTickets = applyDrag(this.group.tickets, dropResult);
             if (
-                dropResult.removedIndex !== null ||
-                dropResult.addedIndex !== null
+                (dropResult.removedIndex >= 0 && dropResult.removedIndex !== null) ||
+                (dropResult.addedIndex >= 0 && dropResult.addedIndex !== null)
             ) {
-                this.$emit("updateBoard", newBoard);
-                // const scene = Object.assign({}, this.scene);
-                // const column = scene.children.filter(p => p.id === columnId)[0];
-                // const columnIndex = scene.children.indexOf(column);
-                // const newColumn = Object.assign({}, column);
-                // newColumn.children = applyDrag(newColumn.children, dropResult);
-                // scene.children.splice(columnIndex, 1, newColumn);
-                // this.scene = scene;
+                this.$emit('updateTickets', { newTickets, groupId: this.group.id })
             }
         },
         getTicketPayload(idx) {
-            console.log({idx})
             return this.group.tickets[idx];
         }
     },
-    props: ["group"],
     components: {
         TicketPreview,
-        Container, 
-        Draggable 
+        Container,
+        Draggable
     }
 };
 </script>

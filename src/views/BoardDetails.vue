@@ -9,7 +9,11 @@
             :get-child-payload="getGroupPayload"
         >
             <Draggable v-for="group in currBoard.groups" :key="group._id">
-                <ticket-group :group="group" @addTicket="addNewTicket" />
+                <ticket-group
+                    :group="group"
+                    @addTicket="addNewTicket"
+                    @updateTickets="updateTickets"
+                />
             </Draggable>
         </Container>
 
@@ -61,9 +65,7 @@ export default {
         },
         addNewTicket({ ticket, groupId }) {
             const board = this.currBoard;
-            const currGroupIdx = board.groups.findIndex(
-                group => group.id === groupId
-            );
+            const currGroupIdx = board.groups.findIndex(group => group.id === groupId);
             board.groups[currGroupIdx].tickets.push(ticket);
             this.$store.dispatch("updateBoard", board);
         },
@@ -75,26 +77,30 @@ export default {
             console.log("save board");
             this.$store.dispatch("updateBoard", this.currBoard);
         },
+        updateTickets({ newTickets, groupId }) {
+            const newBoard = this.currBoard;
+            const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+            if (groupIdx < 0) return;
+
+            newBoard.groups[groupIdx].tickets = newTickets;
+            this.$store.dispatch("updateBoard", newBoard);
+        },
         async loadBoard() {
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
-            // this.board = _.cloneDeep(this.$store.getters.currBoard);
 
             // Sets selectedTicket and selectedGroupId
             if (this.$route.params.ticketId) {
-                this.selectedGroupId = this.currBoard.groups.find(
-                    group =>
-                        (this.selectedTicket = group.tickets.find(
-                            ticket => ticket.id === this.$route.params.ticketId
-                        ))
-                ).id;
+                this.selectedGroupId = this.currBoard.groups.find(group =>
+                    (this.selectedTicket = group.tickets.find(ticket =>
+                        ticket.id === this.$route.params.ticketId))).id;
             }
         },
         onGroupDrop(dropResult) {
             const newGroups = applyDrag(
-                _.cloneDeep(this.currBoard.groups),
+                this.currBoard.groups,
                 dropResult
             );
-            const newBoard = _.cloneDeep(this.currBoard);
+            const newBoard = this.currBoard;
             newBoard.groups = newGroups;
 
             this.$store.dispatch("updateBoard", newBoard);
@@ -108,9 +114,6 @@ export default {
         currBoard() {
             return this.$store.getters.currBoard;
         }
-        // currTicket(){
-
-        // }
     },
     components: {
         TicketGroup,

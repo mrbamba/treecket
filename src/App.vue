@@ -8,7 +8,7 @@
 
 <style lang="scss">
 #app {
-    text-align: center;
+    // text-align: center;
     height: 100vh;
 }
 
