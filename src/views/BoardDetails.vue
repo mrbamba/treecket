@@ -9,7 +9,11 @@
             :get-child-payload="getGroupPayload"
         >
             <Draggable v-for="group in currBoard.groups" :key="group._id">
-                <ticket-group :group="group" @addTicket="addNewTicket" />
+                <ticket-group
+                    :group="group"
+                    @addTicket="addNewTicket"
+                    @updateTickets="updateTickets"
+                />
             </Draggable>
         </Container>
 
@@ -72,6 +76,14 @@ export default {
         saveBoard() {
             console.log("save board");
             this.$store.dispatch("updateBoard", this.currBoard);
+        },
+        updateTickets({ newTickets, groupId }) {
+            const newBoard = this.currBoard;
+            const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+            if (groupIdx < 0) return;
+
+            newBoard.groups[groupIdx].tickets = newTickets;
+            this.$store.dispatch("updateBoard", newBoard);
         },
         async loadBoard() {
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
