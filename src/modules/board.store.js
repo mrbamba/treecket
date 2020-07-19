@@ -9,7 +9,6 @@ export default {
   },
   getters: {
     boards(state) {
-      console.log(state.boards)
       return state.boards;
     },
     currBoard(state) {
