@@ -15,7 +15,7 @@
                     @updateTickets="updateTickets"
                 />
             </Draggable>
-        <add-group @addGroup="addGroup"/>
+            <add-group @addGroup="addGroup" />
         </Container>
 
         <ticket-details
@@ -37,6 +37,7 @@ import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag, generateItems } from "@/services/dnd.service.js";
+import SocketService from "@/services/socket.service.js";
 
 export default {
     data() {
@@ -59,6 +60,13 @@ export default {
     },
     async created() {
         this.loadBoard();
+        SocketService.setup();
+        SocketService.emit("feed board", this.$route.params.boardId);
+        SocketService.on("feed update", this.loadBoard);
+    },
+    destoryed() {
+        SocketService.off("feed update", this.$route.params.boardId);
+        SocketService.terminate();
     },
     methods: {
         closeTicketDetails() {
@@ -66,23 +74,26 @@ export default {
             this.selectedGroupId = null;
             this.$router.push(`/board/${this.currBoard._id}`);
         },
-        addTicket({ ticket, groupId }) {
+        async addTicket({ ticket, groupId }) {
             const board = this.currBoard;
             const currGroupIdx = board.groups.findIndex(
                 group => group.id === groupId
             );
             board.groups[currGroupIdx].tickets.push(ticket);
-            this.$store.dispatch("updateBoard", board);
+            await this.$store.dispatch("updateBoard", board);
+            SocketService.emit("updateBoard", this.currBoard._id);
         },
-        deleteTicket({ ticketId, groupId }) {
-            this.$store.dispatch("deleteTicket", { ticketId, groupId });
+        async deleteTicket({ ticketId, groupId }) {
             this.closeTicketDetails();
+            await this.$store.dispatch("deleteTicket", { ticketId, groupId });
+            SocketService.emit("updateBoard", this.currBoard._id);
         },
-        saveBoard() {
+        async saveBoard() {
             console.log("save board");
-            this.$store.dispatch("updateBoard", this.currBoard);
+            await this.$store.dispatch("updateBoard", this.currBoard);
+            SocketService.emit("updateBoard", this.currBoard._id);
         },
-        updateTickets({ newTickets, groupId }) {
+        async updateTickets({ newTickets, groupId }) {
             const newBoard = this.currBoard;
             const groupIdx = newBoard.groups.findIndex(
                 group => group.id === groupId
@@ -90,9 +101,11 @@ export default {
             if (groupIdx < 0) return;
 
             newBoard.groups[groupIdx].tickets = newTickets;
-            this.$store.dispatch("updateBoard", newBoard);
+            await this.$store.dispatch("updateBoard", newBoard);
+            SocketService.emit("updateBoard", this.currBoard._id);
         },
         async loadBoard() {
+            console.log("running loadBoard on boardDetails");
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
 
             // Sets selectedTicket and selectedGroupId
@@ -105,22 +118,24 @@ export default {
                 ).id;
             }
         },
-        onGroupDrop(dropResult) {
+        async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
             const newBoard = this.currBoard;
             newBoard.groups = newGroups;
 
-            this.$store.dispatch("updateBoard", newBoard);
+            await this.$store.dispatch("updateBoard", newBoard);
+            SocketService.emit("updateBoard", this.currBoard._id);
         },
         getGroupPayload(idx) {
             console.log("Group Payload!:", this.currBoard.groups[idx]);
             return this.currBoard.groups[idx];
         },
-        addGroup(newGroupName) {
+        async addGroup(newGroupName) {
             let updatedBoard = this.currBoard;
             let group = boardService.getNewGroup(newGroupName);
             updatedBoard.groups.push(group);
-            this.$store.dispatch("updateBoard", updatedBoard);
+            await this.$store.dispatch("updateBoard", updatedBoard);
+            SocketService.emit("updateBoard", this.currBoard._id);
         }
     },
     computed: {
@@ -133,7 +148,7 @@ export default {
         TicketDetails,
         Container,
         Draggable,
-        AddGroup,
+        AddGroup
     },
     watch: {
         async $route(to, from) {

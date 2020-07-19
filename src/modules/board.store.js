@@ -6,7 +6,6 @@ export default {
     filterBy: {
       txt: "",
     },
-    overlay: false // consider misc.store.js or locate in global store (index.js)
   },
   getters: {
     boards(state) {
@@ -14,9 +13,6 @@ export default {
     },
     currBoard(state) {
       return state.currBoard;
-    },
-    overlay(state) {
-      return state.overlay;
     }
   },
   mutations: {
@@ -35,13 +31,6 @@ export default {
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },
-
-    showOverlay(state) {
-      state.overlay = true;
-    },
-    hideOverlay(state) {
-      state.overlay = false;
-    }
     // removeTicket(state, { id }) {
     //   const ticketIndex = state.board.group.ticket.findIndex(
     //     currTicket => currTicket.id === id

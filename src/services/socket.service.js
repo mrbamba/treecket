@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/'
-    : '//localhost:3005' 
+    : '//localhost:3030' 
 var socket;
 
 export default {
