@@ -1,0 +1,28 @@
+.ticket-details {
+    border: 1px solid black;
+    position: relative;
+    background-color: #f4f5f7;
+    display: flex;
+    width: 500px;
+    text-align: start;
+    justify-content: space-around;
+    padding: 30px;
+    margin: 0 auto;
+    .close-btn{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    textarea {
+        border: unset;
+        resize: none;
+        background-color: transparent;
+        font-size: 1.2rem;
+        overflow-y: hidden;
+        cursor: pointer;
+        &:focus {
+            border: 2px solid black;
+        }
+    }
+}

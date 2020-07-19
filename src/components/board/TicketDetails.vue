@@ -1,11 +1,12 @@
 <template>
-    <div>
-        <button @click="closeTicketDetails">X</button>
-        <h3>{{ ticket.title }}</h3>
+    <div class="ticket-details">
+        <button class="close-btn" @click="closeTicketDetails">X</button>
+        <div>
+        <textarea @input="expandTextareaEl()" ref="title" v-model="ticket.title" @blur="saveTicket" maxlength="140" />
         <section>
             <h3>Description:</h3>
-            <textarea v-model="ticket.description" @blur="saveTicket" name="" id="" cols="30" rows="10">
-            </textarea>
+            <textarea v-model="ticket.description" @blur="saveTicket" placeholder="Enter your ticket description"
+            cols="30" rows="10"/>
             <section v-for="attachment in ticket.attacments" :key="attachment.id">
                 {{ attachment }}
             </section>
@@ -19,6 +20,7 @@
                 </ul>
             </section>
         </section>
+        </div>
         <ticket-menu @deleteTicket="deleteTicket" :ticket="ticket" />
     </div>
 </template>
@@ -45,6 +47,10 @@ export default {
         deleteTicket(ticketId){
             console.log('TicketDetails params:', ticketId, this.groupId)
             this.$emit('deleteTicket', { ticketId, groupId: this.groupId })
+        },
+        expandTextareaEl(){
+            const el = this.$refs.title;
+            el.style.height = ""; el.style.height = el.scrollHeight + "px"
         }
     }
 }
