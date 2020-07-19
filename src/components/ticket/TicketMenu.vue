@@ -4,9 +4,9 @@
         <!-- <member-selector
             v-if="show.memberSelector"
             @click="show.memberSelector=!show.memberSelector"
-        >Members</member-selector> -->
+        >Members</member-selector>-->
         <button>Labels</button>
-        <button>Checklist</button>
+        <button @click="onAddChecklist">Checklist</button>
         <button>Due Date</button>
         <button>Attachment</button>
         <button>Cover</button>
@@ -50,6 +50,9 @@ export default {
     methods: {
         onTicketDelete(ticketId) {
             this.$emit('deleteTicket', ticketId)
+        },
+        onAddChecklist() {
+            this.$emit('addChecklist')
         }
     },
     components: {
