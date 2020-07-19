@@ -3,7 +3,7 @@
         <header>
             <div class="group-header">
                 <h3>{{ group.title }}</h3>
-                <h4>{{ group.tickets.length }}</h4>
+                <h4>{{ ticketsInGroupCount }}</h4>
                 <button>☰</button>
             </div>
         </header>
@@ -52,10 +52,38 @@ export default {
         };
     },
     methods: {
-        emitOpenTicket(ticket) {
-            this.$emit('openTicket', { ticket, groupId: this.group.id });
+        toggleAddTicket() {
+            this.showAddTicket = !this.showAddTicket;
+            this.ticketTitle = '';
+            if (this.showAddTicket) setTimeout(() => { this.$refs.newTicketTitle.focus() }, 0)
         },
-
+        addTicket() {
+            if (!this.ticketTitle) return;
+            const ticket = boardService.getNewTicket(this.ticketTitle);
+            this.$emit('addTicket', {
+                ticket,
+                groupId: this.group.id
+            });
+            this.ticketTitle = '';
+        },
+        onBlur(ev) {
+            if (ev.relatedTarget) {
+                if (ev.relatedTarget.dataset.preventBlur === 'close') {
+                    this.toggleAddTicket();
+                    return;
+                } else if (ev.relatedTarget.dataset.preventBlur === 'add') {
+                    this.addTicket();
+                    this.$refs.newTicketTitle.focus()
+                    return;
+                }
+            };
+            if (!this.ticketTitle) {
+                this.ticketTitle = '';
+            } else {
+                this.addTicket();
+            }
+            this.toggleAddTicket();
+        },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
             if (
@@ -65,14 +93,16 @@ export default {
                 this.$emit('updateTickets', { newTickets, groupId: this.group.id })
             }
         },
-        addTicket({ticket, groupId}) {
-            this.$emit('addTicket', {
-                ticket,
-                groupId
-            });
+        addTicket({ ticket, groupId }) {
+            this.$emit('addTicket', { ticket, groupId });
         },
         getTicketPayload(idx) {
             return this.group.tickets[idx];
+        }
+    },
+    computed: {
+        ticketsInGroupCount() {
+            return (this.group.tickets.length) ? this.group.tickets.length : '';
         }
     },
     components: {

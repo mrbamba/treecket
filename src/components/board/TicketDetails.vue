@@ -35,14 +35,25 @@ import TicketMenu from "@/components/ticket/TicketMenu.vue";
 import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 export default {
     props: ['ticket', 'groupId'],
-    // data(){
-    // return {
-    //     description: this.ticket.description
-    // }
-    // },
     components: {
         TicketMenu,
         TicketChecklists
+    },
+    computed: {
+        overlay() {
+            return this.$store.getters.overlay
+        }
+    },
+    created() {
+        this.$store.commit('showOverlay');
+    },
+    mounted() {
+        this.$watch('overlay', function (newValue, oldValue) {
+            this.closeTicketDetails();
+        });
+    },
+    destroyed() {
+        this.$store.commit('hideOverlay');
     },
     methods: {
         saveTicket() {
@@ -59,7 +70,7 @@ export default {
             const el = this.$refs.title;
             el.style.height = ""; el.style.height = el.scrollHeight + "px"
         }
-    }
+    },
 }
 </script>
 
