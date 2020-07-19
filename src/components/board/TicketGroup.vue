@@ -7,11 +7,17 @@
                 <button>☰</button>
             </div>
         </section>
-        <ticket-preview
-            v-for="ticket in group.tickets"
-            :key="ticket.id"
-            :ticket="ticket"
-        />
+
+        <container
+            @drop="e => onCardDrop(group.id, e)"
+            :get-child-payload="getTicketPayload"
+            :drop-placeholder="dropPlaceholderOptions"
+        >
+            <Draggable v-for="ticket in group.tickets" :key="ticket.id">
+                <ticket-preview :ticket="ticket" />
+            </Draggable>
+        </container>
+
         <div v-if="showAddTicket">
             <textarea
                 v-model="ticketTitle"
@@ -27,14 +33,29 @@
 </template>
 
 <script>
-import TicketPreview from './TicketPreview.vue';
+import TicketPreview from "./TicketPreview.vue";
 import { boardService } from "@/services/board.service.js";
+
+import { Container, Draggable } from 'vue-smooth-dnd'
+import { applyDrag, generateItems } from '@/services/dnd.service.js'
+
 export default {
     data() {
         return {
-            ticketTitle: '',
+            ticketTitle: "",
             showAddTicket: false,
-            newGroup: this.group
+            newGroup: this.group,
+
+            upperDropPlaceholderOptions: {
+                className: "cards-drop-preview",
+                animationDuration: "150",
+                showOnTop: true
+            },
+            dropPlaceholderOptions: {
+                className: "drop-preview",
+                animationDuration: "150",
+                showOnTop: true
+            }
         };
     },
 
@@ -50,15 +71,39 @@ export default {
         },
         addTicket() {
             const newTicket = boardService.getNewTicket(this.ticketTitle);
-            this.$emit('addTicket', { ticket: newTicket, groupId: this.group.id });
-            this.ticketTitle = '';
+            this.$emit("addTicket", {
+                ticket: newTicket,
+                groupId: this.group.id
+            });
+            this.ticketTitle = "";
             this.showAddTicket = false;
-
+        },
+        onCardDrop(groupId, dropResult) {
+            var newBoard = applyDrag(_.cloneDeep(this.group.tickets), dropResult);
+            if (
+                dropResult.removedIndex !== null ||
+                dropResult.addedIndex !== null
+            ) {
+                this.$emit("updateBoard", newBoard);
+                // const scene = Object.assign({}, this.scene);
+                // const column = scene.children.filter(p => p.id === columnId)[0];
+                // const columnIndex = scene.children.indexOf(column);
+                // const newColumn = Object.assign({}, column);
+                // newColumn.children = applyDrag(newColumn.children, dropResult);
+                // scene.children.splice(columnIndex, 1, newColumn);
+                // this.scene = scene;
+            }
+        },
+        getTicketPayload(idx) {
+            console.log({idx})
+            return this.group.tickets[idx];
         }
     },
     props: ["group"],
     components: {
-        TicketPreview
+        TicketPreview,
+        Container, 
+        Draggable 
     }
 };
 </script>

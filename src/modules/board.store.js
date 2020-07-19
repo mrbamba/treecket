@@ -60,6 +60,7 @@ export default {
       commit({ type: 'addBoard', board });
     },
     async updateBoard({ commit }, board) {
+      console.log('store-update board:', board);
       const newBoard = await boardService.update(board);
       commit({ type: 'setBoard', board: newBoard });
     },
