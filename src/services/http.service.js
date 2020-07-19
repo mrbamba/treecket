@@ -3,7 +3,7 @@ import store from '@/store'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
-    : '//localhost:3000/'
+    : '//localhost:3030/api/'
     // add 'api/' after switching to mongoDB locally
 
 
