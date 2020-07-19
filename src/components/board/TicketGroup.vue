@@ -1,12 +1,12 @@
 <template>
     <section class="ticket-group">
-        <section>
+        <header>
             <div class="group-header">
                 <h3>{{ group.title }}</h3>
                 <h4>{{ group.tickets.length }}</h4>
                 <button>☰</button>
             </div>
-        </section>
+        </header>
 
         <container
             group-name="col"
@@ -34,7 +34,7 @@
             <button @click.stop="addTicket">Add Ticket</button>
             <button @click.stop="toggleAddTicket">X</button>
         </div>
-        <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else> + Add another ticket</button>
+        <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>+ Add another ticket</button>
     </section>
 </template>
 
@@ -74,14 +74,13 @@ export default {
             this.showAddTicket = !this.showAddTicket;
         },
         addTicket(ev) {
-            if (ev.key === 'Enter' || !ev.key){
+            if (ev.key === 'Enter' || !ev.key) {
                 const newTicket = boardService.getNewTicket(this.ticketTitle);
                 this.$emit("addTicket", {
                     ticket: newTicket,
                     groupId: this.group.id
                 });
                 this.ticketTitle = "";
-                this.showAddTicket = false;
             }
         },
         onTicketDrop(dropResult) {
