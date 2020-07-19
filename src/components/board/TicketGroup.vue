@@ -23,15 +23,18 @@
 
         <div v-if="showAddTicket">
             <textarea
+                ref="addTicket"
+                @blur="toggleAddTicket"
+                @keyup="addTicket"
                 v-model="ticketTitle"
                 cols="30"
                 rows="5"
                 placeholder="Enter a title for this ticket"
             />
             <button @click.stop="addTicket">Add Ticket</button>
-            <button @click.stop="onCloseTicket">X</button>
+            <button @click.stop="toggleAddTicket">X</button>
         </div>
-        <button @click.stop="onAddTicket" v-else>Add another Ticket</button>
+        <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else> + Add another ticket</button>
     </section>
 </template>
 
@@ -67,20 +70,19 @@ export default {
         emitOpenTicket(ticket) {
             this.$emit("openTicket", { ticket, groupId: this.group.id });
         },
-        onAddTicket() {
-            this.showAddTicket = true;
+        toggleAddTicket() {
+            this.showAddTicket = !this.showAddTicket;
         },
-        onCloseTicket() {
-            this.showAddTicket = false;
-        },
-        addTicket() {
-            const newTicket = boardService.getNewTicket(this.ticketTitle);
-            this.$emit("addTicket", {
-                ticket: newTicket,
-                groupId: this.group.id
-            });
-            this.ticketTitle = "";
-            this.showAddTicket = false;
+        addTicket(ev) {
+            if (ev.key === 'Enter' || !ev.key){
+                const newTicket = boardService.getNewTicket(this.ticketTitle);
+                this.$emit("addTicket", {
+                    ticket: newTicket,
+                    groupId: this.group.id
+                });
+                this.ticketTitle = "";
+                this.showAddTicket = false;
+            }
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
