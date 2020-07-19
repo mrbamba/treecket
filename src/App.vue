@@ -2,7 +2,7 @@
     <div id="app" :style="{ background }">
         <main-header />
         <router-view />
-        <div :class="{ overlay }"></div>
+        <div :class="{ overlay }" @click.self="hideOverlay"></div>
     </div>
 </template>
 
@@ -45,7 +45,12 @@ export default {
             }
         }
     },
-
+    methods: {
+        hideOverlay() {
+            console.log('close overlay')
+            this.$store.commit('hideOverlay');
+        }
+    },
     components: {
         MainHeader,
     }

@@ -5,6 +5,7 @@
     z-index: 1;
     // padding: rem(4px) 0;
     font-size: rem(12px);
+    cursor: pointer;
     &:last-of-type{
         padding-bottom: 8px;
     }
@@ -15,5 +16,6 @@
         box-shadow: 0 1px 0 rgba(9,30,66,.25);
         padding: 1em;
         border-radius: 3px;
+        overflow-wrap: anywhere;
     }
 }
