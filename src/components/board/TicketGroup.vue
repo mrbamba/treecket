@@ -20,26 +20,13 @@
                 <ticket-preview :ticket="ticket" />
             </Draggable>
         </container>
-
-        <div v-if="showAddTicket">
-            <textarea
-                @blur="onBlur"
-                @keyup.enter="addTicket"
-                v-model="ticketTitle"
-                ref="newTicketTitle"
-                cols="30"
-                rows="5"
-                placeholder="Enter a title for this ticket..."
-            />
-            <button @click.stop="addTicket" data-prevent-blur="add">Add Ticket</button>
-            <button @click.stop="toggleAddTicket" data-prevent-blur="close">X</button>
-        </div>
-        <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>+ Add another ticket</button>
+        <add-ticket :group="group" @emitAddTicket="addTicket" />
     </section>
 </template>
 
 <script>
 import TicketPreview from "./TicketPreview.vue";
+import AddTicket from "./AddTicket.vue";
 import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from 'vue-smooth-dnd'
@@ -50,8 +37,6 @@ export default {
     props: ["group"],
     data() {
         return {
-            ticketTitle: '',
-            showAddTicket: false,
             newGroup: this.group,
 
             upperDropPlaceholderOptions: {
@@ -70,40 +55,6 @@ export default {
         emitOpenTicket(ticket) {
             this.$emit('openTicket', { ticket, groupId: this.group.id });
         },
-        toggleAddTicket() {
-            this.showAddTicket = !this.showAddTicket;
-            this.ticketTitle = '';
-            if (this.showAddTicket) setTimeout(() => { this.$refs.newTicketTitle.focus() }, 0)
-        },
-
-        addTicket() {
-            if (!this.ticketTitle) return;
-            const ticket = boardService.getNewTicket(this.ticketTitle);
-            this.$emit('addTicket', {
-                ticket,
-                groupId: this.group.id
-            });
-            this.ticketTitle = '';
-        },
-
-        onBlur(ev) {
-            if (ev.relatedTarget) {
-                if (ev.relatedTarget.dataset.preventBlur === 'close') {
-                    this.toggleAddTicket();
-                    return;
-                } else if (ev.relatedTarget.dataset.preventBlur === 'add') {
-                    this.addTicket();
-                    this.$refs.newTicketTitle.focus()
-                    return;
-                }
-            };
-            if (!this.ticketTitle) {
-                this.ticketTitle = '';
-            } else {
-                this.addTicket();
-            }
-            this.toggleAddTicket();
-        },
 
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
@@ -114,7 +65,12 @@ export default {
                 this.$emit('updateTickets', { newTickets, groupId: this.group.id })
             }
         },
-
+        addTicket({ticket, groupId}) {
+            this.$emit('addTicket', {
+                ticket,
+                groupId
+            });
+        },
         getTicketPayload(idx) {
             return this.group.tickets[idx];
         }
@@ -122,7 +78,8 @@ export default {
     components: {
         TicketPreview,
         Container,
-        Draggable
+        Draggable,
+        AddTicket
     }
 };
 </script>
