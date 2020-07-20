@@ -1,15 +1,30 @@
 <template>
     <div>
-        <section v-for="checklist in ticket.checklists" :key="checklist.id">
-            <h4>Checklist:</h4>
+        <section v-for="(checklist, checklistIdx) in ticket.checklists" :key="checklist.id">
+            <section>
+                <h4>Checklist:</h4>
+                <button @click="deleteChecklist(checklistIdx)">Delete</button>
+            </section>
+                <form action="">
+                    <input type="text">
+                    <button>Save</button>
+                </form>
+            <section >
+
+            </section>
             <ul>
-                <li v-for="item in checklist.items" :key="item.id">
+                <li v-for="(item, itemIdx) in checklist.items" :key="item.id">
                     <div v-if="onEditItemId !== item.id">
-                        <input @change.stop="emitUpdateTicket" type="checkbox" v-model="item.isDone" />
-                        <span :class="{done: item.isDone}"  @click="toggleEditItem(item)">{{ item.txt }}</span>
+                        <input @change.stop="updateTicket" type="checkbox" v-model="item.isDone" />
+                        <span
+                            :class="{done: item.isDone}"
+                            @click="toggleEditItem(item)"
+                        >{{ item.txt }}</span>
+                        <button @click="deleteItem(checklist, itemIdx)">x</button>
                     </div>
                     <div v-else>
                         <textarea
+                            ref="editItem"
                             @keyup.enter="saveUpdateChanges(item)"
                             @blur="onBlurEditItem($event, item)"
                             v-model="item.txt"
@@ -22,7 +37,8 @@
                 </li>
                 <div v-if="showNewItem && checklist.id === onEditChecklistId">
                     <input
-                        @keyup.enter="emitAddItem($event, checklist.id)"
+                        ref="addItem"
+                        @keyup.enter="onAddItem($event, checklist.id)"
                         @blur="onBlurAddItem($event, checklist.id)"
                         v-model="itemTxt"
                         type="text"
@@ -31,7 +47,7 @@
                     <button data-prevent-blur="add">Add</button>
                     <button @click="toggleAddItem">X</button>
                 </div>
-                <button v-else @click="toggleAddItem(checklist.id)">Add an item</button>
+                <button v-else @click="toggleAddItem(true, checklist.id)">Add an item</button>
             </ul>
         </section>
     </div>
@@ -51,86 +67,69 @@ export default {
     },
 
     methods: {
-        emitUpdateTicket() {
+        updateTicket() {
             this.$emit('updateTicket', this.ticket);
         },
-
-        toggleAddItem(checklistId) {
-            this.showNewItem = !this.showNewItem;
+        toggleAddItem(inputShowingNextStatus, checklistId) {
+            this.showNewItem = inputShowingNextStatus
+            if (this.showNewItem) this.$nextTick(() => this.$refs.addItem[0].focus())
             this.itemTxt = '';
             this.onEditChecklistId = (this.showNewItem) ? checklistId : null;
         },
-
         toggleEditItem(item) {
             if (this.onEditItemId) {
-                this.onEditItemId = null
-                this.onEditItemTxt = ''
+                this.onEditItemId = null;
+                this.onEditItemTxt = '';
             } else {
-                this.onEditItemId = item.id
-                this.onEditItemTxt = item.txt
+                this.showNewItem = false;
+                this.onEditItemId = item.id;
+                this.$nextTick(() => this.$refs.editItem[0].focus());
+                this.onEditItemTxt = item.txt;
             }
         },
-
-        emitAddItem(ev, checklistId) {
+        onAddItem(ev, checklistId) {
             this.$emit('addItem', { itemTxt: this.itemTxt, checklistId });
-            if (ev && ev.key === 'enter') {
-                this.itemTxt = '';
-            } else {
-                this.toggleAddItem()
-            }
+            this.itemTxt = '';
+            this.toggleAddItem(false);
         },
-
         onBlurAddItem(ev, checklistId) {
             if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "add") {
-                this.emitAddItem(ev, checklistId);
+                this.onAddItem(ev, checklistId);
             } else {
-                this.toggleAddItem()
+                this.toggleAddItem(false);
             }
         },
-
-        onBlurEditItem(ev ,item) {
+        onBlurEditItem(ev, item) {
             if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "save") {
-                this.saveUpdateChanges(item)
+                this.saveUpdateChanges(item);
             } else {
-                this.toggleEditItem(item)
+                item.txt = this.onEditItemTxt;
+                this.toggleEditItem(item);
             }
         },
-
         saveUpdateChanges(item) {
-            this.emitUpdateTicket()
-            this.toggleEditItem(item)
+            this.updateTicket();
+            this.toggleEditItem(item);
+        },
+        deleteItem(checklist, itemIdx) {
+            checklist.items.splice(itemIdx, 1)
+            this.updateTicket()
+        },
+        deleteChecklist(checklistIdx) {
+            this.ticket.checklists.splice(checklistIdx, 1)
+            this.updateTicket()
         }
-
-
-        //         onBlur(ev, checklistId, item) {
-
-        //             if (ev.relatedTarget.dataset.preventBlur === "add") {
-        //                 this.emitAddItem(ev, checklistId);
-        //             } else if (ev.relatedTarget.dataset.preventBlur === "save") {
-
-        //             } else {
-        //                 console.log('close');
-        //                 item.txt = this.onEditItemTxt
-        //                 this.toggleAddItem()
-        //                 this.toggleEditItem(item)
-        //                 this.showNewItem = false;
-        //                 this.onEditChecklistId = null;
-        //                 this.onEditItemId = null;
-        //                 this.itemTxt = '';
-        //                 this.onEditItemTxt = '';
-
-        //             }
-
-        //         } else {
-        //             if(this.showNewItem) {
-        //     this.toggleAddItem()
-        // } else {
-
-        // }
-        //             }
-        //         }
     }
 }
+
+// emitAddItem(ev, checklistId) {
+//     this.$emit('addItem', { itemTxt: this.itemTxt, checklistId });
+//     if (ev && ev.key === 'enter') {
+//         this.itemTxt = '';
+//     } else {
+//         this.toggleAddItem();
+//     }
+// },
 </script>
 
 <style>
