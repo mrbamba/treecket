@@ -75,6 +75,7 @@ export default {
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
         SocketService.terminate();
+        this.$store.commit('setBoard',null)
     },
     methods: {
         closeTicketDetails() {
@@ -113,7 +114,6 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async loadBoard() {
-            console.log("running loadBoard on boardDetails");
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
 
             // Sets selectedTicket and selectedGroupId
@@ -125,7 +125,7 @@ export default {
                         ))
                 ).id;
             }
-        },
+        }, 
         async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
             const newBoard = this.currBoard;

@@ -4,7 +4,7 @@ import moment from 'moment'
 
 Vue.filter("progressBar", (val) => {
   const doneItemsCount = val.reduce((acc, item) => {
-    if (item.isDone) return acc++
+    return (item.isDone) ? ++acc : acc
   }, 0);
   return (doneItemsCount / val.length) * 100 + '%'
 });

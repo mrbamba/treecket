@@ -1,18 +1,18 @@
 <template>
     <div>
         <section v-for="(checklist, checklistIdx) in ticket.checklists" :key="checklist.id">
-            <section>
-                <h4>Checklist:</h4>
+            <form v-if="showChecklistTitleEdit">
+                <input v-model="checklist.title" type="text" />
+                <button @click="saveTitle">Save</button>
+                <button @click="cancelUpdateTitle(checklist)">X</button>
+            </form>
+            <section v-else>
+                <h4 @click="editTitle(checklist)">{{checklist.title}}:</h4>
                 <button @click="deleteChecklist(checklistIdx)">Delete</button>
+            </section>
                 <div>
                     <h6>{{ checklist.items | progressBar }}</h6>
                 </div>
-            </section>
-            <form action>
-                <input type="text" />
-                <button>Save</button>
-            </form>
-            <section></section>
             <ul>
                 <li v-for="(item, itemIdx) in checklist.items" :key="item.id">
                     <div v-if="onEditItemId !== item.id">
@@ -63,7 +63,9 @@ export default {
             onEditChecklistId: null,
             onEditItemId: null,
             itemTxt: '',
-            onEditItemTxt: ''
+            onEditItemTxt: '',
+            showChecklistTitleEdit: false,
+            onEditChecklistTitle: ''
         }
     },
     computed: {
@@ -79,6 +81,20 @@ export default {
     methods: {
         updateTicket() {
             this.$emit('updateTicket', this.ticket);
+        },
+        editTitle(checklist) {
+            this.onEditChecklistTitle = checklist.title;
+            this.showChecklistTitleEdit = true;
+        },
+        saveTitle() {
+            this.onEditChecklistTitle = '';
+            this.showChecklistTitleEdit = false;
+            this.updateTicket()
+        },
+        cancelUpdateTitle(checklist) {
+            checklist.title = this.onEditChecklistTitle;
+            this.onEditChecklistTitle = '';
+            this.showChecklistTitleEdit = false;
         },
         toggleAddItem(inputShowingNextStatus, checklistId) {
             this.showNewItem = inputShowingNextStatus
