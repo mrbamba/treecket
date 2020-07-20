@@ -1,28 +1,28 @@
 .ticket-group {
     display: flex;
     flex-direction: column;
-    margin: 0px 10px;
-    width: 280px;
     height: fit-content;
-    max-height: 100%;
-    background-color: #ebecf0;
+    width: 280px;
     padding: rem(8px);
+    background-color: #ebecf0;
     border-radius: 3px;
 
     .group-header {
-        font-size: rem(12px);
+        font-size: rem(14px);
         display: flex;
         justify-content: space-between;
         padding: rem(8px);
         color: #5e6c84;
-
-        :first-child {
+        
+        &:first-child {
             text-transform: uppercase;
         }
-
+        
         h3 {
+            font-size: rem(14px);
             font-weight: 500;
+            display: inline;
+            margin-inline-end: rem(4px);
         }
     }
 }
-

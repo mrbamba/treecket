@@ -2,8 +2,7 @@
     <section class="ticket-group">
         <header>
             <div class="group-header">
-                <h3>{{ group.title }}</h3>
-                <h4>{{ ticketsInGroupCount }}</h4>
+                <div><h3>{{ group.title }}</h3> {{ ticketsInGroupCount }}</div>
                 <button>☰</button>
             </div>
         </header>
@@ -41,7 +40,7 @@ export default {
 
             upperDropPlaceholderOptions: {
                 className: "cards-drop-preview",
-                animationDuration: "1500",
+                animationDuration: "150",
                 showOnTop: true
             },
             dropPlaceholderOptions: {

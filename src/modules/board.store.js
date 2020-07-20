@@ -1,12 +1,12 @@
 import { boardService } from "../services/board.service.js";
 export default {
   state: {
+    overlay: false, // consider misc.store.js or locate in global store (index.js)
     boards: [],
     currBoard: null,
     filterBy: {
-      txt: "",
+      txt: ""
     },
-    overlay: false // consider misc.store.js or locate in global store (index.js)
   },
   getters: {
     boards(state) {
@@ -36,6 +36,7 @@ export default {
       state.filterBy = filterBy;
     },
 
+    
     showOverlay(state) {
       state.overlay = true;
     },
