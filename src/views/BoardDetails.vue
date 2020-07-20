@@ -10,7 +10,11 @@
             :drop-placeholder="upperDropPlaceholderOptions"
             :get-child-payload="getGroupPayload"
         >
-            <Draggable class="ticket-group-container" v-for="group in currBoard.groups" :key="group._id">
+            <Draggable
+                class="ticket-group-container"
+                v-for="group in currBoard.groups"
+                :key="group._id"
+            >
                 <ticket-group
                     :group="group"
                     @addTicket="addTicket"
@@ -24,6 +28,7 @@
             v-if="selectedTicket"
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
+            :user="loggedInUser"
             @closeTicketDetails="closeTicketDetails"
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
@@ -144,6 +149,10 @@ export default {
     computed: {
         currBoard() {
             return _.cloneDeep(this.$store.getters.currBoard);
+        },
+        loggedInUser() {
+            console.log('asking for logged in user', this.$store.getters.loggedInUser)
+            return this.$store.getters.loggedInUser;
         }
     },
     components: {

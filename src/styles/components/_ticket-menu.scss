@@ -1,4 +1,22 @@
 .ticket-menu {
     display: flex;
     flex-direction: column;
+    button{
+        border-radius: 2px;
+        margin-block-end: 8px;
+        border: none;
+        padding: 6px;
+        background-color: rgba(9,30,66,.04);
+        font-size: 13px;
+        &:nth-of-type(5){
+            margin-bottom: 20px;
+        }
+        font-weight: lighter;
+        text-align: left;
+    }
+    h3{
+        font-size: 12px;
+        // text-align: center;
+        margin-bottom: 10px;
+    }
 }

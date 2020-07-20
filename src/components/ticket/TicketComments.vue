@@ -1,8 +1,8 @@
 <template>
     <div class="ticket-comments">
-        <div class="chat-log">
+        <div class="chat-log" v-if="comments">
             <div
-                v-for="comment in ticket.comments"
+                v-for="comment in comments"
                 :key="comment.id"
                 class="ticket-comment"
             >
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="add-comment-input">
-            <avatar :fullname="user.fullName" :image="user.imgSrc" />
+            <Avatar :fullname="user.fullName" :image="user.imgSrc" />
             <form action="">
                 <input
                     type="text"
@@ -30,7 +30,11 @@
                     @click="enteringComment = true"
                     v-model="newCommentText"
                 />
-                <button @click.prevent="addComment"></button>
+                <div>
+
+                <button @click.prevent="addComment">Save</button>
+                <button>Cancel</button>
+                </div>
             </form>
         </div>
     </div>
@@ -41,6 +45,7 @@ import Avatar from "vue-avatar-component";
 
 export default {
     name: "TicketComments",
+    props:['comments','user'],
     data() {
         return {
             enteringComment: false,
@@ -49,8 +54,12 @@ export default {
     },
     methods: {
         addComment() {
+            comments.
             this.$emit("addComment", this.newCommentText);
         }
+    },
+    components:{
+        Avatar,
     }
 };
 </script>
