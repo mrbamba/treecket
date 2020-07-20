@@ -1,11 +1,10 @@
 <template>
     <div class="add-group ticket-group">
-        <div v-if="addNewGroup === false" @click.stop="toggleAddGroup">+ Add another list</div>
+        <div v-if="!addNewGroup" @click.stop="toggleAddGroup">+ Add another list</div>
         <div v-else>
             <input
                 type="text"
                 v-model="newGroupName"
-                v-if="addNewGroup"
                 @blur="onBlur"
                 ref="newGroupTitle"
                 placeholder="Enter new list name"
@@ -19,7 +18,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+// import Vue from 'vue';
 export default {
     name: "AddGroup",
     data() {
@@ -38,14 +37,9 @@ export default {
         toggleAddGroup() {
             this.addNewGroup = !this.addNewGroup;
             this.newGroupName = '';
-            if (this.addNewGroup) {
-                setTimeout(() => {
-                    this.$refs.newGroupTitle.focus();
-                }, 0);
-            }
+
+            if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
         },
-
-
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'add') {

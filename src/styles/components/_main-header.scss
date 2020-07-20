@@ -1,22 +1,32 @@
 .main-header {
-    box-shadow: 0 2px 2px rgba(10, 30, 60, 0.1);
-    background-color: rgba(0, 0, 0, .2);
-    backdrop-filter: blur(4px);
+    // box-shadow: 0 2px 2px rgba(10, 30, 60, 0.1);
+    background-color: rgba(0, 0, 0, .15);
+    padding: rem(4px);
     .main-header-logo {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        padding: rem(8px);
+        // display: flex;
+        // flex-direction: row;
+        // align-items: center;
+        cursor: pointer;
+        margin: rem(4px);
+        font-family: Lalezar;
+        color: #fff;
+        opacity: 0.6;
+        &:hover {
+            opacity: 0.8;
+        }
     }
     h1 {
-        font-weight: 900;
+        font-size: rem(24px);
         text-transform: uppercase;
         letter-spacing: rem(2px);
         padding-inline-start: rem(4px);
-        line-height: 1;
+        display: inline;
+        line-height: 0.6;
+        vertical-align: bottom;
     }
     img {
-        height: rem(40px);
+        height: rem(20px);
+        vertical-align: middle;
     }
     display: flex;
     flex-direction: row;

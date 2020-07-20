@@ -41,7 +41,7 @@ export default {
 
             upperDropPlaceholderOptions: {
                 className: "cards-drop-preview",
-                animationDuration: "150",
+                animationDuration: "1500",
                 showOnTop: true
             },
             dropPlaceholderOptions: {
