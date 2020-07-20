@@ -1,11 +1,11 @@
 import UserService from '../services/user.service.js'
 
-var localLoggedinUser = null;
-if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
+var localLoggedInUser = null;
+if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
 
 export default {
     state: {
-        loggedInUser : localLoggedinUser,
+        loggedInUser : localLoggedInUser,
         users: []
     },
     getters: {

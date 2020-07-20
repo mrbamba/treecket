@@ -1,9 +1,9 @@
 .ticket-details {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: fixed;
     width: 500px;
-    padding: 30px;
+    padding: 30px 16px 10px 16px;
     border-radius: 3px;
     background-color: #fff;
     z-index: 5;
@@ -16,6 +16,9 @@
         position: absolute;
         right: 5px;
         top: 5px;
+        border: none;
+        margin-bottom: 40px;
+        background-color: transparent;
     }
 
     textarea {
@@ -28,5 +31,47 @@
         &:focus {
             border: 1px solid black;
         }
+    }
+    .ticket-activity-selector{
+        display: flex;
+        flex-direction: row;
+        .history-icon{
+            margin-right: 4px;
+            // align-self: center;
+            font-size: rem(14px);
+        }
+        .comments-icon{
+            margin-right: 4px;
+            // align-self: center;
+            font-size: rem(12px);
+        }
+        h4{
+            margin-right: 8px;
+            align-self: center;
+            font-size: 13px;
+
+        }
+        button{
+            border: none;
+            margin-right: 8px;
+            padding: 4px;
+            border-radius: 2px;
+            background-color: rgba(9, 30, 66, 0.04);
+            font-size: 12px;
+
+        }
+    }
+    .ticket-title{
+        font-size: rem(18px);
+        padding-bottom: rem(20px);
+    }
+    .ticket-description{
+        font-size: 14px;
+    }
+    h4{
+        font-size: 13px;
+    }
+    h3{
+        font-size: 14px;
     }
 }
