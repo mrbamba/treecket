@@ -2,6 +2,13 @@ import './filters.js'
 import Vue from 'vue'
 import moment from 'moment'
 
+Vue.filter("progressBar", (val) => {
+  const doneItemsCount = val.reduce((acc, item) => {
+    if (item.isDone) return acc++
+  }, 0);
+  return (doneItemsCount / val.length) * 100 + '%'
+});
+
 Vue.filter("formatNum", (val) => {
   return Number(val).toLocaleString();
 });

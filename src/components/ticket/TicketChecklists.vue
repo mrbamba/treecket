@@ -4,14 +4,15 @@
             <section>
                 <h4>Checklist:</h4>
                 <button @click="deleteChecklist(checklistIdx)">Delete</button>
+                <div>
+                    <h6>{{ checklist.items | progressBar }}</h6>
+                </div>
             </section>
-                <form action="">
-                    <input type="text">
-                    <button>Save</button>
-                </form>
-            <section >
-
-            </section>
+            <form action>
+                <input type="text" />
+                <button>Save</button>
+            </form>
+            <section></section>
             <ul>
                 <li v-for="(item, itemIdx) in checklist.items" :key="item.id">
                     <div v-if="onEditItemId !== item.id">
@@ -65,7 +66,16 @@ export default {
             onEditItemTxt: ''
         }
     },
-
+    computed: {
+        doneItemsPrec() {
+            // console.log('items', checklist);
+            // const precs = items.reduce((acc, item) => {
+                //     if (item.isDone) acc++
+            // }, 0)
+            // console.log('precs', precs);
+            return this.ticket.checklists.length
+        }
+    },
     methods: {
         updateTicket() {
             this.$emit('updateTicket', this.ticket);

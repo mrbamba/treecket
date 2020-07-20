@@ -15,7 +15,6 @@ export default {
     currBoard(state) {
       return state.currBoard;
     },
-    
     overlay(state) {
       return state.overlay;
     }
@@ -36,8 +35,6 @@ export default {
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },
-
-
     showOverlay(state) {
       state.overlay = true;
     },
@@ -63,6 +60,7 @@ export default {
       commit({ type: 'setBoards', boards })
     },
     async loadBoard({ commit }, boardId) {
+      console.log('RELOAD!!!!!!!!!!!!!!!')
       const board = await boardService.getById(boardId);
       commit({ type: 'setBoard', board })
     },
@@ -71,22 +69,28 @@ export default {
       await boardService.addBoard(board);
       commit({ type: 'addBoard', board });
     },
-    async updateBoard({ commit }, board) {
+    async updateBoard({ commit, state }, board) {
       console.log('store-update board:', board);
-      const newBoard = await boardService.update(board);
-      commit({ type: 'setBoard', board: newBoard });
+      // SAVE BOARD COPY
+      // const boardCopy = _.cloneDeep(state.board);
+      commit({ type: 'setBoard', board });
+      try {
+        await boardService.update(board);
+      } catch (err) {
+        console.log('ERROR IN UPDATE BOARD (STORE):', err)
+        // APPLY COPIED BOARD
+        // commit({ type: 'setBoard', board: boardCopy });
+      }
     },
-    async deleteTicket({state,commit},{ticketId, groupId}){
+    async deleteTicket({ state, commit }, { ticketId, groupId }) {
       var updatedBoard = _.cloneDeep(state.currBoard)
       const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
       const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
       if (groupIdx < 0 || ticketIdx < 0) return;
-
       updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
       updatedBoard = await boardService.update(updatedBoard);
       commit({ type: 'setBoard', board: updatedBoard });
     }
-
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')
     //     socket.emit('sendMsg', msg)
