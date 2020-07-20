@@ -15,6 +15,7 @@ export default {
     currBoard(state) {
       return state.currBoard;
     },
+    
     overlay(state) {
       return state.overlay;
     }
@@ -36,7 +37,7 @@ export default {
       state.filterBy = filterBy;
     },
 
-    
+
     showOverlay(state) {
       state.overlay = true;
     },
