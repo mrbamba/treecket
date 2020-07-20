@@ -53,3 +53,12 @@
   border-radius: 4px;
   margin: 0 8px; // Margins should match margins of .ticket-group (ticket-group.scss)
 }
+
+.smooth-dnd-container.horizontal {
+  display: flex;
+}
+
+.smooth-dnd-draggable-wrapper {
+  height: fit-content !important;
+  display: inline-flex;
+}
