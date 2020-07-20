@@ -10,6 +10,8 @@
         <main class="groups-container">
             <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
             <Container
+                drag-class="col-ghost"
+                drop-class="col-ghost-drop"
                 non-drag-area-selector=".add-ticket-btn"
                 orientation="horizontal"
                 @drop="onGroupDrop($event)"
@@ -22,15 +24,16 @@
                         @updateTickets="updateTickets"
                     />
                 </Draggable>
+            <add-group @addGroup="addGroup" />
             </Container>
 
-            <add-group @addGroup="addGroup" />
         </main>
 
         <ticket-details
             v-if="selectedTicket"
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
+            :user="loggedInUser"
             @closeTicketDetails="closeTicketDetails"
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
@@ -155,22 +158,26 @@ export default {
                 }
                 return '';
             }
-        }
-    },
-    components: {
-        TicketGroup,
-        TicketDetails,
-        Container,
-        Draggable,
-        AddGroup,
-        MainHeader
-    },
-    watch: {
-        async $route(to, from) {
-            this.loadBoard();
+        },
+            loggedInUser() {
+                console.log('asking for logged in user', this.$store.getters.loggedInUser)
+                return this.$store.getters.loggedInUser;
+            }
+        },
+        components: {
+            TicketGroup,
+            TicketDetails,
+            Container,
+            Draggable,
+            AddGroup,
+            MainHeader
+        },
+        watch: {
+            async $route(to, from) {
+                this.loadBoard();
+            }
         }
     }
-};
 </script>
 
 <style>

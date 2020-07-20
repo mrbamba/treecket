@@ -4,33 +4,60 @@
 
         <div v-if="loggedInUser">
             <h3>
-                Logged in user: {{ loggedInUser.username }}
+                Logged in user: {{ loggedInUser.fullName }}
                 <form @submit.prevent="updateUser">
-                    <input type="text" v-model="userToEdit.username" />
+                    <input type="text" v-model="userToEdit.fullName" />
                 </form>
                 <button @click="doLogout">Log out</button>
             </h3>
         </div>
         <div v-else>
-            <form @submit.prevent="doLogin" v-if="route==='Login'">
+            <form @submit.prevent="doLogin" v-if="route === 'Login'">
                 <h2>Log in to your account</h2>
-                <input type="text" v-model="loginCred.email" placeholder="Email" />
+                <input
+                    type="text"
+                    v-model="loginCred.email"
+                    placeholder="Email"
+                />
                 <br />
-                <input type="text" v-model="loginCred.password" placeholder="Password" />
+                <input
+                    type="text"
+                    v-model="loginCred.password"
+                    placeholder="Password"
+                />
                 <br />
                 <button>Continue</button>
                 <router-link to="/signup">Sign up for an account</router-link>
             </form>
             <form @submit.prevent="doSignup" v-else>
                 <h2>Sign up for your account</h2>
-                <input type="text" v-model="signupCred.email" placeholder="Email" />
-                <br />
-                <input type="text" v-model="signupCred.password" placeholder="Password" />
-                <br />
-                <input type="text" v-model="signupCred.username" placeholder="Username" />
-                <br />
+                <input
+                    type="text"
+                    v-model="signupCred.email"
+                    placeholder="Email"
+                />
+                <input
+                    type="password"
+                    v-model="signupCred.password"
+                    placeholder="Password"
+                />
+                <input
+                    type="text"
+                    v-model="signupCred.fullName"
+                    placeholder="Full name"
+                />
+                <label for="upload-input">Upload your profile</label>
+                <input
+                    type="file"
+                    id="upload-input"
+                    @change="onUploadImg"
+                    class="upload-button"
+                />
+
                 <button>Sign up</button>
-                <router-link to="/login">Already have a Treecket account? Log in</router-link>
+                <router-link to="/login"
+                    >Already have a Treecket account? Log in</router-link
+                >
             </form>
         </div>
         <!-- <button @click="getAllUsers">Get All Users</button>
@@ -44,6 +71,8 @@
 </template>
 
 <script>
+import { uploadImg } from "@/services/img-upload.service.js";
+
 export default {
     name: "test",
     data() {
@@ -66,7 +95,7 @@ export default {
     created() {
         console.log("this.loggedInUser", this.loggedInUser);
         // console.log('Route name',this.$route.name)
-        this.setPage()
+        this.setPage();
     },
     methods: {
         async doLogin() {
@@ -81,8 +110,9 @@ export default {
         },
         doSignup() {
             const cred = this.signupCred;
-            if (!cred.email || !cred.password || !cred.username)
+            if (!cred.email || !cred.password || !cred.fullName)
                 return (this.msg = "Please fill up the form");
+            this.signupCred.type = 'user';
             this.$store.dispatch({ type: "signup", userCred: cred });
         },
         getAllUsers() {
@@ -96,14 +126,19 @@ export default {
         },
         setPage() {
             this.route = this.$route.name;
+        },
+        async onUploadImg(ev) {
+            let img = await uploadImg(ev);
+            console.log(img.url);
+            this.signupCred.imgSrc = img.url;
         }
     },
     watch: {
         loggedInUser() {
             this.userToEdit = { ...this.loggedInUser };
         },
-        '$route'(to, from) {
-            this.setPage()
+        $route(to, from) {
+            this.setPage();
         }
     }
 };

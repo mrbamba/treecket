@@ -5,6 +5,7 @@
             <input
                 type="text"
                 v-model="newGroupName"
+                @keyup.enter="addGroup()"
                 @blur="onBlur"
                 ref="newGroupTitle"
                 placeholder="Enter new list name"
@@ -31,20 +32,18 @@ export default {
             if (this.addNewGroup) {
                 if (!this.newGroupName) return;
                 this.$emit("addGroup", this.newGroupName);
+                this.toggleAddGroup()
             }
         },
         toggleAddGroup() {
             this.addNewGroup = !this.addNewGroup;
             this.newGroupName = '';
-
             if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
         },
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'add') {
                     this.addGroup();
-                    this.toggleAddGroup()
-                    return;
                 }
             }
             this.toggleAddGroup()

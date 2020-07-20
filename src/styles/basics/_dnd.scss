@@ -1,3 +1,13 @@
+.col-ghost {
+    transition: transform 0.18s ease;
+    transform: rotateZ(4deg);
+}
+
+.col-ghost-drop {
+    transition: transform 0.18s ease;
+    transform: rotateZ(0deg);
+}
+
 .card-ghost {
     transition: transform 0.18s ease;
     transform: rotateZ(-4deg);
