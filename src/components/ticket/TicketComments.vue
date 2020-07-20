@@ -1,29 +1,20 @@
 <template>
     <div class="ticket-comments">
         <div class="chat-log" v-if="comments">
-            <div
-                v-for="comment in comments"
-                :key="comment.id"
-                class="ticket-comment"
-            >
-                <avatar
-                    :fullname="comment.by.fullName"
-                    :image="comment.by.imgSrc"
-                />
+            <div v-for="comment in comments" :key="comment.id" class="ticket-comment">
+                <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
                 <p>
                     {{ comment.by.fullName | capitalize }}
                     {{ comment.createdAt | formatTime }}
                 </p>
-                <p>
-                    {{ comment.txt }}
-                </p>
+                <p>{{ comment.txt }}</p>
                 <button>Edit</button>
                 <button>Delete</button>
             </div>
         </div>
         <div class="add-comment-input">
-            <Avatar :fullname="user.fullName" :image="user.imgSrc" />
-            <form action="">
+            <avatar :username="user.fullName" :image="user.imgSrc" :size="32"/>
+            <form action>
                 <input
                     type="text"
                     placeholder="Add a comment..."
@@ -31,9 +22,8 @@
                     v-model="newCommentText"
                 />
                 <div>
-
-                <button @click.prevent="addComment">Save</button>
-                <button>Cancel</button>
+                    <button @click.prevent="addComment">Save</button>
+                    <button>Cancel</button>
                 </div>
             </form>
         </div>
@@ -41,11 +31,11 @@
 </template>
 
 <script>
-import Avatar from "vue-avatar-component";
+import Avatar from 'vue-avatar'
 
 export default {
     name: "TicketComments",
-    props:['comments','user'],
+    props: ['comments', 'user'],
     data() {
         return {
             enteringComment: false,
@@ -55,10 +45,10 @@ export default {
     methods: {
         addComment() {
             comments.
-            this.$emit("addComment", this.newCommentText);
+                this.$emit("addComment", this.newCommentText);
         }
     },
-    components:{
+    components: {
         Avatar,
     }
 };
