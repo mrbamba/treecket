@@ -14,6 +14,10 @@ export default {
     },
     currBoard(state) {
       return state.currBoard;
+    },
+    
+    overlay(state) {
+      return state.overlay;
     }
   },
   mutations: {
@@ -32,7 +36,8 @@ export default {
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },
-    
+
+
     showOverlay(state) {
       state.overlay = true;
     },
