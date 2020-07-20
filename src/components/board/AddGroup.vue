@@ -1,5 +1,5 @@
 <template>
-    <div class="add-group ticket-group">
+    <div class="add-group">
         <div v-if="!addNewGroup" @click.stop="toggleAddGroup">+ Add another list</div>
         <div v-else>
             <input
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// import Vue from 'vue';
 export default {
     name: "AddGroup",
     data() {
@@ -49,16 +48,6 @@ export default {
             }
             this.toggleAddGroup()
         }
-
-        // this.Vue.nextTick(function() {
-        //     this.$refs.newGroupTitle.focus();
-        // });
-        // this.focusOnInput();
-
-        // focusOnInput(){
-        //     this.$refs.newGroupTitle.focus();
-
-        // }
     }
 };
 </script>

@@ -19,7 +19,7 @@ export default {
         return {
             boardPrefs: {
                 title: '',
-                background: '#72eedd'
+                background: '#0079bf'
             }
         }
     },

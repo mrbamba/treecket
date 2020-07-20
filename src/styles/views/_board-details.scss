@@ -1,14 +1,14 @@
 .board-details {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     .groups-container {
-        display: flex;
-        overflow-x: auto;
+        display: inline-flex;
+        // overflow-x: auto;
+        flex-grow: 1;
     }
 }
 
-.ticket-group-container {
-    margin-inline-end: 8px; // related to the margin of dnd placeholder!!!
-
-    &:first-of-type {
-        margin-inline-start: 8px;
-    }
+.groups-container {
+    overflow-x: auto;
 }

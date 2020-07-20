@@ -41,18 +41,6 @@ export default {
     hideOverlay(state) {
       state.overlay = false;
     }
-    // removeTicket(state, { id }) {
-    //   const ticketIndex = state.board.group.ticket.findIndex(
-    //     currTicket => currTicket.id === id
-    //   );
-    //   state.board.group.ticket.splice(ticketIndex, 1);
-    // },
-    // updateTicket(state, { ticket }) {
-    //   const ticketIndex = state.board.group.ticket.findIndex(
-    //     (currTicket) => currTicket.id === ticket.id
-    //   );
-    //   state.board.group.ticket.splice(ticketIndex, 1, ticket);
-    // }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -87,6 +75,7 @@ export default {
       const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
       const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
       if (groupIdx < 0 || ticketIdx < 0) return;
+      
       updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
       updatedBoard = await boardService.update(updatedBoard);
       commit({ type: 'setBoard', board: updatedBoard });
