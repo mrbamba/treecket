@@ -1,5 +1,5 @@
 <template>
-    <div class="ticket-details">
+    <div class="ticket-details" @keyup.esc="closeTicketDetails" tabindex="0" ref="ticketDetails">
         <button class="close-btn" @click="closeTicketDetails">X</button>
         <div>
             <textarea
@@ -43,6 +43,7 @@ export default {
     },
     created() {
         this.$store.commit('showOverlay');
+        this.$nextTick(() => this.$refs.ticketDetails.focus());
     },
     mounted() {
         this.$watch('overlay', function (newValue, oldValue) {

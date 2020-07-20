@@ -6,7 +6,18 @@
     border-radius: 3px;
     color: #5e6c84;
     width: 100%;
+
     &:hover {
-        background-color: rgba(9,30,66,.08);
+        background-color: rgba(9, 30, 66, .08);
+    }
+
+    span:first-of-type {
+        font-size: rem(19px);
+        margin-inline-end: 5px;
+        line-height: 0.9;
+        vertical-align: middle;
+    }
+    span:last-of-type {
+        vertical-align: bottom;
     }
 }

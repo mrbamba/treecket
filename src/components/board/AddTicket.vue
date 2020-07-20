@@ -13,7 +13,8 @@
         <button @click.stop="addTicket" data-prevent-blur="add">Add Ticket</button>
         <button @click.stop="toggleAddTicket" data-prevent-blur="close">X</button>
     </div>
-    <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>+ Add another ticket</button>
+    <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>
+        <span>+</span> <span>Add another ticket</span></button>
     </div>
 </template>
 
