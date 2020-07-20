@@ -72,8 +72,8 @@ export default {
             this.ticket.checklists.push(newChecklist)
             this.saveTicket()
         },
-        addItem({itemText, checklistId}){
-            const newItem = boardService.getNewChecklistItem(itemText)
+        addItem({itemTxt, checklistId}){
+            const newItem = boardService.getNewChecklistItem(itemTxt)
             const checklistIdx = this.ticket.checklists.findIndex(checklist => checklist.id === checklistId)
             this.ticket.checklists[checklistIdx].items.push(newItem)
             this.saveTicket()

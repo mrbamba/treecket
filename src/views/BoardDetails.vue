@@ -143,7 +143,7 @@ export default {
     },
     computed: {
         currBoard() {
-            return this.$store.getters.currBoard;
+            return _.cloneDeep(this.$store.getters.currBoard);
         }
     },
     components: {
