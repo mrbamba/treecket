@@ -3,7 +3,7 @@
         <header>
             <div class="group-header">
                 <div><h3>{{ group.title }}</h3> {{ ticketsInGroupCount }}</div>
-                <button>☰</button>
+                <button><font-awesome-icon fas icon="ellipsis-h" /></button>
             </div>
         </header>
 
@@ -13,13 +13,16 @@
             :get-child-payload="getTicketPayload"
             drag-class="card-ghost"
             drop-class="card-ghost-drop"
-            :drop-placeholder="dropPlaceholderOptions"
-        >
+            :drop-placeholder="dropPlaceholderOptions">
+
             <Draggable v-for="ticket in group.tickets" :key="ticket.id">
                 <ticket-preview :ticket="ticket" />
             </Draggable>
+            
         </container>
+
         <add-ticket :group="group" @emitAddTicket="addTicket" />
+
     </section>
 </template>
 
@@ -38,15 +41,10 @@ export default {
         return {
             newGroup: this.group,
 
-            upperDropPlaceholderOptions: {
-                className: "cards-drop-preview",
-                animationDuration: "150",
-                showOnTop: true
-            },
             dropPlaceholderOptions: {
                 className: "drop-preview",
                 animationDuration: "150",
-                showOnTop: true
+                showOnTop: false
             }
         };
     },

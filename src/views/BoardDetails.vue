@@ -1,28 +1,33 @@
 <template>
-    <div class="board-details" v-if="currBoard" style="{width: fit-content}">
+    <div class="board-details" v-if="currBoard" :style="{ background }">
         <main-header />
-        {{ currBoard.title }}
-        <Container
-            non-drag-area-selector=".add-ticket-btn"
-            class="groups-container"
-            orientation="horizontal"
-            @drop="onGroupDrop($event)"
-            :drop-placeholder="upperDropPlaceholderOptions"
-            :get-child-payload="getGroupPayload"
-        >
-            <Draggable
-                class="ticket-group-container"
-                v-for="group in currBoard.groups"
-                :key="group._id"
+
+        <header style="padding: 8px; color: #fff; font-weight: 500 !important">
+            <div>{{ currBoard.title }}</div>
+            <!-- <input type="text" v-model="currBoard.title"> -->
+        </header>
+
+        <main class="groups-container">
+            <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
+            <Container
+                drag-class="col-ghost"
+                drop-class="col-ghost-drop"
+                non-drag-area-selector=".add-ticket-btn"
+                orientation="horizontal"
+                @drop="onGroupDrop($event)"
+                :get-child-payload="getGroupPayload"
             >
-                <ticket-group
-                    :group="group"
-                    @addTicket="addTicket"
-                    @updateTickets="updateTickets"
-                />
-            </Draggable>
+                <Draggable v-for="group in currBoard.groups" :key="group._id">
+                    <ticket-group
+                        :group="group"
+                        @addTicket="addTicket"
+                        @updateTickets="updateTickets"
+                    />
+                </Draggable>
             <add-group @addGroup="addGroup" />
-        </Container>
+            </Container>
+
+        </main>
 
         <ticket-details
             v-if="selectedTicket"
@@ -53,17 +58,12 @@ export default {
             selectedTicket: null,
             selectedGroupId: null,
 
-            upperDropPlaceholderOptions: {
-                className: "cards-drop-preview",
-                animationDuration: "150",
-                showOnTop: true
-            },
-            dropPlaceholderOptions: {
-                className: "drop-preview",
-                animationDuration: "150",
-                showOnTop: true
-            }
-            // board: null
+            // FAULT: Groups place-holders height are set to the tallest group
+            // upperDropPlaceholderOptions: {
+            //     className: "cards-drop-preview",
+            //     animationDuration: "200",
+            //     showOnTop: false
+            // },
         };
     },
     async created() {
@@ -150,25 +150,34 @@ export default {
         currBoard() {
             return _.cloneDeep(this.$store.getters.currBoard);
         },
-        loggedInUser() {
-            console.log('asking for logged in user', this.$store.getters.loggedInUser)
-            return this.$store.getters.loggedInUser;
-        }
-    },
-    components: {
-        TicketGroup,
-        TicketDetails,
-        Container,
-        Draggable,
-        AddGroup,
-        MainHeader
-    },
-    watch: {
-        async $route(to, from) {
-            this.loadBoard();
+        background() {
+            if (this.$route.params.boardId) {
+                const board = this.$store.getters.currBoard;
+                if (board) {
+                    return board.background + ((board.background.includes('url')) ? 'center / cover fixed' : '');
+                }
+                return '';
+            }
+        },
+            loggedInUser() {
+                console.log('asking for logged in user', this.$store.getters.loggedInUser)
+                return this.$store.getters.loggedInUser;
+            }
+        },
+        components: {
+            TicketGroup,
+            TicketDetails,
+            Container,
+            Draggable,
+            AddGroup,
+            MainHeader
+        },
+        watch: {
+            async $route(to, from) {
+                this.loadBoard();
+            }
         }
     }
-};
 </script>
 
 <style>
