@@ -7,17 +7,15 @@
 
 <style lang="scss">
 #app {
-    // text-align: center;
     height: 100vh;
-    // position: relative;
 }
 
-#nav {
-    padding: 10px;
+nav {
+    padding: 5px;
 
     a {
         font-weight: bold;
-        color: #2c3e50;
+        // color: #2c3e50;
 
         &.router-link-exact-active {
             color: #42b983;

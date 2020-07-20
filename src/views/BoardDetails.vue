@@ -10,7 +10,7 @@
             :drop-placeholder="upperDropPlaceholderOptions"
             :get-child-payload="getGroupPayload"
         >
-            <Draggable v-for="group in currBoard.groups" :key="group._id">
+            <Draggable class="ticket-group-container" v-for="group in currBoard.groups" :key="group._id">
                 <ticket-group
                     :group="group"
                     @addTicket="addTicket"
