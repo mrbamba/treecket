@@ -1,25 +1,57 @@
 <template>
-    <div class="ticket-footer">
-        <div>
-            <font-awesome-icon fas icon="history" />
-            <h3>Show:</h3>
+    <div class="ticket-comments">
+        <div class="chat-log">
+            <div
+                v-for="comment in ticket.comments"
+                :key="comment.id"
+                class="ticket-comment"
+            >
+                <avatar
+                    :fullname="comment.by.fullName"
+                    :image="comment.by.imgSrc"
+                />
+                <p>
+                    {{ comment.by.fullName | capitalize }}
+                    {{ comment.createdAt | formatTime }}
+                </p>
+                <p>
+                    {{ comment.txt }}
+                </p>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
-        <button>Comments</button>
-        <button>History</button>
+        <div class="add-comment-input">
+            <avatar :fullname="user.fullName" :image="user.imgSrc" />
+            <form action="">
+                <input
+                    type="text"
+                    placeholder="Add a comment..."
+                    @click="enteringComment = true"
+                    v-model="newCommentText"
+                />
+                <button @click.prevent="addComment"></button>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
-  import Avatar from 'vue-avatar-component'
+import Avatar from "vue-avatar-component";
 
 export default {
-    name:'TicketComments',
-    data(){
-        return{
-            showing:'Comments'
+    name: "TicketComments",
+    data() {
+        return {
+            enteringComment: false,
+            newCommentText: ""
+        };
+    },
+    methods: {
+        addComment() {
+            this.$emit("addComment", this.newCommentText);
         }
     }
-
 };
 </script>
 
