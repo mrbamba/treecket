@@ -11,7 +11,7 @@
                 placeholder="Enter new list name"
             />
             <div>
-                <button @click="addGroup" data-prevent-blur="add">Add Section</button>
+                <button @click="addGroup" data-prevent-blur="add">Add list</button>
                 <button>X</button>
             </div>
         </div>

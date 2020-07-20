@@ -2,13 +2,13 @@
     <div class="board-details" v-if="currBoard" :style="{ background }">
         <main-header />
 
-        <header style="padding: 8px; color: #fff; font-weight: 500 !important">
+        <header style="padding: 8px; color: #fff; font-weight: 500">
             <div>{{ currBoard.title }}</div>
             <!-- <input type="text" v-model="currBoard.title"> -->
         </header>
 
         <main class="groups-container">
-            <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
+                <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
             <Container
                 drag-class="col-ghost"
                 drop-class="col-ghost-drop"

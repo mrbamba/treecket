@@ -1,6 +1,6 @@
 .add-group {
     background-color: rgba(0,0,0,.15);
-    color: white;
+    color: #fff;
     font-size: rem(14px);
     cursor: pointer;
     width: 280px;
@@ -8,7 +8,7 @@
     border-radius: 3px;
 
     &:hover {
-        background-color: rgba(255, 255, 255, .32);
+        background-color: rgba(0, 0, 0, .25);
     }
 
     div {
