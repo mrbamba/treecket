@@ -41,5 +41,5 @@
 .cards-drop-preview {
   background-color: rgba(9, 30, 66, 0.2);
   border-radius: 4px;
-  // margin: 0 10px;
+  margin: 0 8px; // Margins should match margins of .ticket-group (ticket-group.scss)
 }

@@ -1,28 +1,10 @@
 <template>
-    <div id="app" :style="{ background }">
+    <div id="app" class="wrapper">
         <router-view />
         <div :class="{ overlay }" @click.self="hideOverlay"></div>
     </div>
 </template>
 
-<style lang="scss">
-#app {
-    height: 100vh;
-}
-
-nav {
-    padding: 5px;
-
-    a {
-        font-weight: bold;
-        // color: #2c3e50;
-
-        &.router-link-exact-active {
-            color: #42b983;
-        }
-    }
-}
-</style>
 <script>
 import MainHeader from '@/components/MainHeader.vue'
 export default {
@@ -31,15 +13,6 @@ export default {
         overlay() {
             // return true; // Testing - TO DELETE
             return this.$store.getters.overlay;
-        },
-        background() {
-          if (this.$route.params.boardId) {
-            const board = this.$store.getters.currBoard;
-                if (board) {
-                    return board.background + ((board.background.includes('url')) ? 'center / cover' : '');
-                }
-                return '';
-            }
         }
     },
     methods: {
@@ -52,3 +25,20 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+nav {
+    padding: 5px;
+
+    a {
+        font-weight: bold;
+        // color: #2c3e50;
+        opacity: 0.85;
+
+        &.router-link-exact-active {
+            color: #fff;
+            opacity: 1;
+        }
+    }
+}
+</style>
