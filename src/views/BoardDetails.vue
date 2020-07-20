@@ -125,7 +125,7 @@ export default {
                         ))
                 ).id;
             }
-        },
+        }, 
         async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
             const newBoard = this.currBoard;
