@@ -21,29 +21,21 @@
                 <section
                     v-for="attachment in ticket.attacments"
                     :key="attachment.id"
-                >{{ attachment }}</section>
-                <section v-for="checklist in ticket.checklists" :key="checklist.id">
-                    Checklist id: {{ checklist.id }}
-                    <ul>
-                        <li v-for="(item, idx) in checklist.items" :key="idx">
-                            <input type="checkbox" v-model="item.isDone" />
-                            <h4 :class="{done: item.isDone}">{{ item.txt }}</h4>
-                        </li>
-                    </ul>
+                >{{ attachment }}
                 </section>
+                <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
             </section>
         </div>
-        <ticket-menu @deleteTicket="deleteTicket" :ticket="ticket" />
+        <ticket-menu @deleteTicket="deleteTicket" :ticket="ticket" @addChecklist="addChecklist"/>
     </div>
 </template>
 
 <script>
 import TicketMenu from "@/components/ticket/TicketMenu.vue";
+import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
+import { boardService } from "@/services/board.service.js";
 export default {
     props: ['ticket', 'groupId'],
-    components: {
-        TicketMenu
-    },
     computed: {
         overlay() {
             return this.$store.getters.overlay
@@ -74,7 +66,22 @@ export default {
         expandTextareaEl() {
             const el = this.$refs.title;
             el.style.height = ""; el.style.height = el.scrollHeight + "px"
+        },
+        addChecklist() {
+            const newChecklist = boardService.getNewChecklist();
+            this.ticket.checklists.push(newChecklist)
+            this.saveTicket()
+        },
+        addItem({itemText, checklistId}){
+            const newItem = boardService.getNewChecklistItem(itemText)
+            const checklistIdx = this.ticket.checklists.findIndex(checklist => checklist.id === checklistId)
+            this.ticket.checklists[checklistIdx].items.push(newItem)
+            this.saveTicket()
         }
+    },
+    components: {
+        TicketMenu,
+        TicketChecklists
     },
 }
 </script>

@@ -10,7 +10,6 @@ export default {
     methods: {
         openTicket(ticket) {
             const newPath = `/board/${this.$route.params.boardId}/ticket/${ticket.id}`;
-            
             if (this.$route.path !== newPath) {
                 this.$router.push(newPath);
             }

@@ -46,7 +46,6 @@ export default {
     },
     methods: {
         hideOverlay() {
-            console.log('close overlay')
             this.$store.commit('hideOverlay');
         }
     },
