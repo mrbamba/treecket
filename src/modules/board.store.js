@@ -48,7 +48,6 @@ export default {
       commit({ type: 'setBoards', boards })
     },
     async loadBoard({ commit }, boardId) {
-      console.log('RELOAD!!!!!!!!!!!!!!!')
       const board = await boardService.getById(boardId);
       commit({ type: 'setBoard', board })
     },
@@ -58,7 +57,6 @@ export default {
       commit({ type: 'addBoard', board });
     },
     async updateBoard({ commit, state }, board) {
-      console.log('store-update board:', board);
       // SAVE BOARD COPY
       // const boardCopy = _.cloneDeep(state.board);
       commit({ type: 'setBoard', board });
