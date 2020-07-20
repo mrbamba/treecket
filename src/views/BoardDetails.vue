@@ -8,8 +8,8 @@
         </header>
 
         <main class="groups-container">
+                <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
             <Container
-                :drop-placeholder="upperDropPlaceholderOptions"
                 drag-class="col-ghost"
                 drop-class="col-ghost-drop"
                 non-drag-area-selector=".add-ticket-btn"
@@ -59,11 +59,11 @@ export default {
             selectedGroupId: null,
 
             // FAULT: Groups place-holders height are set to the tallest group
-            upperDropPlaceholderOptions: {
-                className: "cards-drop-preview",
-                animationDuration: "200",
-                showOnTop: false
-            },
+            // upperDropPlaceholderOptions: {
+            //     className: "cards-drop-preview",
+            //     animationDuration: "200",
+            //     showOnTop: false
+            // },
         };
     },
     async created() {
