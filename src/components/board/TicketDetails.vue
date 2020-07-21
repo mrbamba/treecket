@@ -37,7 +37,7 @@
                 <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
 
                 
-                <ticket-comments :comments="ticket.comments" :user="user" @addComment="addComment" />
+                <ticket-comments :comments="ticket.comments" :user="user" @addComment="addComment" @updateTicket="saveTicket"/>
             </section>
 
             <ticket-menu

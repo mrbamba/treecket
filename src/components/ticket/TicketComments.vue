@@ -11,20 +11,14 @@
             </button>
         </div>
         <div v-if="comments">
-            <div v-for="comment in comments" :key="comment.id" class="ticket-comment">
-                <div class="comment-img">
-                    <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
-                </div>
-                <div>
-                    <p class="comment-by">
-                        <span>{{ comment.by.fullName | capitalize }}</span>
-                        {{ comment.createdAt | formatTime }}
-                    </p>
-                    <p class="comment-text">{{ comment.txt }}</p>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-            </div>
+            <ticket-comment
+                v-for="comment in comments"
+                :key="comment.id"
+                :comment="comment"
+                class="ticket-comment"
+                @deleteComment="deleteComment"
+                @updateTicket="updateTicket"
+            />
         </div>
         <div class="add-comment-input">
             <div class="create-comment-avatar">
@@ -48,6 +42,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import TicketComment from '@/components/ticket/TicketComment.vue'
 
 export default {
     name: "TicketComments",
@@ -61,13 +56,31 @@ export default {
     methods: {
         addComment() {
             if (!this.newCommentText) return
-            
+
             this.$emit("addComment", this.newCommentText);
             this.newCommentText = ''
+        },
+        deleteComment(commentId) {
+            let commentIdx = this.comments.findIndex((comment) => {
+                comment.id === commentId;
+            })
+            this.comments.splice(commentIdx, 1)
+            this.$emit('updateTicket')
+        },
+        deleteComment(commentId) {
+            let commentIdx = this.comments.findIndex((comment) => {
+                comment.id === commentId;
+            })
+            this.comments.splice(commentIdx, 1)
+            this.$emit('updateTicket')
+        },
+        updateTicket() {
+            this.$emit('updateTicket')
         }
     },
     components: {
         Avatar,
+        TicketComment,
     }
 };
 </script>
