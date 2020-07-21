@@ -1,76 +1,70 @@
 <template>
-    <div
-        class="ticket-details"
-        @keyup.esc="closeTicketDetails"
-        tabindex="0"
-        ref="ticketDetails"
-    >
-        <button class="close-btn" @click="closeTicketDetails">
-            <font-awesome-icon class="comments-icon" fas icon="times" />
-        </button>
-        <div>
+    <div class="ticket-details" @keyup.esc="closeTicketDetails" tabindex="0" ref="ticketDetails">
+        
+        <header>
+
             <textarea
+                class="ticket-title"
                 @input="expandTextareaEl()"
                 ref="title"
                 v-model="ticket.title"
                 @blur="saveTicket"
                 maxlength="140"
-                class="ticket-title"
             />
-            <section>
-                <h3>Description:</h3>
-                <textarea
-                    v-model="ticket.description"
-                    @blur="saveTicket"
-                    placeholder="Add a description..."
-                    cols="30"
-                    rows="10"
-                    class="ticket-description"
-                />
-                <section
-                    v-for="attachment in ticket.attacments"
-                    :key="attachment.id"
-                >
-                    {{ attachment }}
+
+            <button class="close-btn" @click="closeTicketDetails">
+                <!-- <p class="bubble-msg">Press ESC to exit</p> -->
+                <font-awesome-icon fas icon="times" />
+            </button>
+
+        </header>
+
+        <main class="ticket-body">
+
+            <section class="ticket-content">
+
+                <section class="ticket-description">
+                    <h3>Description</h3>
+                    <textarea
+                        v-model="ticket.description"
+                        @blur="saveTicket"
+                        placeholder="Add a description..."
+                        class="ticket-description" />
                 </section>
 
-                <ticket-checklists
-                    :ticket="ticket"
-                    @updateTicket="saveTicket"
-                    @addItem="addItem"
-                />
-            </section>
-            <h4>Activity</h4>
-            <div class="ticket-activity-selector">
-                <h4>Show:</h4>
+                <section class="ticket-attachments"
+                    v-for="attachment in ticket.attacments"
+                    :key="attachment.id"
+                >{{ attachment }}</section>
 
-                <button>
-                    <font-awesome-icon
-                        class="comments-icon"
-                        far
-                        icon="comment"
-                    />Comments
-                </button>
-                <button>
-                    <font-awesome-icon
-                        class="history-icon"
-                        fas
-                        icon="history"
-                    />
-                    History
-                </button>
-            </div>
-            <ticket-comments
-                :comments="ticket.comments"
-                :user="user"
-                @changeComments="changeComments"
+                <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
+
+                <h4>Activity</h4>
+                <div class="ticket-activity-selector">
+                    <h4>Show:</h4>
+                    <button>
+                        <font-awesome-icon class="comments-icon" far icon="comment" />Comments
+                    </button>
+                    <button>
+                        <font-awesome-icon class="history-icon" fas icon="history" />History
+                    </button>
+                </div>
+                <ticket-comments
+                    :comments="ticket.comments"
+                    :user="user"
+                    @changeComments="changeComments"
+                />
+
+            </section>
+
+            <ticket-menu
+                @deleteTicket="deleteTicket"
+                :ticket="ticket"
+                @addChecklist="addChecklist"
             />
-        </div>
-        <ticket-menu
-            @deleteTicket="deleteTicket"
-            :ticket="ticket"
-            @addChecklist="addChecklist"
-        />
+
+        </main>
+
     </div>
 </template>
 
@@ -80,7 +74,7 @@ import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import { boardService } from "@/services/board.service.js";
 export default {
-    props: ["ticket", "groupId","user"],
+    props: ["ticket", "groupId", "user"],
     computed: {
         overlay() {
             return this.$store.getters.overlay;
@@ -91,7 +85,7 @@ export default {
         this.$nextTick(() => this.$refs.ticketDetails.focus());
     },
     mounted() {
-        this.$watch("overlay", function(newValue, oldValue) {
+        this.$watch("overlay", function (newValue, oldValue) {
             this.closeTicketDetails();
         });
     },

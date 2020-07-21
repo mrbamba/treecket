@@ -151,7 +151,7 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         toggleScrollCursor(ev) {
-            this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
+            this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'grabbing' : 'default';
         }
     },
     computed: {

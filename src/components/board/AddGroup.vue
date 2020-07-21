@@ -1,6 +1,6 @@
 <template>
     <div class="add-group">
-        <div v-if="!addNewGroup" @click.stop="toggleAddGroup">+ Add another list</div>
+        <button v-if="!addNewGroup" @click.stop="toggleAddGroup" class="add-group-btn">+ Add another list</button>
         <div v-else>
             <input
                 type="text"
