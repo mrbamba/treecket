@@ -1,6 +1,9 @@
 import httpService from './http.service'
 import utilService from './util.service'
 
+var localLoggedInUser = null;
+if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
+
 export const boardService = {
   query,
   getById,
@@ -10,7 +13,8 @@ export const boardService = {
   getNewTicket,
   getNewGroup,
   getNewChecklist,
-  getNewChecklistItem  
+  getNewChecklistItem,
+  getNewComment
 };
 
 function query(filterBy) {
@@ -29,6 +33,25 @@ function addBoard(board) {
   return httpService.post(`board`, board)
 }
 
+function getNewComment(commentText) {
+
+  return {
+    "id": utilService.makeId(),
+    "txt": commentText,
+    "createdAt": Date.now(),
+    "by": _getMiniUser(),
+  }
+
+}
+
+function _getMiniUser() {
+  return {
+    "_id": localLoggedInUser._id,
+    "fullName": localLoggedInUser.fullName,
+    "imgSrc": localLoggedInUser.imgSrc,
+  }
+}
+
 function getNewChecklist() {
   return {
     "id": utilService.makeId(),
@@ -39,9 +62,9 @@ function getNewChecklist() {
 
 function getNewChecklistItem(txt) {
   return {
-      "id": utilService.makeId(),
-      "txt": txt,
-      "isDone": false
+    "id": utilService.makeId(),
+    "txt": txt,
+    "isDone": false
   }
 }
 

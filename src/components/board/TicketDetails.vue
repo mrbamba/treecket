@@ -1,8 +1,6 @@
 <template>
     <div class="ticket-details" @keyup.esc="closeTicketDetails" tabindex="0" ref="ticketDetails">
-        
         <header>
-
             <textarea
                 class="ticket-title"
                 @input="expandTextareaEl()"
@@ -16,23 +14,22 @@
                 <!-- <p class="bubble-msg">Press ESC to exit</p> -->
                 <font-awesome-icon fas icon="times" />
             </button>
-
         </header>
 
         <main class="ticket-body">
-
             <section class="ticket-content">
-
                 <section class="ticket-description">
                     <h3>Description</h3>
                     <textarea
                         v-model="ticket.description"
                         @blur="saveTicket"
                         placeholder="Add a description..."
-                        class="ticket-description" />
+                        class="ticket-description"
+                    />
                 </section>
 
-                <section class="ticket-attachments"
+                <section
+                    class="ticket-attachments"
                     v-for="attachment in ticket.attacments"
                     :key="attachment.id"
                 >{{ attachment }}</section>
@@ -49,12 +46,7 @@
                         <font-awesome-icon class="history-icon" fas icon="history" />History
                     </button>
                 </div>
-                <ticket-comments
-                    :comments="ticket.comments"
-                    :user="user"
-                    @changeComments="changeComments"
-                />
-
+                <ticket-comments :comments="ticket.comments" :user="user" @addComment="addComment" />
             </section>
 
             <ticket-menu
@@ -62,9 +54,7 @@
                 :ticket="ticket"
                 @addChecklist="addChecklist"
             />
-
         </main>
-
     </div>
 </template>
 
@@ -120,6 +110,13 @@ export default {
             );
             this.ticket.checklists[checklistIdx].items.push(newItem);
             this.saveTicket();
+        },
+        addComment(commentText) {
+            console.log(commentText)
+            let newComment = boardService.getNewComment(commentText);
+            this.ticket.comments.push(newComment);
+            this.saveTicket();
+
         },
         changeComments(comments) {
             this.ticket.comments = comments;
