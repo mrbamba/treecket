@@ -1,6 +1,10 @@
 <template>
     <div class="add-group">
-        <button v-if="!addNewGroup" @click.stop="toggleAddGroup" class="add-group-btn">+ Add another list</button>
+        <button
+            v-if="!addNewGroup"
+            @click.stop="toggleAddGroup"
+            class="add-group-btn"
+        >+ Add another list</button>
         <div v-else>
             <input
                 type="text"
@@ -11,8 +15,10 @@
                 placeholder="Enter new list name"
             />
             <div>
-                <button @click="addGroup" data-prevent-blur="add">Add list</button>
-                <button>X</button>
+                <button @click="addGroup" data-prevent-blur="add" class="add-button">Add list</button>
+                <button class="cancel-button">
+                    Cancel
+                </button>
             </div>
         </div>
     </div>

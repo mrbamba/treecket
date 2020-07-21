@@ -1,0 +1,29 @@
+.ticket-comment{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+    .comment-img{
+        padding:3px 8px 0px 0px;
+        width: fit-content;
+        align-content: flex-start;
+    }
+    .comment-by{
+        margin: 3px 0px 8px 0px;
+        font-size: 14px;
+        color: rgb(66, 82, 110);;
+        span{
+            margin-right: 3px;;
+        }
+    }
+    .comment-text{
+        color: rgb(23, 43, 77);
+        font-size: 14px;
+    }
+
+    .editing-comment{
+        display: flex;
+        flex-direction: column;
+    }
+
+}

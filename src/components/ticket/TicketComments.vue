@@ -1,29 +1,39 @@
 <template>
     <div class="ticket-comments">
-        <div class="chat-log" v-if="comments">
-            <div v-for="comment in comments" :key="comment.id" class="ticket-comment">
-                <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
-                <p>
-                    {{ comment.by.fullName | capitalize }}
-                    {{ comment.createdAt | formatTime }}
-                </p>
-                <p>{{ comment.txt }}</p>
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
+        <h4>Activity</h4>
+        <div class="ticket-activity-selector">
+            <h4>Show:</h4>
+            <button>
+                <font-awesome-icon class="comments-icon" far icon="comment" />Comments
+            </button>
+            <button>
+                <font-awesome-icon class="history-icon" fas icon="history" />History
+            </button>
+        </div>
+        <div v-if="comments">
+            <ticket-comment
+                v-for="comment in comments"
+                :key="comment.id"
+                :comment="comment"
+                class="ticket-comment"
+                @deleteComment="deleteComment"
+                @updateTicket="updateTicket"
+            />
         </div>
         <div class="add-comment-input">
-            <avatar :username="user.fullName" :image="user.imgSrc" :size="32" />
-            <form action>
+            <div class="create-comment-avatar">
+                <avatar v-if="user" :username="user.fullName" :image="user.imgSrc" :size="32" />
+            </div>
+            <form class="input-wrapper">
                 <input
                     type="text"
                     placeholder="Add a comment..."
-                    @click="enteringComment = true"
+                    @click.prevent="enteringComment = true"
                     v-model="newCommentText"
                 />
                 <div>
-                    <button @click.prevent="addComment">Save</button>
-                    <button>Cancel</button>
+                    <button @click.prevent="addComment" class="save-button">Save</button>
+                    <button class="cancel-button">Cancel</button>
                 </div>
             </form>
         </div>
@@ -32,6 +42,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import TicketComment from '@/components/ticket/TicketComment.vue'
 
 export default {
     name: "TicketComments",
@@ -45,12 +56,31 @@ export default {
     methods: {
         addComment() {
             if (!this.newCommentText) return
-            this.newCommentText = ''
+
             this.$emit("addComment", this.newCommentText);
+            this.newCommentText = ''
+        },
+        deleteComment(commentId) {
+            let commentIdx = this.comments.findIndex((comment) => {
+                comment.id === commentId;
+            })
+            this.comments.splice(commentIdx, 1)
+            this.$emit('updateTicket')
+        },
+        deleteComment(commentId) {
+            let commentIdx = this.comments.findIndex((comment) => {
+                comment.id === commentId;
+            })
+            this.comments.splice(commentIdx, 1)
+            this.$emit('updateTicket')
+        },
+        updateTicket() {
+            this.$emit('updateTicket')
         }
     },
     components: {
         Avatar,
+        TicketComment,
     }
 };
 </script>

@@ -1,0 +1,68 @@
+.checklist {
+    min-width: 100%;
+    margin-bottom: 32px;
+    font-size: 14px;
+
+    .progress-bar-container {
+        display: flex;
+        align-items: center;
+        height: 8px;
+        width: 100%;
+        margin-bottom: 32px;
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            flex-grow: 1;
+            margin-inline-start: 8px;
+            background-color: #e2e4e9;
+            overflow: hidden;
+
+            .prec-done {
+                height: 100%;
+                width: 0%;
+                background-color: #5ba4cf;
+                transition: width .8s cubic-bezier(.5, 0, .35, 1.35), background-color .8s;
+            }
+
+            .prec-done.complete {
+                background-color: #61bd4f;
+            }
+        }
+    }
+
+    .check-list-title-preview {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: rem(15px);
+        ;
+        min-width: 100%;
+    }
+
+    .add-an-item {
+        text-align: left;
+    }
+
+    .checklist-item {
+        display: flex;
+        justify-content: space-between;
+
+        div:first-of-type {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            max-width: 100%;
+            align-items: center;
+
+            input {
+                min-width: 0px;
+                margin: 0px 8px 0px 0px;
+            }
+        }
+    }
+
+    .done {
+        text-decoration: line-through;
+    }
+
+}

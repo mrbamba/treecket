@@ -1,14 +1,16 @@
 .ticket-group {
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     height: fit-content;
+    max-height: 100%;
     width: rem(280px);
     padding: rem(8px);
     background-color: #ebecf0;
     border-radius: 3px;
     // Margins should match margins of .cards-drop-preview (dnd.scss)
     margin-inline-end: 8px;
-    
+
     .group-header {
         font-size: rem(14px);
         display: flex;
@@ -38,6 +40,17 @@
             &:hover {
                 background-color: rgba(9, 30, 66, .1);
             }
+        }
+
+    }
+
+    .tickets-container {
+        overflow-y: auto;
+        flex-grow: 1;
+        // height:700px; // testing
+        margin-bottom: 4px;
+        div {
+            max-height: 100%;
         }
     }
 }
