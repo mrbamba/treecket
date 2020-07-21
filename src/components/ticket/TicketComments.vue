@@ -32,8 +32,8 @@
                     v-model="newCommentText"
                 />
                 <div>
-                    <button @click.prevent="addComment">Save</button>
-                    <button>Cancel</button>
+                    <button @click.prevent="addComment" class="save-button">Save</button>
+                    <button class="cancel-button">Cancel</button>
                 </div>
             </form>
         </div>

@@ -33,40 +33,7 @@
 
         }
     }
-    .ticket-comment{
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 20px;
-
-        .comment-img{
-            padding:3px 8px 0px 0px;
-            width: fit-content;
-            align-content: flex-start;
-        }
-        .comment-by{
-            margin: 3px 0px;
-            font-size: 14px;
-            color: rgb(66, 82, 110);;
-            span{
-                margin-right: 3px;;
-            }
-        }
-        .comment-text{
-            color: rgb(23, 43, 77);
-            font-size: 14px;
-        }
-        button{
-            border: none;
-            background: transparent;
-            color: #6b778c;
-
-            &:hover{
-                color: rgb(170, 170, 170);
-                text-decoration: underline;
-                transition: ease-in-out .3s;
-            }
-        }
-    }
+    
     .add-comment-input{
         display: flex;
         width: 100%;
@@ -85,33 +52,7 @@
                 min-width: 100%;
 
             }
-            button:first-of-type{
-                border: none;
-                background-color: #0052cc;
-                color: white;
 
-                padding: 6px 10px;
-                border-radius: 3px;
-                margin: 8px;
-            }
-            button:first-of-type:hover{
-                background-color: #0052ee;
-                transition: ease-in-out .3s;
-
-            }
-
-            button:last-of-type{
-                border: none;
-                background: transparent;
-                color: #42526e;
-                padding: 6px 10px;
-                border-radius: 3px;
-            }
-            button:last-of-type:hover{
-                background: rgb(220, 220, 220);
-                transition: ease-in-out .3s;
-
-            }
         }
 
     }
