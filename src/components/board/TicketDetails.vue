@@ -36,16 +36,7 @@
 
                 <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
 
-                <h4>Activity</h4>
-                <div class="ticket-activity-selector">
-                    <h4>Show:</h4>
-                    <button>
-                        <font-awesome-icon class="comments-icon" far icon="comment" />Comments
-                    </button>
-                    <button>
-                        <font-awesome-icon class="history-icon" fas icon="history" />History
-                    </button>
-                </div>
+                
                 <ticket-comments :comments="ticket.comments" :user="user" @addComment="addComment" />
             </section>
 

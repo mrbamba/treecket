@@ -1,20 +1,36 @@
 <template>
     <div class="ticket-comments">
-        <div class="chat-log" v-if="comments">
+        <h4>Activity</h4>
+        <div class="ticket-activity-selector">
+            <h4>Show:</h4>
+            <button>
+                <font-awesome-icon class="comments-icon" far icon="comment" />Comments
+            </button>
+            <button>
+                <font-awesome-icon class="history-icon" fas icon="history" />History
+            </button>
+        </div>
+        <div v-if="comments">
             <div v-for="comment in comments" :key="comment.id" class="ticket-comment">
-                <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
-                <p>
-                    {{ comment.by.fullName | capitalize }}
-                    {{ comment.createdAt | formatTime }}
-                </p>
-                <p>{{ comment.txt }}</p>
-                <button>Edit</button>
-                <button>Delete</button>
+                <div class="comment-img">
+                    <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
+                </div>
+                <div>
+                    <p class="comment-by">
+                        <span>{{ comment.by.fullName | capitalize }}</span>
+                        {{ comment.createdAt | formatTime }}
+                    </p>
+                    <p class="comment-text">{{ comment.txt }}</p>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
             </div>
         </div>
         <div class="add-comment-input">
-            <avatar :username="user.fullName" :image="user.imgSrc" :size="32" />
-            <form action>
+            <div class="create-comment-avatar">
+                <avatar :username="user.fullName" :image="user.imgSrc" :size="32" />
+            </div>
+            <form class="input-wrapper">
                 <input
                     type="text"
                     placeholder="Add a comment..."
