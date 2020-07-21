@@ -5,10 +5,11 @@
             v-if="show.memberSelector"
             @click="show.memberSelector=!show.memberSelector"
         >Members</member-selector>-->
-        <button>
+        <button @click="toggleLabelsPalet;">
             <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />
             Labels
         </button>
+        <labels v-show="isPaleltShow"/>
         <button @click="onAddChecklist">
             <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />
             Checklist
@@ -45,6 +46,7 @@ import ChecklistCreator from "@/components/ticket/menu/ChecklistCreator.vue";
 import DateSelector from "@/components/ticket/menu/DateSelector.vue";
 import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
 import CoverTool from "@/components/ticket/menu/CoverTool.vue";
+import labels from "@/components/board/labels.vue";
 export default {
     name: "TicketMenu",
     props: {
@@ -65,12 +67,20 @@ export default {
         //     coverTool: false
         // }
     },
+    data() {
+        return {
+            isPaleltShow: false
+        }
+    },
     methods: {
         onTicketDelete(ticketId) {
             this.$emit("deleteTicket", ticketId);
         },
         onAddChecklist() {
             this.$emit("addChecklist");
+        },
+        toggleLabelsPalet() {
+            this.isPaleltShow = !this.isPaleltShow
         }
     },
     components: {
@@ -79,7 +89,8 @@ export default {
         ChecklistCreator,
         DateSelector,
         AttachmentTool,
-        CoverTool
+        CoverTool,
+        labels
     }
 };
 </script>
