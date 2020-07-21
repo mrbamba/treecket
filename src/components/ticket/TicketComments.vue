@@ -61,8 +61,9 @@ export default {
     methods: {
         addComment() {
             if (!this.newCommentText) return
-            this.newCommentText = ''
+            
             this.$emit("addComment", this.newCommentText);
+            this.newCommentText = ''
         }
     },
     components: {
