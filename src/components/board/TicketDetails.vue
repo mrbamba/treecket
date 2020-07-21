@@ -12,7 +12,7 @@
 
             <button class="close-btn" @click="closeTicketDetails">
                 <!-- <p class="bubble-msg">Press ESC to exit</p> -->
-                <font-awesome-icon fas icon="times" />
+                <font-awesome-icon fas icon="times" class="close-btn-fa"/>
             </button>
         </header>
 
@@ -123,7 +123,5 @@ export default {
 </script>
 
 <style>
-.done {
-    text-decoration: line-through;
-}
+
 </style>
