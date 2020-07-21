@@ -30,12 +30,14 @@ select {
   cursor: pointer;
   outline: none;
   font-family: inherit;
+  color: inherit;
 }
 
 input,
 textarea {
-  outline: none;
+  // outline: none;
   font-family: inherit;
+  outline-color: #0079bf;
 }
 
 a {

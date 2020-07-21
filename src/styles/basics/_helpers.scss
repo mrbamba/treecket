@@ -9,6 +9,30 @@
     z-index: 3;
 }
 
+.bubble-msg {
+    position: absolute;
+	max-width: 30em;
+    background-color: #0077ffee;
+    color: #fff;
+	font-size: rem(14px);
+	padding: 0.4em 0.8em;
+	border-radius: rem(8px);
+    box-shadow:	0 2px 6px rgba(9, 33, 66, .2);
+	&::before {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 0;
+		top: 100%;
+		right: 25%;
+		border-left: 0.6em solid transparent;
+		border-right: 0.3em solid transparent;
+		border-top: 0.6em solid #0077ffee;
+		border-bottom-color: #0077ffee;
+		filter: drop-shadow(0 2px 4px rgba(9, 33, 66, .2));
+	}
+}
+
 // Font Sizes
 // .fs12 { font-size: rem(12px); }
 // .fs14 { font-size: rem(14px); }

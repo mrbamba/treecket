@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="add-comment-input">
-            <avatar :username="user.fullName" :image="user.imgSrc" :size="32"/>
+            <avatar :username="user.fullName" :image="user.imgSrc" :size="32" />
             <form action>
                 <input
                     type="text"
@@ -44,8 +44,9 @@ export default {
     },
     methods: {
         addComment() {
-            comments.
-                this.$emit("addComment", this.newCommentText);
+            if (!this.newCommentText) return
+            this.newCommentText = ''
+            this.$emit("addComment", this.newCommentText);
         }
     },
     components: {
