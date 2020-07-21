@@ -18,6 +18,11 @@
 
         <main class="ticket-body">
             <section class="ticket-content">
+                <ul class="labels-container">
+                <li class="label" v-for="label in ticketLabels" :key="label.id" :style="{backgroundColor: label.color}">
+                    {{ label.title }}
+                </li>
+                </ul>
                 <section class="ticket-description">
                     <h3>Description</h3>
                     <textarea
@@ -52,7 +57,9 @@
             <ticket-menu
                 @deleteTicket="deleteTicket"
                 :ticket="ticket"
+                :labels="labels"
                 @addChecklist="addChecklist"
+                @updateTicketLabel="updateTicketLabel"
             />
         </main>
     </div>
@@ -64,13 +71,19 @@ import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import { boardService } from "@/services/board.service.js";
 export default {
-    props: ["ticket", "groupId", "user"],
+    props: ['ticket', 'groupId', 'user', 'labels'],
     computed: {
         overlay() {
             return this.$store.getters.overlay;
+        },
+        ticketLabels() {
+            const ticketLabels = this.ticket.labels.map(labelId =>
+                this.labels.find(currLabel => labelId === currLabel.id));
+            return {...ticketLabels};
         }
     },
     created() {
+        console.log('LOAD');
         this.$store.commit("showOverlay");
         this.$nextTick(() => this.$refs.ticketDetails.focus());
     },
@@ -90,7 +103,6 @@ export default {
             this.$emit("closeTicketDetails");
         },
         deleteTicket(ticketId) {
-            console.log("TicketDetails params:", ticketId, this.groupId);
             this.$emit("deleteTicket", { ticketId, groupId: this.groupId });
         },
         expandTextareaEl() {
@@ -121,6 +133,13 @@ export default {
         changeComments(comments) {
             this.ticket.comments = comments;
             this.saveTicket();
+        },
+        updateTicketLabel(labelId) {
+            const labels = this.ticket.labels
+            const labelIdx = labels.findIndex(label => label === labelId)
+            if (labelIdx >= 0) labels.splice(labelIdx, 1)
+            else labels.push(labelId)
+            this.saveTicket();
         }
     },
     components: {
@@ -132,7 +151,4 @@ export default {
 </script>
 
 <style>
-.done {
-    text-decoration: line-through;
-}
 </style>
