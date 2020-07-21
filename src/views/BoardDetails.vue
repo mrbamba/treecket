@@ -7,8 +7,13 @@
             <!-- <input type="text" v-model="currBoard.title"> -->
         </header>
 
-        <main class="groups-container">
-                <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
+        <main
+            class="groups-container"
+            v-dragscroll:firstchilddrag.x
+            v-on:dragscrollstart="toggleScrollCursor"
+            v-on:dragscrollend="toggleScrollCursor"
+        >
+            <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
             <Container
                 drag-class="col-ghost"
                 drop-class="col-ghost-drop"
@@ -24,9 +29,8 @@
                         @updateTickets="updateTickets"
                     />
                 </Draggable>
-            <add-group @addGroup="addGroup" />
+                <add-group @addGroup="addGroup" />
             </Container>
-
         </main>
 
         <ticket-details
@@ -50,6 +54,7 @@ import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag, generateItems } from "@/services/dnd.service.js";
+import { dragscroll } from 'vue-dragscroll';
 import SocketService from "@/services/socket.service.js";
 
 export default {
@@ -75,7 +80,7 @@ export default {
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
         SocketService.terminate();
-        this.$store.commit('setBoard',null)
+        this.$store.commit('setBoard', null)
     },
     methods: {
         closeTicketDetails() {
@@ -125,7 +130,7 @@ export default {
                         ))
                 ).id;
             }
-        }, 
+        },
         async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
             const newBoard = this.currBoard;
@@ -144,6 +149,9 @@ export default {
             updatedBoard.groups.push(group);
             await this.$store.dispatch("updateBoard", updatedBoard);
             SocketService.emit("updateBoard", this.currBoard._id);
+        },
+        toggleScrollCursor(ev) {
+            this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
         }
     },
     computed: {
@@ -159,25 +167,28 @@ export default {
                 return '';
             }
         },
-            loggedInUser() {
-                console.log('asking for logged in user', this.$store.getters.loggedInUser)
-                return this.$store.getters.loggedInUser;
-            }
-        },
-        components: {
-            TicketGroup,
-            TicketDetails,
-            Container,
-            Draggable,
-            AddGroup,
-            MainHeader
-        },
-        watch: {
-            async $route(to, from) {
-                this.loadBoard();
-            }
+        loggedInUser() {
+            console.log('asking for logged in user', this.$store.getters.loggedInUser)
+            return this.$store.getters.loggedInUser;
+        }
+    },
+    components: {
+        TicketGroup,
+        TicketDetails,
+        Container,
+        Draggable,
+        AddGroup,
+        MainHeader
+    },
+    directives: {
+        dragscroll
+    },
+    watch: {
+        async $route(to, from) {
+            this.loadBoard();
         }
     }
+}
 </script>
 
 <style>

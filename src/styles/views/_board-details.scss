@@ -1,14 +1,17 @@
 .board-details {
+    padding-bottom: 8px;
+
     height: 100%;
     display: flex;
     flex-direction: column;
     .groups-container {
         display: inline-flex;
-        // overflow-x: auto;
+        overflow-y: hidden;
         flex-grow: 1;
     }
 }
 
 .groups-container {
     overflow-x: auto;
+    padding-inline-start: 8px;
 }

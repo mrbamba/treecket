@@ -42,3 +42,23 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+}
+
+/* track */
+::-webkit-scrollbar-track {
+    border-radius: 7px;
+    background: rgba(0,0,0,.15);
+    margin-inline-start: 8px;
+    margin-inline-end: 8px;
+}
+
+/* handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.4);
+    border-radius: 4px;
+}

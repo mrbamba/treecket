@@ -1,6 +1,7 @@
 .col-ghost {
-    transition: transform 0.18s ease;
-    transform: rotateZ(4deg);
+    transition: transform 0.18s ease, box-shadow 0.1s ease-in-out;
+    transform: rotateZ(3deg);
+    box-shadow: -2px 5px 10px rgba(9, 33, 66, .08);
 }
 
 .col-ghost-drop {
@@ -9,8 +10,9 @@
 }
 
 .card-ghost {
-    transition: transform 0.18s ease;
-    transform: rotateZ(-4deg);
+    transition: transform 0.18s ease, box-shadow 0.1s ease-in-out;
+    transform: rotateZ(-3deg);
+    box-shadow: 2px 5px 10px rgba(9, 33, 66, .08);
 }
 
 .card-ghost-drop {

@@ -1,17 +1,18 @@
 .add-group {
+    display: block;
     background-color: rgba(0,0,0,.15);
     color: #fff;
     font-size: rem(14px);
     cursor: pointer;
-    width: 280px;
     height: fit-content;
     border-radius: 3px;
-
     &:hover {
         background-color: rgba(0, 0, 0, .25);
     }
-
+    
     div {
+        margin-inline-end: 8px;
+        width: rem(280px);
         padding: rem(10px);
     }
 }
