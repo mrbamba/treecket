@@ -1,3 +1,7 @@
+// .add-ticket {
+//     position: fixed;
+// }
+
 .add-ticket-btn {
     border: none;
     background-color: transparent;
@@ -17,6 +21,7 @@
         line-height: 0.9;
         vertical-align: middle;
     }
+
     span:last-of-type {
         vertical-align: bottom;
         font-family: rem(14px);
