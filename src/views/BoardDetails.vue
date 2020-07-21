@@ -151,7 +151,7 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         toggleScrollCursor(ev) {
-            this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'grabbing' : 'default';
+            this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
         }
     },
     computed: {
@@ -162,7 +162,7 @@ export default {
             if (this.$route.params.boardId) {
                 const board = this.$store.getters.currBoard;
                 if (board) {
-                    return board.background + ((board.background.includes('url')) ? 'center / cover fixed' : '');
+                    return board.background + ((board.background.includes('url')) ? ' fixed' : '');
                 }
                 return '';
             }

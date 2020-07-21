@@ -2,7 +2,7 @@
     <div class="main-header" :style="{ backgroundColor }">
         <div class="main-header-logo">
             <router-link to="/">
-                <img src="@/assets/logo-white.png" alt />
+                <img src="@/assets/logo-white-bouncing.gif" alt />
                 <h1>Treecket</h1>
             </router-link>
         </div>

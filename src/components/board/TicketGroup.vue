@@ -1,5 +1,5 @@
 <template>
-    <section class="ticket-group">
+    <div class="ticket-group">
         <header>
             <div class="group-header">
                 <div><h3>{{ group.title }}</h3> {{ ticketsInGroupCount }}</div>
@@ -7,23 +7,25 @@
             </div>
         </header>
 
-        <container
-            group-name="col"
-            @drop="onTicketDrop"
-            :get-child-payload="getTicketPayload"
-            drag-class="card-ghost"
-            drop-class="card-ghost-drop"
-            :drop-placeholder="dropPlaceholderOptions">
+        <div class="tickets-container">
+            <container
+                group-name="col"
+                @drop="onTicketDrop"
+                :get-child-payload="getTicketPayload"
+                drag-class="card-ghost"
+                drop-class="card-ghost-drop"
+                :drop-placeholder="dropPlaceholderOptions">
 
-            <Draggable v-for="ticket in group.tickets" :key="ticket.id">
-                <ticket-preview :ticket="ticket" />
-            </Draggable>
-            
-        </container>
+                <Draggable v-for="ticket in group.tickets" :key="ticket.id">
+                    <ticket-preview :ticket="ticket" />
+                </Draggable>
+            </container>
+        </div>
 
-        <add-ticket :group="group" @emitAddTicket="addTicket" />
-
-    </section>
+        <footer>
+            <add-ticket :group="group" @emitAddTicket="addTicket" class="add-ticket" />
+        </footer>
+    </div>
 </template>
 
 <script>
@@ -44,7 +46,7 @@ export default {
             dropPlaceholderOptions: {
                 className: "drop-preview",
                 animationDuration: "150",
-                showOnTop: false
+                showOnTop: true
             }
         };
     },
@@ -95,6 +97,9 @@ export default {
         },
         getTicketPayload(idx) {
             return this.group.tickets[idx];
+        },
+        doDrag(ev) {
+            console.log(ev)
         }
     },
     computed: {
