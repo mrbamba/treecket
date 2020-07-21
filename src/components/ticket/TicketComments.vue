@@ -22,7 +22,7 @@
         </div>
         <div class="add-comment-input">
             <div class="create-comment-avatar">
-                <avatar :username="user.fullName" :image="user.imgSrc" :size="32" />
+                <avatar v-if="user" :username="user.fullName" :image="user.imgSrc" :size="32" />
             </div>
             <form class="input-wrapper">
                 <input
@@ -32,8 +32,8 @@
                     v-model="newCommentText"
                 />
                 <div>
-                    <button @click.prevent="addComment">Save</button>
-                    <button>Cancel</button>
+                    <button @click.prevent="addComment" class="save-button">Save</button>
+                    <button class="cancel-button">Cancel</button>
                 </div>
             </form>
         </div>

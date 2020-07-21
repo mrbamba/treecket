@@ -1,5 +1,5 @@
 <template>
-    <div class="ticket-comment-preview">
+    <div class="ticket-comment">
         <div class="comment-img">
             <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
         </div>
@@ -9,13 +9,18 @@
                 {{ comment.createdAt | formatTime }}
             </p>
             <p class="comment-text" v-if="!editing">{{ comment.txt }}</p>
-            <div v-else>
+            <div v-else class="editing-comment">
                 <input type="text" v-model="commentEditText" ref="editText" />
-                <button @click="editComment">Save</button>
-                <button @click="editing=false">Cancel</button>
+                <div>
+
+                <button @click="editComment" class="save-button">Save</button>
+                <button @click="editing=false" class="cancel-button">Cancel</button>
+                </div>
             </div>
-            <button @click="openEdit">Edit</button>
-            <button @click="deleteComment(comment.id)">Delete</button>
+            <div v-if="!editing">
+                <button @click="openEdit" class="underline-button">Edit</button>
+                <button @click="deleteComment(comment.id)" class="underline-button">Delete</button>
+            </div>
         </div>
     </div>
 </template>
@@ -43,8 +48,8 @@ export default {
             })
         },
         editComment() {
-            this.editing=false
-            this.comment.txt=this.commentEditText
+            this.editing = false
+            this.comment.txt = this.commentEditText
             this.$emit('')
         },
         deleteComment() {

@@ -33,6 +33,45 @@
 	}
 }
 
+.save-button{
+	border: none;
+	background-color: #0052cc;
+	color: white;
+
+	padding: 6px 10px;
+	border-radius: 3px;
+	margin: 8px;
+}
+.save-button:hover{
+	background-color: #0052ee;
+	transition: ease-in-out .3s;
+
+}
+.underline-button{
+	border: none;
+	background: transparent;
+	color: #6b778c;
+
+	&:hover{
+		color: rgb(170, 170, 170);
+		text-decoration: underline;
+		transition: ease-in-out .3s;
+	}
+}
+
+.cancel-button{
+	border: none;
+	background: transparent;
+	color: #42526e;
+	padding: 6px 10px;
+	border-radius: 3px;
+}
+.cancel-button:hover{
+	background: rgb(220, 220, 220);
+	transition: ease-in-out .3s;
+
+}
+
 // Font Sizes
 // .fs12 { font-size: rem(12px); }
 // .fs14 { font-size: rem(14px); }

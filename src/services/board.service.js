@@ -45,10 +45,17 @@ function getNewComment(commentText) {
 }
 
 function _getMiniUser() {
-  return {
-    "_id": localLoggedInUser._id,
-    "fullName": localLoggedInUser.fullName,
-    "imgSrc": localLoggedInUser.imgSrc,
+  if(localLoggedInUser){
+
+    return {
+      "_id": localLoggedInUser._id,
+      "fullName": localLoggedInUser.fullName,
+      "imgSrc": localLoggedInUser.imgSrc,
+    }
+  }else return{
+    "_id": 'anonymous',
+      "fullName": 'Anonymous',
+      "imgSrc": '',
   }
 }
 

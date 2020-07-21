@@ -10,8 +10,8 @@
             rows="5"
             placeholder="Enter a title for this ticket..."
         />
-        <button @click.stop="addTicket" data-prevent-blur="add">Add Ticket</button>
-        <button @click.stop="toggleAddTicket" data-prevent-blur="close">X</button>
+        <button @click.stop="addTicket" data-prevent-blur="add" class="save-button">Add Ticket</button>
+        <button @click.stop="toggleAddTicket" data-prevent-blur="close" class="cancel-button">Cancel</button>
     </div>
     <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>
         <span>+</span> <span>Add another ticket</span></button>
