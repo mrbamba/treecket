@@ -6,7 +6,7 @@ Vue.filter("progressBar", (val) => {
   const doneItemsCount = val.reduce((acc, item) => {
     return (item.isDone) ? ++acc : acc
   }, 0); 
-  return (doneItemsCount) ? ((doneItemsCount / val.length) * 100).toFixed(0) + '%' : '0%'
+  return (doneItemsCount) ? Math.round((doneItemsCount / val.length) * 100) + '%' : '0%'
 });
 
 Vue.filter("formatNum", (val) => {
