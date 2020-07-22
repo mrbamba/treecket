@@ -48,13 +48,32 @@
                 >{{ attachment }}</section>-->
 
                 <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
-
+                <div class="log-selector">
+                    <h4>Activity</h4>
+                    <div class="ticket-activity-selector">
+                        <h4>Show:</h4>
+                        <button @click="logView='Comments'">
+                            <font-awesome-icon class="comments-icon" far icon="comment" />Comments
+                        </button>
+                        <button @click="logView='History'">
+                            <font-awesome-icon class="history-icon" fas icon="history" />History
+                        </button>
+                    </div>
+                </div>
                 <ticket-comments
+                    v-if="logView==='Comments'"
                     :comments="ticket.comments"
                     :user="user"
                     @addComment="addComment"
                     @updateTicket="saveTicket"
                 />
+                <div v-if="logView==='History'">
+                    <ticket-history
+                        v-for="activity in ticketActivities"
+                        :key="activity.id"
+                        :activity="activity"
+                    />
+                </div>
             </section>
 
             <ticket-menu
@@ -80,12 +99,22 @@ import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
 import AddAttachment from "@/components/AddAttachment.vue";
+import TicketHistory from '@/components/ticket/TicketHistory.vue';
 import { boardService } from "@/services/board.service.js";
 export default {
-    props: ['ticket', 'groupId', 'user', 'labels'],
+    props: {
+        ticket: Object,
+        groupId: String,
+        user: Object,
+        labels: Array,
+        ticketActivities: Array
+    },
+    // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
         return {
             showAddAttachment: false,
+            logView: 'Comments',
+
         }
     },
     computed: {
@@ -96,12 +125,13 @@ export default {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
-        }
+        },
     },
     created() {
         console.log('LOAD');
         this.$store.commit("showOverlay");
         this.$nextTick(() => this.$refs.ticketDetails.focus());
+        console.log('Ticket activities', this.ticketActivities);
     },
     mounted() {
         this.$watch("overlay", function (newValue, oldValue) {
@@ -120,6 +150,7 @@ export default {
         },
         deleteTicket(ticketId) {
             this.$emit("deleteTicket", { ticketId, groupId: this.groupId });
+            this.addActivity(`Deleted ticket ${this.ticket.id}`)
         },
         expandTextareaEl() {
             const el = this.$refs.title;
@@ -131,6 +162,8 @@ export default {
             this.ticket.checklists.push(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.saveTicket();
+            this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
+
         },
         addItem({ itemTxt, checklistId }) {
             const newItem = boardService.getNewChecklistItem(itemTxt);
@@ -139,12 +172,16 @@ export default {
             );
             this.ticket.checklists[checklistIdx].items.push(newItem);
             this.saveTicket();
+            this.addActivity(`Added checklist item: \"${itemTxt}\" to ticket: ${this.ticket.id}`)
+
         },
         addComment(commentText) {
             console.log(commentText);
             let newComment = boardService.getNewComment(commentText);
             this.ticket.comments.push(newComment);
             this.saveTicket();
+            this.addActivity(`Added comment: \"${commentText}\" to ticket: ${this.ticket.id}`)
+
 
         },
         changeComments(comments) {
@@ -166,14 +203,26 @@ export default {
             this.ticket.attachments.push(newAttachment)
             this.toggleAddAttachment()
             this.saveTicket();
+            this.addActivity(`Added attachment: ${src} to ticket: ${this.ticket.id}`)
+
         },
         deleteAttachment(id) {
+            this.addActivity(`Deleted attachment: ${this.ticket.attachments[attachmentIdx].src} to ticket: ${this.ticket.id}`)
             const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
             if (attachmentIdx >= 0) {
                 this.ticket.attachments.splice(attachmentIdx, 1)
                 this.$store.commit('setUserMessage', { msg: 'Attachment deleted' });
             }
             this.saveTicket();
+
+        },
+        addActivity(text) {
+            this.$nextTick(() => {
+                let newActivity = {};
+                newActivity.text = text;
+                newActivity.ticketId = this.ticket.id;
+                this.$emit('addActivity', newActivity)
+            })
         }
     },
     components: {
@@ -181,7 +230,8 @@ export default {
         TicketChecklists,
         TicketComments,
         TicketAttachments,
-        AddAttachment
+        AddAttachment,
+        TicketHistory,
     }
 };
 </script>

@@ -16,7 +16,8 @@ export const boardService = {
   getNewChecklistItem,
   getNewComment,
   getAllowLabel,
-  getNewAttachment
+  getNewAttachment,
+  getNewActivity
 };
 
 function query(filterBy) {
@@ -52,27 +53,36 @@ function getAllowLabel(label) {
 }
 
 function getNewAttachment(src) {
-    const srcType = utilService.srcType(src)
-    const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link' 
-    return {
-      "id": utilService.makeId(),
-      type,
-      "src": src
-    }
+  const srcType = utilService.srcType(src)
+  const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link'
+  return {
+    "id": utilService.makeId(),
+    type,
+    "src": src
+  }
 }
 
 function _getMiniUser() {
-  if(localLoggedInUser){
+  if (localLoggedInUser) {
 
     return {
       "_id": localLoggedInUser._id,
       "fullName": localLoggedInUser.fullName,
       "imgSrc": localLoggedInUser.imgSrc,
     }
-  }else return{
+  } else return {
     "_id": 'anonymous',
-      "fullName": 'Anonymous',
-      "imgSrc": '',
+    "fullName": 'Anonymous',
+    "imgSrc": '',
+  }
+}
+function getNewActivity(text, ticketId) {
+  return {
+    "id": utilService.makeId(),
+    "txt": text,
+    "createdAt": Date.now(),
+    "ticketId": ticketId,
+    "by": _getMiniUser()
   }
 }
 

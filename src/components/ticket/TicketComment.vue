@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-comment">
         <div class="comment-img">
-            <avatar :username="comment.by.fullName" :image="comment.by.imgSrc" :size="32" />
+            <avatar :username="comment.by.fullName" :src="comment.by.imgSrc" :size=32 />
         </div>
         <div>
             <p class="comment-by">
@@ -51,7 +51,7 @@ export default {
         editComment() {
             this.editing = false
             this.comment.txt = this.commentEditText
-            this.$emit('')
+            this.$emit('updateTicket',this.comment.txt)
         },
         deleteComment() {
             this.$emit('deleteComment')
