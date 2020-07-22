@@ -6,7 +6,7 @@
             <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
         </div>
         <add-board v-if="showAddBoard" @toggleAddBoard="toggleAddBoard" />
-        <section>
+        <section v-if="boards">
             <board-preview v-for="board in boards" :board="board" :key="board._id" />
         </section>
     </div>
@@ -28,7 +28,7 @@ export default {
     },
     computed: {
         boards() {
-            return this.$store.getters.boards;
+                return this.$store.getters.boards;
         }
     },
     methods: {

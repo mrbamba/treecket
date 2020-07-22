@@ -108,7 +108,6 @@ function getNewGroup(title) {
 
 function getNewBoard(prefs) {
   return {
-    // "_id": utilService.makeId(), // board._id will be created by mongoDB (TO DELETE)
     "title": prefs.title,
     "background": prefs.background,
     "members": [],
