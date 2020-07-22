@@ -147,9 +147,9 @@
 // .square-ratio {
 //     @include aspect-ratio(1, 1);
 // }
-// .video-ratio {
-//     @include aspect-ratio(16, 9);
-// }
+.video-ratio {
+    @include aspect-ratio(16, 9);
+}
 // .desktop-browser-ratio {
 //     @include aspect-ratio(15, 8);
 // }

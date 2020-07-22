@@ -1,18 +1,16 @@
 .ticket-attachments {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    margin-bottom: 30px;
     li {
         display: flex;
         flex-direction: column;
         .file-container {
-            height: 150px;
-            width: 200px;
+            margin-bottom: 8px;
             img, iframe, a {
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
+                height: 170px;
+                border-radius: 3px;
             }
         }
         .btn-container {

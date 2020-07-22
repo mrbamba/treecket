@@ -40,6 +40,7 @@
                     :attachments="ticket.attachments"
                     @deleteAttachment="deleteAttachment"
                     @showAddAttachment="toggleAddAttachment()"
+                    @makeCover="makeCover"
                 />
                 <!-- <section
                     class="ticket-attachments"
@@ -158,8 +159,8 @@ export default {
             else labels.push(labelId);
             this.saveTicket();
         },
-        toggleAddAttachment(isClosed) {
-            this.showAddAttachment = isClosed;
+        toggleAddAttachment() {
+            this.showAddAttachment = !this.showAddAttachment;
         },
         addAttachment(src) {
             const newAttachment = boardService.getNewAttachment(src)
@@ -174,6 +175,14 @@ export default {
                 this.$store.commit('setUserMessage', { msg: 'Attachment deleted' });
             }
             this.saveTicket();
+        },
+        makeCover(id) {
+            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
+            if (attachmentIdx >= 0) {
+                const attachment = this.ticket.attachments.splice(attachmentIdx, 1)
+                this.ticket.attachments.unshift(attachment[0])
+                this.saveTicket()
+            }
         }
     },
     components: {
