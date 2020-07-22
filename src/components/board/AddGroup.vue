@@ -5,8 +5,9 @@
             @click.stop="toggleAddGroup"
             class="add-group-btn"
         >+ Add another list</button>
-        <div v-else>
+        <div v-else :class="groupClass">
             <input
+            class="minimal-input"
                 type="text"
                 v-model="newGroupName"
                 @keyup.enter="addGroup()"
@@ -16,9 +17,7 @@
             />
             <div>
                 <button @click="addGroup" data-prevent-blur="add" class="add-button">Add list</button>
-                <button class="cancel-button">
-                    Cancel
-                </button>
+                <button class="cancel-button">Cancel</button>
             </div>
         </div>
     </div>
@@ -32,6 +31,11 @@ export default {
             addNewGroup: false,
             newGroupName: ''
         };
+    },
+    computed: {
+        groupClass() {
+            return (this.addNewGroup) ? 'add-group-selected' : ''
+        }
     },
     methods: {
         addGroup() {

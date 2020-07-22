@@ -105,6 +105,7 @@ export default {
         addChecklist() {
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.push(newChecklist);
+        this.$store.commit('setUserMessage',{msg:'New checklist added to ticket'});
             this.saveTicket();
         },
         addItem({ itemTxt, checklistId }) {
@@ -137,7 +138,7 @@ export default {
     components: {
         TicketMenu,
         TicketChecklists,
-        TicketComments
+        TicketComments,
     }
 };
 </script>

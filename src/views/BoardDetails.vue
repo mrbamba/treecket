@@ -43,6 +43,7 @@
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
         />
+        <user-message v-if="userMessage" :userMessage="userMessage"/>
     </div>
 </template>
 
@@ -51,6 +52,8 @@ import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
 import MainHeader from "@/components/MainHeader.vue";
+import UserMessage from '@/components/board/UserMessage.vue';
+
 import { boardService } from "@/services/board.service.js";
 
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -78,7 +81,7 @@ export default {
         SocketService.setup();
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
-         eventBus.$on('updateLabels', (label) => {
+        eventBus.$on('updateLabels', (label) => {
             let board = this.currBoard
             const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
             if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
@@ -167,6 +170,9 @@ export default {
         }
     },
     computed: {
+        userMessage() {
+            return this.$store.getters.userMessage
+        },
         currBoard() {
             return _.cloneDeep(this.$store.getters.currBoard);
         },
@@ -190,7 +196,8 @@ export default {
         Container,
         Draggable,
         AddGroup,
-        MainHeader
+        MainHeader,
+        UserMessage,
     },
     directives: {
         dragscroll

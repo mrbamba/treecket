@@ -2,6 +2,7 @@
     <div>
     <div v-if="showAddTicket">
         <textarea
+        class="minimal-input"
             @blur="onBlur"
             @keyup.enter="addTicket"
             v-model="ticketTitle"

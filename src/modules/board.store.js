@@ -7,6 +7,7 @@ export default {
     filterBy: {
       txt: ""
     },
+    userMessage:''
   },
   getters: {
     boards(state) {
@@ -20,6 +21,9 @@ export default {
     },
     labels(state) {
       return state.currBoard.labels
+    },
+    userMessage(state){
+      return state.userMessage
     }
   },
   mutations: {
@@ -43,6 +47,9 @@ export default {
     },
     hideOverlay(state) {
       state.overlay = false;
+    },
+    setUserMessage(state,{msg}){
+      state.userMessage=msg
     }
   },
   actions: {
@@ -60,15 +67,11 @@ export default {
       commit({ type: 'addBoard', board });
     },
     async updateBoard({ commit, state }, board) {
-      // SAVE BOARD COPY
-      // const boardCopy = _.cloneDeep(state.board);
       commit({ type: 'setBoard', board });
       try {
         await boardService.update(board);
       } catch (err) {
         console.log('ERROR IN UPDATE BOARD (STORE):', err)
-        // APPLY COPIED BOARD
-        // commit({ type: 'setBoard', board: boardCopy });
       }
     },
     async deleteTicket({ state, commit }, { ticketId, groupId }) {
