@@ -1,6 +1,6 @@
 <template>
-    <div class="board-details" v-if="currBoard" :style="{ background }">
-        <main-header />
+    <div class="board-details" v-if="currBoard">
+        <!-- <main-header /> -->
 
         <header style="padding: 8px; color: #fff; font-weight: 500">
             <div>{{ currBoard.title }}</div>
@@ -92,6 +92,9 @@ export default {
             this.saveBoard();
         })
     },
+    mounted() {
+        window.onload = () => { console.log("It's loaded!") };
+    },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
         SocketService.terminate();
@@ -175,15 +178,6 @@ export default {
         },
         currBoard() {
             return _.cloneDeep(this.$store.getters.currBoard);
-        },
-        background() {
-            if (this.$route.params.boardId) {
-                const board = this.$store.getters.currBoard;
-                if (board) {
-                    return board.background + ((board.background.includes('url')) ? ' fixed' : '');
-                }
-                return '';
-            }
         },
         loggedInUser() {
             console.log('asking for logged in user', this.$store.getters.loggedInUser)

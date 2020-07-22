@@ -3,6 +3,7 @@ import utilService from './util.service'
 
 var localLoggedInUser = null;
 if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
+console.log(localLoggedInUser)
 
 export const boardService = {
   query,
@@ -51,17 +52,16 @@ function getAllowLabel(label) {
 }
 
 function _getMiniUser() {
-  if(localLoggedInUser){
-
+  if (localLoggedInUser) {
     return {
       "_id": localLoggedInUser._id,
       "fullName": localLoggedInUser.fullName,
       "imgSrc": localLoggedInUser.imgSrc,
     }
-  }else return{
-    "_id": 'anonymous',
-      "fullName": 'Anonymous',
-      "imgSrc": '',
+  } else return {
+    "_id": 'guest',
+    "fullName": 'Guest',
+    "imgSrc": '',
   }
 }
 

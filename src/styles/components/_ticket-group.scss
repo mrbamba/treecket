@@ -10,6 +10,7 @@
     border-radius: 3px;
     // Margins should match margins of .cards-drop-preview (dnd.scss)
     margin-inline-end: 8px;
+    overflow-wrap: anywhere;
 
     .group-header {
         font-size: rem(14px);
