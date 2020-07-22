@@ -48,7 +48,7 @@
                     :key="attachment.id"
                 >{{ attachment }}</section>-->
 
-                <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
+                <ticket-checklists :ticket="ticket" @checklistDeleted="checklistDeleted" @updateTicket="saveTicket" @addItem="addItem" />
                 <div class="log-selector">
                     <h4>Activity</h4>
                     <div class="ticket-activity-selector">
@@ -162,9 +162,12 @@ export default {
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.push(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
-            this.saveTicket();
             this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
+            this.saveTicket();
 
+        },
+        checklistDeleted(id) {
+            this.addActivity(`Deleted checklist \"${id}\" on ticket: ${this.ticket.id}`)
         },
         addItem({ itemTxt, checklistId }) {
             const newItem = boardService.getNewChecklistItem(itemTxt);
@@ -172,16 +175,16 @@ export default {
                 checklist => checklist.id === checklistId
             );
             this.ticket.checklists[checklistIdx].items.push(newItem);
-            this.saveTicket();
             this.addActivity(`Added checklist item: \"${itemTxt}\" to ticket: ${this.ticket.id}`)
+            this.saveTicket();
 
         },
         addComment(commentText) {
             console.log(commentText);
             let newComment = boardService.getNewComment(commentText);
             this.ticket.comments.push(newComment);
-            this.saveTicket();
             this.addActivity(`Added comment: \"${commentText}\" to ticket: ${this.ticket.id}`)
+            this.saveTicket();
 
 
         },
@@ -208,9 +211,9 @@ export default {
 
         },
         deleteAttachment(id) {
-            this.addActivity(`Deleted attachment: ${this.ticket.attachments[attachmentIdx].src} to ticket: ${this.ticket.id}`)
             const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
             if (attachmentIdx >= 0) {
+                this.addActivity(`Deleted attachment: ${this.ticket.attachments[attachmentIdx].src} to ticket: ${this.ticket.id}`)
                 this.ticket.attachments.splice(attachmentIdx, 1)
                 this.$store.commit('setUserMessage', { msg: 'Attachment deleted' });
             }

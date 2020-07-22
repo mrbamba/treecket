@@ -95,7 +95,7 @@ export default {
             if (this.allowConfetti && this.checklist.items.every(item => item.isDone)) this.confetti();
         },
         deleteChecklist() {
-            this.$emit('deleteChecklist', this.checklistIdx);
+            this.$emit('deleteChecklist', this.checklistIdx, this.checklist.id);
         },
         editTitle(checklist) {
             this.onEditChecklistId = checklist.id;

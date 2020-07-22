@@ -32,7 +32,12 @@
                 :drop-placeholder="dropPlaceholderOptions"
             >
                 <Draggable v-for="ticket in group.tickets" :key="ticket.id">
-                    <ticket-preview :ticket="ticket" />
+                    <ticket-preview
+                        @changeLabelsDisplay="changeLabelsDisplay"
+                        :ticket="ticket"
+                        :labels="labels"
+                        :showFullLabels="showFullLabel"
+                    />
                 </Draggable>
             </container>
         </div>
@@ -53,7 +58,7 @@ import { applyDrag, generateItems } from '@/services/dnd.service.js'
 
 export default {
     name: 'TicketGroup',
-    props: ["group"],
+    props: ['group', 'labels', 'showFullLabels'],
     data() {
         return {
             newGroup: this.group,
@@ -76,7 +81,7 @@ export default {
             this.editTitle = false
             this.$emit('updateGroup', this.group)
         },
-       
+
         addTicket() {
             if (!this.ticketTitle) return;
             const ticket = boardService.getNewTicket(this.ticketTitle);
@@ -86,6 +91,9 @@ export default {
             });
             this.ticketTitle = '';
         },
+        changeLabelsDisplay() {
+            this.$emit('changeLabelsDisplay')
+        }, 
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'close') {

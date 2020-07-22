@@ -22,9 +22,10 @@ export default {
             this.ticket.checklists.splice(checklistIdx, 1, checklist)
             this.$emit('updateTicket', this.ticket);
         },
-        deleteChecklist(checklistIdx) {
+        deleteChecklist(checklistIdx, checklistId) {
             this.ticket.checklists.splice(checklistIdx, 1)
             this.$emit('updateTicket', this.ticket);
+            this.$emit('checklistDeleted', checklistId)
         },
         addItem({itemTxt, checklistId}) {
             this.$emit('addItem', { itemTxt, checklistId });

@@ -25,9 +25,12 @@
                 <Draggable v-for="group in currBoard.groups" :key="group._id">
                     <ticket-group
                         :group="group"
+                        :labels="currBoard.labels"
+                        :showFullLabels="showFullLabel"
                         @addTicket="addTicket"
                         @updateTickets="updateTickets"
                         @updateGroup="updateGroup"
+                        @changeLabelsDisplay="changeLabelsDisplay"
                     />
                 </Draggable>
                 <add-group @addGroup="addGroup" />
@@ -68,6 +71,7 @@ import { eventBus } from '@/services/event-bus.service.js';
 export default {
     data() {
         return {
+            showFullLabel: false,
             selectedTicket: null,
             selectedGroupId: null,
 
@@ -189,6 +193,9 @@ export default {
             let newActivity=boardService.getNewActivity(text,ticketId)
             this.currBoard.activities.push(newActivity)
             this.saveBoard()
+        },
+        changeLabelsDisplay() {
+            this.showFullLabel = !this.showFullLabel
         }
     },
     computed: {
