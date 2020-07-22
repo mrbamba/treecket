@@ -2,6 +2,10 @@
     header {
         box-shadow: 0 2px 7px rgba(0, 0, 0, .13);
         display: flex;
+        text-align: center;
+        >nav {
+            width: 1200px;
+        }
         nav {
             padding: 5px;
                 a {
