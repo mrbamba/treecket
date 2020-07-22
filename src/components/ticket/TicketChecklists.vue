@@ -1,6 +1,6 @@
 <template>
     <div class="ticket-checklists">
-        <checklist
+        <Checklist
             v-for="(checklist, checklistIdx) in ticket.checklists"
             :key="checklist.id"
             :checklist="checklist"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Checklist from './Checklist'
+import Checklist from '@/components/ticket/Checklist.vue';
 export default {
     props: ['ticket'],
     methods: {

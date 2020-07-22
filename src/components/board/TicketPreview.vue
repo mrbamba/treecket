@@ -20,7 +20,7 @@
                     :class="{complete: itemsCount.doneItemsCount === itemsCount.itemsCount}"
                 >
                     <img src alt />
-                    <span>{{ itemsCount.doneItemsCount }} / {{ itemsCount.itemsCount }}</span>
+                    <span>{{ itemsCount.doneItemsCount }}/{{ itemsCount.itemsCount }}</span>
                 </div>
             </section>
         </div>
