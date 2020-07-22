@@ -2,9 +2,21 @@
     <div class="board-details" v-if="currBoard">
         <!-- <main-header /> -->
 
-        <header style="padding: 8px; color: #fff; font-weight: 500">
-            <div>{{ currBoard.title }}</div>
-            <!-- <input type="text" v-model="currBoard.title"> -->
+        <header class="board-header">
+            <div v-if="!editTitle" @click="onEditTitle">
+                <div>{{ currBoard.title }}</div>
+                <!-- <input type="text" v-model="currBoard.title"> -->
+            </div>
+            <div v-else>
+                <input
+                    @blur="updateBoardTitle"
+                    type="text"
+                    v-model="currBoard.title"
+                    v-on:keyup.enter="updateBoardTitle"
+                    class="board-header-input"
+                    ref="updatedBoardTitle"
+                />
+            </div>
         </header>
 
         <main
@@ -70,6 +82,8 @@ export default {
         return {
             selectedTicket: null,
             selectedGroupId: null,
+            editTitle: false,
+
 
             // FAULT: Groups place-holders height are set to the tallest group
             // upperDropPlaceholderOptions: {
@@ -185,11 +199,20 @@ export default {
         toggleScrollCursor(ev) {
             this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
         },
-        addActivity({text,ticketId=null}){
-            let newActivity=boardService.getNewActivity(text,ticketId)
+        addActivity({ text, ticketId = null }) {
+            let newActivity = boardService.getNewActivity(text, ticketId)
             this.currBoard.activities.push(newActivity)
             this.saveBoard()
-        }
+        },
+        onEditTitle() {
+            this.editTitle = true;
+            this.$nextTick(() => this.$refs.updatedBoardTitle.focus());
+
+        },
+        updateBoardTitle() {
+            this.editTitle = false
+            this.saveBoard()
+        },
     },
     computed: {
         userMessage() {
@@ -203,7 +226,7 @@ export default {
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {
-            return this.currBoard.activities.filter(activity=>activity.ticketId=== this.selectedTicket.id);
+            return this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id);
         }
     },
     components: {
