@@ -40,6 +40,7 @@
                     :attachments="ticket.attachments"
                     @deleteAttachment="deleteAttachment"
                     @showAddAttachment="toggleAddAttachment()"
+                    @makeCover="makeCover"
                 />
                 <!-- <section
                     class="ticket-attachments"
@@ -98,8 +99,8 @@ import TicketMenu from "@/components/ticket/TicketMenu.vue";
 import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
-import AddAttachment from "@/components/AddAttachment.vue";
 import TicketHistory from '@/components/ticket/TicketHistory.vue';
+import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import { boardService } from "@/services/board.service.js";
 export default {
     props: {
@@ -195,8 +196,8 @@ export default {
             else labels.push(labelId);
             this.saveTicket();
         },
-        toggleAddAttachment(isClosed) {
-            this.showAddAttachment = isClosed;
+        toggleAddAttachment() {
+            this.showAddAttachment = !this.showAddAttachment;
         },
         addAttachment(src) {
             const newAttachment = boardService.getNewAttachment(src)
@@ -223,6 +224,14 @@ export default {
                 newActivity.ticketId = this.ticket.id;
                 this.$emit('addActivity', newActivity)
             })
+        },
+        makeCover(id) {
+            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
+            if (attachmentIdx >= 0) {
+                const attachment = this.ticket.attachments.splice(attachmentIdx, 1)
+                this.ticket.attachments.unshift(attachment[0])
+                this.saveTicket()
+            }
         }
     },
     components: {

@@ -3,32 +3,36 @@
         <ul class="ticket-attachments clean-list">
             <li v-for="attachment in attachments" :key="attachment.id">
                 <div class="file-container">
-                    <img
+                    <img class="video-ratio"
                         v-if="srcType(attachment.src) === 'img'"
                         :src="attachment.src"
                         :alt="attachment.type"
                     />
-                    <iframe
+                    <iframe allowfullscreen
                         v-else-if="srcType(attachment.src) === 'video'"
                         :src="getIframeSrc(attachment.src)"
                         :alt="attachment.type"
                     />
-                    <a
+                    <a class="video-ratio"
                         v-else
-                        :style="{backgroundImage: 'url(' +  attachment.src + ')'}"
+                        :style="{background: `url(${attachment.src})`}"
                         :href="attachment.src"
                         :alt="attachment.type + ' ' + attachment.title"
                     />
                 </div>
-                <form v-if="showAttachmentEdit" @submit.prevent="updateChanges">
+                <form v-if="attachmentEdit" @submit.prevent="updateChanges">
                     <input v-model="attachment.title" type="text" />
                     <button type="submit">Save</button>
                     <button type="button" @click.stop="closeEdit">X</button>
                 </form>
-                <h5 v-else>{{ attachment.title }}</h5>
+                <h5 v-else @click="showAttachmentEdit">{{ attachment.title }}</h5>
                 <div class="btn-container">
-                    <button class="underline-button">Clone</button>
-                    <button class="underline-button" v-if="attachment.type === 'img'">Make cover</button>
+                    <button class="underline-button" icon="fa-clipboard">Copy</button>
+                    <button
+                        class="underline-button"
+                        v-if="attachment.type === 'img'"
+                        @click="onMakeCover(attachment.id)"
+                    >Make cover</button>
                     <button
                         class="underline-button"
                         @click="onDeleteAttachment(attachment.id)"
@@ -45,7 +49,7 @@ export default {
     props: ['attachments'],
     data() {
         return {
-            showAttachmentEdit: false
+            attachmentEdit: false
         }
     },
     methods: {
@@ -71,6 +75,12 @@ export default {
         },
         showAddAttachment() {
             this.$emit('showAddAttachment')
+        },
+        showAttachmentEdit() {
+            this.attachmentEdit = !this.attachmentEdit
+        },
+        onMakeCover(id) {
+            this.$emit('makeCover', id)
         }
 
     }
