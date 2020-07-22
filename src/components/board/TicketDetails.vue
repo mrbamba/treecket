@@ -46,6 +46,7 @@
                 @addChecklist="addChecklist"
             />
         </main>
+        
     </div>
 </template>
 

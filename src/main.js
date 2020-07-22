@@ -11,8 +11,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueDragscroll from 'vue-dragscroll'
+import VueConfetti from 'vue-confetti'
 
 
+Vue.use(VueConfetti);
 library.add(fas)
 // library.add(fab)
 

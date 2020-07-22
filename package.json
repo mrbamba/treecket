@@ -18,6 +18,7 @@
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-avatar": "^2.3.0",
+    "vue-confetti": "^2.0.9",
     "vue-dragscroll": "^2.1.0",
     "vue-router": "^3.2.0",
     "vue-smooth-dnd": "^0.8.1",

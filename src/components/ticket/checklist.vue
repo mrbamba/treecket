@@ -12,7 +12,11 @@
         <div class="progress-bar-container">
             <h6>{{ checklist.items | progressBar }}</h6>
             <div class="progress-bar">
-                <div class="prec-done" :class="{complete: doneItemsPrec === '100%'}" :style="{width: doneItemsPrec}" ></div>
+                <div
+                    class="prec-done"
+                    :class="{complete: doneItemsPrec === '100%'}"
+                    :style="{width: doneItemsPrec}"
+                ></div>
             </div>
         </div>
         <ul>
@@ -23,7 +27,7 @@
                     <button @click="deleteItem(itemIdx)">x</button>
                 </div>
                 <div v-else>
-                        <!-- @keyup.enter="saveUpdateChanges(item)" -->
+                    <!-- @keyup.enter="saveUpdateChanges(item)" -->
                     <textarea
                         ref="editItem"
                         @blur="onBlurEditItem($event, item)"
@@ -63,7 +67,8 @@ export default {
             itemTxt: '',
             onEditItemTxt: '',
             showChecklistTitleEdit: false,
-            onEditChecklistTitle: ''
+            onEditChecklistTitle: '',
+            allowConfetti: true
         }
     },
     computed: {
@@ -77,6 +82,8 @@ export default {
     methods: {
         updateChecklist() {
             this.$emit('updateChecklist', this.checklist);
+            console.log(this.allowConfetti)
+            if (this.allowConfetti && this.checklist.items.every(item => item.isDone)) this.confetti();
         },
         deleteChecklist() {
             this.$emit('deleteChecklist', this.checklistIdx);
@@ -142,6 +149,27 @@ export default {
         deleteItem(itemIdx) {
             this.checklist.items.splice(itemIdx, 1);
             this.updateChecklist();
+        },
+        confetti() {
+            this.$confetti.start({
+                particles: [
+                    {
+                        type: 'image',
+                        url: 'https://res.cloudinary.com/dfhfhz5le/image/upload/v1595372019/treecket_hmoifu.png',
+                        size: 20
+                    },
+                    {
+                        type: 'rect',
+                    },
+                ],
+                defaultDropRate: 16,
+                // canvasId: 'confetti'
+            });
+            setTimeout(() => {
+                this.$confetti.stop();
+            }, 2000);
+            this.allowConfetti = false;
+            console.log(this.allowConfetti)
         }
     }
 }
