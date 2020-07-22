@@ -122,3 +122,39 @@
         font-size: 13px;
     }
 }
+
+
+.log-selector {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 24px;
+
+    .history-icon {
+        margin-right: 4px;
+        // align-self: center;
+        font-size: rem(14px);
+    }
+
+    .comments-icon {
+        margin-right: 4px;
+        // align-self: center;
+        font-size: rem(12px);
+    }
+
+    h4 {
+        margin-right: 8px;
+        align-self: center;
+        font-size: 13px;
+
+    }
+
+    button {
+        border: none;
+        margin-right: 8px;
+        padding: 4px;
+        border-radius: 2px;
+        background-color: rgba(9, 30, 66, 0.04);
+        font-size: 12px;
+
+    }
+}

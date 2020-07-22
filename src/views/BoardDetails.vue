@@ -1,6 +1,6 @@
 <template>
-    <div class="board-details" v-if="currBoard" :style="{ background }">
-        <main-header />
+    <div class="board-details" v-if="currBoard">
+        <!-- <main-header /> -->
 
         <header style="padding: 8px; color: #fff; font-weight: 500">
             <div>{{ currBoard.title }}</div>
@@ -40,11 +40,13 @@
             :groupId="selectedGroupId"
             :user="loggedInUser"
             :labels="currBoard.labels"
+            :ticketActivities="ticketActivities"
             @closeTicketDetails="closeTicketDetails"
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
+            @addActivity="addActivity"
         />
-        <user-message v-if="userMessage" :userMessage="userMessage"/>
+        <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
 </template>
 
@@ -78,7 +80,7 @@ export default {
         };
     },
     async created() {
-        this.loadBoard();
+        await this.loadBoard();
         SocketService.setup();
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
@@ -93,13 +95,16 @@ export default {
             this.saveBoard();
         })
     },
+    mounted() {
+        window.onload = () => { console.log("It's loaded!") };
+    },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
         SocketService.terminate();
         this.$store.commit('setBoard', null)
     },
     methods: {
-        async updateGroup(updatedGroup){
+        async updateGroup(updatedGroup) {
             const newBoard = this.currBoard;
             const groupIdx = newBoard.groups.findIndex(
                 group => group.id === updatedGroup.id
@@ -179,6 +184,11 @@ export default {
         },
         toggleScrollCursor(ev) {
             this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
+        },
+        addActivity({text,ticketId=null}){
+            let newActivity=boardService.getNewActivity(text,ticketId)
+            this.currBoard.activities.push(newActivity)
+            this.saveBoard()
         }
     },
     computed: {
@@ -188,18 +198,12 @@ export default {
         currBoard() {
             return _.cloneDeep(this.$store.getters.currBoard);
         },
-        background() {
-            if (this.$route.params.boardId) {
-                const board = this.$store.getters.currBoard;
-                if (board) {
-                    return board.background + ((board.background.includes('url')) ? ' fixed' : '');
-                }
-                return '';
-            }
-        },
         loggedInUser() {
             console.log('asking for logged in user', this.$store.getters.loggedInUser)
             return this.$store.getters.loggedInUser;
+        },
+        ticketActivities() {
+            return this.currBoard.activities.filter(activity=>activity.ticketId=== this.selectedTicket.id);
         }
     },
     components: {

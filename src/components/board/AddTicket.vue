@@ -7,8 +7,8 @@
                 @keyup.enter="addTicket"
                 v-model="ticketTitle"
                 ref="newTicketTitle"
-                cols="30"
-                rows="5"
+                rows="2"
+                maxlength="140"
                 placeholder="Enter a title for this ticket..."
             />
             <button @click.stop="addTicket" data-prevent-blur="add" class="add-button">Add Ticket</button>
