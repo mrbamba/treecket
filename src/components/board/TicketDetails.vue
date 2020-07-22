@@ -18,7 +18,7 @@
 
         <main class="ticket-body">
             <section class="ticket-content">
-                <ul class="labels-container">
+                <ul class="labels-container clean-list">
                 <li class="label" v-for="label in ticketLabels" :key="label.id" :style="{backgroundColor: label.color}">
                     {{ label.title }}
                 </li>

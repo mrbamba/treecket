@@ -1,16 +1,22 @@
 <template>
-    <ul class="labels">
+    <ul class="labels clean-list">
         <li v-for="label in labels" :key="label.id">
-            <div  @click="onLabelClick(label.id)">
-            {{label.title}}
-            <button @click.stop="openLabelEdit(label)">Edit Label</button>
-            </div>
             <form @submit.prevent="saveLabel(label)" v-if="isEditLabel && labelInEdit.id === label.id">
-                <input type="text" v-model="labelInEdit.title">
+                <input type="text" v-model="labelInEdit.title" maxlength="16">
                 <input type="color" v-model="labelInEdit.color">
                 <button>save</button>
             </form>
+            <div v-else @click="onLabelClick(label.id)" :style="{backgroundColor: label.color}">
+            <span>{{label.title}}</span>
+            <button @click.stop="openLabelEdit(label)">Edit Label</button>
+            </div>
         </li>
+        <form v-if="isOnAddLabel" @submit.prevent="saveLabel">
+            <input type="text" v-model="labelInEdit.title">
+            <input type="color" v-model="labelInEdit.color">
+            <button>Save</button>
+        </form>
+        <button v-else @click="onAddLabel"> + Add label</button>
     </ul>
 </template>
 
@@ -21,7 +27,8 @@ export default {
     data() {
         return {
             isEditLabel: false,
-            labelInEdit: null
+            labelInEdit: null,
+            isOnAddLabel: false
         }
     },
     methods: {
@@ -32,10 +39,16 @@ export default {
             this.isEditLabel = true;
             this.labelInEdit = label;
         },
-        saveLabel(label) {
+        saveLabel() {
             eventBus.$emit('updateLabels', this.labelInEdit)
             this.isEditLabel = false;
             this.labelInEdit = null;
+            this.isOnAddLabel = false;
+        },
+        onAddLabel() {
+            this.isEditLabel = false;
+            this.labelInEdit = {};
+            this.isOnAddLabel = true;
         }
     }
 }

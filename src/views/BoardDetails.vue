@@ -82,6 +82,10 @@ export default {
             let board = this.currBoard
             const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
             if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
+            else {
+                label = boardService.getAllowLabel(label)
+                board.labels.push(label)
+            }
             this.saveBoard();
         })
     },
