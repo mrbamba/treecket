@@ -114,7 +114,7 @@ export default {
         })
     },
     mounted() {
-        window.onload = () => { console.log("It's loaded!") };
+        window.onload = () => { console.log("BoardDetails + App.vue wrapper background LOADED!") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);

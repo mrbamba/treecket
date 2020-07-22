@@ -2,7 +2,7 @@
     <div class="main-header" :style="{ backgroundColor }">
         <div class="main-header-logo">
             <router-link to="/">
-                <img src="@/assets/logo-white-bouncing.gif" alt ref="logo" />
+                <img :src="logoSrc" alt ref="logo" />
                 <h1>Treecket</h1>
             </router-link>
         </div>
@@ -22,11 +22,11 @@
 <script>
 export default {
     name: "Header",
-    // data() {
-    //     return {
-    //         logoSrc: require('@/assets/logo-white.png')
-    //     }
-    // },
+    data() {
+        return {
+            logoSrc: require('@/assets/logo-white.png')
+        }
+    },
     computed: {
         backgroundColor() {
             if (!this.$route.params.boardId) {
@@ -39,11 +39,12 @@ export default {
         // }
     },
     watch: {
-        // $route(to, from) {
-        //     // Loading gif
-        //     this.logoSrc = require('@/assets/logo-white-bouncing.gif');
-        //     setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 4000);
-        // }
+        $route(to, from) {
+            // Loading gif
+            console.log('START ANIMATION')
+            this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
+            setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 3700);
+        }
     }
 };
 </script>
