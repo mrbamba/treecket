@@ -1,38 +1,5 @@
 .ticket-comments {
-    .ticket-activity-selector {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 24px;
-
-        .history-icon {
-            margin-right: 4px;
-            // align-self: center;
-            font-size: rem(14px);
-        }
-
-        .comments-icon {
-            margin-right: 4px;
-            // align-self: center;
-            font-size: rem(12px);
-        }
-
-        h4 {
-            margin-right: 8px;
-            align-self: center;
-            font-size: 13px;
-
-        }
-
-        button {
-            border: none;
-            margin-right: 8px;
-            padding: 4px;
-            border-radius: 2px;
-            background-color: rgba(9, 30, 66, 0.04);
-            font-size: 12px;
-
-        }
-    }
+    
 
     .add-comment-input {
         display: flex;
@@ -45,15 +12,6 @@
 
         .input-wrapper{
             width: 100%;
-
-        //     input{
-        //         padding: 9px;
-        //         border-radius: 3px ;
-        //         border: 1px solid rgb(223, 225, 230);
-        //         margin-bottom: 10px;
-        //         min-width: 100%;
-
-        //     }
 
         }
 

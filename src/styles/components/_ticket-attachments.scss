@@ -1,0 +1,21 @@
+.ticket-attachments {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    li {
+        display: flex;
+        flex-direction: column;
+        .file-container {
+            margin-bottom: 8px;
+            img, iframe, a {
+                height: 170px;
+                border-radius: 3px;
+            }
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            }
+    }
+}

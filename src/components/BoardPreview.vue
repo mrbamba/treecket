@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'board/' + board._id" class="board-preview" :style="{ background: board.background }">
+    <router-link v-if="board._id" :to="'board/' + board._id" class="board-preview" :style="{ background: board.background }">
         <div>{{ board.title }}</div>
     </router-link>
 </template>

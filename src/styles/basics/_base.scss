@@ -61,6 +61,11 @@ a {
     color: inherit;
 }
 
+iframe {
+    border: none;
+    border-radius: 3px;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
     height: 12px;

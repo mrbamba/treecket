@@ -2,8 +2,23 @@
     <div class="ticket-group">
         <header>
             <div class="group-header">
-                <div><h3>{{ group.title }}</h3> {{ ticketsInGroupCount }}</div>
-                <button><font-awesome-icon fas icon="ellipsis-h" /></button>
+                <div v-if="!editTitle" @click="onEditTitle">
+                    <h3>{{ group.title }}</h3>
+                    {{ ticketsInGroupCount }}
+                </div>
+                <div v-else>
+                    <input
+                        @blur="updateGroupTitle"
+                        type="text"
+                        v-model="group.title"
+                        v-on:keyup.enter="updateGroupTitle"
+                        class="minimal-input"
+                        ref="updatedGroupTitle"
+                    />
+                </div>
+                <button>
+                    <font-awesome-icon fas icon="ellipsis-h" />
+                </button>
             </div>
         </header>
 
@@ -14,8 +29,8 @@
                 :get-child-payload="getTicketPayload"
                 drag-class="card-ghost"
                 drop-class="card-ghost-drop"
-                :drop-placeholder="dropPlaceholderOptions">
-
+                :drop-placeholder="dropPlaceholderOptions"
+            >
                 <Draggable v-for="ticket in group.tickets" :key="ticket.id">
                     <ticket-preview :ticket="ticket" />
                 </Draggable>
@@ -42,6 +57,7 @@ export default {
     data() {
         return {
             newGroup: this.group,
+            editTitle: false,
 
             dropPlaceholderOptions: {
                 className: "drop-preview",
@@ -51,11 +67,16 @@ export default {
         };
     },
     methods: {
-        toggleAddTicket() {
-            this.showAddTicket = !this.showAddTicket;
-            this.ticketTitle = '';
-            if (this.showAddTicket) setTimeout(() => { this.$refs.newTicketTitle.focus() }, 0)
+        onEditTitle() {
+            this.editTitle = true;
+            this.$nextTick(() => this.$refs.updatedGroupTitle.focus());
+
         },
+        updateGroupTitle() {
+            this.editTitle = false
+            this.$emit('updateGroup', this.group)
+        },
+       
         addTicket() {
             if (!this.ticketTitle) return;
             const ticket = boardService.getNewTicket(this.ticketTitle);
@@ -98,9 +119,9 @@ export default {
         getTicketPayload(idx) {
             return this.group.tickets[idx];
         },
-        doDrag(ev) {
-            console.log(ev)
-        }
+        // doDrag(ev) {
+        //     console.log(ev)
+        // }
     },
     computed: {
         ticketsInGroupCount() {

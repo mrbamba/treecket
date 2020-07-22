@@ -16,7 +16,9 @@ export const boardService = {
   getNewChecklist,
   getNewChecklistItem,
   getNewComment,
-  getAllowLabel
+  getAllowLabel,
+  getNewAttachment,
+  getNewActivity
 };
 
 function query(filterBy) {
@@ -51,6 +53,16 @@ function getAllowLabel(label) {
   return label
 }
 
+function getNewAttachment(src) {
+  const srcType = utilService.srcType(src)
+  const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link'
+  return {
+    "id": utilService.makeId(),
+    type,
+    "src": src
+  }
+}
+
 function _getMiniUser() {
   if (localLoggedInUser) {
     return {
@@ -59,9 +71,19 @@ function _getMiniUser() {
       "imgSrc": localLoggedInUser.imgSrc,
     }
   } else return {
-    "_id": 'guest',
+    "_id": 'Guest',
     "fullName": 'Guest',
     "imgSrc": '',
+  }
+}
+
+function getNewActivity(text, ticketId) {
+  return {
+    "id": utilService.makeId(),
+    "txt": text,
+    "createdAt": Date.now(),
+    "ticketId": ticketId,
+    "by": _getMiniUser()
   }
 }
 
@@ -108,7 +130,6 @@ function getNewGroup(title) {
 
 function getNewBoard(prefs) {
   return {
-    // "_id": utilService.makeId(), // board._id will be created by mongoDB (TO DELETE)
     "title": prefs.title,
     "background": prefs.background,
     "members": [],

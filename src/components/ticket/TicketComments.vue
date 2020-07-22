@@ -1,15 +1,6 @@
 <template>
     <div class="ticket-comments">
-        <h4>Activity</h4>
-        <div class="ticket-activity-selector">
-            <h4>Show:</h4>
-            <button>
-                <font-awesome-icon class="comments-icon" far icon="comment" />Comments
-            </button>
-            <button>
-                <font-awesome-icon class="history-icon" fas icon="history" />History
-            </button>
-        </div>
+        
         <div v-if="comments">
             <ticket-comment
                 v-for="comment in comments"

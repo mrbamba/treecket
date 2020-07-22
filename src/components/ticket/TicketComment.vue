@@ -51,7 +51,7 @@ export default {
         editComment() {
             this.editing = false
             this.comment.txt = this.commentEditText
-            this.$emit('')
+            this.$emit('updateTicket',this.comment.txt)
         },
         deleteComment() {
             this.$emit('deleteComment')
