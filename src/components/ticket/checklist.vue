@@ -52,6 +52,7 @@
                     v-model="itemTxt"
                     type="text"
                     placeholder="Add an item"
+                    class="minimal-input"
                 />
                 <button data-prevent-blur="add" class="save-button">Save</button>
                 <button @click="toggleAddItem" class="cancel-button">Cancel</button>

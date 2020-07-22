@@ -27,6 +27,7 @@
                         :group="group"
                         @addTicket="addTicket"
                         @updateTickets="updateTickets"
+                        @updateGroup="updateGroup"
                     />
                 </Draggable>
                 <add-group @addGroup="addGroup" />
@@ -98,6 +99,17 @@ export default {
         this.$store.commit('setBoard', null)
     },
     methods: {
+        async updateGroup(updatedGroup){
+            const newBoard = this.currBoard;
+            const groupIdx = newBoard.groups.findIndex(
+                group => group.id === updatedGroup.id
+            );
+            if (groupIdx < 0) return;
+
+            newBoard.groups[groupIdx] = updatedGroup;
+            await this.$store.dispatch("updateBoard", newBoard);
+            SocketService.emit("updateBoard", this.currBoard._id);
+        },
         closeTicketDetails() {
             this.selectedTicket = null;
             this.selectedGroupId = null;
