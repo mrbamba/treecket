@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import checklist from './checklist'
+import Checklist from './Checklist'
 export default {
     props: ['ticket'],
     methods: {
@@ -31,7 +31,7 @@ export default {
         }
     },
     components: {
-        checklist
+        Checklist
     }
 }
 

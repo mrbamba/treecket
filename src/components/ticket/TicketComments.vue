@@ -25,7 +25,7 @@
                 <avatar v-if="user" :username="user.fullName" :image="user.imgSrc" :size="32" />
             </div>
             <form class="input-wrapper">
-                <input
+                <input class="minimal-input"
                     type="text"
                     placeholder="Add a comment..."
                     @click.prevent="enteringComment = true"

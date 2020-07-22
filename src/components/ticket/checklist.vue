@@ -91,7 +91,6 @@ export default {
     methods: {
         updateChecklist() {
             this.$emit('updateChecklist', this.checklist);
-            console.log(this.allowConfetti)
             if (this.allowConfetti && this.checklist.items.every(item => item.isDone)) this.confetti();
         },
         deleteChecklist() {
@@ -178,7 +177,6 @@ export default {
                 this.$confetti.stop();
             }, 2000);
             this.allowConfetti = false;
-            console.log(this.allowConfetti)
         }
     }
 }
