@@ -22,7 +22,7 @@
         </div>
         <div class="add-comment-input">
             <div class="create-comment-avatar">
-                <avatar v-if="user" :username="user.fullName" :image="user.imgSrc" :size="32" />
+                <avatar v-if="user" :username="user.fullName" :src="user.imgSrc" :size="32" />
             </div>
             <form class="input-wrapper">
                 <input class="minimal-input"
