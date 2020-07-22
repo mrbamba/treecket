@@ -36,7 +36,7 @@
                         @changeLabelsDisplay="changeLabelsDisplay"
                         :ticket="ticket"
                         :labels="labels"
-                        :showFullLabels="showFullLabel"
+                        :showFullLabel="showFullLabels"
                     />
                 </Draggable>
             </container>
