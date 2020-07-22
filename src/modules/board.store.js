@@ -2,12 +2,12 @@ import { boardService } from "../services/board.service.js";
 export default {
   state: {
     overlay: false, // consider misc.store.js or locate in global store (index.js)
-    boards: [],
+    boards: null,
     currBoard: null,
     filterBy: {
       txt: ""
     },
-    userMessage:''
+    userMessage: ''
   },
   getters: {
     boards(state) {
@@ -22,7 +22,7 @@ export default {
     labels(state) {
       return state.currBoard.labels
     },
-    userMessage(state){
+    userMessage(state) {
       return state.userMessage
     }
   },
@@ -48,8 +48,8 @@ export default {
     hideOverlay(state) {
       state.overlay = false;
     },
-    setUserMessage(state,{msg}){
-      state.userMessage=msg
+    setUserMessage(state, { msg }) {
+      state.userMessage = msg
     }
   },
   actions: {
@@ -61,10 +61,15 @@ export default {
       const board = await boardService.getById(boardId);
       commit({ type: 'setBoard', board })
     },
-    async addBoard({ commit, state }, board) {
+    async addBoard({ dispatch, commit, state }, board) {
       console.log('adding:', { board })
-      await boardService.addBoard(board);
-      commit({ type: 'addBoard', board });
+      try {
+        await boardService.addBoard(board);
+        // commit({ type: 'addBoard', board });
+        dispatch('loadBoards');
+      } catch (err) {
+        console.log('Had issue adding new board', { err })
+      }
     },
     async updateBoard({ commit, state }, board) {
       commit({ type: 'setBoard', board });
@@ -79,7 +84,7 @@ export default {
       const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
       const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
       if (groupIdx < 0 || ticketIdx < 0) return;
-      
+
       updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
       updatedBoard = await boardService.update(updatedBoard);
       commit({ type: 'setBoard', board: updatedBoard });

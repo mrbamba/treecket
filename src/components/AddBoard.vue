@@ -7,6 +7,8 @@
             placeholder="Add board title"
             maxlength="32"
         />
+        <button class="save-button" @click="addBoard">Save</button>
+        <button class="cancel-button" @click="cancelAddBoard">Cancel</button>
     </div>
 </template>
 
@@ -27,6 +29,9 @@ export default {
         addBoard() {
             const newBoard = boardService.getNewBoard(this.boardPrefs);
             this.$store.dispatch('addBoard', newBoard);
+            this.$emit('toggleAddBoard');
+        },
+        cancelAddBoard(){
             this.$emit('toggleAddBoard');
         }
     }
