@@ -14,7 +14,8 @@ export const boardService = {
   getNewGroup,
   getNewChecklist,
   getNewChecklistItem,
-  getNewComment
+  getNewComment,
+  getAllowLabel
 };
 
 function query(filterBy) {
@@ -42,6 +43,11 @@ function getNewComment(commentText) {
     "by": _getMiniUser(),
   }
 
+}
+
+function getAllowLabel(label) {
+  label.id = utilService.makeId()
+  return label
 }
 
 function _getMiniUser() {

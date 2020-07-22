@@ -55,8 +55,13 @@
                 display: flex;
                 align-items: center;
                 .label {
-                    padding: 0 12px;
+                    display: flex;
+                    align-items: center;
                     height: 32px;
+                    padding: 0 12px;
+                }
+                .label:not(:last-child) {
+                    margin-inline-end: 4px;
                 }
             }
 
