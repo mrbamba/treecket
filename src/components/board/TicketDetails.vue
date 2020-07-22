@@ -80,7 +80,7 @@ import TicketMenu from "@/components/ticket/TicketMenu.vue";
 import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
-import AddAttachment from "@/components/AddAttachment.vue";
+import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import { boardService } from "@/services/board.service.js";
 export default {
     props: ['ticket', 'groupId', 'user', 'labels'],
