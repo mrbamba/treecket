@@ -14,50 +14,23 @@
         <div v-else>
             <form @submit.prevent="doLogin" v-if="route === 'Login'">
                 <h2>Log in to your account</h2>
-                <input
-                    type="text"
-                    v-model="loginCred.email"
-                    placeholder="Email"
-                />
+                <input type="text" v-model="loginCred.email" placeholder="Email" />
                 <br />
-                <input
-                    type="text"
-                    v-model="loginCred.password"
-                    placeholder="Password"
-                />
+                <input type="text" v-model="loginCred.password" placeholder="Password" />
                 <br />
                 <button>Continue</button>
                 <router-link to="/signup">Sign up for an account</router-link>
             </form>
             <form @submit.prevent="doSignup" v-else>
                 <h2>Sign up for your account</h2>
-                <input
-                    type="text"
-                    v-model="signupCred.email"
-                    placeholder="Email"
-                />
-                <input
-                    type="password"
-                    v-model="signupCred.password"
-                    placeholder="Password"
-                />
-                <input
-                    type="text"
-                    v-model="signupCred.fullName"
-                    placeholder="Full name"
-                />
+                <input type="text" v-model="signupCred.email" placeholder="Email" />
+                <input type="password" v-model="signupCred.password" placeholder="Password" />
+                <input type="text" v-model="signupCred.fullName" placeholder="Full name" />
                 <label for="upload-input">Upload your profile</label>
-                <input
-                    type="file"
-                    id="upload-input"
-                    @change="onUploadImg"
-                    class="upload-button"
-                />
+                <input type="file" id="upload-input" @change="onUploadImg" class="upload-button" />
 
                 <button>Sign up</button>
-                <router-link to="/login"
-                    >Already have a Treecket account? Log in</router-link
-                >
+                <router-link to="/login">Already have a Treecket account? Log in</router-link>
             </form>
         </div>
         <!-- <button @click="getAllUsers">Get All Users</button>
@@ -102,8 +75,16 @@ export default {
             const cred = this.loginCred;
             if (!cred.email || !cred.password)
                 return (this.msg = "Please enter user/password");
-            await this.$store.dispatch({ type: "login", userCred: cred });
-            this.loginCred = {};
+            try {
+
+                await this.$store.dispatch({ type: "login", userCred: cred });
+                this.loginCred = {};
+                this.$router.push('/board');
+            } catch (err) {
+                throw err;
+                console.log('Had login issues')
+            }
+
         },
         doLogout() {
             this.$store.dispatch({ type: "logout" });
@@ -114,6 +95,8 @@ export default {
                 return (this.msg = "Please fill up the form");
             this.signupCred.type = 'user';
             this.$store.dispatch({ type: "signup", userCred: cred });
+            this.$router.push('/board');
+
         },
         getAllUsers() {
             this.$store.dispatch({ type: "loadUsers" });

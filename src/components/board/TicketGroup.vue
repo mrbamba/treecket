@@ -76,11 +76,7 @@ export default {
             this.editTitle = false
             this.$emit('updateGroup', this.group)
         },
-        toggleAddTicket() {
-            this.showAddTicket = !this.showAddTicket;
-            this.ticketTitle = '';
-            if (this.showAddTicket) setTimeout(() => { this.$refs.newTicketTitle.focus() }, 0)
-        },
+       
         addTicket() {
             if (!this.ticketTitle) return;
             const ticket = boardService.getNewTicket(this.ticketTitle);
