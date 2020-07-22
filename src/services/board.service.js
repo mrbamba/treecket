@@ -15,7 +15,8 @@ export const boardService = {
   getNewChecklist,
   getNewChecklistItem,
   getNewComment,
-  getAllowLabel
+  getAllowLabel,
+  getNewAttachment
 };
 
 function query(filterBy) {
@@ -48,6 +49,16 @@ function getNewComment(commentText) {
 function getAllowLabel(label) {
   label.id = utilService.makeId()
   return label
+}
+
+function getNewAttachment(src) {
+    const srcType = utilService.srcType(src)
+    const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link' 
+    return {
+      "id": utilService.makeId(),
+      type,
+      "src": src
+    }
 }
 
 function _getMiniUser() {

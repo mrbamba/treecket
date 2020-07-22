@@ -15,7 +15,7 @@
         <button>
             <font-awesome-icon class="due-date-icon fa-button" fas icon="stopwatch" />Due Date
         </button>
-        <button>
+        <button @click="showAddAttachment">
             <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
         </button>
         <button>Cover</button>
@@ -78,6 +78,9 @@ export default {
         },
         labelClicked(labelId) {
             this.$emit('updateTicketLabel', labelId)
+        },
+        showAddAttachment() {
+            this.$emit('showAddAttachment')
         }
     },
     components: {

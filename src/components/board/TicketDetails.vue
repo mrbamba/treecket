@@ -12,16 +12,19 @@
 
             <button class="close-btn" @click="closeTicketDetails">
                 <!-- <p class="bubble-msg">Press ESC to exit</p> -->
-                <font-awesome-icon fas icon="times" class="close-btn-fa"/>
+                <font-awesome-icon fas icon="times" class="close-btn-fa" />
             </button>
         </header>
 
         <main class="ticket-body">
             <section class="ticket-content">
                 <ul class="labels-container clean-list">
-                <li class="label" v-for="label in ticketLabels" :key="label.id" :style="{backgroundColor: label.color}">
-                    {{ label.title }}
-                </li>
+                    <li
+                        class="label"
+                        v-for="label in ticketLabels"
+                        :key="label.id"
+                        :style="{backgroundColor: label.color}"
+                    >{{ label.title }}</li>
                 </ul>
                 <section class="ticket-description">
                     <h3>Description</h3>
@@ -33,16 +36,25 @@
                     />
                 </section>
 
-                <section
+                <ticket-attachments
+                    :attachments="ticket.attachments"
+                    @deleteAttachment="deleteAttachment"
+                    @showAddAttachment="toggleAddAttachment()"
+                />
+                <!-- <section
                     class="ticket-attachments"
                     v-for="attachment in ticket.attacments"
                     :key="attachment.id"
-                >{{ attachment }}</section>
+                >{{ attachment }}</section>-->
 
                 <ticket-checklists :ticket="ticket" @updateTicket="saveTicket" @addItem="addItem" />
 
-                
-                <ticket-comments :comments="ticket.comments" :user="user" @addComment="addComment" @updateTicket="saveTicket"/>
+                <ticket-comments
+                    :comments="ticket.comments"
+                    :user="user"
+                    @addComment="addComment"
+                    @updateTicket="saveTicket"
+                />
             </section>
 
             <ticket-menu
@@ -51,9 +63,14 @@
                 :labels="labels"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
+                @showAddAttachment="toggleAddAttachment()"
             />
         </main>
-        
+        <add-attachment
+            v-if="showAddAttachment"
+            @addAttachment="addAttachment"
+            @hideAddAttachment="toggleAddAttachment"
+        />
     </div>
 </template>
 
@@ -61,9 +78,16 @@
 import TicketMenu from "@/components/ticket/TicketMenu.vue";
 import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
+import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
+import AddAttachment from "@/components/AddAttachment.vue";
 import { boardService } from "@/services/board.service.js";
 export default {
     props: ['ticket', 'groupId', 'user', 'labels'],
+    data() {
+        return {
+            showAddAttachment: false,
+        }
+    },
     computed: {
         overlay() {
             return this.$store.getters.overlay;
@@ -71,7 +95,7 @@ export default {
         ticketLabels() {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
-            return {...ticketLabels};
+            return { ...ticketLabels };
         }
     },
     created() {
@@ -105,7 +129,7 @@ export default {
         addChecklist() {
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.push(newChecklist);
-        this.$store.commit('setUserMessage',{msg:'New checklist added to ticket'});
+            this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.saveTicket();
         },
         addItem({ itemTxt, checklistId }) {
@@ -117,7 +141,7 @@ export default {
             this.saveTicket();
         },
         addComment(commentText) {
-            console.log(commentText)
+            console.log(commentText);
             let newComment = boardService.getNewComment(commentText);
             this.ticket.comments.push(newComment);
             this.saveTicket();
@@ -128,10 +152,27 @@ export default {
             this.saveTicket();
         },
         updateTicketLabel(labelId) {
-            const labels = this.ticket.labels
-            const labelIdx = labels.findIndex(label => label === labelId)
-            if (labelIdx >= 0) labels.splice(labelIdx, 1)
-            else labels.push(labelId)
+            const labels = this.ticket.labels;
+            const labelIdx = labels.findIndex(label => label === labelId);
+            if (labelIdx >= 0) labels.splice(labelIdx, 1);
+            else labels.push(labelId);
+            this.saveTicket();
+        },
+        toggleAddAttachment(isClosed) {
+            this.showAddAttachment = isClosed;
+        },
+        addAttachment(src) {
+            const newAttachment = boardService.getNewAttachment(src)
+            this.ticket.attachments.push(newAttachment)
+            this.toggleAddAttachment()
+            this.saveTicket();
+        },
+        deleteAttachment(id) {
+            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
+            if (attachmentIdx >= 0) {
+                this.ticket.attachments.splice(attachmentIdx, 1)
+                this.$store.commit('setUserMessage', { msg: 'Attachment deleted' });
+            }
             this.saveTicket();
         }
     },
@@ -139,6 +180,8 @@ export default {
         TicketMenu,
         TicketChecklists,
         TicketComments,
+        TicketAttachments,
+        AddAttachment
     }
 };
 </script>
