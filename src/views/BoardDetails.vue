@@ -38,6 +38,7 @@
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
             :user="loggedInUser"
+            :labels="currBoard.labels"
             @closeTicketDetails="closeTicketDetails"
             @saveTicket="saveBoard"
             @deleteTicket="deleteTicket"
@@ -56,6 +57,7 @@ import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag, generateItems } from "@/services/dnd.service.js";
 import { dragscroll } from 'vue-dragscroll';
 import SocketService from "@/services/socket.service.js";
+import { eventBus } from '@/services/event-bus.service.js';
 
 export default {
     data() {
@@ -76,6 +78,12 @@ export default {
         SocketService.setup();
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
+         eventBus.$on('updateLabels', (label) => {
+            let board = this.currBoard
+            const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
+            if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
+            this.saveBoard();
+        })
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);

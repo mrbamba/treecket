@@ -6,30 +6,6 @@
         }
     }
 
-    .progress-bar-container {
-        display: flex;
-        align-items: center;
-        height: 8px;
-        width: 100%;
-    }
+    
 
-    .progress-bar {
-        height: 100%;
-        border-radius: 4px;
-        flex-grow: 1;
-        margin-inline-start: 8px;
-        background-color: #e2e4e9;
-        overflow: hidden;
-        
-        .prec-done {
-            height: 100%;
-            width: 0%;
-            background-color: #5ba4cf;
-            transition: width .8s cubic-bezier(.5,0,.35,1.35), background-color .8s;
-        }
-        
-        .prec-done.complete {
-            background-color: #61bd4f;
-        }
-    }
 }

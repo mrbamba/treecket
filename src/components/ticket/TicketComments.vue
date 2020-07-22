@@ -28,7 +28,7 @@
                 <input
                     type="text"
                     placeholder="Add a comment..."
-                    @click="enteringComment = true"
+                    @click.prevent="enteringComment = true"
                     v-model="newCommentText"
                 />
                 <div>

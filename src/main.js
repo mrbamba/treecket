@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
+import { eventBus } from './services/event-bus.service'
 import store from './store'
 // const cloneDeep = require('lodash/cloneDeep');
 import _ from 'lodash';    

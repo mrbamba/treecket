@@ -17,6 +17,9 @@ export default {
     },
     overlay(state) {
       return state.overlay;
+    },
+    labels(state) {
+      return state.currBoard.labels
     }
   },
   mutations: {

@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div class="checklist">
         <form v-if="showChecklistTitleEdit && onEditChecklistId === checklist.id">
             <input v-model="checklist.title" ref="checklistTitle" type="text" />
             <button @click="saveTitle">Save</button>
             <button @click="cancelUpdateTitle(checklist)">X</button>
         </form>
-        <section v-else>
+        <section v-else class="check-list-title-preview">
             <h4 @click="editTitle(checklist)">{{checklist.title}}:</h4>
-            <button @click="deleteChecklist">Delete</button>
+            <button @click="deleteChecklist" class="delete-button">Delete</button>
         </section>
         <div class="progress-bar-container">
             <h6>{{ checklist.items | progressBar }}</h6>
@@ -19,12 +19,17 @@
                 ></div>
             </div>
         </div>
-        <ul>
+        <ul class="clean-list">
             <li v-for="(item, itemIdx) in checklist.items" :key="item.id">
-                <div v-if="onEditItemId !== item.id">
-                    <input @change.stop="updateChecklist" type="checkbox" v-model="item.isDone" />
-                    <span :class="{done: item.isDone}" @click="toggleEditItem(item)">{{ item.txt }}</span>
-                    <button @click="deleteItem(itemIdx)">x</button>
+                <div v-if="onEditItemId !== item.id" class="checklist-item">
+                    <div>
+                        <input @change.stop="updateChecklist" type="checkbox" v-model="item.isDone" />
+                        <span
+                            :class="{done: item.isDone}"
+                            @click="toggleEditItem(item)"
+                        >{{ item.txt }}</span>
+                    </div>
+                    <button @click="deleteItem(itemIdx)" class="underline-button">Delete</button>
                 </div>
                 <div v-else>
                     <!-- @keyup.enter="saveUpdateChanges(item)" -->
@@ -35,8 +40,8 @@
                         cols="30"
                         rows="3"
                     />
-                    <button data-prevent-blur="save">Save</button>
-                    <button>X</button>
+                    <button data-prevent-blur="save" class="save-button">Save</button>
+                    <button class="cancel-button">Cancel</button>
                 </div>
             </li>
             <div v-if="showNewItem && checklist.id === onEditChecklistId">
@@ -48,10 +53,14 @@
                     type="text"
                     placeholder="Add an item"
                 />
-                <button data-prevent-blur="add">Add</button>
-                <button @click="toggleAddItem">X</button>
+                <button data-prevent-blur="add" class="save-button">Save</button>
+                <button @click="toggleAddItem" class="cancel-button">Cancel</button>
             </div>
-            <button v-else @click="toggleAddItem(true, checklist.id)">Add an item</button>
+            <button
+                v-else
+                @click="toggleAddItem(true, checklist.id)"
+                class="add-button add-an-item"
+            >Add an item</button>
         </ul>
     </div>
 </template>
