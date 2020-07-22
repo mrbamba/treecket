@@ -6,14 +6,14 @@
     // padding: rem(4px) 0;
     font-size: rem(12px);
     cursor: pointer;
-    &:last-of-type{
-        margin-bottom: 8px;
-    }
-    :first-child{
+    margin: 8px;
+
+    :first-child {
         flex-grow: 1;
     }
+
     div {
-        box-shadow: 0 1px 0 rgba(9,30,66,.25);
+        box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
         padding: 1em;
         border-radius: 3px;
         overflow-wrap: anywhere;

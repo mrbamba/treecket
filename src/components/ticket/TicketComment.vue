@@ -19,6 +19,7 @@
             </div>
             <div v-if="!editing">
                 <button @click="openEdit" class="underline-button">Edit</button>
+                <span class="dot-seperator"></span>
                 <button @click="deleteComment(comment.id)" class="underline-button">Delete</button>
             </div>
         </div>

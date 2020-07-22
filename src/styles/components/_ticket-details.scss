@@ -37,7 +37,7 @@
             background-color: transparent;
             border: none;
             height: fit-content;
-            
+
         }
     }
 
@@ -46,14 +46,27 @@
         flex-grow: 1;
         display: flex;
         min-height: 420px;
-        
+
+        &::-webkit-scrollbar {
+            width: 11px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: rgba(9, 33, 66, .1);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, .15);
+        }
+
         .ticket-content {
             padding-right: 235px;
             overflow-wrap: anywhere;
+            flex-grow: 1;
 
             .labels-container {
                 display: flex;
                 align-items: center;
+
                 .label {
                     padding: 0 12px;
                     height: 32px;
@@ -77,12 +90,12 @@
         }
     }
 
-    
+
 
     .ticket-description {
         font-size: 14px;
     }
-    
+
     textarea {
         border: unset;
         resize: none;
@@ -93,6 +106,7 @@
         cursor: pointer;
         width: 100%;
         margin-bottom: rem(16px);
+
         &:focus {
             border: 1px solid black;
         }

@@ -49,8 +49,21 @@
         flex-grow: 1;
         // height:700px; // testing
         margin-bottom: 4px;
+
         div {
             max-height: 100%;
+        }
+
+        &::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(9, 33, 66, .1);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, .2);
         }
     }
 }
