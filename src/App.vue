@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="wrapper" :style="{ background }">
+    <div id="app" class="wrapper">
         <!-- <main-header v-if="showMainHeader" /> -->
         <transition name="component-fade" mode="out-in">
             <router-view />
@@ -15,15 +15,6 @@ export default {
     computed: {
         mainHeader() {
 
-        },
-        background() {
-            if (this.$route.params.boardId) {
-                const board = this.$store.getters.currBoard;
-                if (board) {
-                    return board.background + ((board.background.includes('url')) ? ' fixed' : '');
-                }
-                return '';
-            }
         },
         overlay() {
             // return true; // Testing - TO DELETE

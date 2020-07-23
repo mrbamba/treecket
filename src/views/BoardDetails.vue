@@ -1,11 +1,10 @@
 <template>
-    <div class="board-details" v-if="currBoard">
+    <div class="board-details" v-if="currBoard" :style="{ background }">
         <main-header />
 
         <section class="board-header">
             <div v-if="!editTitle" @click="onEditTitle">
                 <div>{{ currBoard.title }}</div>
-                <!-- <input type="text" v-model="currBoard.title"> -->
             </div>
             <div v-else>
                 <input
@@ -17,6 +16,7 @@
                     ref="updatedBoardTitle"
                 />
             </div>
+            <button>Public</button>
         </section>
 
         <main
@@ -247,6 +247,15 @@ export default {
         }
     },
     computed: {
+        background() {
+            if (this.$route.params.boardId) {
+                const board = this.currBoard;
+                if (board) {
+                    return board.background + ((board.background.includes('url')) ? ' fixed' : '');
+                }
+                return '';
+            }
+        },
         userMessage() {
             return this.$store.getters.userMessage
         },

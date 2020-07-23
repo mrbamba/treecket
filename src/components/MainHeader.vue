@@ -1,5 +1,5 @@
 <template>
-    <div class="main-header" :style="{ backgroundColor }">
+    <header class="main-header" :style="{ backgroundColor }">
         <!-- <input class="minimal-input" style="" /> -->
         <router-link to="/" class="main-header-logo">
             <img :src="logoSrc" alt ref="logo" />
@@ -15,12 +15,12 @@
             <router-link to="/login">Log in</router-link>
             <!-- <router-link to="/about">About</router-link> -->
         </nav>
-    </div>
+    </header>
 </template>
 
 <script>
 export default {
-    name: "Header",
+    name: "MainHeader",
     data() {
         return {
             logoSrc: require('@/assets/logo-white.png'),
