@@ -42,11 +42,8 @@ export default {
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },
-    showOverlay(state) {
-      state.overlay = true;
-    },
-    hideOverlay(state) {
-      state.overlay = false;
+    toggleOverlay(state, isShown) {
+      state.overlay = isShown;
     },
     setUserMessage(state, { msg }) {
       state.userMessage = msg
@@ -79,16 +76,16 @@ export default {
         console.log('ERROR IN UPDATE BOARD (STORE):', err)
       }
     },
-    async deleteTicket({ state, commit }, { ticketId, groupId }) {
-      var updatedBoard = _.cloneDeep(state.currBoard)
-      const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
-      const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
-      if (groupIdx < 0 || ticketIdx < 0) return;
+    // async deleteTicket({ state, commit }, { ticketId, groupId }) {
+    //   var updatedBoard = _.cloneDeep(state.currBoard)
+    //   const groupIdx = updatedBoard.groups.findIndex(group => group.id === groupId);
+    //   const ticketIdx = updatedBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+    //   if (groupIdx < 0 || ticketIdx < 0) return;
 
-      updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
-      updatedBoard = await boardService.update(updatedBoard);
-      commit({ type: 'setBoard', board: updatedBoard });
-    }
+    //   updatedBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
+    //   updatedBoard = await boardService.update(updatedBoard);
+    //   commit({ type: 'setBoard', board: updatedBoard });
+    // }
     // sendMsg(context, {msg}) {
     //     console.log('sending from store')
     //     socket.emit('sendMsg', msg)

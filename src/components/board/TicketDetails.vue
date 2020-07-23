@@ -131,7 +131,7 @@ export default {
     },
     created() {
         console.log('LOAD');
-        this.$store.commit("showOverlay");
+        this.$store.commit("toggleOverlay", true);
         this.$nextTick(() => this.$refs.ticketDetails.focus());
         console.log('Ticket activities', this.ticketActivities);
     },
@@ -141,7 +141,7 @@ export default {
         });
     },
     destroyed() {
-        this.$store.commit("hideOverlay");
+        this.$store.commit("toggleOverlay", false);
     },
     methods: {
         saveTicket() {

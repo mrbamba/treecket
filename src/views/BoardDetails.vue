@@ -49,7 +49,7 @@
             <add-group @addGroup="addGroup" />
         </main>
 
-        <transition name="slide-left" mode="out-in">
+        <transition name="pop-up-fade" mode="out-in">
             <ticket-details
                 v-if="selectedTicket"
                 :ticket="selectedTicket"
@@ -150,8 +150,14 @@ export default {
         },
         async deleteTicket({ ticketId, groupId }) {
             this.closeTicketDetails();
-            await this.$store.dispatch("deleteTicket", { ticketId, groupId });
-            SocketService.emit("updateBoard", this.currBoard._id);
+            // await this.$store.dispatch("deleteTicket", { ticketId, groupId });
+
+            const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
+            const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+            if (groupIdx < 0 || ticketIdx < 0) return;
+
+            this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
+            this.saveBoard();
         },
         async saveBoard() {
             console.log("save board");

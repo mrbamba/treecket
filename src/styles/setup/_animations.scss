@@ -91,25 +91,33 @@
 
 
 
-.slide-left-enter-active {
-    animation: slide-left-in .3s ease-in-out;
+.pop-up-fade-enter-active {
+    animation: pop-up-fade-in .3s ease-in-out;
 }
 
-.slide-left-leave-active {
-    animation: slide-left-in .2s reverse ease;
+.pop-up-fade-leave-active {
+    animation: pop-up-fade-in .2s reverse ease;
 }
 
-@keyframes slide-left-in {
+@keyframes pop-up-fade-in {
     0% {
-        transform: translate(-20%, -20%) scale(0);
+        transform: translate(-50%, -30%) scale(0.8);
         opacity: 0;
-    }
-
-    20% {
-        transform: translate(-50%, -30%) scale(1.1);
     }
 
     100% {
         transform: translate(-50%, -50%) scale(1);
     }
 }
+
+
+.component-fade-enter-active {
+    transition: opacity .1s ease;
+}
+.component-fade-leave-active {
+    transition: opacity .3s ease;
+  }
+  .component-fade-enter, .component-fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
