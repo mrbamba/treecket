@@ -75,7 +75,6 @@ export default {
     },
     computed: {
         itemsCount() {
-            console.log(this.ticket);
             if (this.ticket.checklists.length === 0) return { 'itemsCount': 0, 'doneItemsCount': 0 }
             let doneItemsCount = 0;
             const itemsCount = this.ticket.checklists.reduce((acc, checklist) => {

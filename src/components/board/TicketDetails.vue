@@ -48,7 +48,12 @@
                     :key="attachment.id"
                 >{{ attachment }}</section>-->
 
-                <ticket-checklists :ticket="ticket" @checklistDeleted="checklistDeleted" @updateTicket="saveTicket" @addItem="addItem" />
+                <ticket-checklists
+                    :ticket="ticket"
+                    @checklistDeleted="checklistDeleted"
+                    @updateTicket="saveTicket"
+                    @addItem="addItem"
+                />
                 <div class="log-selector">
                     <h4>Activity</h4>
                     <div class="ticket-activity-selector">
@@ -81,11 +86,11 @@
                 @deleteTicket="deleteTicket"
                 :ticket="ticket"
                 :labels="labels"
-                :boardUsers="boardUsers"
+                :boardMembers="boardMembers"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
-                @loadUsers="loadUsers"
+                @toggleMember="toggleMember"
             />
         </main>
         <add-attachment
@@ -112,7 +117,7 @@ export default {
         user: Object,
         labels: Array,
         ticketActivities: Array,
-        boardUsers:Array,
+        boardMembers: Array,
     },
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
@@ -131,7 +136,7 @@ export default {
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
         },
-        users(){
+        users() {
             return this.$store.getters.users
         }
     },
@@ -242,9 +247,18 @@ export default {
                 this.saveTicket()
             }
         },
-        loadUsers(userFilterBy){
-            console.log(userFilterBy);
-            this.$store.dispatch('loadUsers',userFilterBy)
+        toggleMember(memberToUpdate) {
+            const memberIdx = this.ticket.members.findIndex(member => member._id === memberToUpdate._id)
+            if (memberIdx >= 0) {
+                this.ticket.members.splice(memberIdx, 1)
+                this.addActivity(`Removed ${memberToUpdate.fullName} from ticket ${this.ticket.id}`)
+
+            } else {
+                this.ticket.members.push(memberToUpdate)
+                this.addActivity(`Assigned ${memberToUpdate.fullName} to ticket ${this.ticket.id}`)
+            }
+
+            this.saveTicket()
         }
     },
     components: {

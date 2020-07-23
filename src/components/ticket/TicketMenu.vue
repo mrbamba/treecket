@@ -3,7 +3,7 @@
         <h3>ADD TO CARD</h3>
         <button @click="show.memberSelector=!show.memberSelector">Members</button>
         <MemberSelector
-            v-if="show.memberSelector" :users="users" @loadUsers="loadUsers"/>
+            v-if="show.memberSelector" :boardMembers="boardMembers" :ticketMembers="ticket.members" @toggleMember="toggleMember"  @closeMemberSelect="show.memberSelector=false"/>
         <button @click="show.labelSelector=!show.labelSelector">
             <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
         </button>
@@ -48,7 +48,7 @@ export default {
             type: Array,
             required: true
         },
-        users: {
+        boardMembers: {
             type: Array,
             require: true
         },
@@ -82,7 +82,10 @@ export default {
         loadUsers(userFilterBy){
             console.log(userFilterBy);
             this.$emit('loadUsers',userFilterBy)
-        }
+        },
+        toggleMember(member) {
+            this.$emit('toggleMember', member)
+        },
     },
     components: {
         MemberSelector,

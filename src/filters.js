@@ -33,4 +33,8 @@ Vue.filter('pluck', function (objects, key) {
     });
 });
 
+Vue.filter('isMember',(memberToCheck,ticketMembers)=>{
+  let temp = ticketMembers.filter(member => member.fullName === memberToCheck.fullName)
+                if (temp.length > 0) { return '✔️' } else return ''
+})
 

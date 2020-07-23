@@ -54,7 +54,7 @@
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
             :user="loggedInUser"
-            :boardUsers="currBoard.members"
+            :boardMembers="currBoard.members"
             :labels="currBoard.labels"
             :ticketActivities="ticketActivities"
             @closeTicketDetails="closeTicketDetails"
