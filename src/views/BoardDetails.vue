@@ -2,7 +2,7 @@
     <div class="board-details" v-if="currBoard">
         <main-header />
 
-        <header class="board-header">
+        <section class="board-header">
             <div v-if="!editTitle" @click="onEditTitle">
                 <div>{{ currBoard.title }}</div>
                 <!-- <input type="text" v-model="currBoard.title"> -->
@@ -17,7 +17,7 @@
                     ref="updatedBoardTitle"
                 />
             </div>
-        </header>
+        </section>
 
         <main
             class="groups-container"
@@ -49,7 +49,7 @@
             <add-group @addGroup="addGroup" />
         </main>
 
-        <transition name="bounce" mode="out-in">
+        <transition name="slide-left" mode="out-in">
             <ticket-details
                 v-if="selectedTicket"
                 :ticket="selectedTicket"

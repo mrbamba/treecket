@@ -23,8 +23,11 @@ export default {
     data() {
         return {
             logoSrc: require('@/assets/logo-white.png'),
-            logoTimeout: null
         }
+    },
+    created() {
+        this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce +100ms for first frame on last bounce)
+        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 1200);
     },
     computed: {
         backgroundColor() {
@@ -40,11 +43,8 @@ export default {
     watch: {
         $route(to, from) {
             // Loading gif
-            // if (!this.logoSrc.includes('bouncing')) {
-            // clearTimeout(this.logoTimeout)
-            // }
             this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
-            this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 2200);
+            setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 1200);
         }
     }
 };

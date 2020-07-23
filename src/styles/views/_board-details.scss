@@ -8,7 +8,8 @@
     .board-header {
         padding: 12px;
         color: #fff;
-        font-weight: 500;
+        font-size: rem(18px);
+        font-weight: 700;
 
         .board-header-input {
             padding: 0px;
@@ -25,7 +26,28 @@
         overflow-y: hidden;
         flex-grow: 1;
         overflow-x: auto;
-        margin: 0 8px;
+        padding-inline-start: 8px;
         padding-bottom: 8px;
+
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+    }
+
+    /* track */
+    ::-webkit-scrollbar-track {
+        border-radius: 7px;
+        background: rgba(0, 0, 0, .15);
+        margin-inline-start: 8px;
+        margin-inline-end: 8px;
+    }
+
+    /* handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, .4);
+        border-radius: 4px;
     }
 }

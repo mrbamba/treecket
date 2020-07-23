@@ -68,22 +68,48 @@
 
 .bounce-enter-active {
     animation: bounce-in .3s ease-in-out;
-  }
-  .bounce-leave-active {
+}
+
+.bounce-leave-active {
     animation: bounce-in .2s reverse ease;
-  }
-  @keyframes bounce-in {
+}
+
+@keyframes bounce-in {
     0% {
-      transform: scale(0);
-      transform: translate(-20%, -20%);
-      opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
     }
+
     50% {
-        transform: scale(1.1);
-        transform: translate(-45%, -25%);
+        transform: translate(-50%, -50%) scale(1.1);
     }
+
     100% {
-        transform: scale(1);
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(1);
     }
-  }
+}
+
+
+
+.slide-left-enter-active {
+    animation: slide-left-in .3s ease-in-out;
+}
+
+.slide-left-leave-active {
+    animation: slide-left-in .2s reverse ease;
+}
+
+@keyframes slide-left-in {
+    0% {
+        transform: translate(-20%, -20%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        transform: translate(-50%, -30%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
