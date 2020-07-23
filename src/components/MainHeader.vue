@@ -1,17 +1,15 @@
 <template>
     <div class="main-header" :style="{ backgroundColor }">
-        <div class="main-header-logo">
-            <router-link to="/">
-                <img :src="logoSrc" alt ref="logo" />
-                <h1>Treecket</h1>
-            </router-link>
-        </div>
+        <!-- <input class="minimal-input" style="" /> -->
+        <router-link to="/" class="main-header-logo">
+            <img :src="logoSrc" alt ref="logo" />
+            <h1>Treecket</h1>
+        </router-link>
         <nav>
             <!-- <router-link to="/">Home</router-link> | -->
 
             <router-link to="/board">
-                <font-awesome-icon fas icon="th-large" /> 
-                Boards
+                <font-awesome-icon fas icon="th-large" />Boards
             </router-link>|
             <router-link to="/login">Log in</router-link>
             <!-- <router-link to="/about">About</router-link> -->
@@ -24,7 +22,8 @@ export default {
     name: "Header",
     data() {
         return {
-            logoSrc: require('@/assets/logo-white.png')
+            logoSrc: require('@/assets/logo-white.png'),
+            logoTimeout: null
         }
     },
     computed: {
@@ -41,9 +40,11 @@ export default {
     watch: {
         $route(to, from) {
             // Loading gif
-            console.log('START ANIMATION')
-            this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
-            setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 3700);
+            if (!this.logoSrc.includes('bouncing')) {
+                this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
+            }
+            clearTimeout(this.logoTimeout)
+            this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 2200);
         }
     }
 };

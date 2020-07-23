@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="wrapper" :style="{ background }">
-        <main-header v-if="showMainHeader" />
+        <!-- <main-header v-if="showMainHeader" /> -->
         <router-view />
         <div :class="{ overlay }" @click.self="hideOverlay"></div>
     </div>

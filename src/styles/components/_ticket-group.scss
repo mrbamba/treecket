@@ -5,12 +5,18 @@
     height: fit-content;
     max-height: 100%;
     width: rem(280px);
-    padding: rem(8px);
     background-color: #ebecf0;
     border-radius: 3px;
     // Margins should match margins of .cards-drop-preview (dnd.scss)
     margin-inline-end: 8px;
+    padding: rem(8px) 0;
     overflow-wrap: anywhere;
+
+    >* {
+        padding-inline-start: rem(8px);
+        padding-inline-end: rem(4px);
+        margin-inline-end: rem(4px);
+    }
 
     .group-header {
         font-size: rem(14px);
@@ -19,13 +25,13 @@
         align-items: center;
         color: #5e6c84;
         margin-bottom: 4px;
-        
+
         :first-child {
             text-transform: uppercase;
             cursor: pointer;
             flex-grow: 1;
         }
-        
+
         h3 {
             padding: 0 0 8px 8px;
             font-size: rem(14px);
@@ -72,11 +78,11 @@
         }
 
         &::-webkit-scrollbar-track {
-            background-color: rgba(9, 33, 66, .1);
+            background-color: rgba(9, 33, 66, .15);
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, .2);
+            background-color: rgba(0, 0, 0, .15);
         }
     }
 }
