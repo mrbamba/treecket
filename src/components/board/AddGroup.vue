@@ -1,26 +1,26 @@
 <template>
     <div class="add-group">
         <transition name="slide-fade" mode="out-in">
-        <button
-            v-if="!addNewGroup"
-            @click.stop="toggleAddGroup"
-            class="add-group-btn"
-        >+ Add another list</button>
-        <div v-else :class="groupClass">
-            <input
-            class="minimal-input"
-                type="text"
-                v-model="newGroupName"
-                @keyup.enter="addGroup()"
-                @blur="onBlur"
-                ref="newGroupTitle"
-                placeholder="Enter new list name"
-            />
-            <div>
-                <button @click="addGroup" data-prevent-blur="add" class="add-button">Add list</button>
-                <button class="cancel-button">Cancel</button>
+            <button
+                v-if="!addNewGroup"
+                @click.stop="toggleAddGroup"
+                class="add-group-btn"
+            >+ Add another list</button>
+            <div v-else :class="groupClass">
+                <input
+                    class="minimal-input"
+                    type="text"
+                    v-model="newGroupName"
+                    @keyup.enter="addGroup()"
+                    @blur="onBlur"
+                    ref="newGroupTitle"
+                    placeholder="Enter new list name"
+                />
+                <div>
+                    <button @click="addGroup" data-prevent-blur="add" class="add-button">Add list</button>
+                    <button class="cancel-button">Cancel</button>
+                </div>
             </div>
-        </div>
         </transition>
     </div>
 </template>
