@@ -2,6 +2,10 @@
     min-width: 100%;
     margin-bottom: 32px;
     font-size: 14px;
+    form {
+        margin-bottom: 15px;
+        min-height: 30px;
+    }
 
     .progress-bar-container {
         display: flex;
