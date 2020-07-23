@@ -1,6 +1,5 @@
 import httpService from './http.service'
 import utilService from './util.service'
-import _ from 'lodash';
 
 var localLoggedInUser = null;
 if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
@@ -175,19 +174,4 @@ function getNewBoard(prefs) {
       }
     ]
   }
-}
-
-function cloneObj(obj, key = 'id') {
-  const clonedObj = _.cloneDeep(obj);
-  (function updateKey(obj, key) {
-    Object.keys(obj).forEach(currKey => {
-      if (currKey === key) {
-        obj[currKey] = utilService.makeId();
-      }
-      if (obj[currKey] && typeof obj[currKey] === 'object') {
-        updateKey(obj[currKey], key);
-      }
-    });
-  })(clonedObj, key);
-  return clonedObj;
 }
