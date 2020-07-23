@@ -40,10 +40,10 @@ export default {
     watch: {
         $route(to, from) {
             // Loading gif
-            if (!this.logoSrc.includes('bouncing')) {
-                this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
-            }
-            clearTimeout(this.logoTimeout)
+            // if (!this.logoSrc.includes('bouncing')) {
+            // clearTimeout(this.logoTimeout)
+            // }
+            this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
             this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 2200);
         }
     }

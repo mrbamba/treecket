@@ -2,13 +2,10 @@
     background-color: rgba(0,0,0,.15);
     color: rgba(255, 255, 255, .9);
     font-size: rem(14px);
-    height: fit-content;
+    height: 40px;
     border-radius: 3px;
-    margin-right: 8px;
-    // width: 300px;
+    width: 300px;
     transition: ease-in-out .3s;
-    min-width: rem(280px);
-    // padding: rem(8px);
 
     &:hover {
         background-color: rgba(0, 0, 0, .25);
@@ -19,7 +16,7 @@
     //     outline: none;
     // }
     .add-group-btn {
-        width: rem(260px);
+        width: rem(280px);
         background-color: transparent;
         border: none;
         padding: rem(12px);
@@ -31,5 +28,4 @@
     width: rem(280px);
     padding: rem(8px);
     border-radius: 3px;
-
 }

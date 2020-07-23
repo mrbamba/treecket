@@ -45,13 +45,11 @@
                         @changeLabelsDisplay="changeLabelsDisplay"
                     />
                 </Draggable>
-                <add-group @addGroup="addGroup" />
             </Container>
+            <add-group @addGroup="addGroup" />
         </main>
 
-        <transition
-            name="bounce" mode="out-in"
-            >
+        <transition name="bounce" mode="out-in">
             <ticket-details
                 v-if="selectedTicket"
                 :ticket="selectedTicket"

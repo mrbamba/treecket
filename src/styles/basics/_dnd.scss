@@ -59,8 +59,8 @@
 
 .smooth-dnd-container.horizontal {
   display: flex;
-  // min-width: 0;
-  // min-height: 0;
+  min-width: auto;
+  min-height: auto;
 }
 
 .smooth-dnd-disable-touch-action:active {
