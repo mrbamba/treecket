@@ -1,9 +1,15 @@
 <template>
     <div class="checklist">
-        <form v-if="showChecklistTitleEdit && onEditChecklistId === checklist.id">
-            <input v-model="checklist.title" ref="checklistTitle" type="text" />
-            <button @click="saveTitle">Save</button>
-            <button @click="cancelUpdateTitle(checklist)">X</button>
+        <form @submit.prevent="saveTitle" v-if="showChecklistTitleEdit">
+            <input
+                v-model="checklist.title"
+                ref="checklistTitle"
+                type="text"
+                @blur="cancelUpdateTitle($event, checklist)"
+                @keydown.tab="saveTitle"
+            />
+            <button class="save-button" type="submit" data-prevent-blur="saveTitle">Save</button>
+            <button class="cancel-button" type="button">X</button>
         </form>
         <section v-else class="check-list-title-preview">
             <h4 @click="editTitle(checklist)">{{checklist.title}}:</h4>
@@ -67,6 +73,7 @@
 </template>
 
 <script>
+import { eventBus } from '@/services/event-bus.service.js';
 export default {
     props: ['checklist', 'checklistIdx'],
     data() {
@@ -98,17 +105,23 @@ export default {
             this.$emit('deleteChecklist', this.checklistIdx, this.checklist.id);
         },
         editTitle(checklist) {
-            this.onEditChecklistId = checklist.id;
             this.onEditChecklistTitle = checklist.title;
             this.showChecklistTitleEdit = true;
             this.$nextTick(() => this.$refs.checklistTitle.focus())
         },
         saveTitle() {
+            if (!this.checklist.title) {
+                this.$nextTick(() => this.$refs.checklistTitle.focus())
+                return
+            }
             this.onEditChecklistTitle = '';
             this.showChecklistTitleEdit = false;
             this.updateChecklist()
         },
-        cancelUpdateTitle(checklist) {
+        cancelUpdateTitle(ev, checklist) {
+            if (!ev.relatedTarget ||
+            ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "saveTitle") return
+            console.log('cancel');
             checklist.title = this.onEditChecklistTitle;
             this.onEditChecklistTitle = '';
             this.showChecklistTitleEdit = false;
@@ -179,6 +192,12 @@ export default {
             }, 2500);
             this.allowConfetti = false;
         }
+    },
+    created() {
+        eventBus.$on('checklistAdded', (checklist) => {
+            console.log(checklist.id);
+            this.editTitle(checklist)
+        })
     }
 }
 </script>

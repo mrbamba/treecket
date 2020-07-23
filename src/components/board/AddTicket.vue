@@ -8,7 +8,7 @@
                 v-model="ticketTitle"
                 ref="newTicketTitle"
                 rows="2"
-                maxlength="140"
+                maxlength="75"
                 placeholder="Enter a title for this ticket..."
             />
             <button @click.stop="addTicket" data-prevent-blur="add" class="add-button">Add Ticket</button>

@@ -90,7 +90,7 @@ function getNewActivity(text, ticketId) {
 function getNewChecklist() {
   return {
     "id": utilService.makeId(),
-    "title": "Logo Settings",
+    "title": "Checklist",
     "items": []
   }
 }
@@ -107,6 +107,7 @@ function getNewTicket(title) {
   return {
     "id": utilService.makeId(),
     "title": title,
+    "cover": true,
     "description": "",
     "color": "#fff",
     "members": [],
