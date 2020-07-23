@@ -48,6 +48,7 @@
             </Container>
             <add-group @addGroup="addGroup" />
         </main>
+        <transition name="pop-up-fade" mode="out-in">
 
         <transition name="slide-left" mode="out-in">
             <ticket-details
@@ -56,6 +57,7 @@
                 :ticketIdx="selectedTicketIdx"
                 :groupId="selectedGroupId"
                 :user="loggedInUser"
+                :boardMembers="currBoard.members"
                 :labels="currBoard.labels"
                 :ticketActivities="ticketActivities"
                 @closeTicketDetails="closeTicketDetails"
@@ -65,6 +67,7 @@
                 @cloneTicket="cloneTicket"
             />
         </transition>
+
         <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
 </template>
@@ -154,8 +157,14 @@ export default {
         },
         async deleteTicket({ ticketId, groupId }) {
             this.closeTicketDetails();
-            await this.$store.dispatch("deleteTicket", { ticketId, groupId });
-            SocketService.emit("updateBoard", this.currBoard._id);
+            // await this.$store.dispatch("deleteTicket", { ticketId, groupId });
+
+            const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
+            const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+            if (groupIdx < 0 || ticketIdx < 0) return;
+
+            this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
+            this.saveBoard();
         },
         async saveBoard() {
             await this.$store.dispatch("updateBoard", this.currBoard);
@@ -246,7 +255,6 @@ export default {
             return _.cloneDeep(this.$store.getters.currBoard);
         },
         loggedInUser() {
-            console.log('asking for logged in user', this.$store.getters.loggedInUser)
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {

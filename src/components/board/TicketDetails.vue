@@ -87,9 +87,11 @@
                 @deleteTicket="deleteTicket"
                 :ticket="ticket"
                 :labels="labels"
+                :boardMembers="boardMembers"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
+                @toggleMember="toggleMember"
                 @changeCoverStatus="changeCoverStatus"
                 @cloneTicket="cloneTicket"
             />
@@ -118,7 +120,8 @@ export default {
         groupId: String,
         user: Object,
         labels: Array,
-        ticketActivities: Array
+        ticketActivities: Array,
+        boardMembers: Array,
     },
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
@@ -137,9 +140,12 @@ export default {
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
         },
+        users() {
+            return this.$store.getters.users
+        }
     },
     created() {
-        this.$store.commit("showOverlay");
+        this.$store.commit("toggleOverlay", true);
         this.$nextTick(() => this.$refs.ticketDetails.focus());
     },
     mounted() {
@@ -148,7 +154,7 @@ export default {
         });
     },
     destroyed() {
-        this.$store.commit("hideOverlay");
+        this.$store.commit("toggleOverlay", false);
     },
     methods: {
         saveTicket() {
@@ -243,6 +249,18 @@ export default {
                 const attachment = this.ticket.attachments.splice(attachmentIdx, 1);
                 this.ticket.attachments.unshift(attachment[0]);
             }
+        },
+        toggleMember(memberToUpdate) {
+            const memberIdx = this.ticket.members.findIndex(member => member._id === memberToUpdate._id)
+            if (memberIdx >= 0) {
+                this.ticket.members.splice(memberIdx, 1)
+                this.addActivity(`Removed ${memberToUpdate.fullName} from ticket ${this.ticket.id}`)
+
+            } else {
+                this.ticket.members.push(memberToUpdate)
+                this.addActivity(`Assigned ${memberToUpdate.fullName} to ticket ${this.ticket.id}`)
+            }
+
             this.saveTicket();
         },
         changeCoverStatus() {

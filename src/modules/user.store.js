@@ -13,7 +13,6 @@ export default {
             return state.users;
         },
         loggedInUser(state) {
-            console.log(state.loggedInUser)
             return state.loggedInUser
         }
     },
@@ -46,8 +45,9 @@ export default {
             context.commit({type: 'setUsers', users: []})
             context.commit({type: 'setUser', user: null})
         },
-        async loadUsers(context) {
-            const users = await UserService.getUsers();
+        async loadUsers(context,userFilterBy) {
+            console.log('Store users',userFilterBy)
+            const users = await UserService.getUsers(userFilterBy);
             context.commit({type: 'setUsers', users})
         },
         async removeUser(context, {userId}) {

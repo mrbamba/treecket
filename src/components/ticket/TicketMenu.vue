@@ -1,14 +1,13 @@
 <template>
     <div class="ticket-menu">
         <h3>ADD TO CARD</h3>
-        <!-- <member-selector
-            v-if="show.memberSelector"
-            @click="show.memberSelector=!show.memberSelector"
-        >Members</member-selector>-->
-        <button @click="toggleLabelsPalet">
+        <button @click="show.memberSelector=!show.memberSelector">Members</button>
+        <MemberSelector
+            v-if="show.memberSelector" :boardMembers="boardMembers" :ticketMembers="ticket.members" @toggleMember="toggleMember"  @closeMemberSelect="show.memberSelector=false"/>
+        <button @click="show.labelSelector=!show.labelSelector">
             <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
         </button>
-        <labels v-show="isPalletteShow" @labelClicked="labelClicked" :labels="labels" />
+        <labels v-show="show.labelSelector" @labelClicked="labelClicked" :labels="labels" />
         <button @click="onAddChecklist">
             <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />Checklist
         </button>
@@ -37,6 +36,7 @@ import DateSelector from "@/components/ticket/menu/DateSelector.vue";
 import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
 import CoverTool from "@/components/ticket/menu/CoverTool.vue";
 import labels from "@/components/board/labels.vue";
+
 export default {
     name: "TicketMenu",
     props: {
@@ -47,23 +47,23 @@ export default {
         labels: {
             type: Array,
             required: true
-        }
-        // users: {
-        //     type: Array,
-        //     require: true
-        // },
-        // show: {
-        //     memberSelector: false,
-        //     labelSelector: false,
-        //     checklistCreator: false,
-        //     dateSelector: false,
-        //     attachmentTool: false,
-        //     coverTool: false
-        // }
+        },
+        boardMembers: {
+            type: Array,
+            require: true
+        },
+        
     },
     data() {
         return {
-            isPalletteShow: false
+            show: {
+            memberSelector: false,
+            labelSelector: false,
+            checklistCreator: false,
+            dateSelector: false,
+            attachmentTool: false,
+            coverTool: false
+        }
         }
     },
     methods: {
@@ -73,14 +73,18 @@ export default {
         onAddChecklist() {
             this.$emit("addChecklist");
         },
-        toggleLabelsPalet() {
-            this.isPalletteShow = !this.isPalletteShow
-        },
         labelClicked(labelId) {
             this.$emit('updateTicketLabel', labelId)
         },
         showAddAttachment() {
             this.$emit('showAddAttachment')
+        },
+        loadUsers(userFilterBy){
+            console.log(userFilterBy);
+            this.$emit('loadUsers',userFilterBy)
+        },
+        toggleMember(member) {
+            this.$emit('toggleMember', member)
         },
         changeCoverStatus() {
             this.$emit('changeCoverStatus')

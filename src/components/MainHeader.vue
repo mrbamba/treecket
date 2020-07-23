@@ -9,7 +9,8 @@
             <!-- <router-link to="/">Home</router-link> | -->
 
             <router-link to="/board">
-                <font-awesome-icon fas icon="th-large" />Boards
+                <font-awesome-icon fas icon="th-large" /> 
+                Boards
             </router-link>|
             <router-link to="/login">Log in</router-link>
             <!-- <router-link to="/about">About</router-link> -->
