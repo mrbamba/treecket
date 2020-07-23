@@ -17,7 +17,11 @@
                     placeholder="Enter new list name"
                 />
                 <div>
-                    <button @click="addGroup" data-prevent-blur="add" class="add-button">Add list</button>
+                    <button
+                        @click.stop="addGroup"
+                        data-prevent-blur="add"
+                        class="add-button"
+                    >Add list</button>
                     <button class="cancel-button">Cancel</button>
                 </div>
             </div>
@@ -44,7 +48,7 @@ export default {
             if (this.addNewGroup) {
                 if (!this.newGroupName) return;
                 this.$emit("addGroup", this.newGroupName);
-                this.toggleAddGroup()
+                this.addNewGroup = false
             }
         },
         toggleAddGroup() {
@@ -56,7 +60,7 @@ export default {
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'add') {
-                    this.addGroup();
+                    return
                 }
             }
             this.toggleAddGroup()

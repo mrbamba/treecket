@@ -59,26 +59,18 @@ export default {
             // Filters for search string
             let filtered = _.cloneDeep(this.boardMembers).filter(user => user.fullName.toLowerCase().includes(this.userFilterBy.txt.toLowerCase()))
             // Sorts by fullName
-            filtered.sort((memberA, memberB) => {
-                var memberAName = memberA.fullName.toLowerCase();
-                var memberBName = memberB.fullName.toLowerCase();
-                if (memberAName < memberBName) {
-                    return -1;
-                }
-                if (memberAName > memberBName) {
-                    return 1;
-                }
-                return 0;
-            });
+            filtered.sort((memberA, memberB) => 
+                memberA.fullName.localeCompare(memberB.fullName)
+            );
             // Creates array of only users that are on the ticket
             let ticketMembersList = filtered.filter(user => {
                 let temp = this.ticketMembers.filter(member => member._id === user._id)
-                if (temp.length > 0) { return true } else return false
+                return temp.length
             })
             // Creates array of only board users who are not on the ticket
             let boardMembersList = filtered.filter(user => {
                 let temp = this.ticketMembers.filter(member => member._id === user._id)
-                if (temp.length > 0) { return false } else return true
+                return !temp.length
             })
             // Merges the two arrays into the first one
             Array.prototype.push.apply(ticketMembersList, boardMembersList);

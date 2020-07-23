@@ -5,7 +5,7 @@ import moment from 'moment'
 Vue.filter("progressBar", (val) => {
   const doneItemsCount = val.reduce((acc, item) => {
     return (item.isDone) ? ++acc : acc
-  }, 0); 
+  }, 0);
   return (doneItemsCount) ? Math.round((doneItemsCount / val.length) * 100) + '%' : '0%'
 });
 
@@ -18,23 +18,23 @@ Vue.filter("formatTime", (val) => {
 });
 
 Vue.filter("capitalize", (val) => {
-  if (!val) return ""; 
+  if (!val) return "";
   val = val.toString();
   return val.charAt(0).toUpperCase() + val.slice(1);
 });
 
 Vue.filter('toUSD', function (value) {
-    return `$${value}`;
+  return `$${value}`;
 });
 
 Vue.filter('pluck', function (objects, key) {
-    return objects.map(function(object) { 
-        return object[key];
-    });
+  return objects.map(function (object) {
+    return object[key];
+  });
 });
 
-Vue.filter('isMember',(memberToCheck,ticketMembers)=>{
-  let temp = ticketMembers.filter(member => member.fullName === memberToCheck.fullName)
-                if (temp.length > 0) { return '✔️' } else return ''
+Vue.filter('isMember', (memberToCheck, members) => {
+  let temp = members.filter(member => member.fullName === memberToCheck.fullName)
+  return (temp.length > 0) ? '✔️' : ''
 })
 
