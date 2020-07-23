@@ -7,7 +7,7 @@
                 ref="title"
                 v-model="ticket.title"
                 @blur="saveTicket"
-                maxlength="140"
+                maxlength="75"
             />
 
             <button class="close-btn" @click="closeTicketDetails">
@@ -104,6 +104,7 @@ import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
 import TicketHistory from '@/components/ticket/TicketHistory.vue';
 import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import { boardService } from "@/services/board.service.js";
+import { eventBus } from '@/services/event-bus.service.js';
 export default {
     props: {
         ticket: Object,
@@ -164,11 +165,12 @@ export default {
         },
         addChecklist() {
             const newChecklist = boardService.getNewChecklist();
-            this.ticket.checklists.push(newChecklist);
+            console.log(newChecklist.id);
+            this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
             this.saveTicket();
-
+            this.$nextTick(() => eventBus.$emit('checklistAdded', newChecklist))
         },
         checklistDeleted(id) {
             this.addActivity(`Deleted checklist \"${id}\" on ticket: ${this.ticket.id}`)
