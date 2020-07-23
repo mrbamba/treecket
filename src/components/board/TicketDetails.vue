@@ -37,10 +37,11 @@
                 </section>
 
                 <ticket-attachments
-                    :attachments="ticket.attachments"
+                    :ticket="ticket"
                     @deleteAttachment="deleteAttachment"
                     @showAddAttachment="toggleAddAttachment()"
                     @makeCover="makeCover"
+                    @changeCoverStatus="changeCoverStatus"
                 />
                 <!-- <section
                     class="ticket-attachments"
@@ -91,6 +92,7 @@
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
                 @toggleMember="toggleMember"
+                @changeCoverStatus="changeCoverStatus"
             />
         </main>
         <add-attachment
@@ -141,7 +143,7 @@ export default {
         }
     },
     created() {
-        this.$store.commit("showOverlay");
+        this.$store.commit("toggleOverlay", true);
         this.$nextTick(() => this.$refs.ticketDetails.focus());
     },
     mounted() {
@@ -150,7 +152,7 @@ export default {
         });
     },
     destroyed() {
-        this.$store.commit("hideOverlay");
+        this.$store.commit("toggleOverlay", false);
     },
     methods: {
         saveTicket() {
@@ -170,7 +172,6 @@ export default {
         },
         addChecklist() {
             const newChecklist = boardService.getNewChecklist();
-            console.log(newChecklist.id);
             this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
@@ -240,11 +241,11 @@ export default {
             })
         },
         makeCover(id) {
-            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
+            this.ticket.cover = true;
+            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id);
             if (attachmentIdx >= 0) {
-                const attachment = this.ticket.attachments.splice(attachmentIdx, 1)
-                this.ticket.attachments.unshift(attachment[0])
-                this.saveTicket()
+                const attachment = this.ticket.attachments.splice(attachmentIdx, 1);
+                this.ticket.attachments.unshift(attachment[0]);
             }
         },
         toggleMember(memberToUpdate) {
@@ -258,7 +259,11 @@ export default {
                 this.addActivity(`Assigned ${memberToUpdate.fullName} to ticket ${this.ticket.id}`)
             }
 
-            this.saveTicket()
+            this.saveTicket();
+        },
+        changeCoverStatus() {
+            this.ticket.cover = !this.ticket.cover
+            this.saveTicket();
         }
     },
     components: {

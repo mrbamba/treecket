@@ -1,35 +1,31 @@
 .add-group {
-    background-color: rgba(0,0,0,.15);
     color: rgba(255, 255, 255, .9);
     font-size: rem(14px);
-    height: fit-content;
-    border-radius: 3px;
-    margin-right: 8px;
-    // width: 300px;
-    transition: ease-in-out .3s;
-    min-width: rem(280px);
-    // padding: rem(8px);
-
-    &:hover {
-        background-color: rgba(0, 0, 0, .25);
-    }
+    height: 40px;
+    padding-inline-end: 8px;
+    
+    // transition: ease-in-out .3s;
     // input {
     //     min-width: 100%;
     //     margin: 8px;
     //     outline: none;
     // }
     .add-group-btn {
-        width: rem(260px);
-        background-color: transparent;
+        background-color: rgba(0, 0, 0, .15);
+        border-radius: 3px;
+        width: rem(280px);
         border: none;
         padding: rem(12px);
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .25);
+        }
     }
 }
 
-.add-group-selected{
+.add-group-selected {
     background-color: #ebecf0;
     width: rem(280px);
     padding: rem(8px);
     border-radius: 3px;
-
 }

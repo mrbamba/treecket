@@ -17,7 +17,7 @@
         <button @click="showAddAttachment">
             <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
         </button>
-        <button>Cover</button>
+        <button @click.stop="changeCoverStatus">Cover</button>
 
         <h3>ACTIONS</h3>
         <button>Move</button>
@@ -86,6 +86,9 @@ export default {
         toggleMember(member) {
             this.$emit('toggleMember', member)
         },
+        changeCoverStatus() {
+            this.$emit('changeCoverStatus')
+        }
     },
     components: {
         MemberSelector,

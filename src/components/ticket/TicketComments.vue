@@ -2,6 +2,7 @@
     <div class="ticket-comments">
         
         <div v-if="comments">
+            <transition-group name="slide-up-fade">
             <ticket-comment
                 v-for="comment in comments"
                 :key="comment.id"
@@ -10,6 +11,7 @@
                 @deleteComment="deleteComment"
                 @updateTicket="updateTicket"
             />
+            </transition-group>
         </div>
         <div class="add-comment-input">
             <div class="create-comment-avatar">

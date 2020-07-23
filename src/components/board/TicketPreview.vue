@@ -1,6 +1,14 @@
 <template>
     <section @click="openTicket(ticket)" class="ticket-preview">
         <div :style="{backgroundColor: ticket.color}">
+            <div class="cover-container" v-if="ticket.cover && getCoverSrc">
+                <iframe
+                    v-if="ticket.attachments[0].type === 'video'"
+                    :src="getCoverSrc"
+                    frameborder="0"
+                ></iframe>
+                <img v-else :src="getCoverSrc"/>
+            </div>
             <ul class="label-container clean-list">
                 <li class="label" v-for="label in ticketLabels" :key="label.id">
                     <div
@@ -62,18 +70,18 @@
 import Avatar from 'vue-avatar'
 export default {
     props: ['ticket', 'labels', 'showFullLabel'],
-    methods: {
-        openTicket(ticket) {
-            const newPath = `/board/${this.$route.params.boardId}/ticket/${ticket.id}`;
-            if (this.$route.path !== newPath) {
-                this.$router.push(newPath);
+    computed: {
+        getCoverSrc() {
+
+            if (this.ticket.attachments.length > 0) {
+                if (this.ticket.attachments[0].type === 'img') {
+                    return this.ticket.attachments[0].src;
+                } else if (this.ticket.attachments[0].type === 'video') {
+                    const src = this.getIframeSrc(this.ticket.attachments[0].src) 
+                    return src
+                }
             }
         },
-        changeLabelsDisplay() {
-            this.$emit('changeLabelsDisplay')
-        }
-    },
-    computed: {
         itemsCount() {
             if (this.ticket.checklists.length === 0) return { 'itemsCount': 0, 'doneItemsCount': 0 }
             let doneItemsCount = 0;
@@ -91,6 +99,29 @@ export default {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
+        }
+    },
+    methods: {
+        openTicket(ticket) {
+            const newPath = `/board/${this.$route.params.boardId}/ticket/${ticket.id}`;
+            if (this.$route.path !== newPath) {
+                this.$router.push(newPath);
+            }
+        },
+        changeLabelsDisplay() {
+            this.$emit('changeLabelsDisplay')
+        },
+        getYoutubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+
+            return (match && match[2].length === 11)
+                ? match[2]
+                : null;
+        },
+        getIframeSrc(src) {
+            const videoId = this.getYoutubeId(src);
+            return `https://www.youtube.com/embed/${videoId}`
         }
     },
     components: {

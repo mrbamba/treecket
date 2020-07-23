@@ -1,7 +1,9 @@
 <template>
     <div id="app" class="wrapper" :style="{ background }">
-        <main-header v-if="showMainHeader" />
-        <router-view />
+        <!-- <main-header v-if="showMainHeader" /> -->
+        <transition name="component-fade" mode="out-in">
+            <router-view />
+        </transition>
         <div :class="{ overlay }" @click.self="hideOverlay"></div>
     </div>
 </template>
@@ -33,7 +35,7 @@ export default {
     },
     methods: {
         hideOverlay() {
-            this.$store.commit('hideOverlay');
+            this.$store.commit('toggleOverlay', false);
         },
     },
     components: {

@@ -1,8 +1,8 @@
 <template>
     <div class="board-details" v-if="currBoard">
-        <!-- <main-header /> -->
+        <main-header />
 
-        <header class="board-header">
+        <section class="board-header">
             <div v-if="!editTitle" @click="onEditTitle">
                 <div>{{ currBoard.title }}</div>
                 <!-- <input type="text" v-model="currBoard.title"> -->
@@ -17,7 +17,7 @@
                     ref="updatedBoardTitle"
                 />
             </div>
-        </header>
+        </section>
 
         <main
             class="groups-container"
@@ -45,9 +45,10 @@
                         @changeLabelsDisplay="changeLabelsDisplay"
                     />
                 </Draggable>
-                <add-group @addGroup="addGroup" />
             </Container>
+            <add-group @addGroup="addGroup" />
         </main>
+        <transition name="pop-up-fade" mode="out-in">
 
         <ticket-details
             v-if="selectedTicket"
@@ -62,6 +63,8 @@
             @deleteTicket="deleteTicket"
             @addActivity="addActivity"
         />
+        </transition>
+
         <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
 </template>
@@ -89,7 +92,6 @@ export default {
             selectedGroupId: null,
             editTitle: false,
 
-
             // FAULT: Groups place-holders height are set to the tallest group
             // upperDropPlaceholderOptions: {
             //     className: "cards-drop-preview",
@@ -115,7 +117,7 @@ export default {
         })
     },
     mounted() {
-        // window.onload = () => { console.log("It's loaded!") };
+        window.onload = () => { console.log("BoardDetails + App.vue wrapper background LOADED!") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
@@ -150,8 +152,14 @@ export default {
         },
         async deleteTicket({ ticketId, groupId }) {
             this.closeTicketDetails();
-            await this.$store.dispatch("deleteTicket", { ticketId, groupId });
-            SocketService.emit("updateBoard", this.currBoard._id);
+            // await this.$store.dispatch("deleteTicket", { ticketId, groupId });
+
+            const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
+            const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
+            if (groupIdx < 0 || ticketIdx < 0) return;
+
+            this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
+            this.saveBoard();
         },
         async saveBoard() {
             console.log("save board");

@@ -1,22 +1,20 @@
 .ticket-details {
     position: fixed;
-    width: 500px;
+    display: flex;
+    flex-direction: column;
     padding: 30px 16px 16px 24px;
     border-radius: 3px;
     background-color: #fff;
     z-index: 5;
-    top: 50%;
+    top: 60px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     box-shadow: 0px 0px 20px -6px rgba(0, 15, 35, 0.3);
     outline: none;
-    // overflow-y: auto;
-    max-height: calc(100vh - 120px); // margin bottom hidden
-    margin: 0px;
-    width: 100%;
+    overflow-x: hidden;
+    width: calc(100vw - 120px);
     max-width: 1040px;
-    display: flex;
-    flex-direction: column;
+    max-height: calc(100vh - 120px); // margin bottom hidden
 
     header {
         display: flex;
@@ -92,7 +90,6 @@
             right: 0;
             width: rem(170px);
             margin: 10px 40px 10px 25px;
-            height: 100%;
         }
     }
 
