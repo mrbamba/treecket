@@ -37,10 +37,11 @@
                 </section>
 
                 <ticket-attachments
-                    :attachments="ticket.attachments"
+                    :ticket="ticket"
                     @deleteAttachment="deleteAttachment"
                     @showAddAttachment="toggleAddAttachment()"
                     @makeCover="makeCover"
+                    @changeCoverStatus="changeCoverStatus"
                 />
                 <!-- <section
                     class="ticket-attachments"
@@ -48,7 +49,12 @@
                     :key="attachment.id"
                 >{{ attachment }}</section>-->
 
-                <ticket-checklists :ticket="ticket" @checklistDeleted="checklistDeleted" @updateTicket="saveTicket" @addItem="addItem" />
+                <ticket-checklists
+                    :ticket="ticket"
+                    @checklistDeleted="checklistDeleted"
+                    @updateTicket="saveTicket"
+                    @addItem="addItem"
+                />
                 <div class="log-selector">
                     <h4>Activity</h4>
                     <div class="ticket-activity-selector">
@@ -84,6 +90,7 @@
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
+                @changeCoverStatus="changeCoverStatus"
             />
         </main>
         <add-attachment
@@ -161,7 +168,6 @@ export default {
         },
         addChecklist() {
             const newChecklist = boardService.getNewChecklist();
-            console.log(newChecklist.id);
             this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
@@ -231,12 +237,17 @@ export default {
             })
         },
         makeCover(id) {
-            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id)
+            this.ticket.cover = true;
+            const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id);
             if (attachmentIdx >= 0) {
-                const attachment = this.ticket.attachments.splice(attachmentIdx, 1)
-                this.ticket.attachments.unshift(attachment[0])
-                this.saveTicket()
+                const attachment = this.ticket.attachments.splice(attachmentIdx, 1);
+                this.ticket.attachments.unshift(attachment[0]);
             }
+            this.saveTicket();
+        },
+        changeCoverStatus() {
+            this.ticket.cover = !this.ticket.cover
+            this.saveTicket();
         }
     },
     components: {
