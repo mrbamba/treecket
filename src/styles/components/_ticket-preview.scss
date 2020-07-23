@@ -3,28 +3,64 @@
     justify-content: space-between;
     position: relative;
     z-index: 1;
-    // padding: rem(4px) 0;
     font-size: rem(12px);
     cursor: pointer;
     margin-bottom: 8px;
-
+    min-height: 32px;
+    
     :first-child {
         flex-grow: 1;
-    }
+        // padding: 0 rem(4px);
 
-    div {
-        box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
-        padding: 1em;
-        border-radius: 3px;
-        overflow-wrap: anywhere;
     }
-    .badges-container {
-        div {
-            box-shadow: unset;
-            padding: 5px 0;
+    & > div {
+    box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+    border-radius: 3px;
+    overflow-wrap: anywhere;
+    padding:6px 8px 2px;
+    }
+    .label-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        max-width: fit-content;
+        .label {
+            // margin: 0, 4px, 4px, 0 !important;
+            div {
+                margin: 0 4px 4px 0;
+                min-height: 8px ;
+                height: fit-content;
+                min-width: 40px;
+                width: fit-content;
+                border-radius: 4px;
+            }
+            .full-label {
+                display: flex;
+                align-items: center;
+                line-height: 1;
+                height: 16px;
+                padding: 8px;
+                min-width: 56px;
+            }
         }
-        .complete {
-            background-color: #61bd4f;
+    }
+    .bottom-container {
+        display: flex;
+        align-items: center;
+        .badges-container {
+            display: flex;
+            flex-grow: 0;
+            div {
+                margin-inline-start: 3px ;
+                box-shadow: unset;
+                padding: 5px 0 0 0;
+            }
+            .complete {
+                background-color: #61bd4f;
+            }
+        }
+        .ticket-members-container {
+            align-self: flex-end;
         }
     }
 }

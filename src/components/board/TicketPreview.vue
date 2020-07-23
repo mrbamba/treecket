@@ -1,8 +1,9 @@
 <template>
     <section @click="openTicket(ticket)" class="ticket-preview">
         <div :style="{backgroundColor: ticket.color}">
-            <section class v-for="label in ticketLabels" :key="label.id">
-                <div
+            <ul class="label-container clean-list">
+            <li class="label" v-for="label in ticketLabels" :key="label.id">
+                <div class="full-label"
                     v-if="showFullLabel"
                     :style="{backgroundColor: label.color}"
                     @click.stop="changeLabelsDisplay"
@@ -12,8 +13,10 @@
                     :style="{backgroundColor: label.color}"
                     @click.stop="changeLabelsDisplay"
                 ></div>
-            </section>
+            </li>
+            </ul>
             <span>{{ ticket.title }}</span>
+            <div class="bottom-container">
             <section class="badges-container">
                 <div
                     v-if="itemsCount.itemsCount > 0"
@@ -22,7 +25,21 @@
                     <img src alt />
                     <span>{{ itemsCount.doneItemsCount }}/{{ itemsCount.itemsCount }}</span>
                 </div>
+                <div v-if="ticket.attachments.length > 0">
+                    <span>{{ ticket.attachments.length }}</span>
+                    <img src="" alt="">
+                </div>
+                <div v-if="ticket.description">
+                    <span>Desc!!</span>
+                    <img src="" alt="">
+                </div>
             </section>
+            <div class="ticket-members-container">
+                <div v-for="member in ticket.members" :key="member._id">
+                    <img :src="member.imgSrc" alt="">
+                </div>
+            </div>
+            </div>
         </div>
     </section>
 </template>
