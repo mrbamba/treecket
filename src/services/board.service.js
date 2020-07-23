@@ -18,7 +18,8 @@ export const boardService = {
   getNewComment,
   getAllowLabel,
   getNewAttachment,
-  getNewActivity
+  getNewActivity,
+  cloneTicket
 };
 
 function query(filterBy) {
@@ -35,6 +36,12 @@ function update(board) {
 
 function addBoard(board) {
   return httpService.post(`board`, board)
+}
+
+function cloneTicket(ticket) {
+  const newTicket = _.cloneDeep(ticket)
+  newTicket.id = utilService.makeId()
+  return newTicket
 }
 
 function getNewComment(commentText) {

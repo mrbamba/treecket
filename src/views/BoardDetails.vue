@@ -53,6 +53,7 @@
             <ticket-details
                 v-if="selectedTicket"
                 :ticket="selectedTicket"
+                :ticketIdx="selectedTicketIdx"
                 :groupId="selectedGroupId"
                 :user="loggedInUser"
                 :labels="currBoard.labels"
@@ -61,6 +62,7 @@
                 @saveTicket="saveBoard"
                 @deleteTicket="deleteTicket"
                 @addActivity="addActivity"
+                @cloneTicket="cloneTicket"
             />
         </transition>
         <user-message v-if="userMessage" :userMessage="userMessage" />
@@ -87,6 +89,7 @@ export default {
         return {
             showFullLabel: false,
             selectedTicket: null,
+            selectedTicketIdx: null,
             selectedGroupId: null,
             editTitle: false,
 
@@ -104,12 +107,12 @@ export default {
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
         eventBus.$on('updateLabels', (label) => {
-            let board = this.currBoard
+            let board = this.currBoard;
             const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
             if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
             else {
-                label = boardService.getAllowLabel(label)
-                board.labels.push(label)
+                label = boardService.getAllowLabel(label);
+                board.labels.push(label);
             }
             this.saveBoard();
         })
@@ -120,7 +123,7 @@ export default {
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
         SocketService.terminate();
-        this.$store.commit('setBoard', null)
+        this.$store.commit('setBoard', null);
     },
     methods: {
         async updateGroup(updatedGroup) {
@@ -137,6 +140,7 @@ export default {
         closeTicketDetails() {
             this.selectedTicket = null;
             this.selectedGroupId = null;
+            this.selectedTicketIdx = null
             this.$router.push(`/board/${this.currBoard._id}`);
         },
         async addTicket({ ticket, groupId }) {
@@ -154,7 +158,6 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async saveBoard() {
-            console.log("save board");
             await this.$store.dispatch("updateBoard", this.currBoard);
             SocketService.emit("updateBoard", this.currBoard._id);
         },
@@ -177,7 +180,10 @@ export default {
                 this.selectedGroupId = this.currBoard.groups.find(
                     group =>
                         (this.selectedTicket = group.tickets.find(
-                            ticket => ticket.id === this.$route.params.ticketId
+                            (ticket, idx) => {
+                                this.selectedTicketIdx = idx
+                                return ticket.id === this.$route.params.ticketId
+                            }
                         ))
                 ).id;
             }
@@ -205,12 +211,12 @@ export default {
             this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
         },
         addActivity({ text, ticketId = null }) {
-            let newActivity = boardService.getNewActivity(text, ticketId)
-            this.currBoard.activities.push(newActivity)
-            this.saveBoard()
+            let newActivity = boardService.getNewActivity(text, ticketId);
+            this.currBoard.activities.push(newActivity);
+            this.saveBoard();
         },
         changeLabelsDisplay() {
-            this.showFullLabel = !this.showFullLabel
+            this.showFullLabel = !this.showFullLabel;
         },
         onEditTitle() {
             this.editTitle = true;
@@ -218,9 +224,19 @@ export default {
 
         },
         updateBoardTitle() {
-            this.editTitle = false
-            this.saveBoard()
+            this.editTitle = false;
+            this.saveBoard();
         },
+        cloneTicket(ticket, ticketIdx, groupId) {
+            const newTicket = boardService.cloneTicket(ticket);
+            const newBoard = this.currBoard;
+            const groupIdx = newBoard.groups.findIndex(
+                group => group.id === groupId
+            );
+            if (groupIdx < 0) return;
+            newBoard.groups[groupIdx].tickets.splice(ticketIdx, 0, newTicket);
+            this.saveBoard(newBoard);
+        }
     },
     computed: {
         userMessage() {

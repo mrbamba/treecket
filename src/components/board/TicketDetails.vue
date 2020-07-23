@@ -91,6 +91,7 @@
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
                 @changeCoverStatus="changeCoverStatus"
+                @cloneTicket="cloneTicket"
             />
         </main>
         <add-attachment
@@ -113,6 +114,7 @@ import { eventBus } from '@/services/event-bus.service.js';
 export default {
     props: {
         ticket: Object,
+        ticketIdx: Number,
         groupId: String,
         user: Object,
         labels: Array,
@@ -137,10 +139,8 @@ export default {
         },
     },
     created() {
-        console.log('LOAD');
         this.$store.commit("showOverlay");
         this.$nextTick(() => this.$refs.ticketDetails.focus());
-        console.log('Ticket activities', this.ticketActivities);
     },
     mounted() {
         this.$watch("overlay", function (newValue, oldValue) {
@@ -248,6 +248,9 @@ export default {
         changeCoverStatus() {
             this.ticket.cover = !this.ticket.cover
             this.saveTicket();
+        },
+        cloneTicket(ticket) {
+            this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId)
         }
     },
     components: {

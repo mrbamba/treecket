@@ -27,6 +27,7 @@
 
 <script>
 import { boardService } from "@/services/board.service.js";
+import { eventBus } from '@/services/event-bus.service.js';
 export default {
     props: ['group'],
     data() {
@@ -38,7 +39,7 @@ export default {
 
     methods: {
         toggleAddTicket() {
-            this.showAddTicket = !this.showAddTicket;
+            this.showAddTicket = (this.showAddTicket) ? false : true;
             this.ticketTitle = '';
             if (this.showAddTicket) this.$nextTick(() => this.$refs.newTicketTitle.focus());
         },
@@ -71,8 +72,12 @@ export default {
             }
             this.toggleAddTicket();
         },
+    },
+    created() {
+        eventBus.$on('onAddTicket', (groupId) => {
+            if (groupId === this.group.id) this.toggleAddTicket()
+        })
     }
-
 }
 </script>
 

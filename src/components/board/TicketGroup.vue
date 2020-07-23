@@ -18,6 +18,7 @@
                 </div>
                 <button>
                     <font-awesome-icon fas icon="ellipsis-h" />
+                    <group-menu :groupId="group.id" />
                 </button>
             </div>
         </header>
@@ -51,8 +52,8 @@
 <script>
 import TicketPreview from "./TicketPreview.vue";
 import AddTicket from "./AddTicket.vue";
+import GroupMenu from '@/components/GroupMenu.vue'
 import { boardService } from "@/services/board.service.js";
-
 import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag, generateItems } from '@/services/dnd.service.js'
 
@@ -80,16 +81,6 @@ export default {
         updateGroupTitle() {
             this.editTitle = false
             this.$emit('updateGroup', this.group)
-        },
-
-        addTicket() {
-            if (!this.ticketTitle) return;
-            const ticket = boardService.getNewTicket(this.ticketTitle);
-            this.$emit('addTicket', {
-                ticket,
-                groupId: this.group.id
-            });
-            this.ticketTitle = '';
         },
         changeLabelsDisplay() {
             this.$emit('changeLabelsDisplay')
@@ -140,7 +131,8 @@ export default {
         TicketPreview,
         Container,
         Draggable,
-        AddTicket
+        AddTicket,
+        GroupMenu
     }
 };
 </script>

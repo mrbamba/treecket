@@ -8,7 +8,7 @@
         <button @click="toggleLabelsPalet">
             <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
         </button>
-        <labels v-show="isPaleltShow" @labelClicked="labelClicked" :labels="labels" />
+        <labels v-show="isPalletteShow" @labelClicked="labelClicked" :labels="labels" />
         <button @click="onAddChecklist">
             <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />Checklist
         </button>
@@ -22,7 +22,7 @@
 
         <h3>ACTIONS</h3>
         <button>Move</button>
-        <button>Copy</button>
+        <button @click="onClone">Clone</button>
         <button>Watch</button>
         <button>Share</button>
         <button @click.stop="onTicketDelete(ticket.id)">&#128465; Delete</button>
@@ -63,7 +63,7 @@ export default {
     },
     data() {
         return {
-            isPaleltShow: false
+            isPalletteShow: false
         }
     },
     methods: {
@@ -74,7 +74,7 @@ export default {
             this.$emit("addChecklist");
         },
         toggleLabelsPalet() {
-            this.isPaleltShow = !this.isPaleltShow
+            this.isPalletteShow = !this.isPalletteShow
         },
         labelClicked(labelId) {
             this.$emit('updateTicketLabel', labelId)
@@ -84,6 +84,9 @@ export default {
         },
         changeCoverStatus() {
             this.$emit('changeCoverStatus')
+        },
+        onClone() {
+            this.$emit('cloneTicket', this.ticket)
         }
     },
     components: {

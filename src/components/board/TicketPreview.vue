@@ -10,7 +10,7 @@
                 <img v-else :src="getCoverSrc"/>
             </div>
             <ul class="label-container clean-list">
-                <li class="label" v-for="label in ticketLabels" :key="label.id">
+                <li class="ticket-label" v-for="label in ticketLabels" :key="label.id">
                     <div
                         class="full-label"
                         v-if="showFullLabel"
