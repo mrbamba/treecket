@@ -18,7 +18,7 @@
                 </div>
                 <button>
                     <font-awesome-icon fas icon="ellipsis-h" />
-                    <group-menu :groupId="group.id" />
+                    <group-menu :group="group" @cloneGroup="cloneGroup" />
                 </button>
             </div>
         </header>
@@ -59,7 +59,7 @@ import { applyDrag, generateItems } from '@/services/dnd.service.js'
 
 export default {
     name: 'TicketGroup',
-    props: ['group', 'labels', 'showFullLabels'],
+    props: ['group', 'labels', 'showFullLabels', 'groupIdx'],
     data() {
         return {
             newGroup: this.group,
@@ -102,6 +102,11 @@ export default {
                 this.addTicket();
             }
             this.toggleAddTicket();
+        },
+        
+        cloneGroup(group) {
+            this.$emit('cloneGroup', group, this.groupIdx)
+
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);

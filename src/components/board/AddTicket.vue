@@ -56,6 +56,7 @@ export default {
 
         onBlur(ev) {
             if (ev.relatedTarget) {
+                if (ev.relatedTarget.dataset.preventBlur === this.group.id) return
                 if (ev.relatedTarget.dataset.preventBlur === 'close') {
                     this.toggleAddTicket();
                     return;

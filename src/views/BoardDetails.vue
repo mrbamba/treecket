@@ -34,15 +34,17 @@
                 @drop="onGroupDrop($event)"
                 :get-child-payload="getGroupPayload"
             >
-                <Draggable v-for="group in currBoard.groups" :key="group._id">
+                <Draggable v-for="(group, groupIdx) in currBoard.groups" :key="group._id">
                     <ticket-group
                         :group="group"
                         :labels="currBoard.labels"
                         :showFullLabels="showFullLabel"
+                        :groupIdx="groupIdx"
                         @addTicket="addTicket"
                         @updateTickets="updateTickets"
                         @updateGroup="updateGroup"
                         @changeLabelsDisplay="changeLabelsDisplay"
+                        @cloneGroup="cloneGroup"
                     />
                 </Draggable>
             </Container>
@@ -237,13 +239,17 @@ export default {
         },
         cloneTicket(ticket, ticketIdx, groupId) {
             const newTicket = boardService.cloneTicket(ticket);
-            const newBoard = this.currBoard;
-            const groupIdx = newBoard.groups.findIndex(
+            const groupIdx = this.currBoard.groups.findIndex(
                 group => group.id === groupId
             );
             if (groupIdx < 0) return;
-            newBoard.groups[groupIdx].tickets.splice(ticketIdx, 0, newTicket);
-            this.saveBoard(newBoard);
+            this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 0, newTicket);
+            this.saveBoard();
+        },
+        cloneGroup(group, groupIdx) {
+            const newGroup = boardService.cloneGroup(group);
+            this.currBoard.groups.splice(groupIdx, 0, newGroup)
+            this.saveBoard()
         }
     },
     computed: {

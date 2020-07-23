@@ -150,6 +150,7 @@ export default {
             this.toggleAddItem(false);
         },
         onBlurAddItem(ev, checklistId) {
+            console.log('blur');
             if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "add") {
                 this.onAddItem(ev, checklistId);
             } else {
