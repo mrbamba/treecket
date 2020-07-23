@@ -54,6 +54,7 @@
             :ticket="selectedTicket"
             :groupId="selectedGroupId"
             :user="loggedInUser"
+            :boardUsers="currBoard.members"
             :labels="currBoard.labels"
             :ticketActivities="ticketActivities"
             @closeTicketDetails="closeTicketDetails"
@@ -114,7 +115,7 @@ export default {
         })
     },
     mounted() {
-        window.onload = () => { console.log("It's loaded!") };
+        // window.onload = () => { console.log("It's loaded!") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
@@ -229,7 +230,6 @@ export default {
             return _.cloneDeep(this.$store.getters.currBoard);
         },
         loggedInUser() {
-            console.log('asking for logged in user', this.$store.getters.loggedInUser)
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {

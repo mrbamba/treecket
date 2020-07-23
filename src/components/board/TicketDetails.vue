@@ -81,9 +81,11 @@
                 @deleteTicket="deleteTicket"
                 :ticket="ticket"
                 :labels="labels"
+                :boardUsers="boardUsers"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
+                @loadUsers="loadUsers"
             />
         </main>
         <add-attachment
@@ -108,7 +110,8 @@ export default {
         groupId: String,
         user: Object,
         labels: Array,
-        ticketActivities: Array
+        ticketActivities: Array,
+        boardUsers:Array,
     },
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
@@ -127,12 +130,13 @@ export default {
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
         },
+        users(){
+            return this.$store.getters.users
+        }
     },
     created() {
-        console.log('LOAD');
         this.$store.commit("showOverlay");
         this.$nextTick(() => this.$refs.ticketDetails.focus());
-        console.log('Ticket activities', this.ticketActivities);
     },
     mounted() {
         this.$watch("overlay", function (newValue, oldValue) {
@@ -235,6 +239,10 @@ export default {
                 this.ticket.attachments.unshift(attachment[0])
                 this.saveTicket()
             }
+        },
+        loadUsers(userFilterBy){
+            console.log(userFilterBy);
+            this.$store.dispatch('loadUsers',userFilterBy)
         }
     },
     components: {

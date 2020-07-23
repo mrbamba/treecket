@@ -3,7 +3,6 @@ import utilService from './util.service'
 
 var localLoggedInUser = null;
 if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
-console.log(localLoggedInUser)
 
 export const boardService = {
   query,

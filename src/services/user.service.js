@@ -33,8 +33,9 @@ async function logout() {
     await HttpService.post('auth/logout');
     sessionStorage.clear();
 }
-function getUsers() {
-    return HttpService.get('user')
+function getUsers(usersFilterBy) {
+    console.log('getting users', usersFilterBy);
+    return HttpService.get('user',usersFilterBy)
 }
 
 function _handleLogin(user) {
