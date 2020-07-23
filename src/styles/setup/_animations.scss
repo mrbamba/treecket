@@ -1,0 +1,115 @@
+// /* Enter and leave animations can use different */
+// /* durations and timing functions.              */
+// .slide-fade-enter-active {
+//     transition: all .3s ease;
+// }
+
+// .slide-fade-leave-active {
+//     transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// }
+
+// .slide-fade-enter,
+// .slide-fade-leave-to
+
+// /* .slide-fade-leave-active below version 2.1.8 */
+//     {
+//     transform: translateX(10px);
+//     opacity: 0;
+// }
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-leave-to {
+    opacity: 0;
+}
+
+.slide-fade-enter
+
+/* .slide-fade-leave-active below version 2.1.8 */
+    {
+    transform: translateY(-100px);
+    opacity: 0;
+}
+
+
+
+.slide-up-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-up-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.25, 1.0);
+}
+
+.slide-up-fade-leave-to {
+    transform: translateX(400px);
+    opacity: 0;
+    opacity: 0;
+}
+
+.slide-up-fade-enter
+
+/* .slide-fade-leave-active below version 2.1.8 */
+    {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+
+
+
+.bounce-enter-active {
+    animation: bounce-in .3s ease-in-out;
+}
+
+.bounce-leave-active {
+    animation: bounce-in .2s reverse ease;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+
+.slide-left-enter-active {
+    animation: slide-left-in .3s ease-in-out;
+}
+
+.slide-left-leave-active {
+    animation: slide-left-in .2s reverse ease;
+}
+
+@keyframes slide-left-in {
+    0% {
+        transform: translate(-20%, -20%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        transform: translate(-50%, -30%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

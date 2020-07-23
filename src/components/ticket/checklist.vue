@@ -189,7 +189,7 @@ export default {
             });
             setTimeout(() => {
                 this.$confetti.stop();
-            }, 2000);
+            }, 2500);
             this.allowConfetti = false;
         }
     },

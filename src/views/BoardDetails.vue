@@ -1,8 +1,8 @@
 <template>
     <div class="board-details" v-if="currBoard">
-        <!-- <main-header /> -->
+        <main-header />
 
-        <header class="board-header">
+        <section class="board-header">
             <div v-if="!editTitle" @click="onEditTitle">
                 <div>{{ currBoard.title }}</div>
                 <!-- <input type="text" v-model="currBoard.title"> -->
@@ -17,7 +17,7 @@
                     ref="updatedBoardTitle"
                 />
             </div>
-        </header>
+        </section>
 
         <main
             class="groups-container"
@@ -45,22 +45,24 @@
                         @changeLabelsDisplay="changeLabelsDisplay"
                     />
                 </Draggable>
-                <add-group @addGroup="addGroup" />
             </Container>
+            <add-group @addGroup="addGroup" />
         </main>
 
-        <ticket-details
-            v-if="selectedTicket"
-            :ticket="selectedTicket"
-            :groupId="selectedGroupId"
-            :user="loggedInUser"
-            :labels="currBoard.labels"
-            :ticketActivities="ticketActivities"
-            @closeTicketDetails="closeTicketDetails"
-            @saveTicket="saveBoard"
-            @deleteTicket="deleteTicket"
-            @addActivity="addActivity"
-        />
+        <transition name="slide-left" mode="out-in">
+            <ticket-details
+                v-if="selectedTicket"
+                :ticket="selectedTicket"
+                :groupId="selectedGroupId"
+                :user="loggedInUser"
+                :labels="currBoard.labels"
+                :ticketActivities="ticketActivities"
+                @closeTicketDetails="closeTicketDetails"
+                @saveTicket="saveBoard"
+                @deleteTicket="deleteTicket"
+                @addActivity="addActivity"
+            />
+        </transition>
         <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
 </template>
@@ -88,7 +90,6 @@ export default {
             selectedGroupId: null,
             editTitle: false,
 
-
             // FAULT: Groups place-holders height are set to the tallest group
             // upperDropPlaceholderOptions: {
             //     className: "cards-drop-preview",
@@ -114,7 +115,7 @@ export default {
         })
     },
     mounted() {
-        window.onload = () => { console.log("It's loaded!") };
+        window.onload = () => { console.log("BoardDetails + App.vue wrapper background LOADED!") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);

@@ -1,5 +1,6 @@
 <template>
     <div class="add-group">
+        <transition name="slide-fade" mode="out-in">
         <button
             v-if="!addNewGroup"
             @click.stop="toggleAddGroup"
@@ -20,6 +21,7 @@
                 <button class="cancel-button">Cancel</button>
             </div>
         </div>
+        </transition>
     </div>
 </template>
 
@@ -48,7 +50,8 @@ export default {
         toggleAddGroup() {
             this.addNewGroup = !this.addNewGroup;
             this.newGroupName = '';
-            if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
+            // if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
+            if (this.addNewGroup) setTimeout(() => this.$refs.newGroupTitle.focus(), 300);
         },
         onBlur(ev) {
             if (ev.relatedTarget) {
