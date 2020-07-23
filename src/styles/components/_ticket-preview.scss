@@ -15,12 +15,17 @@
     >div {
         width: 100%;
     }
-
-    &>div {
-        box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
-        border-radius: 3px;
-        overflow-wrap: anywhere;
-        padding: 6px 8px 2px;
+    .cover-container {
+        max-width: 100%;
+        img {
+            max-width: 100%;
+        }
+    }
+    & > div {
+    box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+    border-radius: 3px;
+    overflow-wrap: anywhere;
+    padding:6px 8px 2px;
     }
 
     .label-container {

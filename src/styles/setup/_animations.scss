@@ -92,7 +92,7 @@
 
 
 .pop-up-fade-enter-active {
-    animation: pop-up-fade-in .3s ease-in-out;
+    animation: pop-up-fade-in .3s ease;
 }
 
 .pop-up-fade-leave-active {
@@ -101,12 +101,16 @@
 
 @keyframes pop-up-fade-in {
     0% {
-        transform: translate(-50%, -30%) scale(0.8);
-        opacity: 0;
+        transform: translate(0, 30%) scale(0);
+        opacity: 0.5;
+    }
+
+    70% {
+        transform: translate(-50%, 10%);
     }
 
     100% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translateX(-50%) scale(1);
     }
 }
 
