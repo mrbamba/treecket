@@ -1,5 +1,9 @@
 <template>
     <section @click="openTicket(ticket)" class="ticket-preview">
+        <button class="edit-ticket-preview-btn">
+            <span>i</span>
+            <ticket-preview-menu v-if="showTicketPreview" :ticket="ticket" />
+        </button>
         <div :style="{backgroundColor: ticket.color}">
             <div class="cover-container" v-if="ticket.cover && getCoverSrc">
                 <iframe
@@ -67,9 +71,15 @@
 </template>
 
 <script>
+import TicketPreviewMenu from '@/components/board/TicketPreviewMenu'
 import Avatar from 'vue-avatar'
 export default {
     props: ['ticket', 'labels', 'showFullLabel'],
+    data() {
+        return {
+            showTicketPreview:false
+        }
+    },
     computed: {
         getCoverSrc() {
 
@@ -125,7 +135,8 @@ export default {
         }
     },
     components: {
-        Avatar
+        Avatar,
+        TicketPreviewMenu
     }
 }
 </script>
