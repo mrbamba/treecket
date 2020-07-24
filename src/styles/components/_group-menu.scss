@@ -4,7 +4,6 @@
     position: absolute;
     min-width: 150px;
     height: fit-content;
-    right: 0;
     // top: rem(25px);
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -14,7 +13,6 @@
     button {
         width: 100%;
     }
-
     button .close-menu-btn {
         position: absolute;
         right: 0;

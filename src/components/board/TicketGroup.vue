@@ -16,15 +16,15 @@
                         ref="updatedGroupTitle"
                     />
                 </div>
-                <button @click="groupMenuOpened = !groupMenuOpened">
+                <button @click="toggleGroupMenu">
                     <i class="fas fa-ellipsis-h" />
+                </button>
                     <group-menu
                         v-if="groupMenuOpened"
                         :group="group"
                         @cloneGroup="cloneGroup"
                         @deleteGroup="deleteGroup"
                     />
-                </button>
             </div>
         </header>
 
@@ -78,8 +78,11 @@ export default {
         };
     },
     methods: {
-        toggleGroupMenu() {
-            this.groupMenuOpened = !this.groupMenuOpened
+        toggleGroupMenu(ev) {
+            console.log(ev);
+            this.groupMenuRight = ev.innerWidth - ev.clientX
+            this.groupMenuTop = ev.clientY
+            this.groupMenuOpened = !this.groupMenuOpened;
         },
         onEditTitle() {
             this.editTitle = true;
@@ -140,14 +143,14 @@ export default {
     computed: {
         ticketsInGroupCount() {
             return (this.group.tickets.length) ? this.group.tickets.length : '';
-        }
-    },
-    components: {
-        TicketPreview,
+    }
+},
+components: {
+    TicketPreview,
         Container,
         Draggable,
         AddTicket,
         GroupMenu
-    }
+}
 };
 </script>

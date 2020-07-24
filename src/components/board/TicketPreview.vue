@@ -1,9 +1,12 @@
 <template>
     <section @click="openTicket(ticket)" class="ticket-preview">
-        <button class="edit-ticket-preview-btn">
-            <span>i</span>
-            <ticket-preview-menu v-if="showTicketPreview" :ticket="ticket" />
+        <button
+            class="edit-ticket-preview-btn"
+            @click.stop="showTicketPreview = !showTicketPreview"
+        >
+            <i class="fas fa-pencil-alt"></i>
         </button>
+        <ticket-preview-menu v-if="showTicketPreview" :ticket="ticket" />
         <div :style="{backgroundColor: ticket.color}">
             <div class="cover-container" v-if="ticket.cover && getCoverSrc">
                 <iframe
@@ -11,7 +14,7 @@
                     :src="getCoverSrc"
                     frameborder="0"
                 ></iframe>
-                <img v-else :src="getCoverSrc"/>
+                <img v-else :src="getCoverSrc" />
             </div>
             <ul class="label-container clean-list">
                 <li class="ticket-label" v-for="label in ticketLabels" :key="label.id">
@@ -28,26 +31,31 @@
                     ></div>
                 </li>
             </ul>
-            <span>{{ ticket.title }}</span>
+            <span class="ticket-preview-title">{{ ticket.title }}</span>
             <div class="bottom-container">
-                <section class="badges-container">
+                <section v-if="ticket.dueDate" class="badges-container">
+                    <div class="due-date"
+                        :class="{'past-due': timeLeft === 'past-due', 'due-soon': timeLeft === 'due-soon'}"
+                    >
+                        <i class="far fa-clock"></i>
+                        <span>{{ dueDateToShow }}</span>
+                    </div>
                     <div v-if="ticket.description">
-                        <span>Desc!!</span>
-                        <img src alt />
+                        <i class="fas fa-align-left"></i>
                     </div>
                     <div v-if="ticket.comments.length > 0">
-                        <img src alt />
+                        <i class="far fa-comment"></i>
                         <span>{{ticket.comments.length}}</span>
                     </div>
-                    <div v-if="ticket.attachments.length > 0">
+                    <div class="attachment" v-if="ticket.attachments.length > 0">
+                        <i class="fas fa-paperclip"></i>
                         <span>{{ ticket.attachments.length }}</span>
-                        <img src alt />
                     </div>
                     <div
                         v-if="itemsCount.itemsCount > 0"
                         :class="{complete: itemsCount.doneItemsCount === itemsCount.itemsCount}"
                     >
-                        <img src alt />
+                        <i class="far fa-check-square"></i>
                         <span>{{ itemsCount.doneItemsCount }}/{{ itemsCount.itemsCount }}</span>
                     </div>
                 </section>
@@ -78,7 +86,7 @@ export default {
     props: ['ticket', 'labels', 'showFullLabel'],
     data() {
         return {
-            showTicketPreview:false
+            showTicketPreview: false
         }
     },
     computed: {
@@ -88,7 +96,7 @@ export default {
                 if (this.ticket.attachments[0].type === 'img') {
                     return this.ticket.attachments[0].src;
                 } else if (this.ticket.attachments[0].type === 'video') {
-                    const src = this.getIframeSrc(this.ticket.attachments[0].src) 
+                    const src = this.getIframeSrc(this.ticket.attachments[0].src)
                     return src
                 }
             }
@@ -110,6 +118,13 @@ export default {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
+        },
+        dueDateToShow() {
+            return new Date(this.ticket.dueDate).toLocaleDateString('en-us', { month: 'short', day: 'numeric' })
+        },
+        timeLeft() {
+            if (Date.now() + 1000*60*60*24 > Date.parse(this.ticket.dueDate)) return 'past-due'
+            else if (Date.now() + 1000*60*60*48 > Date.parse(this.ticket.dueDate)) return 'due-soon'
         }
     },
     methods: {
