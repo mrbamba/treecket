@@ -34,7 +34,7 @@
                 v-if="attachment.type === 'img' || attachment.type === 'video'"
             >
                 <span v-if="isCover" @click="onRemoveCover">Remove cover</span>
-                <span v-else @click="onMakeCover(attachment.id)">Make a cover</span>
+                <span v-else @click="onMakeCover(attachment.id)">Make cover</span>
             </button>
             <button class="underline-button" @click="onDeleteAttachment(attachment.id)">Delete</button>
         </div>

@@ -39,7 +39,6 @@
                 <ticket-attachments
                     :ticket="ticket"
                     @deleteAttachment="deleteAttachment"
-                    @showAddAttachment="toggleAddAttachment()"
                     @makeCover="makeCover"
                     @changeCoverStatus="changeCoverStatus"
                 />
@@ -91,17 +90,13 @@
                 @saveTicket="saveTicket"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
-                @showAddAttachment="toggleAddAttachment()"
                 @toggleMember="toggleMember"
                 @changeCoverStatus="changeCoverStatus"
                 @cloneTicket="cloneTicket"
+                @addAttachment="addAttachment"
             />
         </main>
-        <add-attachment
-            v-if="showAddAttachment"
-            @addAttachment="addAttachment"
-            @hideAddAttachment="toggleAddAttachment"
-        />
+        
     </div>
 </template>
 
@@ -111,7 +106,6 @@ import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
 import TicketHistory from '@/components/ticket/TicketHistory.vue';
-import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import { boardService } from "@/services/board.service.js";
 import { eventBus } from '@/services/event-bus.service.js';
 export default {
@@ -127,7 +121,7 @@ export default {
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
         return {
-            showAddAttachment: false,
+            // showAddAttachment: false,
             logView: 'Comments',
 
         }
@@ -214,13 +208,9 @@ export default {
             else labels.push(labelId);
             this.saveTicket();
         },
-        toggleAddAttachment() {
-            this.showAddAttachment = !this.showAddAttachment;
-        },
         addAttachment(src) {
             const newAttachment = boardService.getNewAttachment(src)
             this.ticket.attachments.push(newAttachment)
-            this.toggleAddAttachment()
             this.saveTicket();
             this.addActivity(`Added attachment: ${src} to ticket: ${this.ticket.id}`)
 
@@ -277,7 +267,7 @@ export default {
         TicketChecklists,
         TicketComments,
         TicketAttachments,
-        AddAttachment,
+        // AddAttachment,
         TicketHistory,
     }
 };

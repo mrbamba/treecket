@@ -28,9 +28,17 @@
             @change="saveTicket"
         ></el-date-picker>
 
-        <button @click="showAddAttachment">
+        <button @click="show.addAttachment=!show.addAttachment">
             <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
         </button>
+        <add-attachment
+            v-if="show.addAttachment"
+            @addAttachment="addAttachment"
+            @closeAddAttachment="show.addAttachment=false"
+        />
+
+
+
         <button @click.stop="changeCoverStatus">Cover</button>
 
         <h3>ACTIONS</h3>
@@ -47,9 +55,11 @@ import MemberSelector from "@/components/ticket/menu/MemberSelector.vue";
 import LabelSelector from "@/components/ticket/menu/LabelSelector.vue";
 import ChecklistCreator from "@/components/ticket/menu/ChecklistCreator.vue";
 import DateSelector from "@/components/ticket/menu/DateSelector.vue";
-import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
+// import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
 import CoverTool from "@/components/ticket/menu/CoverTool.vue";
 import labels from "@/components/board/labels.vue";
+import AddAttachment from "@/components/ticket/AddAttachment.vue";
+
 
 export default {
     name: "TicketMenu",
@@ -75,7 +85,7 @@ export default {
                 labelSelector: false,
                 checklistCreator: false,
                 dateSelector: false,
-                attachmentTool: false,
+                addAttachment: false,
                 coverTool: false,
                 dueDate: false,
             }
@@ -90,9 +100,6 @@ export default {
         },
         labelClicked(labelId) {
             this.$emit('updateTicketLabel', labelId)
-        },
-        showAddAttachment() {
-            this.$emit('showAddAttachment')
         },
         loadUsers(userFilterBy) {
             console.log(userFilterBy);
@@ -109,6 +116,9 @@ export default {
         },
         saveTicket(){
             this.$emit('saveTicket')
+        },
+        addAttachment(src){
+            this.$emit('addAttachment',src)
         }
     },
     components: {
@@ -116,9 +126,11 @@ export default {
         LabelSelector,
         ChecklistCreator,
         DateSelector,
-        AttachmentTool,
+        // AttachmentTool,
         CoverTool,
-        labels
+        labels,
+        AddAttachment
+
     }
 };
 </script>
