@@ -1,24 +1,29 @@
 <template>
     <div class="ticket-comments">
-        
         <div v-if="comments">
             <transition-group name="slide-up-fade">
-            <ticket-comment
-                v-for="comment in comments"
-                :key="comment.id"
-                :comment="comment"
-                class="ticket-comment"
-                @deleteComment="deleteComment"
-                @updateTicket="updateTicket"
-            />
+                <ticket-comment
+                    v-for="comment in comments"
+                    :key="comment.id"
+                    :comment="comment"
+                    class="ticket-comment"
+                    @deleteComment="deleteComment"
+                    @updateTicket="updateTicket"
+                />
             </transition-group>
         </div>
         <div class="add-comment-input">
             <div class="create-comment-avatar">
-                <avatar v-if="user" :username="user.fullName" :src="user.imgSrc" :size="32" />
+                <avatar
+                    v-if="user"
+                    :username="user.fullName"
+                    :src="user.imgSrc"
+                    :size="32"
+                />
             </div>
             <form class="input-wrapper">
-                <input class="minimal-input"
+                <input
+                    class="minimal-input"
                     type="text"
                     placeholder="Add a comment..."
                     @click.prevent="enteringComment = true"
@@ -54,11 +59,11 @@ export default {
             this.newCommentText = ''
         },
         deleteComment(commentId) {
-            console.log({commentId})
+            console.log({ commentId })
             let commentIdx = this.comments.findIndex((comment) => comment.id === commentId)
-                        console.log({commentIdx})
+            console.log({ commentIdx })
 
-            if (commentIdx<0)return
+            if (commentIdx < 0) return
             this.comments.splice(commentIdx, 1)
             this.$emit('updateTicket')
         },

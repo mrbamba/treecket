@@ -1,38 +1,52 @@
 .board-header {
-    padding: 8px 12px;
+    padding: 8px;
     color: #fff;
     font-size: rem(18px);
     font-weight: 700;
-    
-    //     .board-header-input {
-        //         padding: 0px;
-        //         outline: none;
-    //         border: none;
-    //         font-weight: 500;
-    //         font-size: 16px;
-    //         width: 400px;
-    //     }
-    
-
-    .board-title {
+    display: flex;
+    justify-content: space-between;
+    line-height: 32px;
+    div {
         display: inline-block;
+        +* {
+            display: inline-block;
+        }
+    }
+        
+    .board-title {
         cursor: pointer;
-        padding: rem(4px) rem(8px);
+        padding: 0 rem(8px);
+        margin-inline-end: rem(4px);
         border-radius: 4px;
-
+        
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
         }
+    }
+    
+    .board-title-input {
+        font-size: rem(18px);
+        margin-inline-end: rem(4px);
+        outline: none;
+        border: none;
+        color: #222;
+        padding: rem(4px) rem(8px);
+        font-weight: inherit;
+        border-radius: 4px;
     }
 
     button {
         border: none;
         background-color: rgba(255, 255, 255, 0.2);
-        padding: rem(8px) rem(8px);
+        line-height: inherit;
+        padding: 0 rem(12px);
         border-radius: 4px;
 
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
+        }
+        svg {
+            margin-inline-end: rem(6px);
         }
     }
 

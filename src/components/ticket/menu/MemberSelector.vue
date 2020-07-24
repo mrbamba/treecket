@@ -1,7 +1,9 @@
 <template>
     <div class="member-selector">
         <h2>Members</h2>
-        <i class="fas fa-times close-btn-fa" @click="closeMemberSelect" />
+        <button @click="closeMemberSelect">
+            <i class="fas fa-times close-btn-fa" />
+        </button>
 
         <input
             type="search"
@@ -59,7 +61,7 @@ export default {
             // Filters for search string
             let filtered = _.cloneDeep(this.boardMembers).filter(user => user.fullName.toLowerCase().includes(this.userFilterBy.txt.toLowerCase()))
             // Sorts by fullName
-            filtered.sort((memberA, memberB) => 
+            filtered.sort((memberA, memberB) =>
                 memberA.fullName.localeCompare(memberB.fullName)
             );
             // Creates array of only users that are on the ticket

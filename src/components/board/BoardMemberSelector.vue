@@ -1,7 +1,10 @@
 <template>
     <div class="board-member-selector">
         <h2>Members</h2>
-        <i class="fas fa-times close-btn-fa" @click="closeBoardMemberSelector" />
+        <button @click="closeBoardMemberSelector" class="close-btn-fa">
+
+        <i class="fas fa-times "  />
+        </button>
 
         <input
             type="search"
@@ -88,7 +91,6 @@ export default {
     },
     methods: {
         loadUsers() {
-            // console.log(this.userFilterBy);
             this.$emit('loadUsers', this.userFilterBy)
         },
         closeBoardMemberSelector() {
@@ -96,7 +98,6 @@ export default {
 
         },
         toggleMember(member) {
-            // console.log(member)
             this.$emit('toggleMember', member)
         },
     },

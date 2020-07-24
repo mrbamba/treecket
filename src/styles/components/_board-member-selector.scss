@@ -9,9 +9,13 @@
     width: 250px;
     z-index: 2;
     color: gray;
+
+    button{
+        padding: 0px;
+    }
     .close-btn-fa{
         position: absolute;
-        right: rem(10px);
+        right: rem(5px);
         font-size: rem(13px);
         cursor: pointer;
     }

@@ -6,119 +6,133 @@
     height: 100%;
     background-color: rgba(0, 15, 35, 0.35);
     backdrop-filter: blur(3px);
-	z-index: 3;
+    z-index: 3;
 }
 
 .bubble-msg {
     position: absolute;
-	max-width: 30em;
+    max-width: 30em;
     background-color: #0077ffee;
     color: #fff;
-	font-size: rem(14px);
-	padding: 0.4em 0.8em;
-	border-radius: rem(8px);
-    box-shadow:	0 2px 6px rgba(9, 33, 66, .2);
-	&::before {
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 0;
-		top: 100%;
-		right: 25%;
-		border-left: 0.6em solid transparent;
-		border-right: 0.3em solid transparent;
-		border-top: 0.6em solid #0077ffee;
-		border-bottom-color: #0077ffee;
-		filter: drop-shadow(0 2px 4px rgba(9, 33, 66, .2));
-	}
+    font-size: rem(14px);
+    padding: 0.4em 0.8em;
+    border-radius: rem(8px);
+    box-shadow: 0 2px 6px rgba(9, 33, 66, .2);
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 100%;
+        right: 25%;
+        border-left: 0.6em solid transparent;
+        border-right: 0.3em solid transparent;
+        border-top: 0.6em solid #0077ffee;
+        border-bottom-color: #0077ffee;
+        filter: drop-shadow(0 2px 4px rgba(9, 33, 66, .2));
+    }
 }
 
 .minimal-input {
     outline: none;
-	padding: rem(14px) rem(12px);
-	border-radius: 4px;
-	width: 100%;
+    padding: rem(14px) rem(12px);
+    border-radius: 4px;
+    width: 100%;
     border: 1px solid #e3e3e3;
     transition: border-color .3s ease;
+
     &:focus {
         border-color: #b2b2b2;
     }
 }
 
-.save-button{
-	border: none;
-	background-color: #0052cc;
-	color: white;
-
-	padding: 6px 10px;
-	border-radius: 3px;
-	margin: 8px;
+.input-hider {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+    white-space: pre;
 }
-.save-button:hover{
-	background-color: #0052ee;
-	transition: ease-in-out .3s;
 
-}
-.add-button{
-	border: none;
-	background-color: #20a23f;
-	color: white;
+.save-button {
+    border: none;
+    background-color: #0052cc;
+    color: white;
 
-	padding: 6px 10px;
-	border-radius: 3px;
-	margin: 8px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin: 8px;
 }
-.add-button:hover{
-	background-color: #27b548;
-	transition: ease-in-out .3s;
+
+.save-button:hover {
+    background-color: #0052ee;
+    transition: ease-in-out .3s;
 
 }
 
-.cancel-button{
-	border: none;
-	background: transparent;
-	color: #42526e;
-	padding: 6px 10px;
-	border-radius: 3px;
-}
-.cancel-button:hover{
-	background: rgb(220, 220, 220);
-	transition: ease-in-out .3s;
+.add-button {
+    border: none;
+    background-color: #20a23f;
+    color: white;
 
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin: 8px;
 }
 
-
-.delete-button{
-	border: none;
-	background: transparent;
-	color: #ED1C24;
-	padding: 6px 10px;
-	border-radius: 3px;
-	border: 1px solid #ED1C24;
-}
-.delete-button:hover{
-	background: rgb(220, 220, 220);
-	transition: ease-in-out .3s;
-	background-color: #ED1C24;
-	color: #fff;
+.add-button:hover {
+    background-color: #27b548;
+    transition: ease-in-out .3s;
 
 }
 
-.underline-button{
-	border: none;
-	background: transparent;
-	color: #6b778c;
-	padding: 0;
+.cancel-button {
+    border: none;
+    background: transparent;
+    color: #42526e;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
 
-	&:hover{
-		color: rgb(170, 170, 170);
-		text-decoration: underline;
-		transition: ease-in-out .3s;
-	}
+.cancel-button:hover {
+    background: rgb(220, 220, 220);
+    transition: ease-in-out .3s;
+
+}
+
+
+.delete-button {
+    border: none;
+    background: transparent;
+    color: #ED1C24;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 1px solid #ED1C24;
+}
+
+.delete-button:hover {
+    background: rgb(220, 220, 220);
+    transition: ease-in-out .3s;
+    background-color: #ED1C24;
+    color: #fff;
+
+}
+
+.underline-button {
+    border: none;
+    background: transparent;
+    color: #6b778c;
+    padding: 0;
+
+    &:hover {
+        color: rgb(170, 170, 170);
+        text-decoration: underline;
+        transition: ease-in-out .3s;
+    }
 }
 
 .dot-seperator::before {
-	color: #6b778c;
+    color: #6b778c;
     content: "·";
     display: inline-block;
     text-align: center;
@@ -126,10 +140,10 @@
     width: rem(19px);
 }
 
-.clean-list{
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
+.clean-list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 
@@ -150,6 +164,7 @@
 .video-ratio {
     @include aspect-ratio(16, 9);
 }
+
 // .desktop-browser-ratio {
 //     @include aspect-ratio(15, 8);
 // }

@@ -66,10 +66,11 @@
                         :key="member._id"
                     >
                         <avatar
-                            v-if="ticket.members"
+                            v-show="ticket.members"
                             :username="member.fullName"
                             :src="member.imgSrc"
                             :size="28"
+                            color="#fff"
                         />
                     </div>
                 </div>
