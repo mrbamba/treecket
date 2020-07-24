@@ -25,6 +25,7 @@
             type="date"
             placeholder="Pick due date"
             format="MMM-dd-yyyy"
+            @change="saveTicket"
         ></el-date-picker>
 
         <button @click="showAddAttachment">
@@ -105,6 +106,9 @@ export default {
         },
         onClone() {
             this.$emit('cloneTicket', this.ticket)
+        },
+        saveTicket(){
+            this.$emit('saveTicket')
         }
     },
     components: {

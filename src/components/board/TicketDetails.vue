@@ -88,6 +88,7 @@
                 :ticket="ticket"
                 :labels="labels"
                 :boardMembers="boardMembers"
+                @saveTicket="saveTicket"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
                 @showAddAttachment="toggleAddAttachment()"
