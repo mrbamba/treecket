@@ -8,7 +8,12 @@
                 <i class="fas fa-th-large" />
                 <span>Boards</span>
             </router-link>
-            <input class="ticket-search" style />
+            <div class="ticket-search">
+                <input type="text" @blur="clearInput" ref="ticketSearch" />
+                <button>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </nav>
 
         <router-link to="/" class="main-header-logo">
@@ -40,6 +45,9 @@ export default {
         gifRepeats(count, frames = 11) {
             // 11 frames (1100ms) + 1st frame at end of cycle
             return frames * count * 100 + 75;
+        },
+        clearInput() {
+            this.$refs.ticketSearch.value = '';
         }
     },
     watch: {

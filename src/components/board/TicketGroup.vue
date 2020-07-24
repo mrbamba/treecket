@@ -14,6 +14,7 @@
                         v-on:keyup.enter="updateGroupTitle"
                         class="minimal-input"
                         ref="updatedGroupTitle"
+                        maxlength="36"
                     />
                 </div>
                 <button @click="toggleGroupMenu">

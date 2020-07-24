@@ -8,7 +8,9 @@
             @updateChecklist="updateTicket"
             @deleteChecklist="deleteChecklist"
             @addItem="addItem"
+            @confetti="confetti"
         />
+        <canvas id="confetti" @click.self="hideOverlay" ref="confetti"></canvas>
     </div>
 </template>
 
@@ -29,6 +31,26 @@ export default {
         },
         addItem({itemTxt, checklistId}) {
             this.$emit('addItem', { itemTxt, checklistId });
+        },
+        confetti() {
+            this.$refs.confetti.style.display = 'block';
+            this.$confetti.start({
+                particles: [
+                    {
+                        type: 'image',
+                        url: 'https://res.cloudinary.com/dfhfhz5le/image/upload/v1595372019/treecket_hmoifu.png',
+                        size: 20
+                    },
+                    {
+                        type: 'rect',
+                    },
+                ],
+                defaultDropRate: 16,
+                canvasId: 'confetti'
+            });
+            setTimeout(() => {
+                this.$confetti.stop();
+            }, 2500);
         }
     },
     components: {
