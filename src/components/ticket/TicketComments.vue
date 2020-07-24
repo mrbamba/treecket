@@ -54,16 +54,11 @@ export default {
             this.newCommentText = ''
         },
         deleteComment(commentId) {
-            let commentIdx = this.comments.findIndex((comment) => {
-                comment.id === commentId;
-            })
-            this.comments.splice(commentIdx, 1)
-            this.$emit('updateTicket')
-        },
-        deleteComment(commentId) {
-            let commentIdx = this.comments.findIndex((comment) => {
-                comment.id === commentId;
-            })
+            console.log({commentId})
+            let commentIdx = this.comments.findIndex((comment) => comment.id === commentId)
+                        console.log({commentIdx})
+
+            if (commentIdx<0)return
             this.comments.splice(commentIdx, 1)
             this.$emit('updateTicket')
         },

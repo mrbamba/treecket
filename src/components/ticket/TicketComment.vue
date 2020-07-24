@@ -53,8 +53,8 @@ export default {
             this.comment.txt = this.commentEditText
             this.$emit('updateTicket',this.comment.txt)
         },
-        deleteComment() {
-            this.$emit('deleteComment')
+        deleteComment(commentId) {
+            this.$emit('deleteComment',commentId)
         }
     },
     components: {

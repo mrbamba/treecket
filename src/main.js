@@ -11,8 +11,10 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 import VueDragscroll from 'vue-dragscroll'
 import VueConfetti from 'vue-confetti'
-// import { DateTimePicker } from 'components'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 
+Vue.use(Element)
 Vue.use(VueConfetti);
 // Vue.use(DateTimePicker)
 

@@ -13,7 +13,7 @@
                 class="board-header-input"
                 ref="updatedBoardTitle"
             /> |
-        <button>Public</button> |
+        <button><i class="fas fa-user-lock" /> Public</button> |
 
         <section class="board-members">
             <ul class="clean-list">

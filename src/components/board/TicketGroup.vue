@@ -16,9 +16,14 @@
                         ref="updatedGroupTitle"
                     />
                 </div>
-                <button>
+                <button @click="groupMenuOpened = !groupMenuOpened">
                     <i class="fas fa-ellipsis-h" />
-                    <group-menu :groupId="group.id" />
+                    <group-menu
+                        v-if="groupMenuOpened"
+                        :group="group"
+                        @cloneGroup="clonenpGroup"
+                        @deleteGroup="deleteGroup"
+                    />
                 </button>
             </div>
         </header>
@@ -59,12 +64,12 @@ import { applyDrag, generateItems } from '@/services/dnd.service.js'
 
 export default {
     name: 'TicketGroup',
-    props: ['group', 'labels', 'showFullLabels'],
+    props: ['group', 'labels', 'showFullLabels', 'groupIdx'],
     data() {
         return {
             newGroup: this.group,
             editTitle: false,
-
+            groupMenuOpened: false,
             dropPlaceholderOptions: {
                 className: "drop-preview",
                 animationDuration: "150",
@@ -73,6 +78,9 @@ export default {
         };
     },
     methods: {
+        toggleGroupMenu() {
+            this.groupMenuOpened = !this.groupMenuOpened
+        },
         onEditTitle() {
             this.editTitle = true;
             this.$nextTick(() => this.$refs.updatedGroupTitle.focus());
@@ -84,7 +92,7 @@ export default {
         },
         changeLabelsDisplay() {
             this.$emit('changeLabelsDisplay')
-        }, 
+        },
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'close') {
@@ -102,6 +110,13 @@ export default {
                 this.addTicket();
             }
             this.toggleAddTicket();
+        },
+        cloneGroup(group) {
+            this.$emit('cloneGroup', group, this.groupIdx)
+
+        },
+        deleteGroup(groupId) {
+            this.$emit('deleteGroup', this.groupIdx)
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);

@@ -16,9 +16,18 @@
         <button @click="onAddChecklist">
             <i class="far fa-check-square" /> Checklist
         </button>
-        <button>
+
+        <div class="date-picker-title">
             <i class="far fa-clock" /> Due Date
-        </button>
+        </div>
+        <el-date-picker
+            v-model="ticket.dueDate"
+            type="date"
+            placeholder="Pick due date"
+            format="MMM-dd-yyyy"
+            @change="saveTicket"
+        ></el-date-picker>
+
         <button @click="showAddAttachment">
             <i class="fas fa-paperclip" /> Attachment
         </button>
@@ -67,7 +76,8 @@ export default {
                 checklistCreator: false,
                 dateSelector: false,
                 attachmentTool: false,
-                coverTool: false
+                coverTool: false,
+                dueDate: false,
             }
         }
     },
@@ -96,6 +106,9 @@ export default {
         },
         onClone() {
             this.$emit('cloneTicket', this.ticket)
+        },
+        saveTicket(){
+            this.$emit('saveTicket')
         }
     },
     components: {
@@ -111,4 +124,8 @@ export default {
 </script>
 
 <style>
+.el-date-editor.el-input {
+    max-width: 170px;
+    margin-bottom: 14px;
+}
 </style>
