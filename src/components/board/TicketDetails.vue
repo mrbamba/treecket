@@ -134,9 +134,6 @@ export default {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
             return { ...ticketLabels };
-        },
-        users() {
-            return this.$store.getters.users
         }
     },
     created() {

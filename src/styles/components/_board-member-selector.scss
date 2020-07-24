@@ -1,25 +1,24 @@
-.member-selector{
+.board-member-selector{
     position: fixed;
     display: inline-flex;
     flex-direction: column;
-    right: 15px;
     background-color: #fff;
     border: 1px solid #e8e5e5;
     padding: 15px 8px;
     border-radius: 5px;
     width: 250px;
-    z-index: 1;
-    box-shadow: 0 0 10px rgba(0, 0 ,0 ,.2);
+    z-index: 2;
+    color: gray;
 
     button{
         padding: 0px;
-        background-color: #fff;
-        border: none;
-        position: absolute;
-        right: rem(10px);
-        font-size: rem(13px);
     }
-    
+    .close-btn-fa{
+        position: absolute;
+        right: rem(5px);
+        font-size: rem(13px);
+        cursor: pointer;
+    }
     h2{
         font-size: 16px;
         text-align: center;

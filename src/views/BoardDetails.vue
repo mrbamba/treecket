@@ -1,7 +1,14 @@
 <template>
     <div class="board-details" v-if="currBoard" :style="{ background }">
         <main-header />
-        <board-header :boardTitle="currBoard.title" :boardMembers="currBoard.members" @updateBoardTitle="updateBoardTitle" />
+        <board-header
+            :boardTitle="currBoard.title"
+            :boardMembers="currBoard.members"
+            @updateBoardTitle="updateBoardTitle"
+            :systemUsers="systemUsers"
+            @loadUsers="loadUsers"
+            @toggleMember="toggleMember"
+        />
 
         <main
             class="groups-container"
@@ -105,6 +112,7 @@ export default {
             }
             this.saveBoard();
         })
+
     },
     mounted() {
         window.onload = () => { console.log("BoardDetails + background loaded") };
@@ -192,7 +200,6 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         getGroupPayload(idx) {
-            console.log("Group Payload!:", this.currBoard.groups[idx]);
             return this.currBoard.groups[idx];
         },
         async addGroup(newGroupName) {
@@ -234,7 +241,28 @@ export default {
         deleteGroup(groupIdx) {
             this.currBoard.groups.splice(groupIdx, 1)
             this.saveBoard()
-        } 
+        },
+        loadUsers(userFilterBy) {
+
+            this.$store.dispatch("loadUsers", userFilterBy);
+
+        },
+        toggleMember(memberToUpdate) {
+            console.log({memberToUpdate})
+            console.log('CurrBoard members: ',this.currBoard.members);
+            delete memberToUpdate.email
+            const memberIdx = this.currBoard.members.findIndex(member => member._id === memberToUpdate._id)
+            if (memberIdx >= 0) {
+                this.currBoard.members.splice(memberIdx, 1)
+                this.addActivity(`Removed ${memberToUpdate.fullName} from board`)
+
+            } else {
+                this.currBoard.members.push(memberToUpdate)
+                this.addActivity(`Added ${memberToUpdate.fullName} to board`)
+            }
+
+            this.saveBoard();
+        },
     },
     computed: {
         background() {
@@ -257,6 +285,10 @@ export default {
         },
         ticketActivities() {
             return this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id);
+        },
+        systemUsers() {
+            console.log(this.$store.getters.users)
+            return this.$store.getters.users
         }
     },
     components: {

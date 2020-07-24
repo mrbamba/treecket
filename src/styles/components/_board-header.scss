@@ -8,7 +8,7 @@
     line-height: 32px;
     div {
         display: inline-block;
-        >* {
+        +* {
             display: inline-block;
         }
     }

@@ -34,7 +34,7 @@ Vue.filter('pluck', function (objects, key) {
 });
 
 Vue.filter('isMember', (memberToCheck, members) => {
-  let temp = members.filter(member => member.fullName === memberToCheck.fullName)
+  let temp = members.filter(member => member._id === memberToCheck._id)
   return (temp.length > 0) ? '✔️' : ''
 })
 

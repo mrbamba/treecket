@@ -21,11 +21,16 @@
             </button>
             |
             <section class="board-members">
-                <ul class="clean-list">
-                    <li></li>
-                </ul>
-                <button>+</button>
-            </section>
+            <button @click="show.boardMembers=!show.boardMembers">+</button>
+            <board-member-selector
+                v-if="show.boardMembers"
+                :boardMembers="boardMembers"
+                :systemUsers="systemUsers"
+                @loadUsers="loadUsers"
+                @closeBoardMemberSelector="show.boardMembers=false"
+                @toggleMember="toggleMember"
+            />
+        </section>
         </div>
 
         <button>
@@ -35,13 +40,18 @@
 </template>
 
 <script>
+import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
+
 export default {
-    props: ['boardTitle', 'boardMembers'],
     name: "BoardHeader",
+    props: ['boardTitle', 'boardMembers', 'systemUsers'],
     data() {
         return {
             editTitle: false,
-            newTitle: this.boardTitle
+            newTitle: this.boardTitle,
+            show: {
+                boardMembers: false
+            }
         }
     },
     methods: {
@@ -56,6 +66,15 @@ export default {
                 this.$refs.updatedBoardTitle.focus()
             });
         },
+        loadUsers(userFilterBy) {
+            this.$emit('loadUsers', userFilterBy)
+        },
+        toggleMember(member) {
+            this.$emit('toggleMember', member)
+        },
+    },
+    components:{
+        BoardMemberSelector,
         resizeInput() {
             const input = this.$refs.updatedBoardTitle;
             const hide = input.previousElementSibling;

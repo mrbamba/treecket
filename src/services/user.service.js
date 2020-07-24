@@ -35,7 +35,9 @@ async function logout() {
 }
 function getUsers(usersFilterBy) {
     console.log('getting users', usersFilterBy);
-    return HttpService.get('user',usersFilterBy)
+
+
+    return HttpService.get(`user/?txt=${usersFilterBy.txt}`,usersFilterBy)
 }
 
 function _handleLogin(user) {
