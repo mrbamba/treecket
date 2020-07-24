@@ -1,5 +1,5 @@
-import httpService from './http.service'
-import utilService from './util.service'
+import httpService from './http.service';
+import utilService from './util.service';
 
 var localLoggedInUser = null;
 if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
@@ -18,15 +18,16 @@ export const boardService = {
   getAllowLabel,
   getNewAttachment,
   getNewActivity,
-  cloneTicket
+  cloneTicket,
+  cloneGroup
 };
 
 function query(filterBy) {
-  return httpService.get('board')
+  return httpService.get('board');
 }
 
 function getById(boardId) {
-  return httpService.get(`board/${boardId}`)
+  return httpService.get(`board/${boardId}`);
 }
 
 function update(board) {
@@ -34,39 +35,39 @@ function update(board) {
 }
 
 function addBoard(board) {
-  return httpService.post(`board`, board)
+  return httpService.post(`board`, board);
 }
 
 function cloneTicket(ticket) {
-  const newTicket = _.cloneDeep(ticket)
-  newTicket.id = utilService.makeId()
-  return newTicket
+  return utilService.cloneObj(ticket)
+}
+
+function cloneGroup(group) {
+  return utilService.cloneObj(group)
 }
 
 function getNewComment(commentText) {
-
   return {
     "id": utilService.makeId(),
     "txt": commentText,
     "createdAt": Date.now(),
     "by": _getMiniUser(),
   }
-
 }
 
 function getAllowLabel(label) {
-  label.id = utilService.makeId()
-  return label
+  label.id = utilService.makeId();
+  return label;
 }
 
 function getNewAttachment(src) {
-  const srcType = utilService.srcType(src)
-  const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link'
+  const srcType = utilService.srcType(src);
+  const type = (srcType === 'img') ? 'img' : (srcType === 'video') ? 'video' : 'link';
   return {
     "id": utilService.makeId(),
     type,
     "src": src
-  }
+  };
 }
 
 function _getMiniUser() {
@@ -75,12 +76,12 @@ function _getMiniUser() {
       "_id": localLoggedInUser._id,
       "fullName": localLoggedInUser.fullName,
       "imgSrc": localLoggedInUser.imgSrc,
-    }
+    };
   } else return {
     "_id": 'Guest',
     "fullName": 'Guest',
     "imgSrc": '',
-  }
+  };
 }
 
 function getNewActivity(text, ticketId) {
@@ -90,7 +91,7 @@ function getNewActivity(text, ticketId) {
     "createdAt": Date.now(),
     "ticketId": ticketId,
     "by": _getMiniUser()
-  }
+  };
 }
 
 function getNewChecklist() {
@@ -98,7 +99,7 @@ function getNewChecklist() {
     "id": utilService.makeId(),
     "title": "Checklist",
     "items": []
-  }
+  };
 }
 
 function getNewChecklistItem(txt) {
@@ -106,7 +107,7 @@ function getNewChecklistItem(txt) {
     "id": utilService.makeId(),
     "txt": txt,
     "isDone": false
-  }
+  };
 }
 
 function getNewTicket(title) {
@@ -123,7 +124,7 @@ function getNewTicket(title) {
     "comments": [],
     "checklists": [],
     "attachments": []
-  }
+  };
 }
 
 function getNewGroup(title) {
@@ -132,7 +133,7 @@ function getNewGroup(title) {
     "title": title,
     "color": "#eeeeee",
     "tickets": []
-  }
+  };
 }
 
 function getNewBoard(prefs) {
