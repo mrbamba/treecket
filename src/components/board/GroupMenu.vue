@@ -1,6 +1,8 @@
 <template>
     <div class="group-menu" tabindex="0" ref="groupMenu">
-        <button class="close-menu-btn close-button" @click="closeMenu">X</button>
+        <button class="close-menu-btn close-button" @click="closeMenu">
+            <i class="fas fa-times" />
+        </button>
         <button @click="onAddTicket" :data-prevent-blur="group.id">Add ticket</button>
         <button @click="onCloneGroup">Clone group</button>
         <button @click="onDeleteGroup">Delete group</button>

@@ -28,7 +28,7 @@ function makeId() {
 
 function srcType(src) {
     if (src.includes('jpg') || src.includes('png')
-        || src.includes('gif') || src.includes('scg')) return 'img'
+        || src.includes('gif') || src.includes('svg')) return 'img'
     else if (src.includes('embed') || src.includes('watch') || src.includes('mp4')) return 'video'
     else return 'link'
 }

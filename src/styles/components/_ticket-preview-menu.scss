@@ -1,7 +1,9 @@
 .ticket-preview-menu {
     width: 100px;
     height: 150px;
-    position: fixed;
-    right: 0;
+    position: absolute;
+    // right: 0;
+    display: flex;
     flex-direction: column;
+    width: 150px;
 }
