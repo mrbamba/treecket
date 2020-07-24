@@ -3,19 +3,24 @@
         <h3>ADD TO CARD</h3>
         <button @click="show.memberSelector=!show.memberSelector">Members</button>
         <MemberSelector
-            v-if="show.memberSelector" :boardMembers="boardMembers" :ticketMembers="ticket.members" @toggleMember="toggleMember"  @closeMemberSelect="show.memberSelector=false"/>
+            v-if="show.memberSelector"
+            :boardMembers="boardMembers"
+            :ticketMembers="ticket.members"
+            @toggleMember="toggleMember"
+            @closeMemberSelect="show.memberSelector=false"
+        />
         <button @click="show.labelSelector=!show.labelSelector">
-            <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
+            <i class="fas fa-tag" /> Labels
         </button>
         <labels v-show="show.labelSelector" @labelClicked="labelClicked" :labels="labels" />
         <button @click="onAddChecklist">
-            <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />Checklist
+            <i class="far fa-check-square" /> Checklist
         </button>
         <button>
-            <font-awesome-icon class="due-date-icon fa-button" fas icon="stopwatch" />Due Date
+            <i class="far fa-clock" /> Due Date
         </button>
         <button @click="showAddAttachment">
-            <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
+            <i class="fas fa-paperclip" /> Attachment
         </button>
         <button @click.stop="changeCoverStatus">Cover</button>
 
@@ -52,18 +57,18 @@ export default {
             type: Array,
             require: true
         },
-        
+
     },
     data() {
         return {
             show: {
-            memberSelector: false,
-            labelSelector: false,
-            checklistCreator: false,
-            dateSelector: false,
-            attachmentTool: false,
-            coverTool: false
-        }
+                memberSelector: false,
+                labelSelector: false,
+                checklistCreator: false,
+                dateSelector: false,
+                attachmentTool: false,
+                coverTool: false
+            }
         }
     },
     methods: {
@@ -79,9 +84,9 @@ export default {
         showAddAttachment() {
             this.$emit('showAddAttachment')
         },
-        loadUsers(userFilterBy){
+        loadUsers(userFilterBy) {
             console.log(userFilterBy);
-            this.$emit('loadUsers',userFilterBy)
+            this.$emit('loadUsers', userFilterBy)
         },
         toggleMember(member) {
             this.$emit('toggleMember', member)

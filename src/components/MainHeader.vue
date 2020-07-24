@@ -9,7 +9,7 @@
             <!-- <router-link to="/">Home</router-link> | -->
 
             <router-link to="/board">
-                <font-awesome-icon fas icon="th-large" /> 
+                <i class="fas fa-th-large" />
                 Boards
             </router-link>|
             <router-link to="/login">Log in</router-link>

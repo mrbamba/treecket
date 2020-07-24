@@ -1,23 +1,7 @@
 <template>
     <div class="board-details" v-if="currBoard" :style="{ background }">
         <main-header />
-
-        <section class="board-header">
-            <div v-if="!editTitle" @click="onEditTitle">
-                <div>{{ currBoard.title }}</div>
-            </div>
-            <div v-else>
-                <input
-                    @blur="updateBoardTitle"
-                    type="text"
-                    v-model="currBoard.title"
-                    v-on:keyup.enter="updateBoardTitle"
-                    class="board-header-input"
-                    ref="updatedBoardTitle"
-                />
-            </div>
-            <button>Public</button>
-        </section>
+        <board-header :boardTitle="currBoard.title" :boardMembers="currBoard.members" @updateBoardTitle="updateBoardTitle" />
 
         <main
             class="groups-container"
@@ -72,10 +56,11 @@
 </template>
 
 <script>
+import MainHeader from "@/components/MainHeader.vue";
+import BoardHeader from "@/components/board/BoardHeader.vue";
 import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
-import MainHeader from "@/components/MainHeader.vue";
 import UserMessage from '@/components/board/UserMessage.vue';
 
 import { boardService } from "@/services/board.service.js";
@@ -93,9 +78,8 @@ export default {
             selectedTicket: null,
             selectedTicketIdx: null,
             selectedGroupId: null,
-            editTitle: false,
 
-            // FAULT: Groups place-holders height are set to the tallest group
+            // NOTICE: Height of groups place-holders are set to the tallest group
             // upperDropPlaceholderOptions: {
             //     className: "cards-drop-preview",
             //     animationDuration: "200",
@@ -120,7 +104,7 @@ export default {
         })
     },
     mounted() {
-        window.onload = () => { console.log("BoardDetails + App.vue wrapper background LOADED!") };
+        window.onload = () => { console.log("BoardDetails + background loaded") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
@@ -218,6 +202,10 @@ export default {
         toggleScrollCursor(ev) {
             this.$el.style.cursor = (ev.type === 'dragscrollstart') ? 'ew-resize' : 'default';
         },
+        updateBoardTitle(title) {
+            this.currBoard.title = title;
+            this.saveBoard();
+        },
         addActivity({ text, ticketId = null }) {
             let newActivity = boardService.getNewActivity(text, ticketId);
             this.currBoard.activities.push(newActivity);
@@ -226,22 +214,12 @@ export default {
         changeLabelsDisplay() {
             this.showFullLabel = !this.showFullLabel;
         },
-        onEditTitle() {
-            this.editTitle = true;
-            this.$nextTick(() => this.$refs.updatedBoardTitle.focus());
-
-        },
-        updateBoardTitle() {
-            this.editTitle = false;
-            this.saveBoard();
-        },
         cloneTicket(ticket, ticketIdx, groupId) {
             const newTicket = boardService.cloneTicket(ticket);
             const newBoard = this.currBoard;
-            const groupIdx = newBoard.groups.findIndex(
-                group => group.id === groupId
-            );
+            const groupIdx = newBoard.groups.findIndex(group => group.id === groupId);
             if (groupIdx < 0) return;
+
             newBoard.groups[groupIdx].tickets.splice(ticketIdx, 0, newTicket);
             this.saveBoard(newBoard);
         }
@@ -270,13 +248,15 @@ export default {
         }
     },
     components: {
+        MainHeader,
+        BoardHeader,
         TicketGroup,
         TicketDetails,
         Container,
         Draggable,
         AddGroup,
-        MainHeader,
         UserMessage,
+        BoardHeader,
     },
     directives: {
         dragscroll

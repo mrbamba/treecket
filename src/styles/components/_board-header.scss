@@ -1,0 +1,28 @@
+.board-header {
+    padding: 4px 12px;
+    color: #fff;
+    font-size: rem(18px);
+    font-weight: 700;
+
+    //     .board-header-input {
+    //         padding: 0px;
+    //         outline: none;
+    //         border: none;
+    //         font-weight: 500;
+    //         font-size: 16px;
+    //         width: 400px;
+    //     }
+
+
+    .board-title {
+        display: inline-block;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.32);
+        }
+    }
+
+    .board-members {
+        display: inline-block;
+    }
+}

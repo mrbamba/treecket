@@ -12,7 +12,7 @@
 
             <button class="close-btn" @click="closeTicketDetails">
                 <!-- <p class="bubble-msg">Press ESC to exit</p> -->
-                <font-awesome-icon fas icon="times" class="close-btn-fa" />
+                <i class="fas fa-times" />
             </button>
         </header>
 
@@ -60,10 +60,10 @@
                     <div class="ticket-activity-selector">
                         <h4>Show:</h4>
                         <button @click="logView='Comments'">
-                            <font-awesome-icon class="comments-icon" far icon="comment" />Comments
+                            <i class="far fa-comment" /> Comments
                         </button>
                         <button @click="logView='History'">
-                            <font-awesome-icon class="history-icon" fas icon="history" />History
+                            <i class="fas fa-history" /> History
                         </button>
                     </div>
                 </div>

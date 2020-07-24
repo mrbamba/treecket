@@ -17,7 +17,7 @@
                     />
                 </div>
                 <button>
-                    <font-awesome-icon fas icon="ellipsis-h" />
+                    <i class="fas fa-ellipsis-h" />
                     <group-menu :groupId="group.id" />
                 </button>
             </div>
