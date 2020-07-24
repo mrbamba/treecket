@@ -1,8 +1,7 @@
 .ticket-comments {
-    
     overflow-x: hidden;
     .add-comment-input {
-        display: flex;
+        display: fixed;
         width: 100%;
 
         .create-comment-avatar {

@@ -1,51 +1,53 @@
 <template>
-    <header class="main-header" :style="{ backgroundColor }">
-        <!-- <input class="minimal-input" style="" /> -->
+    <header class="main-header">
+        <nav>
+            <router-link to="/">
+                <i class="fas fa-home"></i>
+            </router-link>
+            <router-link to="/board">
+                <i class="fas fa-th-large" />
+                <span>Boards</span>
+            </router-link>
+            <input class="ticket-search" style />
+        </nav>
+
         <router-link to="/" class="main-header-logo">
             <img :src="logoSrc" alt ref="logo" />
             <h1>Treecket</h1>
         </router-link>
-        <nav>
-            <!-- <router-link to="/">Home</router-link> | -->
+        <!-- <router-link to="/login">Log in</router-link> -->
+        <!-- <avatar :username="user.fullName" :src="user.imgSrc" :size="32" /> -->
 
-            <router-link to="/board">
-                <i class="fas fa-th-large" />
-                Boards
-            </router-link>|
-            <router-link to="/login">Log in</router-link>
-            <!-- <router-link to="/about">About</router-link> -->
-        </nav>
+        <!-- <router-link to="/about">About</router-link> -->
     </header>
 </template>
 
 <script>
 export default {
     name: "MainHeader",
+    props: ['user'],
     data() {
         return {
             logoSrc: require('@/assets/logo-white.png'),
         }
     },
     created() {
-        this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce +100ms for first frame on last bounce)
-        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 3400);
+        this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
+        this.logoTimeout = setTimeout(() =>
+            this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(3));
     },
-    computed: {
-        backgroundColor() {
-            if (!this.$route.params.boardId) {
-                // return '#f2f8ff';
-                return '#026aa7';
-            }
-        },
-        // logoSrc() {
-        //     return (!this.$route.params.boardId) ? '@/assets/logo.png' : '@/assets/logo-white.png';
-        // }
+    methods: {
+        gifRepeats(count, frames = 11) {
+            // 11 frames (1100ms) + 1st frame at end of cycle
+            return frames * count * 100 + 75;
+        }
     },
     watch: {
         $route(to, from) {
             // Loading gif
             this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
-            setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 1200);
+            this.logoTimeout = setTimeout(() =>
+                this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(1));
         }
     }
 };

@@ -1,35 +1,36 @@
 <template>
     <section class="board-header">
         <div>
-        <div v-if="!editTitle" @click="onEditTitle" class="board-title">
-            <div>{{ newTitle }}</div>
+            <div v-if="!editTitle" @click="onEditTitle" class="board-title">
+                <div>{{ newTitle }}</div>
+            </div>
+            <div v-else>
+                <span class="input-hider"></span>
+                <input
+                    @blur="updateBoardTitle"
+                    @input="resizeInput"
+                    type="text"
+                    v-model="newTitle"
+                    v-on:keyup.enter="updateBoardTitle"
+                    class="board-title-input"
+                    ref="updatedBoardTitle"
+                />
+            </div>
+            <button>
+                <i class="fas fa-user-lock" /> Team
+            </button>
+            |
+            <section class="board-members">
+                <ul class="clean-list">
+                    <li></li>
+                </ul>
+                <button>+</button>
+            </section>
         </div>
-        <div v-else>
-            <span class="input-hider"></span>
-            <input
-                @blur="updateBoardTitle"
-                @input="resizeInput"
-                type="text"
-                v-model="newTitle"
-                v-on:keyup.enter="updateBoardTitle"
-                class="board-title-input"
-                ref="updatedBoardTitle"
-            />
-        </div>|
+
         <button>
-            <i class="fas fa-user-lock" /> Public
+            <i class="fas fa-ellipsis-h" /> Show Menu
         </button>
-        |
-        <section class="board-members">
-            <ul class="clean-list">
-                <li></li>
-            </ul>
-            <button>+</button>
-        </section>
-        </div>
-
-        <button><i class="fas fa-ellipsis-h" /> Show Menu</button>
-
     </section>
 </template>
 

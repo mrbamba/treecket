@@ -13,17 +13,18 @@
         font-size: 14px;
         color: rgb(66, 82, 110);;
         span{
-            margin-right: 3px;;
+            font-weight: 500;
+            margin-right: 3px;
         }
     }
     .comment-text{
         color: rgb(23, 43, 77);
         font-size: 14px;
+        margin: rem(12px) 0 rem(9px);
     }
 
     .editing-comment{
         display: flex;
         flex-direction: column;
     }
-
 }

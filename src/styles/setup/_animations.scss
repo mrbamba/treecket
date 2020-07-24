@@ -92,22 +92,24 @@
 
 
 .pop-up-fade-enter-active {
-    animation: pop-up-fade-in .3s ease-in-out;
+    animation: pop-up-fade-in .4s ease;
 }
 
 .pop-up-fade-leave-active {
-    animation: pop-up-fade-in .2s reverse ease;
+    animation: pop-up-fade-in .1s reverse ease;
 }
 
 @keyframes pop-up-fade-in {
     0% {
-        transform: translateX(-50%) scale(0.7);
-        opacity: 0;
+        transform: translate(-50%, 50%) scaleY(0.8);
+        opacity: 0.5;
     }
 
-    50% {
-        transform: translate(-50%, 50px);
-    }
+    // 50% {
+    //     transform: translate(-50%, 50px) scaleY(0.9);
+    //     opacity: 0.8;
+    // }
+    
 
     100% {
         transform: translateX(-50%) scale(1);
