@@ -21,7 +21,7 @@
                     <group-menu
                         v-if="groupMenuOpened"
                         :group="group"
-                        @cloneGroup="clonenpGroup"
+                        @cloneGroup="cloneGroup"
                         @deleteGroup="deleteGroup"
                     />
                 </button>
@@ -57,7 +57,7 @@
 <script>
 import TicketPreview from "./TicketPreview.vue";
 import AddTicket from "./AddTicket.vue";
-import GroupMenu from '@/components/GroupMenu.vue'
+import GroupMenu from '@/components/board/GroupMenu.vue'
 import { boardService } from "@/services/board.service.js";
 import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag, generateItems } from '@/services/dnd.service.js'
