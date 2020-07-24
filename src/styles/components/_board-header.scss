@@ -6,6 +6,9 @@
     display: flex;
     justify-content: space-between;
     line-height: 32px;
+    button{
+        margin-right: 5px;
+    }
     div {
         display: inline-block;
         +* {
@@ -52,5 +55,10 @@
 
     .board-members {
         display: inline-block;
+    }
+    .end-of-board-header{
+        display: flex;
+        flex-direction: row;
+        
     }
 }

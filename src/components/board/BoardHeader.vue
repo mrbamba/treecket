@@ -19,38 +19,44 @@
             <button>
                 <i class="fas fa-user-lock" /> Team
             </button>
-            |
+            
             <section class="board-members">
-            <button @click="show.boardMembers=!show.boardMembers">+</button>
-            <board-member-selector
-                v-if="show.boardMembers"
-                :boardMembers="boardMembers"
-                :systemUsers="systemUsers"
-                @loadUsers="loadUsers"
-                @closeBoardMemberSelector="show.boardMembers=false"
-                @toggleMember="toggleMember"
-            />
-        </section>
+                <button @click="show.boardMembers=!show.boardMembers">+</button>
+                <board-member-selector
+                    v-if="show.boardMembers"
+                    :boardMembers="boardMembers"
+                    :systemUsers="systemUsers"
+                    @loadUsers="loadUsers"
+                    @closeBoardMemberSelector="show.boardMembers=false"
+                    @toggleMember="toggleMember"
+                />
+            </section>
         </div>
-
-        <button>
-            <i class="fas fa-ellipsis-h" /> Show Menu
-        </button>
+        <div class="end-of-board-header">
+            <button @click="show.dashboard=!show.dashboard">
+                <i class="fas fa-chart-area"></i>
+            </button>
+            <dashboard :board="board" v-if="show.dashboard"/>
+            <button>
+                <i class="fas fa-ellipsis-h" /> Show Menu
+            </button>
+        </div>
     </section>
 </template>
 
 <script>
 import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
-
+import Dashboard from '@/components/board/Dashboard.vue'
 export default {
     name: "BoardHeader",
-    props: ['boardTitle', 'boardMembers', 'systemUsers'],
+    props: ['boardTitle', 'boardMembers', 'systemUsers','board'],
     data() {
         return {
             editTitle: false,
             newTitle: this.boardTitle,
             show: {
-                boardMembers: false
+                boardMembers: false,
+                dashboard: false
             }
         }
     },
@@ -72,9 +78,6 @@ export default {
         toggleMember(member) {
             this.$emit('toggleMember', member)
         },
-    },
-    components:{
-        BoardMemberSelector,
         resizeInput() {
             const input = this.$refs.updatedBoardTitle;
             const hide = input.previousElementSibling;
@@ -82,6 +85,10 @@ export default {
             hide.textContent = input.value;
             input.style.width = hide.offsetWidth + 16 + "px";
         }
+    },
+    components: {
+        BoardMemberSelector,
+        Dashboard,
     }
 }
 </script>

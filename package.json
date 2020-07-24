@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build":  "vue-cli-service build --dest ../backend/public"
+    "build": "vue-cli-service build --dest ../backend/public"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "lodash": "^4.17.19",
@@ -17,6 +18,7 @@
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-avatar": "^2.3.0",
+    "vue-chartjs": "^3.5.0",
     "vue-confetti": "^2.0.9",
     "vue-dragscroll": "^2.1.0",
     "vue-router": "^3.2.0",

@@ -4,8 +4,9 @@
         <board-header
             :boardTitle="currBoard.title"
             :boardMembers="currBoard.members"
-            @updateBoardTitle="updateBoardTitle"
             :systemUsers="systemUsers"
+            :board="currBoard"
+            @updateBoardTitle="updateBoardTitle"
             @loadUsers="loadUsers"
             @toggleMember="toggleMember"
         />
