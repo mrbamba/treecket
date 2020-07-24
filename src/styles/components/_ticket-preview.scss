@@ -8,9 +8,10 @@
     margin-bottom: 8px;
     min-height: 32px;
 
-    // .smooth-dnd-draggable-wrapper:last-child & {
-    //     margin-bottom: 1px;
-    // }
+    .tickets-container>div>div:last-child & {
+        margin-bottom: 1px;
+    }
+
     .edit-ticket-preview-btn {
         position: absolute;
         right: 0;
