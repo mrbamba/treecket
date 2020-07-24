@@ -28,7 +28,7 @@ export default {
     },
     created() {
         this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce +100ms for first frame on last bounce)
-        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 1200);
+        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), 3400);
     },
     computed: {
         backgroundColor() {

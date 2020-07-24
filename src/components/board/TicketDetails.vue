@@ -259,7 +259,7 @@ export default {
             this.saveTicket();
         },
         cloneTicket(ticket) {
-            this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId)
+            this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId);
         }
     },
     components: {
