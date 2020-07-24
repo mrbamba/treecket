@@ -17,14 +17,11 @@
                     />
                 </div>
                 <button @click="groupMenuOpened = !groupMenuOpened">
-                    <font-awesome-icon
-                        fas
-                        icon="ellipsis-h"
-                    />
+                    <i class="fas fa-ellipsis-h" />
                     <group-menu
                         v-if="groupMenuOpened"
                         :group="group"
-                        @cloneGroup="cloneGroup"
+                        @cloneGroup="clonenpGroup"
                         @deleteGroup="deleteGroup"
                     />
                 </button>

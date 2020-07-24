@@ -10,15 +10,15 @@
             @closeMemberSelect="show.memberSelector=false"
         />
         <button @click="show.labelSelector=!show.labelSelector">
-            <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
+            <i class="fas fa-tag" /> Labels
         </button>
         <labels v-show="show.labelSelector" @labelClicked="labelClicked" :labels="labels" />
         <button @click="onAddChecklist">
-            <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />Checklist
+            <i class="far fa-check-square" /> Checklist
         </button>
 
         <div class="date-picker-title">
-            <font-awesome-icon class="due-date-icon fa-button" fas icon="stopwatch" />Due Date
+            <i class="far fa-clock" /> Due Date
         </div>
         <el-date-picker
             v-model="ticket.dueDate"
@@ -29,15 +29,13 @@
         ></el-date-picker>
 
         <button @click="show.addAttachment=!show.addAttachment">
-            <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
+            <i class="fas fa-paperclip" /> Attachment
         </button>
         <add-attachment
             v-if="show.addAttachment"
             @addAttachment="addAttachment"
             @closeAddAttachment="show.addAttachment=false"
         />
-
-
 
         <button @click.stop="changeCoverStatus">Cover</button>
 
@@ -114,11 +112,11 @@ export default {
         onClone() {
             this.$emit('cloneTicket', this.ticket)
         },
-        saveTicket(){
+        saveTicket() {
             this.$emit('saveTicket')
         },
-        addAttachment(src){
-            this.$emit('addAttachment',src)
+        addAttachment(src) {
+            this.$emit('addAttachment', src)
         }
     },
     components: {

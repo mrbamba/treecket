@@ -1,7 +1,7 @@
 <template>
     <div class="member-selector">
         <h2>Members</h2>
-        <font-awesome-icon fas icon="times" class="close-btn-fa" @click="closeMemberSelect" />
+        <i class="fas fa-times close-btn-fa" @click="closeMemberSelect" />
 
         <input
             type="search"
