@@ -1,38 +1,49 @@
 <template>
     <section class="board-header">
-       
         <div v-if="!editTitle" @click="onEditTitle" class="board-title">
             <div>{{ newTitle }}</div>
         </div>
 
-            <input v-else
-                @blur="updateBoardTitle"
-                type="text"
-                v-model="newTitle"
-                v-on:keyup.enter="updateBoardTitle"
-                class="board-header-input"
-                ref="updatedBoardTitle"
-            /> |
-        <button><i class="fas fa-user-lock" /> Public</button> |
-
+        <input
+            v-else
+            @blur="updateBoardTitle"
+            type="text"
+            v-model="newTitle"
+            v-on:keyup.enter="updateBoardTitle"
+            class="board-header-input"
+            ref="updatedBoardTitle"
+        /> |
+        <button>
+            <i class="fas fa-user-lock" /> Public
+        </button>
+ |
         <section class="board-members">
-            <ul class="clean-list">
-                <li></li>
-            </ul>
-            <button>+</button>
+            <button @click="show.boardMembers=!show.boardMembers">+</button>
+            <board-member-selector
+                v-if="show.boardMembers"
+                :boardMembers="boardMembers"
+                :systemUsers="systemUsers"
+                @loadUsers="loadUsers"
+                @closeBoardMemberSelector="show.boardMembers=false"
+                @toggleMember="toggleMember"
+            />
         </section>
-
     </section>
 </template>
 
 <script>
+import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
+
 export default {
-    props: ['boardTitle', 'boardMembers'],
     name: "BoardHeader",
+    props: ['boardTitle', 'boardMembers', 'systemUsers'],
     data() {
         return {
             editTitle: false,
-            newTitle: this.boardTitle
+            newTitle: this.boardTitle,
+            show: {
+                boardMembers: false
+            }
         }
     },
     methods: {
@@ -44,6 +55,15 @@ export default {
             this.editTitle = true;
             this.$nextTick(() => this.$refs.updatedBoardTitle.focus());
         },
+        loadUsers(userFilterBy) {
+            this.$emit('loadUsers', userFilterBy)
+        },
+        toggleMember(member) {
+            this.$emit('toggleMember', member)
+        },
+    },
+    components:{
+        BoardMemberSelector,
     }
 };
 </script>
