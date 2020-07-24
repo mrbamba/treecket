@@ -85,7 +85,6 @@ export default {
             onEditItemTxt: '',
             showChecklistTitleEdit: false,
             onEditChecklistTitle: '',
-            allowConfetti: true
         }
     },
     computed: {
@@ -99,7 +98,9 @@ export default {
     methods: {
         updateChecklist() {
             this.$emit('updateChecklist', this.checklist);
-            if (this.allowConfetti && this.checklist.items.every(item => item.isDone)) this.confetti();
+            if (this.checklist.items.length > 0 && this.checklist.items.every(item => item.isDone)) {
+                this.$emit('confetti');
+            }
         },
         deleteChecklist() {
             this.$emit('deleteChecklist', this.checklistIdx, this.checklist.id);
@@ -120,7 +121,7 @@ export default {
         },
         cancelUpdateTitle(ev, checklist) {
             if (!ev.relatedTarget ||
-            ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "saveTitle") return
+                ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "saveTitle") return
             console.log('cancel');
             checklist.title = this.onEditChecklistTitle;
             this.onEditChecklistTitle = '';
@@ -173,26 +174,6 @@ export default {
             this.checklist.items.splice(itemIdx, 1);
             this.updateChecklist();
         },
-        confetti() {
-            this.$confetti.start({
-                particles: [
-                    {
-                        type: 'image',
-                        url: 'https://res.cloudinary.com/dfhfhz5le/image/upload/v1595372019/treecket_hmoifu.png',
-                        size: 20
-                    },
-                    {
-                        type: 'rect',
-                    },
-                ],
-                defaultDropRate: 16,
-                // canvasId: 'confetti'
-            });
-            setTimeout(() => {
-                this.$confetti.stop();
-            }, 2500);
-            this.allowConfetti = false;
-        }
     },
     created() {
         eventBus.$on('checklistAdded', (checklist) => {
