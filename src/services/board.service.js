@@ -39,9 +39,11 @@ function addBoard(board) {
 }
 
 function cloneTicket(ticket) {
-  const newTicket = _.cloneDeep(ticket);
-  newTicket.id = utilService.makeId();
-  return newTicket;
+  return utilService.cloneObj(ticket)
+}
+
+function cloneGroup(group) {
+  return utilService.cloneObj(group)
 }
 
 function getNewComment(commentText) {
@@ -172,5 +174,5 @@ function getNewBoard(prefs) {
         "tickets": []
       }
     ]
-  };
+  }
 }

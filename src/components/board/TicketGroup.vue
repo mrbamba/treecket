@@ -16,9 +16,17 @@
                         ref="updatedGroupTitle"
                     />
                 </div>
-                <button>
-                    <font-awesome-icon fas icon="ellipsis-h" />
-                    <group-menu :group="group" @cloneGroup="cloneGroup" />
+                <button @click="groupMenuOpened = !groupMenuOpened">
+                    <font-awesome-icon
+                        fas
+                        icon="ellipsis-h"
+                    />
+                    <group-menu
+                        v-if="groupMenuOpened"
+                        :group="group"
+                        @cloneGroup="cloneGroup"
+                        @deleteGroup="deleteGroup"
+                    />
                 </button>
             </div>
         </header>
@@ -64,7 +72,7 @@ export default {
         return {
             newGroup: this.group,
             editTitle: false,
-
+            groupMenuOpened: false,
             dropPlaceholderOptions: {
                 className: "drop-preview",
                 animationDuration: "150",
@@ -73,6 +81,9 @@ export default {
         };
     },
     methods: {
+        toggleGroupMenu() {
+            this.groupMenuOpened = !this.groupMenuOpened
+        },
         onEditTitle() {
             this.editTitle = true;
             this.$nextTick(() => this.$refs.updatedGroupTitle.focus());
@@ -84,7 +95,7 @@ export default {
         },
         changeLabelsDisplay() {
             this.$emit('changeLabelsDisplay')
-        }, 
+        },
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'close') {
@@ -103,10 +114,12 @@ export default {
             }
             this.toggleAddTicket();
         },
-        
         cloneGroup(group) {
             this.$emit('cloneGroup', group, this.groupIdx)
 
+        },
+        deleteGroup(groupId) {
+            this.$emit('deleteGroup', this.groupIdx)
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
