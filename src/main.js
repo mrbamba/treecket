@@ -13,9 +13,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueDragscroll from 'vue-dragscroll'
 import VueConfetti from 'vue-confetti'
-// import { DateTimePicker } from 'components'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 
-
+Vue.use(Element)
 Vue.use(VueConfetti);
 // Vue.use(DateTimePicker)
 library.add(fas)

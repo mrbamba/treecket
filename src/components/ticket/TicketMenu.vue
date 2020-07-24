@@ -3,7 +3,12 @@
         <h3>ADD TO CARD</h3>
         <button @click="show.memberSelector=!show.memberSelector">Members</button>
         <MemberSelector
-            v-if="show.memberSelector" :boardMembers="boardMembers" :ticketMembers="ticket.members" @toggleMember="toggleMember"  @closeMemberSelect="show.memberSelector=false"/>
+            v-if="show.memberSelector"
+            :boardMembers="boardMembers"
+            :ticketMembers="ticket.members"
+            @toggleMember="toggleMember"
+            @closeMemberSelect="show.memberSelector=false"
+        />
         <button @click="show.labelSelector=!show.labelSelector">
             <font-awesome-icon class="labels-icon fa-button" fas icon="tag" />Labels
         </button>
@@ -11,9 +16,17 @@
         <button @click="onAddChecklist">
             <font-awesome-icon class="checklist-icon fa-button" fas icon="tasks" />Checklist
         </button>
-        <button>
+
+        <div class="date-picker-title">
             <font-awesome-icon class="due-date-icon fa-button" fas icon="stopwatch" />Due Date
-        </button>
+        </div>
+        <el-date-picker
+            v-model="ticket.dueDate"
+            type="date"
+            placeholder="Pick due date"
+            format="MMM-dd-yyyy"
+        ></el-date-picker>
+
         <button @click="showAddAttachment">
             <font-awesome-icon class="attachment-icon fa-button" fas icon="paperclip" />Attachment
         </button>
@@ -52,18 +65,19 @@ export default {
             type: Array,
             require: true
         },
-        
+
     },
     data() {
         return {
             show: {
-            memberSelector: false,
-            labelSelector: false,
-            checklistCreator: false,
-            dateSelector: false,
-            attachmentTool: false,
-            coverTool: false
-        }
+                memberSelector: false,
+                labelSelector: false,
+                checklistCreator: false,
+                dateSelector: false,
+                attachmentTool: false,
+                coverTool: false,
+                dueDate: false,
+            }
         }
     },
     methods: {
@@ -79,9 +93,9 @@ export default {
         showAddAttachment() {
             this.$emit('showAddAttachment')
         },
-        loadUsers(userFilterBy){
+        loadUsers(userFilterBy) {
             console.log(userFilterBy);
-            this.$emit('loadUsers',userFilterBy)
+            this.$emit('loadUsers', userFilterBy)
         },
         toggleMember(member) {
             this.$emit('toggleMember', member)
@@ -106,4 +120,8 @@ export default {
 </script>
 
 <style>
+.el-date-editor.el-input {
+    max-width: 170px;
+    margin-bottom: 14px;
+}
 </style>
