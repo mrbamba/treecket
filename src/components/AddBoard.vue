@@ -5,7 +5,7 @@
             v-model="boardPrefs.title"
             type="text"
             placeholder="Add board title"
-            maxlength="32"
+            maxlength="36"
         />
         <button class="save-button" @click="addBoard">Save</button>
         <button class="cancel-button" @click="cancelAddBoard">Cancel</button>

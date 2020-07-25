@@ -182,8 +182,6 @@ export default {
             this.updateChecklist();
         },
         confetti() {
-            // this.$refs.confetti.style.display = 'block';
-            console.log(this)
             if (!this.allowConfetti) return;
             this.allowConfetti = false;
             this.$confetti.start({
@@ -197,14 +195,14 @@ export default {
                         type: 'rect',
                     },
                 ],
-                defaultDropRate: 16,
-                // canvasId: 'confetti'
-            });
-            this.lastConfetti = Date.now();
+                defaultDropRate: 14,
+            })
             setTimeout(() => {
+                // let ctx = this.$confetti.canvas.ctx;
+                // let canvas = this.$confetti.canvas.canvas;
+                // console.log({ctx, canvas})
+                // ctx.clearRect(0, 0, canvas.width, canvas.height);
                 this.$confetti.stop();
-                console.log(this.$confetti.canvas)
-                this.$confetti.canvas.clearRect(0, 0, canvas.width, canvas.height);
             }, 3500);
         }
     }

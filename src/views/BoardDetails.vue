@@ -1,7 +1,7 @@
 <template>
     <div class="board-details" v-if="currBoard" :style="{ background }">
-        <main-header />
-        <board-header
+        <board-header />
+        <board-controls
             :boardTitle="currBoard.title"
             :boardMembers="currBoard.members"
             :systemUsers="systemUsers"
@@ -76,8 +76,8 @@
 </template>
 
 <script>
-import MainHeader from "@/components/MainHeader.vue";
 import BoardHeader from "@/components/board/BoardHeader.vue";
+import BoardControls from "@/components/board/BoardControls.vue";
 import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
@@ -360,8 +360,8 @@ export default {
         }
     },
     components: {
-        MainHeader,
         BoardHeader,
+        BoardControls,
         Container,
         Draggable,
         TicketGroup,
