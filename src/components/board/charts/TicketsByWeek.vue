@@ -10,21 +10,19 @@
 </template>
 
 <script>
-// import VueCharts from 'vue-chartjs'
-// import { Line } from 'vue-chartjs'
 import moment from 'moment'
 import TicketsByWeekChart from '@/components/board/charts/TicketsByWeekChart.vue'
 
 
 
 export default {
+    name: "TicketsByWeek",
     props: {
         board: {
             type: Object,
             require: true
         }
     },
-    name: "TicketsByWeek",
     // extends: Line,
     data() {
         return {
@@ -41,7 +39,6 @@ export default {
     },
     methods: {
         calculateData() {
-            console.log(this.board);
             let board = _.cloneDeep(this.board)
             //Create array on all board tickets
             let tickets = []

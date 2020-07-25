@@ -6,12 +6,14 @@
         <h2>Dashboard</h2>
         <tickets-by-week :board="board" />
         <tickets-per-group :board="board" />
+        <tickets-per-member :board="board" />
     </section>
 </template>
 
 <script>
 import TicketsPerGroup from '@/components/board/charts/TicketsPerGroup.vue';
 import TicketsByWeek from '@/components/board/charts/TicketsByWeek';
+import TicketsPerMember from '@/components/board/charts/TicketsPerMember';
 
 export default {
     name: "Dashboard",
@@ -28,7 +30,8 @@ export default {
     },
     components: {
         TicketsPerGroup,
-        TicketsByWeek
+        TicketsByWeek,
+        TicketsPerMember,
     }
 }
 </script>

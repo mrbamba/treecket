@@ -10,21 +10,18 @@
 </template>
 
 <script>
-// import VueCharts from 'vue-chartjs'
-// import { Line } from 'vue-chartjs'
 import TicketsPerGroupChart from '@/components/board/charts/TicketsPerGroupChart.vue'
 
 
 
 export default {
+    name: "TicketsPerGroup",
     props: {
         board: {
             type: Object,
             require: true
         }
     },
-    name: "TicketsPerGroup",
-    // extends: Line,
     data() {
         return {
             chartData: {},
@@ -36,28 +33,20 @@ export default {
         }
     },
     created() {
-        console.log(this.board);
         this.calculateData()
 
     },
     methods: {
         calculateData() {
-            console.log(this.board);
-
-            // let board = _.cloneDeep(this.board)
-
-            // console.log(this.board)
             let groupMap = {};
             this.board.groups.forEach(group => {
                 let groupTitle = group.title
                 groupMap[groupTitle] = group.tickets.length
-                console.log({ groupMap })
             });
             this.chartData.groupTitle = Object.keys(groupMap)
             this.chartData.ticketCount = Object.values(groupMap)
 
 
-            console.log('CHART DATA', this.chartData)
             this.showChart = true;
         }
     },
