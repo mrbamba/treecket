@@ -83,10 +83,13 @@
             </section>
 
             <ticket-menu
-                @deleteTicket="deleteTicket"
                 :ticket="ticket"
                 :labels="labels"
                 :boardMembers="boardMembers"
+                :boardGroupsSummary="boardGroupsSummary"
+                :currGroupSummary="currGroupSummary"
+                @moveTicket="moveTicket"
+                @deleteTicket="deleteTicket"
                 @saveTicket="saveTicket"
                 @addChecklist="addChecklist"
                 @updateTicketLabel="updateTicketLabel"
@@ -117,6 +120,8 @@ export default {
         labels: Array,
         ticketActivities: Array,
         boardMembers: Array,
+        boardGroupsSummary:Array,
+        currGroupSummary:Object,
     },
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
@@ -257,6 +262,9 @@ export default {
         },
         cloneTicket(ticket) {
             this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId);
+        },
+        moveTicket(newGroupId){
+            this.$emit('moveTicket',newGroupId)
         }
     },
     components: {

@@ -1,5 +1,10 @@
 <template>
     <div class="ticket-menu">
+        <ticket-group-selector
+            @moveTicket="moveTicket"
+            :boardGroupsSummary="boardGroupsSummary"
+            :currGroupSummary="currGroupSummary"
+        />
         <h3>ADD TO CARD</h3>
         <button @click="show.memberSelector=!show.memberSelector">Members</button>
         <MemberSelector
@@ -57,6 +62,7 @@ import DateSelector from "@/components/ticket/menu/DateSelector.vue";
 import CoverTool from "@/components/ticket/menu/CoverTool.vue";
 import labels from "@/components/board/labels.vue";
 import AddAttachment from "@/components/ticket/AddAttachment.vue";
+import TicketGroupSelector from '@/components/ticket/menu/TicketGroupSelector';
 
 
 export default {
@@ -74,6 +80,22 @@ export default {
             type: Array,
             require: true
         },
+        currTicketGroup: {
+            type: String,
+            require: true
+        },
+        groupsSummary: {
+            type: Array,
+            require: true
+        },
+        boardGroupsSummary: {
+            type: Array,
+            require: true
+        },
+        currGroupSummary:{
+            type:Object,
+            require:true
+        }
 
     },
     data() {
@@ -117,6 +139,9 @@ export default {
         },
         addAttachment(src) {
             this.$emit('addAttachment', src)
+        },
+        moveTicket(newGroupId) {
+            this.$emit('moveTicket', newGroupId)
         }
     },
     components: {
@@ -127,7 +152,8 @@ export default {
         // AttachmentTool,
         CoverTool,
         labels,
-        AddAttachment
+        AddAttachment,
+        TicketGroupSelector,
 
     }
 };

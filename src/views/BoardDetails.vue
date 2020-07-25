@@ -55,14 +55,21 @@
                 :boardMembers="currBoard.members"
                 :labels="currBoard.labels"
                 :ticketActivities="ticketActivities"
+                :boardGroupsSummary="boardGroupsSummary"
+                :currGroupSummary="currGroupSummary"
                 @closeTicketDetails="closeTicketDetails"
                 @saveTicket="saveBoard"
                 @deleteTicket="deleteTicket"
                 @addActivity="addActivity"
                 @cloneTicket="cloneTicket"
+                @moveTicket="moveTicket"
             />
         </transition>
-        <dashboard :board="currBoard" v-if="show.dashboard && currBoard" @closeDashboard="show.dashboard=false"/>
+        <dashboard
+            :board="currBoard"
+            v-if="show.dashboard && currBoard"
+            @closeDashboard="show.dashboard=false"
+        />
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
@@ -272,6 +279,34 @@ export default {
 
             this.saveBoard();
         },
+        moveTicket(newGroupId) {
+            // const board = this.currBoard
+            console.log('running move ticket on board details',newGroupId)
+            const currGroupIdx = this.currBoard.groups.findIndex(
+                group => group.tickets.find(ticket => {
+                   return ticket.id === this.selectedTicket.id
+                })
+            );
+            if (currGroupIdx < 0) return
+
+            const currTicketIdx = this.currBoard.groups[currGroupIdx].tickets.findIndex(ticket => {
+                return ticket.id === this.selectedTicket.id
+            }
+            )
+            if (currTicketIdx < 0) return
+
+            const newGroupIdx = this.currBoard.groups.findIndex(
+                group => { return group.id === newGroupId })
+            // board.groups[currGroupIdx]
+
+            console.log({newGroupIdx})
+
+            if (newGroupIdx < 0) return
+            let ticketBackup=_.cloneDeep(this.selectedTicket)
+            this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
+            this.currBoard.groups[newGroupIdx].tickets.push(ticketBackup)
+            this.saveBoard();
+        }
     },
     computed: {
         background() {
@@ -297,6 +332,31 @@ export default {
         },
         systemUsers() {
             return this.$store.getters.users
+        },
+        boardGroupsSummary() {
+            let groupsSummary = [];
+            let board = _.cloneDeep(this.currBoard);
+            board.groups.forEach(group => {
+                groupsSummary.push({
+                    id: group.id,
+                    title: group.title
+                })
+            });
+            return groupsSummary;
+        },
+        currGroupSummary() {
+            let board = _.cloneDeep(this.currBoard)
+            let currTicketGroup = board.groups.find(group => {
+                return group.tickets.find(ticket => {
+                    return ticket.id === this.selectedTicket.id
+                })
+            })
+            console.log({ currTicketGroup })
+            return {
+                id: currTicketGroup.id,
+                title: currTicketGroup.title
+            }
+
         }
     },
     components: {
