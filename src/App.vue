@@ -1,6 +1,5 @@
 <template>
     <div id="app" class="wrapper">
-        <!-- <main-header v-if="showMainHeader" /> -->
         <transition name="component-fade" mode="out-in">
             <router-view />
         </transition>
@@ -9,20 +8,13 @@
 </template>
 
 <script>
-import MainHeader from '@/components/MainHeader.vue'
 export default {
 
     computed: {
-        mainHeader() {
-
-        },
         overlay() {
             // return true; // Testing - TO DELETE
             return this.$store.getters.overlay;
         },
-        showMainHeader() {
-            return this.$route.path.includes('board') ? true : false;
-        }
     },
     methods: {
         hideOverlay() {
@@ -30,7 +22,6 @@ export default {
         },
     },
     components: {
-        MainHeader,
     }
 }
 </script>

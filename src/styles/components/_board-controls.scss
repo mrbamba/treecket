@@ -1,0 +1,68 @@
+.board-controls {
+    padding: 8px 4px 8px 8px;
+    color: #fff;
+    font-size: rem(18px);
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    line-height: 32px;
+
+    button {
+        margin-right: 5px;
+    }
+
+    div {
+        display: inline-block;
+    }
+
+    .board-title {
+        cursor: pointer;
+        padding: 0 rem(12px);
+        margin-inline-end: rem(4px);
+        border-radius: 4px;
+        vertical-align: middle;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.32);
+        }
+    }
+
+    .board-title-input {
+        font-size: rem(18px);
+        margin-inline-end: rem(4px);
+        outline: none;
+        border: none;
+        color: #222;
+        padding: rem(4px) rem(8px);
+        font-weight: inherit;
+        border-radius: 4px;
+    }
+
+    button {
+        border: none;
+        background-color: rgba(255, 255, 255, 0.2);
+        line-height: inherit;
+        padding: 0 rem(10px);
+        border-radius: 4px;
+        height: 32px;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.32);
+        }
+
+        @include for-normal-layout {
+            svg {
+                margin-inline-end: rem(10px);
+            }
+        }
+    }
+
+    .board-members {
+        display: inline-block;
+    }
+
+    .end-of-board-controls {
+        display: flex;
+        flex-direction: row;
+    }
+}

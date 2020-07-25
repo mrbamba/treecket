@@ -1,100 +1,65 @@
 <template>
-    <section class="board-header">
-        <div>
-            <div v-if="!editTitle" @click="onEditTitle" class="board-title">
-                <div>{{ newTitle }}</div>
+    <header class="board-header">
+        <nav>
+            <router-link to="/">
+                <i class="fas fa-home"></i>
+            </router-link>
+            <router-link to="/board">
+                <i class="fas fa-th-large" />
+                <span class="hidden show-normal">Boards</span>
+            </router-link>
+            <div class="ticket-search">
+                <input type="text" @blur="clearInput" ref="ticketSearch" />
+                <button @click="toggleTicketSearch">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-            <div v-else>
-                <span class="input-hider"></span>
-                <input
-                    @blur="updateBoardTitle"
-                    @input="resizeInput"
-                    type="text"
-                    v-model="newTitle"
-                    v-on:keyup.enter="updateBoardTitle"
-                    class="board-title-input"
-                    ref="updatedBoardTitle"
-                />
-            </div>
-            <button>
-                <i class="fas fa-user-lock" />
-                <span class="hidden show-normal">Team</span>
-            </button>
+        </nav>
 
-            <section class="board-members">
-                <button @click="show.boardMembers=!show.boardMembers">+</button>
-                <board-member-selector
-                    v-if="show.boardMembers"
-                    :boardMembers="boardMembers"
-                    :systemUsers="systemUsers"
-                    @loadUsers="loadUsers"
-                    @closeBoardMemberSelector="show.boardMembers=false"
-                    @toggleMember="toggleMember"
-                />
-            </section>
-        </div>
-        <div class="end-of-board-header">
-            <button @click="showDashboard">
-                <i class="dashboard-icon fas fa-chart-area"></i>
-                <span class="hidden show-normal">Dashboard</span>
-            </button>
-
-            <button>
-                <i class="fas fa-ellipsis-h" />
-                <span class="hidden show-normal">Show Menu</span>
-            </button>
-        </div>
-    </section>
+        <router-link to="/" class="board-header-logo">
+            <img :src="logoSrc" alt ref="logo" />
+            <h1>Treecket</h1>
+        </router-link>
+        <!-- <avatar :username="user.fullName" :src="user.imgSrc" :size="32" /> -->
+        <!-- <router-link to="/login">Log in</router-link> -->
+    </header>
 </template>
 
 <script>
-import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
 export default {
     name: "BoardHeader",
-    props: ['boardTitle', 'boardMembers', 'systemUsers', 'board'],
+    props: ['user'],
     data() {
         return {
-            editTitle: false,
-            newTitle: this.boardTitle,
-            show: {
-                boardMembers: false,
-                dashboard: false
-            }
+            logoSrc: require('@/assets/logo-white.png'),
         }
+    },
+    created() {
+        this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
+        this.logoTimeout = setTimeout(() =>
+            this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(3));
     },
     methods: {
-        updateBoardTitle() {
-            this.editTitle = false;
-            this.$emit('updateBoardTitle', this.newTitle)
+        gifRepeats(count, frames = 11) {
+            // 11 frames (1100ms) + 1st frame at end of cycle
+            return frames * count * 100 + 75;
         },
-        onEditTitle() {
-            this.editTitle = true;
-            this.$nextTick(() => {
-                this.resizeInput();
-                this.$refs.updatedBoardTitle.focus()
-            });
+        clearInput() {
+            this.$refs.ticketSearch.value = '';
         },
-        loadUsers(userFilterBy) {
-            this.$emit('loadUsers', userFilterBy)
-        },
-        toggleMember(member) {
-            this.$emit('toggleMember', member)
-        },
-        resizeInput() {
-            const input = this.$refs.updatedBoardTitle;
-            const hide = input.previousElementSibling;
-
-            hide.textContent = input.value;
-            input.style.width = hide.offsetWidth + 24 + "px";
-        },
-        showDashboard(){
-            this.$emit('showDashboard')
+        toggleTicketSearch() {
+            this.$refs.ticketSearch.focus();
         }
     },
-    components: {
-        BoardMemberSelector,
+    watch: {
+        $route(to, from) {
+            // Loading gif
+            this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
+            this.logoTimeout = setTimeout(() =>
+                this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(1));
+        }
     }
-}
+};
 </script>
 
 <style>
