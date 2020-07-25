@@ -1,8 +1,10 @@
 .home-container {
     header {
-        box-shadow: 0 2px 7px rgba(0, 0, 0, .13);
         display: flex;
         text-align: center;
+        transition: box-shadow .3s ease;
+        background-color: #fff;
+        // position: absolute;
         >nav {
             width: 1200px;
         }

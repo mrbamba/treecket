@@ -63,7 +63,7 @@
   min-height: auto;
 }
 
-.smooth-dnd-disable-touch-action:active {
+.smooth-dnd-container:active {
   .ticket-group {
     cursor: grabbing;
   }

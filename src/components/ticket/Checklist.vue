@@ -85,7 +85,14 @@ export default {
             onEditItemTxt: '',
             showChecklistTitleEdit: false,
             onEditChecklistTitle: '',
+            allowConfetti: true
         }
+    },
+    created() {
+        eventBus.$on('checklistAdded', (checklist) => {
+            console.log(checklist.id);
+            this.editTitle(checklist)
+        })
     },
     computed: {
         doneItemsPrec() {
@@ -99,7 +106,7 @@ export default {
         updateChecklist() {
             this.$emit('updateChecklist', this.checklist);
             if (this.checklist.items.length > 0 && this.checklist.items.every(item => item.isDone)) {
-                this.$emit('confetti');
+                this.confetti();
             }
         },
         deleteChecklist() {
@@ -113,7 +120,7 @@ export default {
         saveTitle() {
             if (!this.checklist.title) {
                 this.$nextTick(() => this.$refs.checklistTitle.focus())
-                return
+                return;
             }
             this.onEditChecklistTitle = '';
             this.showChecklistTitleEdit = false;
@@ -174,12 +181,30 @@ export default {
             this.checklist.items.splice(itemIdx, 1);
             this.updateChecklist();
         },
-    },
-    created() {
-        eventBus.$on('checklistAdded', (checklist) => {
-            console.log(checklist.id);
-            this.editTitle(checklist)
-        })
+        confetti() {
+            // this.$refs.confetti.style.display = 'block';
+            console.log(this.$confetti)
+            if (!this.allowConfetti) return;
+            this.allowConfetti = false;
+            this.$confetti.start({
+                particles: [
+                    {
+                        type: 'image',
+                        url: 'https://res.cloudinary.com/dfhfhz5le/image/upload/v1595372019/treecket_hmoifu.png',
+                        size: 20
+                    },
+                    {
+                        type: 'rect',
+                    },
+                ],
+                defaultDropRate: 16,
+                // canvasId: 'confetti'
+            });
+            this.lastConfetti = Date.now();
+            setTimeout(() => {
+                this.$confetti.stop();
+            }, 3500);
+        }
     }
 }
 </script>

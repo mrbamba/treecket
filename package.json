@@ -21,6 +21,7 @@
     "vue-chartjs": "^3.5.0",
     "vue-confetti": "^2.0.9",
     "vue-dragscroll": "^2.1.0",
+    "vue-fixed-header": "^3.2.14",
     "vue-router": "^3.2.0",
     "vue-smooth-dnd": "^0.8.1",
     "vuex": "^3.4.0"
