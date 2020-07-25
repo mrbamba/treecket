@@ -18,10 +18,10 @@
                 />
             </div>
             <button>
-                <i class="fas fa-user-lock" />
-                <span class="hidden show-normal">Team</span>
-                <!-- <i class="fas fa-globe-americas" />
-                <span class="hidden show-normal">Public</span> -->
+                <!-- <i class="fas fa-user-lock" />
+                <span class="hidden show-normal">Team</span> -->
+                <i class="fas fa-globe-americas" />
+                <span class="hidden show-normal">Public</span>
             </button>
 
             <section class="board-members">

@@ -47,7 +47,7 @@
                 border-radius: 3px;
                 transition: width .2s;
                 
-                @include for-normal-layout {
+                @include for-wide-layout {
                     width: 9rem;
                     padding-right: rem(40px);
                 }
