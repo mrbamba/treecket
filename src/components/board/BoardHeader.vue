@@ -40,7 +40,8 @@
             </button>
 
             <button>
-                <i class="fas fa-ellipsis-h" /> Show Menu
+                <i class="fas fa-ellipsis-h" />
+                <span class="hidden show-normal">Show Menu</span>
             </button>
         </div>
     </section>

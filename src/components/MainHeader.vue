@@ -20,10 +20,8 @@
             <img :src="logoSrc" alt ref="logo" />
             <h1>Treecket</h1>
         </router-link>
-        <!-- <router-link to="/login">Log in</router-link> -->
         <!-- <avatar :username="user.fullName" :src="user.imgSrc" :size="32" /> -->
-
-        <!-- <router-link to="/about">About</router-link> -->
+        <!-- <router-link to="/login">Log in</router-link> -->
     </header>
 </template>
 

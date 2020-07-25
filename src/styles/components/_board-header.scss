@@ -6,28 +6,27 @@
     display: flex;
     justify-content: space-between;
     line-height: 32px;
+
     button {
         margin-right: 5px;
     }
+
     div {
         display: inline-block;
-        +* {
-            display: inline-block;
-        }
     }
-        
+
     .board-title {
         cursor: pointer;
         padding: 0 rem(12px);
         margin-inline-end: rem(4px);
         border-radius: 4px;
         vertical-align: middle;
-        
+
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
         }
     }
-    
+
     .board-title-input {
         font-size: rem(18px);
         margin-inline-end: rem(4px);
@@ -50,15 +49,19 @@
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
         }
-        svg {
-            margin-inline-end: rem(6px);
+
+        @include for-normal-layout {
+            svg {
+                margin-inline-end: rem(6px);
+            }
         }
     }
 
     .board-members {
         display: inline-block;
     }
-    .end-of-board-header{
+
+    .end-of-board-header {
         display: flex;
         flex-direction: row;
     }
