@@ -32,9 +32,9 @@
                 </li>
             </ul>
             <span class="ticket-preview-title">{{ ticket.title }}</span>
-            <div class="bottom-container">
-                <section v-if="ticket.dueDate" class="badges-container">
-                    <div class="due-date"
+            <div class="bottom-container" v-if="bottomContainer">
+                <section class="badges-container">
+                    <div v-if="ticket.dueDate" class="due-date"
                         :class="{'past-due': timeLeft === 'past-due', 'due-soon': timeLeft === 'due-soon'}"
                     >
                         <i class="far fa-clock"></i>
@@ -90,6 +90,12 @@ export default {
         }
     },
     computed: {
+        bottomContainer() {
+            if (this.ticket.attachments.length || this.ticket.comments.length
+            || this.ticket.description || this.ticket.members.length || this.itemsCount.itemsCount
+            || this.ticket.dueDate || this.ticket.comments.length) return true
+        },
+
         getCoverSrc() {
 
             if (this.ticket.attachments.length > 0) {
