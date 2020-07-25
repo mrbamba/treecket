@@ -14,6 +14,7 @@
                     v-on:keyup.enter="updateBoardTitle"
                     class="board-title-input"
                     ref="updatedBoardTitle"
+                    maxlength="36"
                 />
             </div>
             <button>
@@ -87,7 +88,7 @@ export default {
             const hide = input.previousElementSibling;
 
             hide.textContent = input.value;
-            input.style.width = hide.offsetWidth + 24 + "px";
+            input.style.width = hide.offsetWidth + 29 + "px";
         },
         showDashboard(){
             this.$emit('showDashboard')
