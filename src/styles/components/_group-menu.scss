@@ -2,21 +2,38 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    min-width: 150px;
-    height: fit-content;
-    // top: rem(25px);
+    min-width: 100px;
+    padding: 15px 5px 2px;
+    max-height: fit-content;
+    top: 8px;
+    right: 8px;
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     border: 1px solid #ddd;
-    z-index: 4;
+    z-index: 2;
+
     button {
-        width: 100%;
+        background-color: transparent;
+        border: unset;
+        margin-bottom: 5px;
     }
-    button .close-menu-btn {
+
+    header {
+        text-align: center;
+        margin-bottom: 5px;
+        border-bottom: 1px solid black;
+        h5 {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+    }
+
+    .close-menu-btn {
         position: absolute;
         right: 0;
         top: 0;
-        padding: 0;
+        text-align: right;
     }
 }

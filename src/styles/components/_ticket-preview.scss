@@ -90,6 +90,7 @@
             align-items: center;
             align-items: center;
             flex-wrap: wrap;
+            color: #444;
             &>* {
                 &>*:first-child {
                     margin-inline-end: 3px;
@@ -98,7 +99,8 @@
 
             .due-date {
                 border-radius: 2px;
-                padding: 2px;;
+                padding: 2px;
+                padding: 4px;
             }
 
             .due-date.past-due {
