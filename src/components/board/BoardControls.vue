@@ -42,7 +42,7 @@
                 <span class="hidden show-normal">Dashboard</span>
             </button>
 
-            <button>
+            <button @click="showMenu">
                 <i class="fas fa-ellipsis-h" />
                 <span class="hidden show-normal">Show Menu</span>
             </button>
@@ -92,6 +92,9 @@ export default {
         },
         showDashboard(){
             this.$emit('showDashboard')
+        },
+        showMenu(){
+            this.$emit('showMenu')
         }
     },
     components: {
