@@ -57,7 +57,7 @@
   margin: 0 8px; // Margins should match margins of .ticket-group (ticket-group.scss)
 }
 
-.smooth-dnd-container.horizontal {
+div.smooth-dnd-container.horizontal {
   display: flex;
   min-width: auto;
   min-height: auto;

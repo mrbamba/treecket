@@ -183,7 +183,7 @@ export default {
         },
         confetti() {
             // this.$refs.confetti.style.display = 'block';
-            console.log(this.$confetti)
+            console.log(this)
             if (!this.allowConfetti) return;
             this.allowConfetti = false;
             this.$confetti.start({
@@ -203,6 +203,8 @@ export default {
             this.lastConfetti = Date.now();
             setTimeout(() => {
                 this.$confetti.stop();
+                console.log(this.$confetti.canvas)
+                this.$confetti.canvas.clearRect(0, 0, canvas.width, canvas.height);
             }, 3500);
         }
     }
