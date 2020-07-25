@@ -39,7 +39,7 @@
             
             input {
                 padding-left: (8px);
-                width: 9rem;
+                width: 1rem;
                 background-color: rgba(255, 255, 255, .3);
                 outline: none;
                 border: none;
@@ -47,6 +47,11 @@
                 border-radius: 3px;
                 padding-right: rem(40px);
                 transition: width .2s;
+
+                @include for-normal-layout {
+                    // width: 0;
+                    display: none;
+                }
 
                 &:hover {
                     background-color: rgba(255, 255, 255, .4);

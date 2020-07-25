@@ -1,12 +1,12 @@
 .board-header {
-    padding: 8px;
+    padding: 8px 4px 8px 8px;
     color: #fff;
     font-size: rem(18px);
     font-weight: 700;
     display: flex;
     justify-content: space-between;
     line-height: 32px;
-    button{
+    button {
         margin-right: 5px;
     }
     div {
@@ -18,9 +18,10 @@
         
     .board-title {
         cursor: pointer;
-        padding: 0 rem(8px);
+        padding: 0 rem(12px);
         margin-inline-end: rem(4px);
         border-radius: 4px;
+        vertical-align: middle;
         
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
@@ -44,6 +45,7 @@
         line-height: inherit;
         padding: 0 rem(12px);
         border-radius: 4px;
+        height: 32px;
 
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);

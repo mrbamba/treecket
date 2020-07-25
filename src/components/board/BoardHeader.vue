@@ -17,7 +17,8 @@
                 />
             </div>
             <button>
-                <i class="fas fa-user-lock" /> Team
+                <i class="fas fa-user-lock" />
+                <span class="hidden show-normal">Team</span>
             </button>
 
             <section class="board-members">
@@ -34,7 +35,8 @@
         </div>
         <div class="end-of-board-header">
             <button @click="showDashboard">
-                <i class="dashboard-icon fas fa-chart-area"></i>Dashboard
+                <i class="dashboard-icon fas fa-chart-area"></i>
+                <span class="hidden show-normal">Dashboard</span>
             </button>
 
             <button>
@@ -82,7 +84,7 @@ export default {
             const hide = input.previousElementSibling;
 
             hide.textContent = input.value;
-            input.style.width = hide.offsetWidth + 16 + "px";
+            input.style.width = hide.offsetWidth + 24 + "px";
         },
         showDashboard(){
             this.$emit('showDashboard')

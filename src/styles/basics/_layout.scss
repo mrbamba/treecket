@@ -1,3 +1,9 @@
 .wrapper {
     height: 100vh;
 }
+
+@include for-normal-layout {
+    span.show-normal {
+        display: inline;
+    }
+}

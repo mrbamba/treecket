@@ -6,11 +6,11 @@
             </router-link>
             <router-link to="/board">
                 <i class="fas fa-th-large" />
-                <span>Boards</span>
+                <span class="hidden show-normal">Boards</span>
             </router-link>
             <div class="ticket-search">
                 <input type="text" @blur="clearInput" ref="ticketSearch" />
-                <button>
+                <button @click="toggleTicketSearch">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -48,6 +48,9 @@ export default {
         },
         clearInput() {
             this.$refs.ticketSearch.value = '';
+        },
+        toggleTicketSearch() {
+            this.$refs.ticketSearch.focus();
         }
     },
     watch: {
