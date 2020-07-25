@@ -1,0 +1,29 @@
+.board-activity{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+    .activity-img{
+        padding:3px 8px 0px 0px;
+        width: fit-content;
+        align-content: flex-start;
+    }
+    .activity-by{
+        margin: 3px 0px 8px 0px;
+        font-size: 14px;
+        color: rgb(66, 82, 110);;
+        span{
+            margin-right: 3px;;
+        }
+    }
+    .activity-text{
+        color: rgb(23, 43, 77);
+        font-size: 14px;
+    }
+    button {
+        cursor: pointer;
+
+    }
+
+
+}

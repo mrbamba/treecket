@@ -47,7 +47,7 @@
                 border-radius: 3px;
                 transition: width .2s;
                 
-                @include for-normal-layout {
+                @include for-wide-layout {
                     width: 9rem;
                     padding-right: rem(40px);
                 }
@@ -58,7 +58,7 @@
 
                 &:focus {
                     background-color: #fff;
-                    width: 16rem;
+                    width: 15rem;
                     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.24);
                     &+button {
                         color: rgba(9, 33, 66, .7)
@@ -112,6 +112,7 @@
             margin-inline-start: 30px;
         }
     }
+    
 }
 
 #confetti-canvas {

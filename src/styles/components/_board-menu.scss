@@ -1,0 +1,54 @@
+.board-menu {
+    position: fixed;
+    right: 0;
+    top: 100px;
+    background-color: #fff;
+    z-index: 5;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    width: 300px;
+
+    .board-menu-btn {
+        background-color: transparent;
+        border: none;
+        display: block;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #0082ff;
+        padding: 9px;
+        min-width: 100%;
+        border-radius: 5px;
+        color: #0082ff;
+        &:hover {
+            transition: ease-in-out .3s;
+            background-color: #0082ff;
+            color: #fff;
+    
+        }
+    }
+
+    .board-menu-delete {
+        background-color: transparent;
+        border: none;
+        display: block;
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 9px;
+        min-width: 100%;
+        border-radius: 5px;
+
+        color: #ED1C24;
+        border: 1px solid #ED1C24;
+        &:hover {
+            transition: ease-in-out .3s;
+            background-color: #ED1C24;
+            color: #fff;
+    
+        }
+    }
+
+
+
+}

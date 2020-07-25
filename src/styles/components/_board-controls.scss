@@ -1,11 +1,19 @@
 .board-controls {
-    padding: 8px 4px 8px 8px;
+    padding: 8px 0 8px 8px;
     color: #fff;
     font-size: rem(18px);
     font-weight: 700;
     display: flex;
     justify-content: space-between;
     line-height: 32px;
+
+    .board-member-list {
+        display: inline-flex;
+        margin-right: 3px;
+        .board-member-avatar{
+            margin-right: 3px;
+        }
+    }
 
     button {
         margin-right: 5px;
@@ -22,12 +30,12 @@
         margin-inline-end: rem(4px);
         border-radius: 4px;
         vertical-align: middle;
-        
+
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
         }
     }
-    
+
     .board-title-input {
         vertical-align: middle;
         line-height: 1;

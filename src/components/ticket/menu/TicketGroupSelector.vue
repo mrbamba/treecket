@@ -1,18 +1,18 @@
 <template>
-<div>
-    <el-row class="block-col-2">
-  <el-col :span="12">
-    <span class="demonstration">Move ticket</span>
+<div class="ticket-group-selector">
+    <!-- <el-row class="block-col-5"> -->
+  <!-- <el-col :span="12"> -->
+    <h3>Move ticket</h3>
     <el-dropdown @command="moveTicket">
       <span class="el-dropdown-link">
-        {{currGroupSummary.title}}<i class="el-icon-arrow-down el-icon--right"></i>
+        {{currGroupSummary.title.toUpperCase()}}<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown" >
-        <el-dropdown-item v-for="group in boardGroupsSummary" :key="group.id" :command="group.id">{{group.title}}</el-dropdown-item>
+      <el-dropdown-menu slot="dropdown" class="group-selector" >
+        <el-dropdown-item v-for="group in boardGroupsSummary" :key="group.id" :command="group.id">{{group.title.toUpperCase()}}</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-  </el-col>
-  </el-row>
+  <!-- </el-col> -->
+  <!-- </el-row> -->
 </div>
 </template>
 

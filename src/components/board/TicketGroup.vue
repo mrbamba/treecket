@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-group">
         <header>
-            <div class="group-header">
+            <div class="ticket-group-header">
                 <div v-if="!editTitle" @click="onEditTitle">
                     <h3>{{ group.title }}</h3>
                     {{ ticketsInGroupCount }}

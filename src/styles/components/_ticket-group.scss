@@ -9,23 +9,16 @@
     border-radius: 3px;
     // Margins should match margins of .cards-drop-preview (dnd.scss)
     margin-inline-end: 8px;
-    padding: rem(8px) 0;
     overflow-wrap: anywhere;
     position: relative;
 
-    >* {
-        padding-inline-start: rem(8px);
-        padding-inline-end: rem(4px);
-        margin-inline-end: rem(4px);
-    }
-
-    .group-header {
+    .ticket-group-header {
         font-size: rem(14px);
         display: flex;
         justify-content: space-between;
         align-items: center;
         color: #5e6c84;
-        margin-bottom: 4px;
+        padding: 8px 8px 4px;
 
         :first-child {
             text-transform: uppercase;
@@ -38,7 +31,7 @@
             font-size: rem(14px);
             font-weight: 500;
             display: inline;
-            margin-inline-end: rem(4px);
+            margin-inline-end: rem(5px);
         }
 
         button {
@@ -65,6 +58,9 @@
     }
 
     .tickets-container {
+        margin-inline-start: 8px;
+        margin-inline-end: 4px;
+        padding-inline-end: 4px;
         overflow-y: auto;
         flex-grow: 1;
         margin-bottom: 4px;
