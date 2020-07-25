@@ -1,7 +1,6 @@
 <template>
     <div class="ticket-group">
-        <header>
-            <div class="ticket-group-header">
+        <header class="ticket-group-header">
                 <div v-if="!editTitle" @click="onEditTitle">
                     <h3>{{ group.title }}</h3>
                     {{ ticketsInGroupCount }}
@@ -20,14 +19,14 @@
                 <button @click="toggleGroupMenu">
                     <i class="fas fa-ellipsis-h" />
                 </button>
+        </header>
                     <group-menu
                         v-if="groupMenuOpened"
                         :group="group"
                         @cloneGroup="cloneGroup"
                         @deleteGroup="deleteGroup"
+                        @closeGroupMenu="toggleGroupMenu"
                     />
-            </div>
-        </header>
 
         <div class="tickets-container">
             <container
@@ -80,9 +79,9 @@ export default {
     },
     methods: {
         toggleGroupMenu(ev) {
-            console.log(ev);
-            this.groupMenuRight = ev.innerWidth - ev.clientX
-            this.groupMenuTop = ev.clientY
+            // console.log(ev);
+            // this.groupMenuRight = ev.innerWidth - ev.clientX
+            // this.groupMenuTop = ev.clientY
             this.groupMenuOpened = !this.groupMenuOpened;
         },
         onEditTitle() {

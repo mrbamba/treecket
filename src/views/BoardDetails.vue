@@ -271,7 +271,6 @@ export default {
 
         },
         toggleMember(memberToUpdate) {
-            console.log({ memberToUpdate })
             console.log('CurrBoard members: ', this.currBoard.members);
             delete memberToUpdate.email
             const memberIdx = this.currBoard.members.findIndex(member => member._id === memberToUpdate._id)

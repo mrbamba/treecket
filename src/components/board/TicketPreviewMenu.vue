@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         onDeleteTicket() {
-            console.log(this.ticket);
             this.$emit('deleteTicket', this.ticket)
         }
     },
