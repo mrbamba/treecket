@@ -20,12 +20,20 @@
             <img :src="logoSrc" alt ref="logo" />
             <h1>Treecket</h1>
         </router-link>
+        <avatar
+            class="logged-in-user-avatar"
+            :username="displayUser.fullName"
+            :src="displayUser.imgSrc"
+            :size="30"
+        />
         <!-- <avatar :username="user.fullName" :src="user.imgSrc" :size="32" /> -->
         <!-- <router-link to="/login">Log in</router-link> -->
     </header>
 </template>
 
 <script>
+import Avatar from 'vue-avatar'
+
 export default {
     name: "BoardHeader",
     props: ['user'],
@@ -58,6 +66,22 @@ export default {
             this.logoTimeout = setTimeout(() =>
                 this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(1));
         }
+    },
+    computed: {
+        displayUser() {
+            if (this.user) {
+                return this.user
+            } else {
+                return {
+                    fullName: 'Guest',
+                    imgSrc: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                }
+
+            }
+        }
+    },
+    components: {
+        Avatar,
     }
 };
 </script>

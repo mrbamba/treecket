@@ -21,8 +21,18 @@
                 <i class="fas fa-user-lock" />
                 <span class="hidden show-normal">Team</span>
                 <!-- <i class="fas fa-globe-americas" />
-                <span class="hidden show-normal">Public</span> -->
+                <span class="hidden show-normal">Public</span>-->
             </button>
+            <section class="board-member-list">
+                <avatar
+                class="board-member-avatar"
+                    v-for="member in boardMembers"
+                    :key="member._id"
+                    :username="member.fullName"
+                    :src="member.imgSrc"
+                    :size="32"
+                />
+            </section>
 
             <section class="board-members">
                 <button @click="show.boardMembers=!show.boardMembers">+</button>
@@ -52,6 +62,8 @@
 
 <script>
 import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
+import Avatar from 'vue-avatar'
+
 export default {
     name: "BoardControls",
     props: ['boardTitle', 'boardMembers', 'systemUsers', 'board'],
@@ -90,15 +102,16 @@ export default {
             hide.textContent = input.value;
             input.style.width = hide.offsetWidth + 29 + "px";
         },
-        showDashboard(){
+        showDashboard() {
             this.$emit('showDashboard')
         },
-        showMenu(){
+        showMenu() {
             this.$emit('showMenu')
         }
     },
     components: {
         BoardMemberSelector,
+        Avatar,
     }
 }
 </script>
