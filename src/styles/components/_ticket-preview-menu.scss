@@ -1,9 +1,28 @@
-.ticket-preview-menu {
+div.ticket-preview-menu {
     width: 100px;
-    height: 150px;
-    position: absolute;
+    // height: 150px;
+    position: fixed;
+    background-color: #fff;
     // right: 0;
+    width:220px;
     display: flex;
     flex-direction: column;
-    width: 150px;
+    border-radius: 3px;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(0, 0 ,0 ,.2) ;
+
+    button{
+        background-color: transparent;
+        border: none;
+        margin-bottom: 15px;
+        padding: 5px;
+        border-radius: 3px;
+        &:hover{
+            background-color: #0052ee;
+            color: white;
+        }
+    }
+    button:first-of-type{
+        margin-top: 15px;
+    }
 }
