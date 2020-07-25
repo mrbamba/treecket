@@ -47,6 +47,7 @@
             border: none;
             padding: 9px;
             border-radius: 3px;
+
             &:hover {
                 background-color: rgba(9, 30, 66, .1);
             }
@@ -73,7 +74,11 @@
         }
 
         &::-webkit-scrollbar {
-            width: 9px;
+            width: 8px;
+
+            &:active {
+                cursor: default;
+            }
         }
 
         &::-webkit-scrollbar-track {

@@ -1,29 +1,32 @@
 <template>
     <div class="home-container">
-        <header>
+        <div class="spacer"></div>
+        <header ref="header">
             <div>
                 <div class="logo">
                     <img src="@/assets/logo.png" />
                     <h1>Treecket</h1>
                 </div>
             </div>
-            <nav>
-                <router-link to="/">Home</router-link>|
-                <router-link to="/login">Log in</router-link>
-                <!-- <router-link to="/about">About</router-link> -->
-            </nav>
+            <router-link to="/board" class="save-button">Try it free</router-link>
         </header>
-        <router-link to="/board" class="save-button">Try it free</router-link>
+        <!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae vel eligendi recusandae possimus doloremque labore mollitia sunt reiciendis nostrum itaque qui cupiditate quisquam iusto aspernatur iste, architecto accusamus, neque similique! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis nihil vero porro distinctio sit reprehenderit nam impedit, esse enim. Rem cupiditate nesciunt eos tempora, illum maiores qui incidunt officiis ratione. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit id laudantium porro aspernatur modi odio maiores sed, exercitationem consequuntur repellat cumque tempora autem. Hic minus tempora sunt molestias molestiae quidem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptatibus maiores quam? Perferendis nihil, voluptatibus tenetur incidunt ipsam, nesciunt facilis fugit quos excepturi hic voluptates, eveniet dolorum eum distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate alias dolores fugit vero ut, magnam esse impedit consequuntur maiores ducimus culpa commodi mollitia quo error, sunt rerum minus illum vitae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi atque rem, rerum repellendus ducimus possimus amet debitis quod odio at libero ut et dolore est magni nihil iste vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id vero non? Nulla quibusdam fuga id in pariatur fugit quia consectetur, dicta amet tempora eos vitae ab veniam, ut aspernatur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque nisi natus vitae optio aliquam iure quod facere, ea iste. Dolorum illo id recusandae alias. Modi dolor soluta veniam illum enim. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eligendi debitis earum veniam neque, laborum nobis, mollitia laudantium explicabo aspernatur odio cum vitae quia quos eaque nesciunt expedita delectus perferendis?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae vel eligendi recusandae possimus doloremque labore mollitia sunt reiciendis nostrum itaque qui cupiditate quisquam iusto aspernatur iste, architecto accusamus, neque similique! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis nihil vero porro distinctio sit reprehenderit nam impedit, esse enim. Rem cupiditate nesciunt eos tempora, illum maiores qui incidunt officiis ratione. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit id laudantium porro aspernatur modi odio maiores sed, exercitationem consequuntur repellat cumque tempora autem. Hic minus tempora sunt molestias molestiae quidem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptatibus maiores quam? Perferendis nihil, voluptatibus tenetur incidunt ipsam, nesciunt facilis fugit quos excepturi hic voluptates, eveniet dolorum eum distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate alias dolores fugit vero ut, magnam esse impedit consequuntur maiores ducimus culpa commodi mollitia quo error, sunt rerum minus illum vitae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi atque rem, rerum repellendus ducimus possimus amet debitis quod odio at libero ut et dolore est magni nihil iste vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id vero non? Nulla quibusdam fuga id in pariatur fugit quia consectetur, dicta amet tempora eos vitae ab veniam, ut aspernatur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque nisi natus vitae optio aliquam iure quod facere, ea iste. Dolorum illo id recusandae alias. Modi dolor soluta veniam illum enim. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eligendi debitis earum veniam neque, laborum nobis, mollitia laudantium explicabo aspernatur odio cum vitae quia quos eaque nesciunt expedita delectus perferendis?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae vel eligendi recusandae possimus doloremque labore mollitia sunt reiciendis nostrum itaque qui cupiditate quisquam iusto aspernatur iste, architecto accusamus, neque similique! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis nihil vero porro distinctio sit reprehenderit nam impedit, esse enim. Rem cupiditate nesciunt eos tempora, illum maiores qui incidunt officiis ratione. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit id laudantium porro aspernatur modi odio maiores sed, exercitationem consequuntur repellat cumque tempora autem. Hic minus tempora sunt molestias molestiae quidem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptatibus maiores quam? Perferendis nihil, voluptatibus tenetur incidunt ipsam, nesciunt facilis fugit quos excepturi hic voluptates, eveniet dolorum eum distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate alias dolores fugit vero ut, magnam esse impedit consequuntur maiores ducimus culpa commodi mollitia quo error, sunt rerum minus illum vitae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi atque rem, rerum repellendus ducimus possimus amet debitis quod odio at libero ut et dolore est magni nihil iste vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id vero non? Nulla quibusdam fuga id in pariatur fugit quia consectetur, dicta amet tempora eos vitae ab veniam, ut aspernatur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque nisi natus vitae optio aliquam iure quod facere, ea iste. Dolorum illo id recusandae alias. Modi dolor soluta veniam illum enim. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eligendi debitis earum veniam neque, laborum nobis, mollitia laudantium explicabo aspernatur odio cum vitae quia quos eaque nesciunt expedita delectus perferendis?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae vel eligendi recusandae possimus doloremque labore mollitia sunt reiciendis nostrum itaque qui cupiditate quisquam iusto aspernatur iste, architecto accusamus, neque similique! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis nihil vero porro distinctio sit reprehenderit nam impedit, esse enim. Rem cupiditate nesciunt eos tempora, illum maiores qui incidunt officiis ratione. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit id laudantium porro aspernatur modi odio maiores sed, exercitationem consequuntur repellat cumque tempora autem. Hic minus tempora sunt molestias molestiae quidem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptatibus maiores quam? Perferendis nihil, voluptatibus tenetur incidunt ipsam, nesciunt facilis fugit quos excepturi hic voluptates, eveniet dolorum eum distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate alias dolores fugit vero ut, magnam esse impedit consequuntur maiores ducimus culpa commodi mollitia quo error, sunt rerum minus illum vitae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi atque rem, rerum repellendus ducimus possimus amet debitis quod odio at libero ut et dolore est magni nihil iste vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus id vero non? Nulla quibusdam fuga id in pariatur fugit quia consectetur, dicta amet tempora eos vitae ab veniam, ut aspernatur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque nisi natus vitae optio aliquam iure quod facere, ea iste. Dolorum illo id recusandae alias. Modi dolor soluta veniam illum enim. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, eligendi debitis earum veniam neque, laborum nobis, mollitia laudantium explicabo aspernatur odio cum vitae quia quos eaque nesciunt expedita delectus perferendis? -->
     </div>
 </template>
 
 <script>
-// import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
     name: "Home",
-    components: {
-        // HelloWorld
-    }
 };
 </script>
+
+<style scoped>
+.fixed {
+    position: fixed;
+    top: 0;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.13);
+}
+</style>
