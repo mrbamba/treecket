@@ -68,7 +68,7 @@ div.smooth-dnd-container.horizontal {
     cursor: grabbing;
 
     .ticket-preview {
-      cursor: grabbing !important;
+      cursor: grabbing;
     }
 
     .ticket-group-header input,
@@ -77,9 +77,6 @@ div.smooth-dnd-container.horizontal {
     }
   }
 }
-
-// .smooth-dnd-container:active {
-// }
 
 div .smooth-dnd-container.horizontal>.smooth-dnd-draggable-wrapper {
   height: fit-content;
