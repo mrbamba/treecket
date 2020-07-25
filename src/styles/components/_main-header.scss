@@ -39,18 +39,17 @@
             
             input {
                 padding-left: (8px);
-                width: 1rem;
+                width: 2rem;
                 background-color: rgba(255, 255, 255, .3);
                 outline: none;
                 border: none;
                 height: 100%;
                 border-radius: 3px;
-                padding-right: rem(40px);
                 transition: width .2s;
-
+                
                 @include for-normal-layout {
-                    // width: 0;
-                    display: none;
+                    width: 9rem;
+                    padding-right: rem(40px);
                 }
 
                 &:hover {
