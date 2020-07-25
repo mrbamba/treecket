@@ -80,7 +80,7 @@ function _getMiniUser() {
   } else return {
     "_id": 'Guest',
     "fullName": 'Guest',
-    "imgSrc": '',
+    "imgSrc": 'http://res.cloudinary.com/dkdsymsli/image/upload/v1595713140/dklfuu3fq5kcng4qqpfv.png',
   };
 }
 

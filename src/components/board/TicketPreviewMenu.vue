@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-preview-menu">
         <header>
-            <h5>Ticket Menu</h5>
+            <!-- <h5>Ticket Menu</h5> -->
         </header>
         <button @click.stop="openLabelsModal = !openLabelsModal">
             Edit labels

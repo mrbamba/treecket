@@ -74,7 +74,7 @@ export default {
             } else {
                 return {
                     fullName: 'Guest',
-                    imgSrc: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                    imgSrc: 'http://res.cloudinary.com/dkdsymsli/image/upload/v1595713140/dklfuu3fq5kcng4qqpfv.png'
                 }
 
             }
