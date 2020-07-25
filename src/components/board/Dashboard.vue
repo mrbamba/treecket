@@ -1,12 +1,16 @@
 <template>
     <section class="dashboard">
-        <tickets-by-week :board="board"/>
-        <group-map :board="board" />
+        <button @click="closeDashboard" class="close-dashboard-btn">
+            <i class="fas fa-times" />
+        </button>
+        <h2>Dashboard</h2>
+        <tickets-by-week :board="board" />
+        <tickets-per-group :board="board" />
     </section>
 </template>
 
 <script>
-import GroupMap from '@/components/board/charts/GroupMap.vue';
+import TicketsPerGroup from '@/components/board/charts/TicketsPerGroup.vue';
 import TicketsByWeek from '@/components/board/charts/TicketsByWeek';
 
 export default {
@@ -17,8 +21,13 @@ export default {
             require: true
         },
     },
+    methods: {
+        closeDashboard() {
+            this.$emit('closeDashboard')
+        }
+    },
     components: {
-        GroupMap,
+        TicketsPerGroup,
         TicketsByWeek
     }
 }

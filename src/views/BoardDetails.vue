@@ -9,6 +9,7 @@
             @updateBoardTitle="updateBoardTitle"
             @loadUsers="loadUsers"
             @toggleMember="toggleMember"
+            @showDashboard="show.dashboard=true"
         />
 
         <main
@@ -30,7 +31,7 @@
                     <ticket-group
                         :group="group"
                         :labels="currBoard.labels"
-                        :showFullLabels="showFullLabel"
+                        :showFullLabels="show.fullLabel"
                         :groupIdx="groupIdx"
                         @addTicket="addTicket"
                         @updateTickets="updateTickets"
@@ -61,6 +62,7 @@
                 @cloneTicket="cloneTicket"
             />
         </transition>
+        <dashboard :board="currBoard" v-if="show.dashboard && currBoard" @closeDashboard="show.dashboard=false"/>
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
     </div>
@@ -73,6 +75,8 @@ import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
 import UserMessage from '@/components/board/UserMessage.vue';
+import Dashboard from '@/components/board/Dashboard.vue'
+
 
 import { boardService } from "@/services/board.service.js";
 
@@ -85,7 +89,11 @@ import { eventBus } from '@/services/event-bus.service.js';
 export default {
     data() {
         return {
-            showFullLabel: false,
+            // showFullLabel: false,
+            show: {
+                dashboard: false,
+                fullLabel: false
+            },
             selectedTicket: null,
             selectedTicketIdx: null,
             selectedGroupId: null,
@@ -116,7 +124,7 @@ export default {
 
     },
     mounted() {
-        window.onload = () => { console.log("BoardDetails + background loaded") };
+        // window.onload = () => { console.log("BoardDetails + background loaded") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
@@ -223,7 +231,7 @@ export default {
             this.saveBoard();
         },
         changeLabelsDisplay() {
-            this.showFullLabel = !this.showFullLabel;
+            this.show.fullLabel = !this.show.fullLabel;
         },
         cloneTicket(ticket, ticketIdx, groupId) {
             const newTicket = boardService.cloneTicket(ticket);
@@ -249,8 +257,8 @@ export default {
 
         },
         toggleMember(memberToUpdate) {
-            console.log({memberToUpdate})
-            console.log('CurrBoard members: ',this.currBoard.members);
+            console.log({ memberToUpdate })
+            console.log('CurrBoard members: ', this.currBoard.members);
             delete memberToUpdate.email
             const memberIdx = this.currBoard.members.findIndex(member => member._id === memberToUpdate._id)
             if (memberIdx >= 0) {
@@ -288,20 +296,20 @@ export default {
             return this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id);
         },
         systemUsers() {
-            console.log(this.$store.getters.users)
             return this.$store.getters.users
         }
     },
     components: {
         MainHeader,
         BoardHeader,
-        TicketGroup,
-        TicketDetails,
         Container,
         Draggable,
+        TicketGroup,
         AddGroup,
+        TicketDetails,
         UserMessage,
-        BoardHeader,
+        Dashboard,
+
     },
     directives: {
         dragscroll

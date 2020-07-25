@@ -1,0 +1,31 @@
+<script>
+import { Bar } from 'vue-chartjs'
+export default {
+    name:'TicketsPerGroupChart',
+    extends: Bar,
+    props: {
+        label: {
+            type: String,
+        },
+        chartData: {
+            type: Object,
+        },
+        options: {
+            type: Object,
+        }
+    },
+    mounted() {
+        const groupTitle = this.chartData.groupTitle
+        const ticketCount = this.chartData.ticketCount
+
+        this.renderChart({
+            labels: groupTitle,
+            datasets: [{
+                label: this.label,
+                data: ticketCount
+            }]
+        }, this.options)
+    }
+}
+
+</script>

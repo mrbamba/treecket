@@ -1,10 +1,30 @@
 .dashboard {
-    // position: absolute;
-    margin: 60px;
-    min-width: 800px;
-    min-height: 600px;
-    max-width: 100%;
-    max-height: 100%;
+    position: absolute;
+    top: 40px;
+    // right: 10px;
+    // margin: 0 60px 60px 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    // min-width: 80%;
+    // min-height: 600px;
+    width: calc(100% - 80px);
+    height: calc(100% - 80px);
+    overflow-y: auto;
     background-color: #fff;
     border: 1px solid gray;
+    z-index: 7;
+    padding: 25px;
+    border-radius: 5px;
+
+    h2 {
+        text-align: center;
+        // margin: 0 auto;
+        display: block;
+        margin-bottom: 25px;
+    }
+    .close-dashboard-btn{
+        float: right;
+        background-color: #fff;
+        border: none;
+    }
 }

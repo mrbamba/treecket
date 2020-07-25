@@ -19,7 +19,7 @@
             <button>
                 <i class="fas fa-user-lock" /> Team
             </button>
-            
+
             <section class="board-members">
                 <button @click="show.boardMembers=!show.boardMembers">+</button>
                 <board-member-selector
@@ -33,10 +33,10 @@
             </section>
         </div>
         <div class="end-of-board-header">
-            <button @click="show.dashboard=!show.dashboard">
+            <button @click="showDashboard">
                 <i class="fas fa-chart-area"></i>
             </button>
-            <dashboard :board="board" v-if="show.dashboard"/>
+
             <button>
                 <i class="fas fa-ellipsis-h" /> Show Menu
             </button>
@@ -46,10 +46,9 @@
 
 <script>
 import BoardMemberSelector from "@/components/board/BoardMemberSelector.vue";
-import Dashboard from '@/components/board/Dashboard.vue'
 export default {
     name: "BoardHeader",
-    props: ['boardTitle', 'boardMembers', 'systemUsers','board'],
+    props: ['boardTitle', 'boardMembers', 'systemUsers', 'board'],
     data() {
         return {
             editTitle: false,
@@ -84,11 +83,13 @@ export default {
 
             hide.textContent = input.value;
             input.style.width = hide.offsetWidth + 16 + "px";
+        },
+        showDashboard(){
+            this.$emit('showDashboard')
         }
     },
     components: {
         BoardMemberSelector,
-        Dashboard,
     }
 }
 </script>

@@ -1,34 +1,34 @@
 <template>
-    <section class="dashboard">
-        <LineChart :options="options" label="New tickets by week" :chartData="chartData" v-if="chartData.weeks.length>0"/>
+    <section class="tickets-by-week">
+        <tickets-by-week-chart
+            :options="options"
+            label="New tickets by week"
+            :chartData="chartData"
+            v-if="chartData.weeks.length>0"
+        />
     </section>
 </template>
 
 <script>
-import VueCharts from 'vue-chartjs'
-import { Line } from 'vue-chartjs'
+// import VueCharts from 'vue-chartjs'
+// import { Line } from 'vue-chartjs'
 import moment from 'moment'
-import LineChart from '@/components/board/charts/LineChart.vue'
+import TicketsByWeekChart from '@/components/board/charts/TicketsByWeekChart.vue'
 
 
 
 export default {
-    props: ['board'],
-    name: "Dashboard",
-    extends: Line,
+    props: {
+        board: {
+            type: Object,
+            require: true
+        }
+    },
+    name: "TicketsByWeek",
+    // extends: Line,
     data() {
         return {
             chartData: {},
-            // chartdata: {
-            //     labels: ['TO DO', 'IN PROGRESS', 'DONE'],
-            //     datasets: [
-            //         {
-            //             label: 'Data One',
-            //             backgroundColor: '#f87979',
-            //             data: [18, 7, 43]
-            //         }
-            //     ]
-            // },
             options: {
                 responsive: true,
                 maintainAspectRatio: false
@@ -41,6 +41,7 @@ export default {
     },
     methods: {
         calculateData() {
+            console.log(this.board);
             let board = _.cloneDeep(this.board)
             //Create array on all board tickets
             let tickets = []
@@ -58,37 +59,16 @@ export default {
             tickets.forEach(ticket => {
                 if (Date.now() - ticket.createdAt > 1000 * 60 * 60 * 24 * 365) return
                 let weeknumber = moment(ticket.createdAt).isoWeek();
-                console.log(weeknumber)
                 ticketMap[weeknumber] = ticketMap[weeknumber] || 0
                 ticketMap[weeknumber]++
-            }); 
-            // let arr = [ ...ticketMap.keys()]
+            });
             this.chartData.weeks = Object.keys(ticketMap)
             this.chartData.ticketCount = Object.values(ticketMap)
 
-            console.log(this.chartData)
-            // 
         }
     },
-    // props: {
-    // board: {
-    //     type: Object,
-    //     require: true
-    // },
-    // chartdata: {
-    //     type: Object,
-    //     default: null
-    // },
-    // options: {
-    //     type: Object,
-    //     default: null
-    // }
-    // },
-    // mounted() {
-    //     this.renderChart(this.chartdata, this.options)
-    // },
     components: {
-        LineChart
+        TicketsByWeekChart
     }
 }
 </script>
