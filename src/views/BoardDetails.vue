@@ -10,6 +10,7 @@
             @loadUsers="loadUsers"
             @toggleMember="toggleMember"
             @showDashboard="show.dashboard=true"
+            @showMenu="show.menu=!show.menu"
         />
 
         <main
@@ -72,6 +73,7 @@
         />
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
+        <board-menu :activities="currBoard.activities" :boardId="currBoard._id" @editBackground="show.backgroundEditor=!show.backgroundEditor"  v-if="show.menu"/>
     </div>
 </template>
 
@@ -82,7 +84,9 @@ import TicketGroup from "@/components/board/TicketGroup.vue";
 import AddGroup from "@/components/board/AddGroup.vue";
 import TicketDetails from "@/components/board/TicketDetails.vue";
 import UserMessage from '@/components/board/UserMessage.vue';
-import Dashboard from '@/components/board/Dashboard.vue'
+import Dashboard from '@/components/board/Dashboard.vue';
+import BoardMenu from '@/components/board/BoardMenu.vue';
+
 
 
 import { boardService } from "@/services/board.service.js";
@@ -99,7 +103,9 @@ export default {
             // showFullLabel: false,
             show: {
                 dashboard: false,
-                fullLabel: false
+                fullLabel: false,
+                menu: false,
+                backgroundEditor: false
             },
             selectedTicket: null,
             selectedTicketIdx: null,
@@ -281,10 +287,10 @@ export default {
         },
         moveTicket(newGroupId) {
             // const board = this.currBoard
-            console.log('running move ticket on board details',newGroupId)
+            console.log('running move ticket on board details', newGroupId)
             const currGroupIdx = this.currBoard.groups.findIndex(
                 group => group.tickets.find(ticket => {
-                   return ticket.id === this.selectedTicket.id
+                    return ticket.id === this.selectedTicket.id
                 })
             );
             if (currGroupIdx < 0) return
@@ -299,10 +305,10 @@ export default {
                 group => { return group.id === newGroupId })
             // board.groups[currGroupIdx]
 
-            console.log({newGroupIdx})
+            console.log({ newGroupIdx })
 
             if (newGroupIdx < 0) return
-            let ticketBackup=_.cloneDeep(this.selectedTicket)
+            let ticketBackup = _.cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
             this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
             this.saveBoard();
@@ -369,6 +375,7 @@ export default {
         TicketDetails,
         UserMessage,
         Dashboard,
+        BoardMenu,
 
     },
     directives: {
