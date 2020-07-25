@@ -34,7 +34,7 @@
         </div>
         <div class="end-of-board-header">
             <button @click="showDashboard">
-                <i class="fas fa-chart-area"></i>
+                <i class="dashboard-icon fas fa-chart-area"></i>Dashboard
             </button>
 
             <button>
