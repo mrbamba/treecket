@@ -304,7 +304,7 @@ export default {
             if (newGroupIdx < 0) return
             let ticketBackup=_.cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
-            this.currBoard.groups[newGroupIdx].tickets.push(ticketBackup)
+            this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
             this.saveBoard();
         }
     },
