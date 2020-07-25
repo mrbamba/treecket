@@ -66,12 +66,20 @@ div.smooth-dnd-container.horizontal {
 .smooth-dnd-container:active {
   .ticket-group {
     cursor: grabbing;
-  }
 
-  .ticket-preview {
-    cursor: grabbing;
+    .ticket-preview {
+      cursor: grabbing !important;
+    }
+
+    .ticket-group-header input,
+    .ticket-preview div {
+      cursor: pointer !important;
+    }
   }
 }
+
+// .smooth-dnd-container:active {
+// }
 
 div .smooth-dnd-container.horizontal>.smooth-dnd-draggable-wrapper {
   height: fit-content;

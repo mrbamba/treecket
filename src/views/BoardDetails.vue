@@ -1,6 +1,6 @@
 <template>
     <div class="board-details" v-if="currBoard" :style="{ background }">
-        <board-header />
+        <board-header :user="loggedInUser" />
         <board-controls
             :boardTitle="currBoard.title"
             :boardMembers="currBoard.members"
@@ -26,6 +26,7 @@
                 orientation="horizontal"
                 @drop="onGroupDrop($event)"
                 :get-child-payload="getGroupPayload"
+                drag-handle-selector=".ticket-group-header"
             >
                 <Draggable v-for="(group, groupIdx) in currBoard.groups" :key="group._id">
                     <ticket-group
