@@ -8,17 +8,17 @@ div.ticket-preview-menu {
     display: flex;
     flex-direction: column;
     border-radius: 3px;
-    z-index: 5;
+    // z-index: 10000000000000000000 !important;
     box-shadow: 0 0 10px rgba(0, 0 ,0 ,.2) ;
 
     button{
         background-color: transparent;
         border: none;
         margin-bottom: 15px;
-        padding: 5px;
+        padding: 15px;
         border-radius: 3px;
         &:hover{
-            background-color: #0052ee;
+            background-color: #3076f7;
             color: white;
         }
     }
