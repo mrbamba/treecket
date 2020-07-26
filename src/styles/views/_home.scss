@@ -1,26 +1,33 @@
 .home-container {
     header {
         display: flex;
+        justify-content: space-between;
         text-align: center;
         transition: box-shadow .3s ease;
         background-color: #fff;
-        // position: absolute;
-        >nav {
-            width: 1200px;
+
+        .user-options {
+            margin-top: 14px;
         }
-        nav {
-            padding: 5px;
-                a {
-                    font-weight: 500;
-                    color: #2c3e50;
-                    &.router-link-exact-active {
-                        color: #fff;
-                        border-bottom: 2px solid #4a4;
-                        opacity: 1;
-                    }
-                }
-        }
+
+        // // position: absolute;
+        // >nav {
+        //     width: 1200px;
+        // }
+        // nav {
+        //     padding: 5px;
+        //         a {
+        //             font-weight: 500;
+        //             color: #2c3e50;
+        //             &.router-link-exact-active {
+        //                 color: #fff;
+        //                 border-bottom: 2px solid #4a4;
+        //                 opacity: 1;
+        //             }
+        //         }
+        // }
     }
+
     .logo {
         margin: rem(4px);
         font-family: Lalezar;
@@ -40,4 +47,36 @@
             vertical-align: middle;
         }
     }
+
+    .main-home-page {
+
+        display: grid;
+        grid-template-columns: 0.4fr 2.2fr min-content 0.4fr;
+        grid-template-rows: 0.7fr 2fr min-content 0.3fr;
+        gap: 1px 1px;
+        grid-template-areas: ". . ."". . ."". . .";
+    
+
+    .left-of-home {
+        // min-width: 15vw;
+    }
+
+
+    .main {
+        // min-width: 70vw;
+        // min-height: 90vh;
+        background: url("http://res.cloudinary.com/dkdsymsli/image/upload/v1595754237/htz1wnkfhja2gqwh5hya.png") no-repeat center center fixed;
+        background-size: cover;
+
+    }
+
+
+    .right-of-home {
+        // min-width: 15vw;
+    }
+    .below-main{
+        text-align: center;
+    }
 }
+}
+
