@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="showAddTicket">
-            <textarea
+        <form @submit.prevent="addTicket" v-if="showAddTicket">
+            <input
                 class="minimal-input"
                 @blur="onBlur"
                 @keyup.enter="addTicket"
@@ -11,13 +11,14 @@
                 maxlength="75"
                 placeholder="Enter a title for this ticket..."
             />
-            <button @click.stop="addTicket" data-prevent-blur="add" class="add-button">Add Ticket</button>
+            <button type="submit" data-prevent-blur="add" class="add-button">Add Ticket</button>
             <button
+                type="button"
                 @click.stop="toggleAddTicket"
                 data-prevent-blur="close"
                 class="cancel-button"
             >Cancel</button>
-        </div>
+        </form>
         <button class="add-ticket-btn" @click.stop="toggleAddTicket" v-else>
             <span>+</span>
             <span>Add another ticket</span>
@@ -45,19 +46,20 @@ export default {
         },
 
         addTicket() {
-            if (!this.ticketTitle) return;
-            const ticket = boardService.getNewTicket(this.ticketTitle);
-            this.$emit('emitAddTicket', {
-                ticket,
-                groupId: this.group.id
-            });
-            this.ticketTitle = '';
+            if (this.ticketTitle) {
+                const ticket = boardService.getNewTicket(this.ticketTitle);
+                this.$emit('emitAddTicket', {
+                    ticket,
+                    groupId: this.group.id
+                });
+                this.ticketTitle = '';
+            }
         },
 
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === this.group.id) return
-                if (ev.relatedTarget.dataset.preventBlur === 'close') {
+                else if (ev.relatedTarget.dataset.preventBlur === 'close') {
                     this.toggleAddTicket();
                     return;
                 } else if (ev.relatedTarget.dataset.preventBlur === 'add') {
@@ -65,11 +67,10 @@ export default {
                     this.$refs.newTicketTitle.focus()
                     return;
                 }
-            };
-            if (!this.ticketTitle) {
-                this.ticketTitle = '';
             } else {
-                this.addTicket();
+                if (this.ticketTitle) {
+                    this.addTicket();
+                }
             }
             this.toggleAddTicket();
         },

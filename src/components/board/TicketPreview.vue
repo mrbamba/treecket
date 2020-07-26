@@ -6,7 +6,7 @@
         >
             <i class="fas fa-pencil-alt"></i>
         </button>
-        <ticket-preview-menu v-if="showTicketPreview" :ticket="ticket" />
+        <ticket-preview-menu v-if="showTicketPreview" :ticket="ticket" @deleteTicket="deleteTicket" />
         <div :style="{backgroundColor: ticket.color}">
             <div class="cover-container" v-if="ticket.cover && getCoverSrc">
                 <iframe
@@ -143,6 +143,11 @@ export default {
         changeLabelsDisplay() {
             this.$emit('changeLabelsDisplay')
         },
+        deleteTicket(ticket) {
+            console.log(ticket);
+            this.$emit('deleteTicket', ticket)
+        },
+
         getYoutubeId(url) {
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             const match = url.match(regExp);

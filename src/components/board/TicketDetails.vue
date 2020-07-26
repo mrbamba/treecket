@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-details" @keyup.esc="closeTicketDetails" tabindex="0" ref="ticketDetails">
         <header>
-            <textarea
+            <input
                 class="ticket-title"
                 @input="expandTextareaEl()"
                 ref="title"

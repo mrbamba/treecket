@@ -39,6 +39,7 @@
             >
                 <Draggable v-for="ticket in group.tickets" :key="ticket.id">
                     <ticket-preview
+                        @deleteTicket="deleteTicket"
                         @changeLabelsDisplay="changeLabelsDisplay"
                         :ticket="ticket"
                         :labels="labels"
@@ -136,6 +137,10 @@ export default {
         getTicketPayload(idx) {
             return this.group.tickets[idx];
         },
+
+        deleteTicket(ticket) {
+            this.$emit('deleteTicket', {ev: this.$event, ticketId: ticket.id, groupId: this.group.id})
+        }
         // doDrag(ev) {
         //     console.log(ev)
         // }
