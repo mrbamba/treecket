@@ -16,16 +16,5 @@
 <script>
 export default {
     name: "BoardPreview",
-    props: {
-        board: {
-            type: Object,
-            require: true
-        }
-    },
-    // computed: {
-    //     background() {
-    //         // return this.board.background + ((this.board.background.includes('url')) ? 'center / cover' : '');
-    //     }
-    // }
 }
 </script>
