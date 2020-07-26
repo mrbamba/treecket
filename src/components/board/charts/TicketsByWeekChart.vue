@@ -22,7 +22,9 @@ export default {
             labels: weeks,
             datasets: [{
                 label: this.label,
-                data: ticketCount
+                data: this.chartData.ticketCount,
+                backgroundColor:this.chartData.colors,
+                borderColor:this.chartData.colors,
             }]
         }, this.options)
     }
