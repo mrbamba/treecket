@@ -23,7 +23,7 @@
                         v-if="showFullLabel"
                         :style="{backgroundColor: label.color}"
                         @click.stop="changeLabelsDisplay"
-                    >{{ label.title }}</div>
+                    ><transition-group name="slide-up-fade">{{ label.title }}</transition-group></div>
                     <div
                         v-else
                         :style="{backgroundColor: label.color}"

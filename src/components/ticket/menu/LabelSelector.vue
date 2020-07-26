@@ -6,7 +6,7 @@
         <h4>
             Labels
         </h4>
-        <Labels :labels="labels"/>
+        <Labels :labels="labels" @labelClicked="labelClicked"/>
     </ul>
 </template>
 
@@ -17,7 +17,10 @@ export default {
     methods: {
         closeLabelSelector() {
             this.$emit('closeLabelSelector')
-        }
+        },
+        labelClicked(labelId){
+            this.$emit('labelClicked', labelId)
+        },
     },
     components: {
         Labels
