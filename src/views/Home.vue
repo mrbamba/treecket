@@ -13,7 +13,7 @@
                 <router-link to="/signup" class="add-button">Signup</router-link>
             </div>
         </header>
-        <div class="main-home-page">
+        <!-- <div class="main-home-page">
             <div></div>
             <div></div>
             <div></div>
@@ -22,9 +22,9 @@
             <div class="right-of-home"></div>
             <div></div>
             <div class="below-main">
-                <router-link to="/board" class="save-button">Try it free</router-link>
             </div>
-        </div>
+        </div> -->
+                <router-link to="/board" class="save-button">Try it free</router-link>
     </div>
 </template>
 
