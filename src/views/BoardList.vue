@@ -1,5 +1,6 @@
 <template>
     <div class="boards-list">
+        <fixed-header />
         <div class="boards-list-header">
             <h2>Boards</h2>
             <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
@@ -12,8 +13,10 @@
 </template>
 
 <script>
+import FixedHeader from '@/components/FixedHeader.vue';
 import BoardPreview from '@/components/BoardPreview.vue';
 import AddBoard from '@/components/AddBoard.vue';
+
 export default {
     name: "BoardList",
     data() {
@@ -37,6 +40,7 @@ export default {
     components: {
         BoardPreview,
         AddBoard,
+        FixedHeader,
     }
 }
 </script>
