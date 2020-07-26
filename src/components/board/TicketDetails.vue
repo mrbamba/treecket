@@ -18,16 +18,30 @@
 
         <main class="ticket-body">
             <section class="ticket-content">
-                <ul class="labels-container clean-list">
-                    <li
-                        class="label"
-                        v-for="label in ticketLabels"
-                        :key="label.id"
-                        :style="{backgroundColor: label.color}"
-                    >{{ label.title }}</li>
-                </ul>
+                <div class="ticket-content-top">
+                    <div class="ticket-members">
+                        <avatar
+                            class="ticket-member-avatar"
+                            v-for="member in ticket.members"
+                            :key="member._id"
+                            :username="member.fullName"
+                            :src="member.imgSrc"
+                            :size="54"
+                        />
+                    </div>
+                    <ul class="labels-container clean-list">
+                        <li
+                            class="label"
+                            v-for="label in ticketLabels"
+                            :key="label.id"
+                            :style="{backgroundColor: label.color}"
+                        >{{ label.title }}</li>
+                    </ul>
+                </div>
                 <section class="ticket-description">
-                    <h3><i class="fas fa-align-left" /> Description</h3>
+                    <h3>
+                        <i class="fas fa-align-left" /> Description
+                    </h3>
                     <textarea
                         v-model="ticket.description"
                         @blur="saveTicket"
@@ -99,7 +113,6 @@
                 @addAttachment="addAttachment"
             />
         </main>
-        
     </div>
 </template>
 
@@ -111,6 +124,8 @@ import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
 import TicketHistory from '@/components/ticket/TicketHistory.vue';
 import { boardService } from "@/services/board.service.js";
 import { eventBus } from '@/services/event-bus.service.js';
+import Avatar from 'vue-avatar'
+
 export default {
     props: {
         ticket: Object,
@@ -120,8 +135,8 @@ export default {
         labels: Array,
         ticketActivities: Array,
         boardMembers: Array,
-        boardGroupsSummary:Array,
-        currGroupSummary:Object,
+        boardGroupsSummary: Array,
+        currGroupSummary: Object,
     },
     // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
@@ -264,8 +279,8 @@ export default {
         cloneTicket(ticket) {
             this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId);
         },
-        moveTicket(newGroupId){
-            this.$emit('moveTicket',newGroupId)
+        moveTicket(newGroupId) {
+            this.$emit('moveTicket', newGroupId)
         }
     },
     components: {
@@ -275,6 +290,7 @@ export default {
         TicketAttachments,
         // AddAttachment,
         TicketHistory,
+        Avatar,
     }
 };
 </script>

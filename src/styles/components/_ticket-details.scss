@@ -13,7 +13,7 @@
     overflow-x: hidden;
     width: 100%;
     min-height: 600px;
-    
+
     @include for-wide-layout {
         top: 60px;
         width: calc(100vw - 120px);
@@ -25,6 +25,7 @@
         font-size: rem(14px);
         font-weight: 500;
         margin-bottom: rem(8px);
+
         svg {
             margin-inline-end: rem(8px);
         }
@@ -46,7 +47,7 @@
             padding: rem(14px) rem(12px);
             margin: rem(14px) rem(12px);
             transition: box-shadow 0.3s ease;
-            
+
             &:focus {
                 box-shadow: 0 0 0 1px #ddd;
             }
@@ -56,6 +57,7 @@
             background-color: transparent;
             border: none;
             height: fit-content;
+            padding: 15px;
 
         }
     }
@@ -64,45 +66,63 @@
         overflow-y: auto;
         flex-grow: 1;
         display: flex;
-        margin: 0 rem(11px) 0;
+        // margin: 0 rem(11px) 0;
         padding: rem(20px) 0 100px;
-        
+
         &::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         &::-webkit-scrollbar-track {
             background-color: rgba(9, 33, 66, .1);
             margin-top: 4px;
         }
-        
+
         &::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, .15);
         }
 
         .ticket-content {
-            padding-right: 220px;
+            padding-right: 200px;
             overflow-y: auto;
             flex-grow: 1;
             padding-inline-start: rem(16px);
-            
-            
-            .labels-container {
-                display: flex;
-                align-items: center;
-                margin-bottom: 25px;
 
-                .label {
-                    display: flex;
-                    align-items: center;
-                    height: 32px;
-                    padding: 0 12px;
-                    border-radius: 4px;
-                    color: white;
+            .ticket-content-top {
+                display: flex;
+                margin-bottom: 25px;
+                justify-content: space-between;
+                .ticket-members {
+                    display: inline-flex;
+                    flex-direction: row;
+                    // align-items: center;
+
+                    .ticket-member-avatar{
+                        margin-right: 5px;
+
+                    }
                 }
 
-                .label:not(:last-child) {
-                    margin-inline-end: 4px;
+                .labels-container {
+                    display: inline-flex;
+                    align-items: center;
+                    margin-block-start: 0px;
+                    padding-inline-start: 0px;
+
+
+                    .label {
+                        display: flex;
+                        align-items: center;
+                        height: 32px;
+                        padding: 0 12px;
+                        border-radius: 4px;
+                        color: white;
+                        min-width: 50px;
+                    }
+
+                    .label:not(:last-child) {
+                        margin-inline-end: 4px;
+                    }
                 }
             }
 
