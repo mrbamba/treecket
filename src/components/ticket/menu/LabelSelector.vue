@@ -6,7 +6,7 @@
         <h4>
             Labels
         </h4>
-        <Labels :labels="labels" @labelClicked="labelClicked"/>
+        <labels :labels="labels" @labelClicked="labelClicked"/>
     </ul>
 </template>
 
