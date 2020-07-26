@@ -12,7 +12,10 @@
         position: absolute;
         right: 5px;
         top: 2px;
-        background: transparent;
+        background-color: transparent;
+        &:hover {
+            background-color: transparent;
+        }
     }
     h4 {
         display: inline-block;

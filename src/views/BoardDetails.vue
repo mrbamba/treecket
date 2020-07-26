@@ -76,7 +76,7 @@
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
         <board-menu
-            :activities="currBoard.activities"
+            :activities="currBoard.activities.reverse()"
             :boardId="currBoard._id"
             @editBackground="show.backgroundEditor=!show.backgroundEditor"
             v-if="show.menu"
@@ -353,7 +353,6 @@ export default {
                     return ticket.id === this.selectedTicket.id
                 })
             })
-            console.log({ currTicketGroup })
             return {
                 id: currTicketGroup.id,
                 title: currTicketGroup.title
