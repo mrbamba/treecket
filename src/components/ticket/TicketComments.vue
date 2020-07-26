@@ -1,6 +1,6 @@
 <template>
     <div class="ticket-comments">
-        <div v-if="comments">
+        <div v-if="comments" class="comment-previews">
             <transition-group name="slide-up-fade">
                 <ticket-comment
                     v-for="comment in comments"

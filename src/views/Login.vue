@@ -2,7 +2,7 @@
     <div class="login">
         <h2>{{ msg }}</h2>
 
-        <div v-if="loggedInUser">
+        <div v-if="loggedInUser" >
             <h3>
                 Logged in user: {{ loggedInUser.fullName }}
                 <form @submit.prevent="updateUser">
@@ -12,22 +12,20 @@
             </h3>
         </div>
         <div v-else>
-            <form @submit.prevent="doLogin" v-if="route === 'Login'">
+            <form @submit.prevent="doLogin" v-if="route === 'Login'" class="login-page">
                 <h2>Log in to your account</h2>
-                <input type="text" v-model="loginCred.email" placeholder="Email" />
-                <br />
-                <input type="text" v-model="loginCred.password" placeholder="Password" />
-                <br />
-                <button>Continue</button>
-                <router-link to="/signup">Sign up for an account</router-link>
+                <input type="text" v-model="loginCred.email" placeholder="Email" class="minimal-input"/>
+                <input type="password" v-model="loginCred.password" placeholder="Password"  class="minimal-input"/>
+                <button >Continue</button>
+                <router-link to="/signup" class="cancel-button">Sign up for an account</router-link>
             </form>
-            <form @submit.prevent="doSignup" v-else>
+            <form @submit.prevent="doSignup" v-else class="signup-page">
                 <h2>Sign up for your account</h2>
-                <input type="text" v-model="signupCred.email" placeholder="Email" />
-                <input type="password" v-model="signupCred.password" placeholder="Password" />
-                <input type="text" v-model="signupCred.fullName" placeholder="Full name" />
+                <input type="text" v-model="signupCred.email" placeholder="Email"  class="minimal-input"/>
+                <input type="password" v-model="signupCred.password" placeholder="Password" class="minimal-input"/>
+                <input type="text" v-model="signupCred.fullName" placeholder="Full name" class="minimal-input"/>
                 <label for="upload-input">Upload your profile</label>
-                <input type="file" id="upload-input" @change="onUploadImg" class="upload-button" />
+                <input type="file" id="upload-input" @change="onUploadImg" class="minimal-input" />
 
                 <button>Sign up</button>
                 <router-link to="/login">Already have a Treecket account? Log in</router-link>
