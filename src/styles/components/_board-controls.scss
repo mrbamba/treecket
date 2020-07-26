@@ -19,7 +19,8 @@
     }
 
     div {
-        display: inline-block;
+        display: flex;
+        align-items: center;
     }
 
     .board-title {
