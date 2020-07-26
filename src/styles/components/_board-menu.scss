@@ -49,7 +49,41 @@
     
         }
     }
-
-
-
+    .background-type-selector {
+        display: flex;
+        margin-bottom: 20px;
+        div {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            height: 110px;
+            flex-basis: 50%;
+            padding: 5px;
+            text-align: center;
+            border-radius: 4px;
+            span {
+                font-size: rem(14px);
+                color: #172b4d;
+            }
+            .images-navigator {
+                background: url(https://dvyvvujm9h0uq.cloudfront.net/com/articles/1559116065-photocollage1.jpg) center / cover;
+                padding: 5px;
+                margin-bottom: 8px;
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+            .colors-navigator {
+                flex-basis: 50%;
+                background: url(https://a.trellocdn.com/prgb/dist/images/colors@2x.864f4df15d825e89e199.jpg) center / cover;
+                margin-bottom: 8px;
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+    .background-palette {
+        margin-bottom: 20px;
+    }
 }

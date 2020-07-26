@@ -2,15 +2,16 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 400px;
+    height: 100%;
     justify-content: space-between;
-    padding: 10px;
+    z-index: 5;
     &>* {
         flex-basis: 50%;
         padding: 5px;
         &>*{
-            height: 100%;
+            height: 70px;
             width: 100%;
+            border-radius: 4px;
         }
     }
 }

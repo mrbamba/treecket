@@ -79,6 +79,7 @@
             :activities="currBoard.activities.reverse()"
             :boardId="currBoard._id"
             @editBackground="show.backgroundEditor=!show.backgroundEditor"
+            @setBackground="setBackground"
             v-if="show.menu"
         />
     </div>
@@ -287,6 +288,12 @@ export default {
 
             this.saveBoard();
         },
+        setBackground(background) {
+            this.show.menu = false;
+            this.currBoard.background = background
+            this.saveBoard();
+        },
+
         moveTicket(newGroupId) {
             const currGroupIdx = this.currBoard.groups.findIndex(
                 group => group.tickets.find(ticket => {
@@ -315,6 +322,7 @@ export default {
             if (this.$route.params.boardId) {
                 const board = this.currBoard;
                 if (board) {
+                    console.log(board.background);
                     return board.background + ((board.background.includes('url')) ? ' fixed' : '');
                 }
                 return '';
