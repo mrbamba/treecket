@@ -1,6 +1,7 @@
-.add-board{
+.add-board {
     text-align: center;
-    input{
+
+    input {
         outline: none;
         padding: rem(16px) rem(12px);
         border-radius: 4px;
@@ -8,9 +9,9 @@
         border: 1px solid #e3e3e3;
         transition: border-color .3s ease;
         margin-bottom: 20px;
+
         &:focus {
             border-color: #b2b2b2;
         }
     }
 }
-
