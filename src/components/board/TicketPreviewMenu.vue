@@ -5,7 +5,7 @@
         </header>
         <button @click.stop="openLabelsModal = !openLabelsModal">
             Edit labels
-            <labels-modal v-if="openLabelsModal" />
+            <labels-selector v-if="openLabelsModal" />
             </button>
         <button>Change members</button>
         <button @click="onCloneTicket">Clone ticket</button>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import LabelsModal from '@/components/LabelsModal'
+import LabelsSelector from '@/components/ticket/menu/LabelSelector'
 export default {
     props:['ticket'],
     data() {
@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         onDeleteTicket() {
-            console.log('delete ticket', this.ticket);
             this.$emit('deleteTicket', this.ticket)
         },
         onCloneTicket() {
@@ -33,7 +32,7 @@ export default {
         }
     },
     componenets: {
-        LabelsModal
+        LabelsSelector
     }
 
 }

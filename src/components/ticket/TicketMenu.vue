@@ -17,7 +17,12 @@
         <button @click="show.labelSelector=!show.labelSelector">
             <i class="fas fa-tag" /> Labels
         </button>
-        <labels v-show="show.labelSelector" @labelClicked="labelClicked" :labels="labels" />
+        <label-selector
+            v-show="show.labelSelector"
+            @labelClicked="labelClicked"
+            @closeLabelSelector="show.labelSelector=false"
+            :labels="labels"
+        />
         <button @click="onAddChecklist">
             <i class="far fa-check-square" /> Checklist
         </button>
@@ -58,9 +63,10 @@ import MemberSelector from "@/components/ticket/menu/MemberSelector.vue";
 import LabelSelector from "@/components/ticket/menu/LabelSelector.vue";
 import ChecklistCreator from "@/components/ticket/menu/ChecklistCreator.vue";
 import DateSelector from "@/components/ticket/menu/DateSelector.vue";
+import BackgroundPalette from '@/components/BackgroundPalette'
 // import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
 import CoverTool from "@/components/ticket/menu/CoverTool.vue";
-import labels from "@/components/board/labels.vue";
+// import labels from "@/components/board/labels.vue";
 import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import TicketGroupSelector from '@/components/ticket/menu/TicketGroupSelector';
 
@@ -92,9 +98,9 @@ export default {
             type: Array,
             require: true
         },
-        currGroupSummary:{
-            type:Object,
-            require:true
+        currGroupSummary: {
+            type: Object,
+            require: true
         }
 
     },
@@ -122,7 +128,6 @@ export default {
             this.$emit('updateTicketLabel', labelId)
         },
         loadUsers(userFilterBy) {
-            console.log(userFilterBy);
             this.$emit('loadUsers', userFilterBy)
         },
         toggleMember(member) {
@@ -149,9 +154,10 @@ export default {
         LabelSelector,
         ChecklistCreator,
         DateSelector,
+        BackgroundPalette,
         // AttachmentTool,
         CoverTool,
-        labels,
+        // labels,
         AddAttachment,
         TicketGroupSelector,
 

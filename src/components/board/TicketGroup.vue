@@ -80,9 +80,6 @@ export default {
     },
     methods: {
         toggleGroupMenu(ev) {
-            // console.log(ev);
-            // this.groupMenuRight = ev.innerWidth - ev.clientX
-            // this.groupMenuTop = ev.clientY
             this.groupMenuOpened = !this.groupMenuOpened;
         },
         onEditTitle() {
@@ -115,12 +112,18 @@ export default {
             }
             this.toggleAddTicket();
         },
+            addTicket({ ticket, groupId }) {
+                this.$emit('addTicket', { ticket, groupId });
+                this.toggleGroupMenu()
+            },
         cloneGroup(group) {
             this.$emit('cloneGroup', group, this.groupIdx)
+            this.toggleGroupMenu()
 
         },
         deleteGroup(groupId) {
             this.$emit('deleteGroup', this.groupIdx)
+            this.toggleGroupMenu()
         },
         onTicketDrop(dropResult) {
             const newTickets = applyDrag(this.group.tickets, dropResult);
@@ -130,9 +133,6 @@ export default {
             ) {
                 this.$emit('updateTickets', { newTickets, groupId: this.group.id })
             }
-        },
-        addTicket({ ticket, groupId }) {
-            this.$emit('addTicket', { ticket, groupId });
         },
         getTicketPayload(idx) {
             return this.group.tickets[idx];

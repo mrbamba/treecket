@@ -3,12 +3,16 @@
         <li v-for="label in labels" :key="label.id">
             <form @submit.prevent="saveLabel(label)" v-if="isEditLabel && labelInEdit.id === label.id">
                 <input type="text" v-model="labelInEdit.title" maxlength="16">
-                <input type="color" v-model="labelInEdit.color">
+                <input type="color" value="#000000" v-model="labelInEdit.color">
                 <button>save</button>
             </form>
-            <div v-else @click="onLabelClick(label.id)" :style="{backgroundColor: label.color}">
+            <div v-else>
+            <div @click="onLabelClick(label.id)" :style="{backgroundColor: label.color}">
             <span>{{label.title}}</span>
-            <button @click.stop="openLabelEdit(label)">Edit Label</button>
+            </div>
+            <button @click.stop="openLabelEdit(label)">
+                 <i class="fas fa-pencil-alt"></i>
+            </button>
             </div>
         </li>
         <form v-if="isOnAddLabel" @submit.prevent="saveLabel">
@@ -16,7 +20,7 @@
             <input type="color" v-model="labelInEdit.color">
             <button>Save</button>
         </form>
-        <button v-else @click="onAddLabel"> + Add label</button>
+        <button class="add-button" v-else @click="onAddLabel"> + Add label</button>
     </ul>
 </template>
 
