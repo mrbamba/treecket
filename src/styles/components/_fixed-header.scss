@@ -1,0 +1,32 @@
+.fixed-header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    transition: box-shadow .3s ease;
+    background-color: #fff;
+
+    .user-options {
+        margin-top: 14px;
+    }
+
+    .logo {
+        margin: rem(4px);
+        font-family: Lalezar;
+
+        h1 {
+            font-size: rem(40px);
+            text-transform: uppercase;
+            letter-spacing: rem(2px);
+            padding-inline-start: rem(4px);
+            display: inline;
+            line-height: 0.6;
+            vertical-align: bottom;
+        }
+
+        img {
+            width: rem(35px);
+            vertical-align: middle;
+        }
+    }
+
+}
