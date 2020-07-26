@@ -1,4 +1,5 @@
 .home-container {
+
     .jumbo-white {
         display: flex;
         max-height: 50vh;
@@ -8,10 +9,21 @@
             font-size: rem(40px);
             font-weight: 500;
             color: #253858;
+            padding-top: 100px; // FOR DEMO
         }
 
         img {
             object-fit: contain;
+            flex-basis: 50%;
+            width: 600px; // FOR DEMO
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-basis: 50%;
         }
 
         &:first-child {
@@ -22,9 +34,12 @@
     .jumbo-gray {
 
         display: flex;
+        justify-content: center;
+        align-items: center;
         max-height: 50vh;
         background-color: #eee;
-        padding: 2vh 5vh;
+        padding: 2vh 20vh;
+        min-height: 20vh;
 
         h3 {
             font-size: rem(28px);
