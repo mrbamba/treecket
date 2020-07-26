@@ -1,32 +1,45 @@
 .group-menu {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    min-width: 100px;
+    position: fixed;
+    min-width: 220px;
     padding: 15px 5px 2px;
-    max-height: fit-content;
-    top: 8px;
-    right: 8px;
+    // max-height: fit-content;
+    // top: 8px;
+    // right: 8px;
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     border: 1px solid #ddd;
     z-index: 2;
+    font-size: 16px;
+    padding: 15px;
+    color: rgb(65, 65, 65);
 
-    button {
+    .group-menu-btn {
         background-color: transparent;
         border: unset;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 3px;
+
+        &:hover{
+            background-color: #3076f7;
+            color: white;
+        }
+        &:last-of-type{
+            margin-bottom: 0px;
+        }
     }
 
     header {
         text-align: center;
         margin-bottom: 5px;
-        border-bottom: 1px solid black;
+        // border-bottom: 1px solid black;
         h5 {
             font-weight: bold;
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 15px;
         }
     }
 

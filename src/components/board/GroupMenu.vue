@@ -6,9 +6,9 @@
         </button>
             <h5>Group Menu</h5>
         </header>
-        <button @click="onAddTicket" :data-prevent-blur="group.id">Add ticket</button>
-        <button @click="onCloneGroup">Clone group</button>
-        <button @click="onDeleteGroup">Delete group</button>
+        <button class="group-menu-btn" @click="onAddTicket" :data-prevent-blur="group.id">Add ticket</button>
+        <button class="group-menu-btn" @click="onCloneGroup">Clone group</button>
+        <button class="group-menu-btn" @click="onDeleteGroup">Delete group</button>
         <!-- <button>Sort by</button> -->
     </div>
 </template>
