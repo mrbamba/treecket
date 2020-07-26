@@ -52,9 +52,11 @@
         flex-wrap: wrap;
         width: fit-content;
         max-width: fit-content;
-
+        padding-top: 6px;
         .ticket-label {
-            border-radius: 4px;
+            color: white;
+            font-size: rem(12px);
+            cursor: pointer;
             div {
                 margin: 0 4px 4px 0;
                 min-height: 8px;
@@ -63,12 +65,12 @@
                 width: fit-content;
                 border-radius: 4px;
             }
-
+            
             .full-label {
                 display: flex;
                 align-items: center;
-                line-height: 1;
                 height: 16px;
+                line-height: 1;
                 padding: 8px;
                 min-width: 56px;
             }

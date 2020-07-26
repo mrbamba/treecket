@@ -241,6 +241,7 @@ export default {
             if (attachmentIdx >= 0) {
                 const attachment = this.ticket.attachments.splice(attachmentIdx, 1);
                 this.ticket.attachments.unshift(attachment[0]);
+                this.saveTicket();
             }
         },
         toggleMember(memberToUpdate) {
