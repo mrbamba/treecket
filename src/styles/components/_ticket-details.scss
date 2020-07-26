@@ -13,9 +13,12 @@
     overflow-x: hidden;
     width: 100%;
     min-height: 600px;
-
+    height: 100%;
+    max-height: 100%;
+    
     @include for-wide-layout {
         top: 60px;
+        height: fit-content;
         width: calc(100vw - 120px);
         max-width: 1040px;
         max-height: calc(100vh - 120px); // margin bottom hidden
