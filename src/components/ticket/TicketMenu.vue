@@ -167,7 +167,7 @@ export default {
 
 <style>
 .el-date-editor.el-input {
-    max-width: 170px;
-    margin-bottom: 14px;
+    max-width: 160px;
+    margin-bottom: 0px;
 }
 </style>

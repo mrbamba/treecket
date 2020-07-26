@@ -1,41 +1,52 @@
-.board-member-selector{
+.board-member-selector {
     position: fixed;
     display: inline-flex;
     flex-direction: column;
     background-color: #fff;
-    border: 1px solid #e8e5e5;
-    padding: 15px 8px;
-    border-radius: 5px;
-    width: 250px;
+    padding: rem(16px);
+    border-radius: 3px;
+    width: 300px;
+    max-height: 500px;
     z-index: 2;
-    color: gray;
-    box-shadow: 0 0 10px rgba(0, 0 ,0 ,.2);
+    color: #5e6c84;
+    box-shadow: 0 0 14px rgba(0, 0, 0, .3);
+    overflow-y: auto;
+    top: 86px;
+    left: 40px;
 
 
-    button{
+    button {
         padding: 0px;
     }
-    .close-btn-fa{
+
+    .close-btn-fa {
         position: absolute;
         right: rem(5px);
         font-size: rem(13px);
         cursor: pointer;
     }
-    h2{
+
+    h2 {
         font-size: 16px;
         text-align: center;
         margin-bottom: rem(10px);
     }
-    input{
+
+    input {
         margin-bottom: rem(10px);
     }
-    h4{
-        font-size: rem(14px);
+
+    h4 {
+        font-size: rem(13px);
         margin-bottom: rem(10px);
+        font-weight: 500;
+        letter-spacing: 0.5px;
     }
-    ul{
+
+    ul {
         user-select: none;
-        .member-list-item{
+
+        .member-list-item {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -45,24 +56,28 @@
             font-size: 14px;
             padding: 5px 0px;
             margin: 8px 2px;
-            .member-select-avatar{
+
+            .member-select-avatar {
                 margin-right: 8px;
             }
-            &:hover{
+
+            &:hover {
                 background-color: rgb(233, 233, 233);
             }
-            span{
+
+            span {
                 font-size: 9px;
                 align-self: center;
-                
+
             }
-            div{
+
+            div {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 // padding: 0 rem(8px);
             }
         }
-        
+
     }
 }

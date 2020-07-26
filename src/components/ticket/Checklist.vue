@@ -12,7 +12,7 @@
             <button class="cancel-button" type="button">X</button>
         </form>
         <section v-else class="check-list-title-preview">
-            <h4 @click="editTitle(checklist)">{{checklist.title}}:</h4>
+            <h4 @click="editTitle(checklist)"><i class="far fa-check-square" /> {{checklist.title}}</h4>
             <button @click="deleteChecklist" class="delete-button">Delete</button>
         </section>
         <div class="progress-bar-container">

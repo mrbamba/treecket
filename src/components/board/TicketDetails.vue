@@ -27,7 +27,7 @@
                     >{{ label.title }}</li>
                 </ul>
                 <section class="ticket-description">
-                    <h3>Description</h3>
+                    <h3><i class="fas fa-align-left" /> Description</h3>
                     <textarea
                         v-model="ticket.description"
                         @blur="saveTicket"
@@ -55,9 +55,9 @@
                     @addItem="addItem"
                 />
                 <div class="log-selector">
-                    <h4>Activity</h4>
+                    <h3>Activity</h3>
                     <div class="ticket-activity-selector">
-                        <h4>Show:</h4>
+                        <span>Show:</span>
                         <button @click="logView='Comments'">
                             <i class="far fa-comment" /> Comments
                         </button>

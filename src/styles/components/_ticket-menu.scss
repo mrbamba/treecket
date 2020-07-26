@@ -20,12 +20,14 @@
         font-weight: 500;
         letter-spacing: 0.5px;
         margin-bottom: rem(4px);
-            margin-top: rem(16px);
+        margin-top: rem(16px);
     }
 
     .date-picker-title {
-        display: flex;
-        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-bottom: rem(4px);
 
         .due-date-icon {
             margin-right: 8px;
@@ -34,11 +36,11 @@
 
     button {
         border: none;
-        margin-bottom: 5px;
+        margin-bottom: rem(8px);
         background-color: rgba(9, 33, 66, .08);
         border-radius: 3px;
         text-align: left;
-        padding: rem(6px) rem(12px);
+        padding: rem(8px) rem(12px);
         color: #172b4d;
 
         &:hover {

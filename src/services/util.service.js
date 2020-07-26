@@ -11,9 +11,7 @@ function cloneObj(obj, key = 'id') {
     const clonedObj = _.cloneDeep(obj);
     (function updateKey(obj, key) {
       Object.keys(obj).forEach(currKey => {
-        if (currKey === key) {
-          obj[currKey] = makeId();
-        }
+        if (currKey === key) obj[currKey] = makeId();
         if (obj[currKey] && typeof obj[currKey] === 'object') {
           updateKey(obj[currKey], key);
         }
