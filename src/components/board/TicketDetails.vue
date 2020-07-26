@@ -72,10 +72,10 @@
                     <h3>Activity</h3>
                     <div class="ticket-activity-selector">
                         <span>Show:</span>
-                        <button @click="logView='Comments'">
+                        <button @click="logView='Comments'" :class="{ selected: logView==='Comments' }">
                             <i class="far fa-comment" /> Comments
                         </button>
-                        <button @click="logView='History'">
+                        <button @click="logView='History'" :class="{ selected: logView==='History' }">
                             <i class="fas fa-history" /> History
                         </button>
                     </div>
