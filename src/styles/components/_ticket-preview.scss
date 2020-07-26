@@ -7,7 +7,7 @@
     margin-bottom: 8px;
     font-size: rem(14px);
     cursor: pointer;
-    
+
     .tickets-container>div>div:last-child & {
         margin-bottom: 1px;
     }
@@ -20,17 +20,21 @@
         width: 2em;
         height: 2em;
         opacity: 0;
+    }
+
+    &:hover .edit-ticket-preview-btn {
+        color: #444;
+        opacity: 1;
+
         &:hover {
             background-color: rgba(170, 170, 170, 0.1);
-            box-shadow: 0px 0 1px rgba(0, 0, 0, 0.8);
-            opacity: 1;
         }
     }
 
     >div {
         width: 100%;
     }
-    
+
     .cover-container {
         max-width: 100%;
 
@@ -54,6 +58,7 @@
         max-width: fit-content;
         padding-top: 6px;
         .ticket-label {
+            border-radius: 4px;
             color: white;
             font-size: rem(12px);
             cursor: pointer;
@@ -93,6 +98,7 @@
             align-items: center;
             flex-wrap: wrap;
             color: #444;
+
             &>* {
                 &>*:first-child {
                     margin-inline-end: 3px;
@@ -109,7 +115,7 @@
                 background-color: #eb5a46;
                 color: white;
             }
-            
+
             .due-date.due-soon {
                 background-color: #f2d600;
                 color: white;

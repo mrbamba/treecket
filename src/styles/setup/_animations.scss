@@ -91,23 +91,22 @@
 
 
 
-.pop-up-fade-enter-active {
-    animation: pop-up-fade-in .4s ease;
+.slide-left-enter-active {
+    animation: slide-left .4s ease;
 }
 
-.pop-up-fade-leave-active {
-    animation: pop-up-fade-in .1s reverse ease;
+.slide-left-leave-active {
+    animation: slide-left .2s reverse ease;
 }
 
-@keyframes pop-up-fade-in {
+@keyframes slide-left {
     0% {
-        transform: translate(-50%, 50%) scaleY(0.8);
-        opacity: 0.5;
+        transform: translateX(200%);
+        opacity: 0;
     }
-    
 
     100% {
-        transform: translateX(-50%) scale(1);
+        transform: translateX(0%);
     }
 }
 

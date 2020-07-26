@@ -76,7 +76,7 @@
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
         <board-menu
-            :activities="currBoard.activities"
+            :activities="currBoard.activities.reverse()"
             :boardId="currBoard._id"
             @editBackground="show.backgroundEditor=!show.backgroundEditor"
             v-if="show.menu"

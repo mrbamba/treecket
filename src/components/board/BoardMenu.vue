@@ -1,9 +1,12 @@
 <template>
+        <transition name="slide-left">
+
     <div class="board-menu">
         <button @click="editBackground" class="board-menu-btn">Background</button>
         <button @click="deleteBoard" class="board-menu-delete">Delete Board</button>
         <board-history v-for="activity in activities" :key="activity.id" :activity="activity" :boardId="boardId"/>
     </div>
+    </transition>
 </template>
 
 <script>

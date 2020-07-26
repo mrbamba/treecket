@@ -64,28 +64,29 @@
         overflow-y: auto;
         flex-grow: 1;
         display: flex;
-        margin: 0 rem(8px) rem(20px);
-        padding: rem(20px);
-
+        margin: 0 rem(11px) 0;
+        padding: rem(20px) 0 100px;
+        
         &::-webkit-scrollbar {
-            width: 11px;
+            width: 10px;
         }
         
         &::-webkit-scrollbar-track {
             background-color: rgba(9, 33, 66, .1);
             margin-top: 4px;
         }
-
+        
         &::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, .15);
         }
 
         .ticket-content {
-            padding-right: 235px;
+            padding-right: 220px;
             overflow-y: auto;
             flex-grow: 1;
-        
-
+            padding-inline-start: rem(16px);
+            
+            
             .labels-container {
                 display: flex;
                 align-items: center;
