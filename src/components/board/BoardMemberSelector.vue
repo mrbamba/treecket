@@ -28,7 +28,7 @@
                         :size="28"
                         class="member-select-avatar"
                     />
-                    {{member.fullName}} ({{member.email}})
+                    {{member.fullName}} 
                 </div>
                 <span>{{member | isMember(boardMembers)}}</span>
             </li>
