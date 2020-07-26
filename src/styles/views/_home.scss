@@ -51,8 +51,8 @@
     .main-home-page {
 
         display: grid;
-        grid-template-columns: 0.4fr 2.2fr min-content 0.4fr;
-        grid-template-rows: 0.7fr 2fr min-content 0.3fr;
+        grid-template-columns: 0.4fr 2.2fr  0.4fr;
+        grid-template-rows: 0.7fr 2fr  0.3fr;
         gap: 1px 1px;
         grid-template-areas: ". . ."". . ."". . .";
     
