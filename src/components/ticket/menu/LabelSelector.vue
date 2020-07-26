@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Labels from '@/components/board/labels'
+import Labels from '@/components/board/Labels'
 export default {
     props: ['labels'],
     methods: {
