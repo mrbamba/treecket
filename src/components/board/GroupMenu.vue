@@ -20,6 +20,7 @@ export default {
     methods: {
         onAddTicket() {
             eventBus.$emit('onAddTicket', this.group.id);
+            this.closeMenu()
         },
         onCloneGroup() {
             this.$emit('cloneGroup', this.group);

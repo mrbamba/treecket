@@ -1,32 +1,32 @@
 <template>
     <div class="ticket-group">
         <header class="ticket-group-header">
-                <div v-if="!editTitle" @click="onEditTitle">
-                    <h3>{{ group.title }}</h3>
-                    {{ ticketsInGroupCount }}
-                </div>
-                <div v-else>
-                    <input
-                        @blur="updateGroupTitle"
-                        type="text"
-                        v-model="group.title"
-                        v-on:keyup.enter="updateGroupTitle"
-                        class="minimal-input"
-                        ref="updatedGroupTitle"
-                        maxlength="36"
-                    />
-                </div>
-                <button @click="toggleGroupMenu">
-                    <i class="fas fa-ellipsis-h" />
-                </button>
+            <div v-if="!editTitle" @click="onEditTitle">
+                <h3>{{ group.title }}</h3>
+                {{ ticketsInGroupCount }}
+            </div>
+            <div v-else>
+                <input
+                    @blur="updateGroupTitle"
+                    type="text"
+                    v-model="group.title"
+                    v-on:keyup.enter="updateGroupTitle"
+                    class="minimal-input"
+                    ref="updatedGroupTitle"
+                    maxlength="36"
+                />
+            </div>
+            <button @click="toggleGroupMenu">
+                <i class="fas fa-ellipsis-h" />
+            </button>
         </header>
-                    <group-menu
-                        v-if="groupMenuOpened"
-                        :group="group"
-                        @cloneGroup="cloneGroup"
-                        @deleteGroup="deleteGroup"
-                        @closeGroupMenu="toggleGroupMenu"
-                    />
+        <group-menu
+            v-if="groupMenuOpened"
+            :group="group"
+            @cloneGroup="cloneGroup"
+            @deleteGroup="deleteGroup"
+            @closeGroupMenu="toggleGroupMenu"
+        />
 
         <div class="tickets-container">
             <container
@@ -112,10 +112,10 @@ export default {
             }
             this.toggleAddTicket();
         },
-            addTicket({ ticket, groupId }) {
-                this.$emit('addTicket', { ticket, groupId });
-                this.toggleGroupMenu()
-            },
+        addTicket({ ticket, groupId }) {
+            this.$emit('addTicket', { ticket, groupId });
+            this.toggleGroupMenu()
+        },
         cloneGroup(group) {
             this.$emit('cloneGroup', group, this.groupIdx)
             this.toggleGroupMenu()
@@ -139,7 +139,7 @@ export default {
         },
 
         deleteTicket(ticket) {
-            this.$emit('deleteTicket', {ev: this.$event, ticketId: ticket.id, groupId: this.group.id})
+            this.$emit('deleteTicket', { ev: this.$event, ticketId: ticket.id, groupId: this.group.id })
         }
         // doDrag(ev) {
         //     console.log(ev)
@@ -148,14 +148,14 @@ export default {
     computed: {
         ticketsInGroupCount() {
             return (this.group.tickets.length) ? this.group.tickets.length : '';
-    }
-},
-components: {
-    TicketPreview,
+        }
+    },
+    components: {
+        TicketPreview,
         Container,
         Draggable,
         AddTicket,
         GroupMenu
-}
+    }
 };
 </script>

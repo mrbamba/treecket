@@ -77,7 +77,7 @@ export default {
     },
     created() {
         eventBus.$on('onAddTicket', (groupId) => {
-            if (groupId === this.group.id) this.toggleAddTicket()
+            if (groupId === this.group.id) this.$nextTick( () => this.toggleAddTicket())
         })
     }
 }

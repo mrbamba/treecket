@@ -90,8 +90,7 @@ export default {
     },
     created() {
         eventBus.$on('checklistAdded', (checklist) => {
-            console.log(checklist.id);
-            this.editTitle(checklist)
+            this.$nextTick(() => this.editTitle(checklist))
         })
     },
     computed: {
@@ -129,7 +128,6 @@ export default {
         cancelUpdateTitle(ev, checklist) {
             if (!ev.relatedTarget ||
                 ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "saveTitle") return
-            console.log('cancel');
             checklist.title = this.onEditChecklistTitle;
             this.onEditChecklistTitle = '';
             this.showChecklistTitleEdit = false;
@@ -158,7 +156,6 @@ export default {
             this.toggleAddItem(false);
         },
         onBlurAddItem(ev, checklistId) {
-            console.log('blur');
             if (ev.relatedTarget && ev.relatedTarget.dataset.preventBlur === "add") {
                 this.onAddItem(ev, checklistId);
             } else {

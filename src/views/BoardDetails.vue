@@ -353,7 +353,6 @@ export default {
                     return ticket.id === this.selectedTicket.id
                 })
             })
-            console.log({ currTicketGroup })
             return {
                 id: currTicketGroup.id,
                 title: currTicketGroup.title
