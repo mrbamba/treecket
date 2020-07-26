@@ -1,6 +1,6 @@
 .ticket-comments {
     overflow-x: hidden;
-    margin-bottom: 25px;
+    // margin-bottom: 25px;
     margin-bottom: 80px;
     
     .add-comment-input {
@@ -9,8 +9,9 @@
         display: flex;
         width: 100%;
         background-color: #fff;
-        padding-top:25px;
-        padding-right: 300px;
+        // padding-top:25px;
+        padding-right: 225px;
+        // border-top: 1px solid #bbb;
 
 
         .create-comment-avatar {
