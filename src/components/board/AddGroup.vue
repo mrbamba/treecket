@@ -45,11 +45,11 @@ export default {
     },
     methods: {
         addGroup() {
-            if (this.addNewGroup) {
+            // if (this.addNewGroup) {
                 if (!this.newGroupName) return;
                 this.$emit("addGroup", this.newGroupName);
                 this.addNewGroup = false
-            }
+            // }
         },
         toggleAddGroup() {
             this.addNewGroup = !this.addNewGroup;

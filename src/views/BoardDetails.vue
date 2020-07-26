@@ -41,6 +41,7 @@
                         @changeLabelsDisplay="changeLabelsDisplay"
                         @cloneGroup="cloneGroup"
                         @deleteGroup="deleteGroup"
+                        @deleteTicket="deleteTicket"
                     />
                 </Draggable>
             </Container>
@@ -74,7 +75,12 @@
         />
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
-        <board-menu :activities="currBoard.activities" :boardId="currBoard._id" @editBackground="show.backgroundEditor=!show.backgroundEditor"  v-if="show.menu"/>
+        <board-menu
+            :activities="currBoard.activities"
+            :boardId="currBoard._id"
+            @editBackground="show.backgroundEditor=!show.backgroundEditor"
+            v-if="show.menu"
+        />
     </div>
 </template>
 
@@ -174,12 +180,9 @@ export default {
         },
         async deleteTicket({ ticketId, groupId }) {
             this.closeTicketDetails();
-            // await this.$store.dispatch("deleteTicket", { ticketId, groupId });
-
             const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
             const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
             if (groupIdx < 0 || ticketIdx < 0) return;
-
             this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
             this.saveBoard();
         },
@@ -271,7 +274,6 @@ export default {
 
         },
         toggleMember(memberToUpdate) {
-            console.log('CurrBoard members: ', this.currBoard.members);
             delete memberToUpdate.email
             const memberIdx = this.currBoard.members.findIndex(member => member._id === memberToUpdate._id)
             if (memberIdx >= 0) {
@@ -286,8 +288,6 @@ export default {
             this.saveBoard();
         },
         moveTicket(newGroupId) {
-            // const board = this.currBoard
-            console.log('running move ticket on board details', newGroupId)
             const currGroupIdx = this.currBoard.groups.findIndex(
                 group => group.tickets.find(ticket => {
                     return ticket.id === this.selectedTicket.id
@@ -303,10 +303,6 @@ export default {
 
             const newGroupIdx = this.currBoard.groups.findIndex(
                 group => { return group.id === newGroupId })
-            // board.groups[currGroupIdx]
-
-            console.log({ newGroupIdx })
-
             if (newGroupIdx < 0) return
             let ticketBackup = _.cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
