@@ -114,7 +114,6 @@ export default {
         },
         addTicket({ ticket, groupId }) {
             this.$emit('addTicket', { ticket, groupId });
-            this.toggleGroupMenu()
         },
         cloneGroup(group) {
             this.$emit('cloneGroup', group, this.groupIdx)
