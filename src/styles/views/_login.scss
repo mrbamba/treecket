@@ -1,0 +1,83 @@
+.login {
+    form.login-page {
+        // margin-top: 100px;
+        width: 300px;
+        margin: 25px auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        padding: 40px;
+        text-align: center;
+
+
+        h2 {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        input:first-of-type {
+            margin-top: 25px;
+        }
+
+        input {
+            margin-bottom: 25px;
+        }
+
+        button {
+            width: 100%;
+            margin-bottom: 25px;
+            border: none;
+            background-color: #0052cc;
+            color: white;
+            padding: 15px 10px;
+            border-radius: 3px;
+
+            // margin: 8px;
+            &:hover {
+                background-color: #0052ee;
+                transition: ease-in-out .3s;
+            }
+        }
+
+
+    }
+    form.signup-page{
+        width: 300px;
+        margin: 25px auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        padding: 40px;
+        text-align: center;
+
+
+        h2 {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        input:first-of-type {
+            margin-top: 25px;
+        }
+
+        input {
+            margin-bottom: 25px;
+        }
+        label{
+            margin-bottom: 25px;
+        }
+
+        button {
+            width: 100%;
+            margin-bottom: 25px;
+            border: none;
+            background-color: #0052cc;
+            color: white;
+            padding: 15px 10px;
+            border-radius: 3px;
+
+            // margin: 8px;
+            &:hover {
+                background-color: #0052ee;
+                transition: ease-in-out .3s;
+            }
+        }
+
+    }
+}
