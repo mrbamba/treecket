@@ -19,6 +19,14 @@
         <main class="ticket-body">
             <section class="ticket-content">
                 <div class="ticket-content-top">
+                    <ul class="labels-container clean-list">
+                        <li
+                            class="label"
+                            v-for="label in ticketLabels"
+                            :key="label.id"
+                            :style="{backgroundColor: label.color}"
+                        >{{ label.title }}</li>
+                    </ul>
                     <div class="ticket-members">
                         <avatar
                             class="ticket-member-avatar"
@@ -29,14 +37,7 @@
                             :size="54"
                         />
                     </div>
-                    <ul class="labels-container clean-list">
-                        <li
-                            class="label"
-                            v-for="label in ticketLabels"
-                            :key="label.id"
-                            :style="{backgroundColor: label.color}"
-                        >{{ label.title }}</li>
-                    </ul>
+                    
                 </div>
                 <section class="ticket-description">
                     <h3>
