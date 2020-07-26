@@ -34,7 +34,7 @@
     }
 }
 
-.close-menu-btn{
+.close-menu-btn {
     background-color: #fff;
     color: rgb(65, 65, 65);
     border: none;
@@ -115,14 +115,13 @@
     padding: 6px 10px;
     border-radius: 3px;
     border: 1px solid #ED1C24;
-}
 
-.delete-button:hover {
-    background: rgb(220, 220, 220);
-    transition: ease-in-out .3s;
-    background-color: #ED1C24;
-    color: #fff;
-
+    &:hover {
+        background: rgb(220, 220, 220);
+        transition: ease-in-out .3s;
+        background-color: #ED1C24;
+        color: #fff;
+    }
 }
 
 .underline-button {
