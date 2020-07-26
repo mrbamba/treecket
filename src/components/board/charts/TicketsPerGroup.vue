@@ -27,7 +27,7 @@ export default {
             chartData: {},
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
             },
             showChart: false,
         }

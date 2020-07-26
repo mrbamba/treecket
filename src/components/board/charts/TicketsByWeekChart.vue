@@ -23,8 +23,9 @@ export default {
             datasets: [{
                 label: this.label,
                 data: this.chartData.ticketCount,
-                backgroundColor:this.chartData.colors,
-                borderColor:this.chartData.colors,
+                backgroundColor: '#1299aacc',
+                borderColor: '#127b8cdd',
+                pointBackgroundColor: '#fff',
             }]
         }, this.options)
     }

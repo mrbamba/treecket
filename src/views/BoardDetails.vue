@@ -75,12 +75,14 @@
         />
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
-        <board-menu
-            :activities="currBoard.activities.reverse()"
-            :boardId="currBoard._id"
-            @editBackground="show.backgroundEditor=!show.backgroundEditor"
-            v-if="show.menu"
-        />
+        <transition name="slide-left">
+            <board-menu
+                :activities="currBoard.activities.reverse()"
+                :boardId="currBoard._id"
+                @editBackground="show.backgroundEditor=!show.backgroundEditor"
+                v-if="show.menu"
+            />
+        </transition>
     </div>
 </template>
 
