@@ -1,6 +1,5 @@
 <template>
     <div class="boards-list">
-        
         <div class="boards-list-header">
             <h2>Boards</h2>
             <button @click="toggleAddBoard" class="add-board-btn">Create board</button>

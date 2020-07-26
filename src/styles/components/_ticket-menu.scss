@@ -1,6 +1,7 @@
 .ticket-menu {
     display: flex;
     flex-direction: column;
+
     // button{
     //     border-radius: 2px;
     //     margin-block-end: 8px;
@@ -14,16 +15,63 @@
     //     font-weight: lighter;
     //     text-align: left;
     // }
-    h3{
+    h3 {
         font-size: 12px;
-        // text-align: center;
-        margin-bottom: 10px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-bottom: rem(4px);
+        margin-top: rem(16px);
     }
-    .date-picker-title{
-        display: flex;
-        margin-bottom: 8px;
-        .due-date-icon{
+
+    .date-picker-title {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-bottom: rem(4px);
+
+        .due-date-icon {
             margin-right: 8px;
         }
+    }
+
+    button {
+        border: none;
+        margin-bottom: rem(8px);
+        background-color: rgba(9, 33, 66, .08);
+        border-radius: 3px;
+        text-align: left;
+        padding: rem(8px) rem(12px);
+        color: #172b4d;
+
+        &:hover {
+            background-color: rgba(9, 33, 66, .13);
+        }
+
+        svg {
+            color: #42526e;
+            margin-inline-end: rem(6px);
+        }
+    }
+}
+
+.ticket-group-selector {
+    padding: rem(6px) rem(12px);
+    border: 1px solid #409eff;
+    border-radius: 3px;
+
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #409eff;
+    }
+
+    .el-icon-arrow-down {
+        font-size: 12px;
+    }
+
+    .demonstration {
+        display: block;
+        color: #8492a6;
+        font-size: 14px;
+        margin-bottom: 20px;
     }
 }

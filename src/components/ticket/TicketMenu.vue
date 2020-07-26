@@ -5,8 +5,23 @@
             :boardGroupsSummary="boardGroupsSummary"
             :currGroupSummary="currGroupSummary"
         />
+        
+        <div class="date-picker-title">
+            <i class="far fa-clock" /> Due Date
+        </div>
+        <el-date-picker
+            v-model="ticket.dueDate"
+            type="date"
+            placeholder="Pick due date"
+            format="MMM-dd-yyyy"
+            @change="saveTicket"
+        ></el-date-picker>
+        
         <h3>ADD TO CARD</h3>
-        <button @click="show.memberSelector=!show.memberSelector">Members</button>
+
+        <button @click="show.memberSelector=!show.memberSelector">
+            <i class="far fa-user" /> Members
+        </button>
         <MemberSelector
             v-if="show.memberSelector"
             :boardMembers="boardMembers"
@@ -27,17 +42,6 @@
             <i class="far fa-check-square" /> Checklist
         </button>
 
-        <div class="date-picker-title">
-            <i class="far fa-clock" /> Due Date
-        </div>
-        <el-date-picker
-            v-model="ticket.dueDate"
-            type="date"
-            placeholder="Pick due date"
-            format="MMM-dd-yyyy"
-            @change="saveTicket"
-        ></el-date-picker>
-
         <button @click="show.addAttachment=!show.addAttachment">
             <i class="fas fa-paperclip" /> Attachment
         </button>
@@ -47,14 +51,16 @@
             @closeAddAttachment="show.addAttachment=false"
         />
 
-        <button @click.stop="changeCoverStatus">Cover</button>
-
         <h3>ACTIONS</h3>
-        <button>Move</button>
-        <button @click="onClone">Clone</button>
-        <button>Watch</button>
-        <button>Share</button>
-        <button @click.stop="onTicketDelete(ticket.id)">&#128465; Delete</button>
+        <button @click="onClone">
+            <i class="far fa-clone"></i> Clone
+        </button>
+        <button>
+            <i class="fas fa-share-alt" /> Share
+        </button>
+        <button @click.stop="onTicketDelete(ticket.id)">
+            <i class="far fa-trash-alt" /> Delete
+        </button>
     </div>
 </template>
 
@@ -167,7 +173,7 @@ export default {
 
 <style>
 .el-date-editor.el-input {
-    max-width: 170px;
-    margin-bottom: 14px;
+    max-width: 160px;
+    margin-bottom: 0px;
 }
 </style>

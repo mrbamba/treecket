@@ -19,13 +19,23 @@
             </div>
             <button>
                 <!-- <i class="fas fa-user-lock" />
-                <span class="hidden show-normal">Team</span> -->
+                <span class="hidden show-normal">Team</span>-->
                 <i class="fas fa-globe-americas" />
                 <span class="hidden show-normal">Public</span>
             </button>
+                <section class="board-members">
+                    <board-member-selector
+                        v-if="show.boardMembers"
+                        :boardMembers="boardMembers"
+                        :systemUsers="systemUsers"
+                        @loadUsers="loadUsers"
+                        @closeBoardMemberSelector="show.boardMembers=false"
+                        @toggleMember="toggleMember"
+                    />
+                </section>
             <section class="board-member-list">
                 <avatar
-                class="board-member-avatar"
+                    class="board-member-avatar"
                     v-for="member in boardMembers"
                     :key="member._id"
                     :username="member.fullName"
@@ -34,17 +44,7 @@
                 />
             </section>
 
-            <section class="board-members">
-                <button @click="show.boardMembers=!show.boardMembers">+</button>
-                <board-member-selector
-                    v-if="show.boardMembers"
-                    :boardMembers="boardMembers"
-                    :systemUsers="systemUsers"
-                    @loadUsers="loadUsers"
-                    @closeBoardMemberSelector="show.boardMembers=false"
-                    @toggleMember="toggleMember"
-                />
-            </section>
+            <button @click="show.boardMembers=!show.boardMembers">+</button>
         </div>
         <div class="end-of-board-controls">
             <button @click="showDashboard">
@@ -100,7 +100,7 @@ export default {
             const hide = input.previousElementSibling;
 
             hide.textContent = input.value;
-            input.style.width = hide.offsetWidth + 29 + "px";
+            input.style.width = hide.offsetWidth + 33 + "px";
         },
         showDashboard() {
             this.$emit('showDashboard')

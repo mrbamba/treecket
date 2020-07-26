@@ -1,14 +1,14 @@
 .dashboard {
     position: absolute;
-    top: 40px;
+    top: 60px;
     // right: 10px;
     // margin: 0 60px 60px 60px;
     left: 50%;
     transform: translateX(-50%);
     // min-width: 80%;
     // min-height: 600px;
-    width: calc(100% - 80px);
-    height: calc(100% - 80px);
+    width: calc(100% - 120px);
+    height: calc(100% - 120px);
     overflow-y: auto;
     background-color: #fff;
     border: 1px solid gray;

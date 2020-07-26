@@ -12,7 +12,7 @@
         align-items: center;
         height: 8px;
         width: 100%;
-        margin-bottom: 32px;
+        margin-bottom: rem(16px);
 
         .progress-bar {
             height: 100%;
@@ -38,9 +38,12 @@
     .check-list-title-preview {
         display: flex;
         justify-content: space-between;
-        margin-bottom: rem(15px);
-        ;
+        align-items: flex-end;
+        margin-bottom: rem(8px);
         min-width: 100%;
+        svg {
+            margin-inline-end: rem(4px);
+        }
     }
 
     .add-an-item {

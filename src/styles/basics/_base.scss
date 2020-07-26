@@ -4,7 +4,7 @@
 
 ::selection {
     color: #fff;
-    background-color: $color-brand;
+    background-color: rgba($color: $color-brand, $alpha: .5) ;
 }
 
 html {
@@ -13,14 +13,18 @@ html {
 
 body {
     margin: 0px;
-    // overflow: hidden;
 }
 
 // img{
 //     width: 100%;
 // }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     font-weight: normal;
     display: inline;
@@ -28,33 +32,19 @@ h1, h2, h3, h4, h5, h6 {
 
 button,
 select {
-  cursor: pointer;
-  outline: none;
-  font-family: inherit;
-  color: inherit;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+    color: inherit;
 }
 
 input,
 textarea {
-  // outline: none;
-  font-family: inherit;
-  outline-color: #0079bf;
-  resize: none;
-}
-
-// input,
-// textarea {
-    // padding: 9px;
-    // border-radius: 3px ;
-    // border: 1px solid #efefef;
-    // margin-bottom: 10px;
-    // min-width: 100%;
     // outline: none;
-    // transition: border-color .3s ease;
-    // &:focus {
-    //     border-color: #b2b2b2;
-    // }
-// }
+    font-family: inherit;
+    outline-color: #0079bf;
+    resize: none;
+}
 
 a {
     text-decoration: none;
