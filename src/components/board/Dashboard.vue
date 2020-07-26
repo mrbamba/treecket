@@ -3,13 +3,13 @@
         <button @click="closeDashboard" class="close-dashboard-btn">
             <i class="fas fa-times" />
         </button>
-        <h2>Dashboard</h2>
+        <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
         <div class="top-data">
-            <div class="total-tickets-count">Total tickets count {{ticketsCount}}</div>
-            <div class="total-board-members-count">Total board members count {{board.members.length}}</div>
-            <div class="board-created-at">Board created {{board.createdAt|formatTime}}</div>
-            <div class="total-board-activities">Total board activities {{board.activities.length}}</div>
-            <div class="total-comments">Total comments{{commentCount}}</div>
+            <div class="total-tickets-count"><i class="fas fa-align-left"></i> Total tickets count {{ticketsCount}}</div>
+            <div class="total-board-members-count"><i class="far fa-user-circle"></i> Total board members count {{board.members.length}}</div>
+            <div class="board-created-at"><i class="far fa-clock"></i> Board created {{board.createdAt|formatTime}}</div>
+            <div class="total-board-activities"><i class="fas fa-history"></i> Total board activities {{board.activities.length}}</div>
+            <div class="total-comments"><i class="far fa-comments"></i> Total comments{{commentCount}}</div>
         </div>
         <div class="chart-section-one">
             <tickets-per-member class="tickets-per-member-chart" :board="board" />
