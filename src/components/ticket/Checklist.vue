@@ -85,12 +85,13 @@ export default {
             onEditItemTxt: '',
             showChecklistTitleEdit: false,
             onEditChecklistTitle: '',
-            allowConfetti: true
+            allowConfetti: true,
         }
     },
     created() {
         eventBus.$on('checklistAdded', (checklist) => {
-            this.$nextTick(() => this.editTitle(checklist))
+            // this.$nextTick(() => )
+            this.editTitle(checklist)
         })
     },
     computed: {

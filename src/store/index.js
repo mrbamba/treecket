@@ -7,7 +7,7 @@ import socketStore from '../modules/socket.store.js';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: true,
+  strict: false,
   state: {
   },
   mutations: {

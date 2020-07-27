@@ -155,7 +155,7 @@
         overflow-wrap: anywhere;
         cursor: pointer;
         width: 100%;
-        margin: rem(8px) 0 rem(20px) rem(20px);
+        margin: rem(8px) 0 rem(20px) 0;
 
         &:focus {
             border: 1px solid black;
@@ -200,18 +200,20 @@
         background-color: #f4f5f7;
         color: #505e78;
         font-size: 12px;
-        &:active{
+
+        &:active {
             color: #0165d7;
             background-color: rgb(222, 235, 255);
 
         }
-        &:hover{
+
+        &:hover {
             background-color: rgb(235, 236, 240);
         }
     }
 
     button.selected {
         background-color: #505e78;
-        color:#f4f5f7;
+        color: #f4f5f7;
     }
 }
