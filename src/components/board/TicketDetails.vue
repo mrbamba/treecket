@@ -17,7 +17,7 @@
         </header>
 
         <main class="ticket-body">
-            <section class="ticket-content">
+            <section class="ticket-content" ref="ticketContent">
                 <div class="ticket-content-top">
                     <ul class="labels-container clean-list" v-if="getTicketLabels.length > 0">
                         <li
@@ -223,8 +223,7 @@ export default {
             this.ticket.comments.push(newComment);
             this.addActivity(`Added comment \"${commentText}\" to ${this.ticket.title}`)
             this.saveTicket();
-
-
+            this.$nextTick(() => this.$refs.ticketContent.scrollTop = this.$refs.ticketContent.scrollHeight);
         },
         changeComments(comments) {
             this.ticket.comments = comments;
