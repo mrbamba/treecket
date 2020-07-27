@@ -145,12 +145,12 @@ function getNewBoard(prefs) {
     "labels": [
       {
         "id": utilService.makeId(),
-        "color": "#44aa44",
+        "color": "",
         "title": ""
       },
       {
         "id": utilService.makeId(),
-        "color": "#ee7777",
+        "color": "",
         "title": ""
       }
     ],

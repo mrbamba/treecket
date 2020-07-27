@@ -138,7 +138,7 @@ export default {
         },
 
         deleteTicket(ticket) {
-            this.$emit('deleteTicket', { ev: this.$event, ticketId: ticket.id, groupId: this.group.id })
+            this.$emit('deleteTicket', { ticketId: ticket.id, groupId: this.group.id })
         }
     },
     computed: {

@@ -71,9 +71,9 @@ export default {
         },
         setBackground(background) {
             this.$emit('setBackground', background);
-            this.show.backgroundSelector = false;
-            this.type = '';
-            this.show.typeMenu = false;
+            // this.show.backgroundSelector = false;
+            // this.type = '';
+            // this.show.typeMenu = false;
         }
     },
     components:{

@@ -44,7 +44,8 @@ export default {
             this.labelInEdit = label;
         },
         saveLabel() {
-            eventBus.$emit('updateLabels', this.labelInEdit)
+            console.log(this.labelInEdit);
+            eventBus.$emit('updateLabels', this.labelInEdit);
             this.isEditLabel = false;
             this.labelInEdit = null;
             this.isOnAddLabel = false;

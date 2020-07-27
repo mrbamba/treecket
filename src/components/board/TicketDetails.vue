@@ -19,10 +19,10 @@
         <main class="ticket-body">
             <section class="ticket-content">
                 <div class="ticket-content-top">
-                    <ul class="labels-container clean-list">
+                    <ul class="labels-container clean-list" v-if="getTicketLabels.length > 0">
                         <li
                             class="label"
-                            v-for="label in ticketLabels"
+                            v-for="label in getTicketLabels"
                             :key="label.id"
                             :style="{backgroundColor: label.color}"
                         >{{ label.title }}</li>
@@ -149,6 +149,7 @@ export default {
         return {
             // showAddAttachment: false,
             logView: 'Comments',
+            isAddingAllow: true
 
         }
     },
@@ -156,10 +157,10 @@ export default {
         overlay() {
             return this.$store.getters.overlay;
         },
-        ticketLabels() {
+        getTicketLabels() {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
-            return { ...ticketLabels };
+            return ticketLabels;
         }
     },
     created() {
@@ -184,6 +185,7 @@ export default {
         deleteTicket(ticketId) {
             this.addActivity(`Deleted ticket ${this.ticket.title}`)
             this.$emit("deleteTicket", { ticketId, groupId: this.groupId });
+            this.$emit("closeTicketDetails");
         },
         expandTextareaEl() {
             const el = this.$refs.title;
@@ -191,13 +193,17 @@ export default {
             el.style.height = el.scrollHeight + "px";
         },
         addChecklist() {
+            if (!this.isAddingAllow) return
+            this.isAddingAllow = false;
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             console.log(this.ticket.id)
             this.addActivity(`Added a checklist to ${this.ticket.title}`)
             this.saveTicket();
-            this.$nextTick(() => eventBus.$emit('checklistAdded', newChecklist))
+            // this.$nextTick(() => this.$nextTick(() => 
+            eventBus.$emit('checklistAdded', newChecklist)
+            this.isAddingAllow = true;
         },
         checklistDeleted(id) {
             this.addActivity(`Deleted a checklist on ${this.ticket.title}`)
