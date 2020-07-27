@@ -1,5 +1,8 @@
 <script>
 import { Bar } from 'vue-chartjs'
+Chart.defaults.global.defaultFontColor = 'white';
+
+
 export default {
     name:'TicketsPerGroupChart',
     extends: Bar,

@@ -28,7 +28,14 @@ export default {
             chartData: {},
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        fontColor: "white",
+                        fontSize: 20
+                    }
+                },
             }
         }
     },

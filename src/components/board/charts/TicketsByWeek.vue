@@ -30,6 +30,24 @@ export default {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                // defaultFontColor: "#fff",
+
+                // fillColor: "rgba(255, 89, 114, 0.6)",
+                // strokeColor: "rgba(51, 51, 51, 1)",
+
+                // pointColor: "rgba(255, 89, 114, 1)",
+                // pointStrokeColor: "#fff",
+                // pointHighlightFill: "#fff",
+                // pointHighlightStroke: "rgba(151,187,205,1)",
+
+                // scaleFontColor: "#FFFFFF",
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        fontColor: "white",
+                        fontSize: 24
+                    }
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -67,18 +85,22 @@ export default {
                 ticketMap[weeknumber] = ticketMap[weeknumber] || 0
                 ticketMap[weeknumber]++
             });
-            this.chartData.weeks = Object.keys(ticketMap)
+            let weeks = Object.keys(ticketMap)
+            this.chartData.weeks = []
+            weeks.forEach(weekNumber => {
+                this.chartData.weeks.push('Week ' + weekNumber)
+            });
             this.chartData.ticketCount = Object.values(ticketMap)
 
             // let colorsArray=['#FF0000','#FF7F00','#FFD400','#FFFF00','#BFFF00','#6AFF00','#00EAFF','#0095FF','#0040FF','#AA00FF','#FF00AA','#EDB9B9','#E7E9B9','#B9EDE0','#B9D7ED','#DCB9ED','#8F2323','#8F6A23','#4F8F23','#23628F','#6B238F','#000000','#737373','#CCCCCC']
-            let colorsArray=['#77777755'];
+            let colorsArray = ['#77777755'];
 
             var colors = [];
             while (colors.length < this.chartData.ticketCount.length) {
                 let colorIndex = Math.floor(Math.random() * Math.floor(colorsArray.length))
                 colors.push(colorsArray[colorIndex])
             }
-            this.chartData.colors=colors;
+            this.chartData.colors = colors;
             this.showChart = true;
         }
     },
