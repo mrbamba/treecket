@@ -19,7 +19,6 @@
             v-on:dragscrollstart="toggleScrollCursor"
             v-on:dragscrollend="toggleScrollCursor"
         >
-            <!-- :drop-placeholder="upperDropPlaceholderOptions" -->
             <Container
                 drag-class="col-ghost"
                 drop-class="col-ghost-drop"
@@ -110,7 +109,6 @@ import { eventBus } from '@/services/event-bus.service.js';
 export default {
     data() {
         return {
-            // showFullLabel: false,
             show: {
                 dashboard: false,
                 fullLabel: false,
@@ -135,7 +133,6 @@ export default {
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
         eventBus.$on('updateLabels', (label) => {
-            // console.log({label, boardLabels: this.currBoard.labels});
             let board = this.currBoard;
             const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
             if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
@@ -146,9 +143,6 @@ export default {
             this.saveBoard();
         })
 
-    },
-    mounted() {
-        // window.onload = () => { console.log("BoardDetails + background loaded") };
     },
     destoryed() {
         SocketService.off("feed update", this.$route.params.boardId);
@@ -257,6 +251,7 @@ export default {
             console.log(text)
 
             let newActivity = boardService.getNewActivity(text, ticketId);
+            console.log(newActivity)
             this.currBoard.activities.push(newActivity);
         },
         changeLabelsDisplay() {
@@ -307,7 +302,6 @@ export default {
         },
         setBackground(background) {
             this.addActivity(`Changed the board background`)
-            // this.show.menu = false;
             this.currBoard.background = background
             this.saveBoard();
         },
@@ -357,7 +351,7 @@ export default {
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {
-            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id));
+            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id).reverse());
         },
         systemUsers() {
             return this.$store.getters.users
