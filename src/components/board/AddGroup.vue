@@ -10,11 +10,11 @@
                 <input
                     class="minimal-input"
                     type="text"
-                    v-model="newGroupName"
+                    v-model="newGroupTitle"
                     @keyup.enter="addGroup()"
                     @blur="onBlur"
                     ref="newGroupTitle"
-                    placeholder="Enter new list name"
+                    placeholder="Enter new list title"
                 />
                 <div>
                     <button
@@ -35,7 +35,7 @@ export default {
     data() {
         return {
             addNewGroup: false,
-            newGroupName: ''
+            newGroupTitle: ''
         };
     },
     computed: {
@@ -46,21 +46,22 @@ export default {
     methods: {
         addGroup() {
             // if (this.addNewGroup) {
-                if (!this.newGroupName) return;
-                this.$emit("addGroup", this.newGroupName);
-                this.addNewGroup = false
+                if (!this.newGroupTitle) return;
+                this.$emit("addGroup", this.newGroupTitle);
+                // this.addNewGroup = false
+                this.newGroupTitle = '';
             // }
         },
         toggleAddGroup() {
             this.addNewGroup = !this.addNewGroup;
-            this.newGroupName = '';
+            this.newGroupTitle = '';
             // if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
             if (this.addNewGroup) setTimeout(() => this.$refs.newGroupTitle.focus(), 300);
         },
         onBlur(ev) {
             if (ev.relatedTarget) {
                 if (ev.relatedTarget.dataset.preventBlur === 'add') {
-                    return
+                    return;
                 }
             }
             this.toggleAddGroup()
