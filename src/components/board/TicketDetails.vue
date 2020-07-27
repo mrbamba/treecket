@@ -19,10 +19,10 @@
         <main class="ticket-body">
             <section class="ticket-content">
                 <div class="ticket-content-top">
-                    <ul class="labels-container clean-list">
+                    <ul class="labels-container clean-list" v-if="getTicketLabels.length > 0">
                         <li
                             class="label"
-                            v-for="label in ticketLabels"
+                            v-for="label in getTicketLabels"
                             :key="label.id"
                             :style="{backgroundColor: label.color}"
                         >{{ label.title }}</li>
@@ -72,10 +72,16 @@
                     <h3>Activity</h3>
                     <div class="ticket-activity-selector">
                         <span>Show:</span>
-                        <button @click="logView='Comments'" :class="{ selected: logView==='Comments' }">
+                        <button
+                            @click="logView='Comments'"
+                            :class="{ selected: logView==='Comments' }"
+                        >
                             <i class="far fa-comment" /> Comments
                         </button>
-                        <button @click="logView='History'" :class="{ selected: logView==='History' }">
+                        <button
+                            @click="logView='History'"
+                            :class="{ selected: logView==='History' }"
+                        >
                             <i class="fas fa-history" /> History
                         </button>
                     </div>
@@ -144,6 +150,7 @@ export default {
         return {
             // showAddAttachment: false,
             logView: 'Comments',
+            isAddingAllow: true
 
         }
     },
@@ -151,10 +158,10 @@ export default {
         overlay() {
             return this.$store.getters.overlay;
         },
-        ticketLabels() {
+        getTicketLabels() {
             const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
-            return { ...ticketLabels };
+            return ticketLabels;
         }
     },
     created() {
@@ -178,6 +185,7 @@ export default {
         },
         deleteTicket(ticketId) {
             this.$emit("deleteTicket", { ticketId, groupId: this.groupId });
+            this.$emit("closeTicketDetails");
             this.addActivity(`Deleted ticket ${this.ticket.id}`)
         },
         expandTextareaEl() {
@@ -186,12 +194,16 @@ export default {
             el.style.height = el.scrollHeight + "px";
         },
         addChecklist() {
+            if (!this.isAddingAllow) return
+            this.isAddingAllow = false;
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
             this.addActivity(`Added a checklist to ticket: ${this.ticket.id}`)
             this.saveTicket();
-            this.$nextTick(() => eventBus.$emit('checklistAdded', newChecklist))
+            // this.$nextTick(() => this.$nextTick(() => 
+            eventBus.$emit('checklistAdded', newChecklist)
+            this.isAddingAllow = true;
         },
         checklistDeleted(id) {
             this.addActivity(`Deleted checklist \"${id}\" on ticket: ${this.ticket.id}`)
@@ -282,8 +294,8 @@ export default {
         moveTicket(newGroupId) {
             this.$emit('moveTicket', newGroupId)
         },
-        clearDueDate(){
-            this.ticket.dueDate='';
+        clearDueDate() {
+            this.ticket.dueDate = '';
             this.saveTicket();
         }
     },

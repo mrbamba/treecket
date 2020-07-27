@@ -16,8 +16,8 @@
                 ></iframe>
                 <img v-else :src="getCoverSrc" />
             </div>
-            <ul class="label-container clean-list" v-if="ticketLabels.length > 0">
-                <li class="ticket-label" v-for="label in ticketLabels" :key="label.id">
+            <ul class="label-container clean-list">
+                <li class="ticket-label" v-for="label in getTicketLabels" :key="label.id">
                     <div
                         class="full-label"
                         v-if="showFullLabel"
@@ -120,10 +120,12 @@ export default {
             }, 0)
             return { itemsCount, doneItemsCount };
         },
-        ticketLabels() {
-            const ticketLabels = this.ticket.labels.map(labelId =>
+        getTicketLabels() {
+            if (this.ticket.labels.length > 0) {
+                const ticketLabels = this.ticket.labels.map(labelId =>
                 this.labels.find(currLabel => labelId === currLabel.id));
-            return { ...ticketLabels };
+            return ticketLabels;
+            }
         },
         dueDateToShow() {
             return new Date(this.ticket.dueDate).toLocaleDateString('en-us', { month: 'short', day: 'numeric' })

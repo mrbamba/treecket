@@ -135,6 +135,7 @@ export default {
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
         eventBus.$on('updateLabels', (label) => {
+            // console.log({label, boardLabels: this.currBoard.labels});
             let board = this.currBoard;
             const labelIdx = board.labels.findIndex(currLabel => currLabel.id === label.id);
             if (labelIdx >= 0) board.labels.splice(labelIdx, 1, label);
@@ -182,7 +183,6 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async deleteTicket({ ticketId, groupId }) {
-            this.closeTicketDetails();
             const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
             const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
             if (groupIdx < 0 || ticketIdx < 0) return;
@@ -291,7 +291,7 @@ export default {
             this.saveBoard();
         },
         setBackground(background) {
-            this.show.menu = false;
+            // this.show.menu = false;
             this.currBoard.background = background
             this.saveBoard();
         },
