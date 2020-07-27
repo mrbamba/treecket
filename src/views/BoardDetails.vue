@@ -77,7 +77,7 @@
         <user-message v-if="userMessage" :userMessage="userMessage" />
         <transition name="slide-left">
             <board-menu
-                :activities="currBoard.activities.reverse()"
+                :activities="reverseChronolgicalActivities"
                 :boardId="currBoard._id"
                 @editBackground="show.backgroundEditor=!show.backgroundEditor"
                 @setBackground="setBackground"
@@ -179,15 +179,20 @@ export default {
                 group => group.id === groupId
             );
             board.groups[currGroupIdx].tickets.push(ticket);
+            this.addActivity(`Added a new ticket`, ticket.id)
+
             await this.$store.dispatch("updateBoard", board);
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async deleteTicket({ ticketId, groupId }) {
+            console.log({ ticketId, groupId })
             const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
             const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
             if (groupIdx < 0 || ticketIdx < 0) return;
+            console.log('got here?')
             this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
-            this.saveBoard();
+            this.addActivity(`deleted a ticket`)
+            this.saveBoard()
         },
         async saveBoard() {
             await this.$store.dispatch("updateBoard", this.currBoard);
@@ -232,9 +237,11 @@ export default {
             return this.currBoard.groups[idx];
         },
         async addGroup(newGroupName) {
+            this.addActivity(`${this.loggedInUser.fullName} added a new group`)
             let updatedBoard = this.currBoard;
             let group = boardService.getNewGroup(newGroupName);
             updatedBoard.groups.push(group);
+
             await this.$store.dispatch("updateBoard", updatedBoard);
             SocketService.emit("updateBoard", this.currBoard._id);
         },
@@ -243,17 +250,21 @@ export default {
         },
         updateBoardTitle(title) {
             this.currBoard.title = title;
-            this.saveBoard();
+            this.addActivity(`Changed the board name to ${title}`)
+            this.saveBoard()
         },
-        addActivity({ text, ticketId = null }) {
+        addActivity(text, ticketId = null) {
+            console.log(text)
+
             let newActivity = boardService.getNewActivity(text, ticketId);
             this.currBoard.activities.push(newActivity);
-            this.saveBoard();
         },
         changeLabelsDisplay() {
             this.show.fullLabel = !this.show.fullLabel;
         },
         cloneTicket(ticket, ticketIdx, groupId) {
+            this.addActivity(`Cloned a ticket`, ticket.id)
+
             const newTicket = boardService.cloneTicket(ticket);
             const groupIdx = this.currBoard.groups.findIndex(
                 group => group.id === groupId
@@ -263,11 +274,15 @@ export default {
             this.saveBoard();
         },
         cloneGroup(group, groupIdx) {
+            this.addActivity(`Cloned group ${group.title}`)
+
             const newGroup = boardService.cloneGroup(group);
             this.currBoard.groups.splice(groupIdx, 0, newGroup)
             this.saveBoard()
         },
         deleteGroup(groupIdx) {
+            this.addActivity(`Deleted group ${this.currBoard.groups[groupIdx].title}`)
+
             this.currBoard.groups.splice(groupIdx, 1)
             this.saveBoard()
         },
@@ -291,6 +306,7 @@ export default {
             this.saveBoard();
         },
         setBackground(background) {
+            this.addActivity(`Changed the board background`)
             // this.show.menu = false;
             this.currBoard.background = background
             this.saveBoard();
@@ -313,6 +329,8 @@ export default {
             const newGroupIdx = this.currBoard.groups.findIndex(
                 group => { return group.id === newGroupId })
             if (newGroupIdx < 0) return
+            this.addActivity(`Moved ${this.selectedTicket.title} from ${this.currBoard.groups[currGroupIdx].title} to ${this.currBoard.groups[newGroupIdx].title}`,this.selectedTicket.id)
+
             let ticketBackup = _.cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
             this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
@@ -339,7 +357,7 @@ export default {
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {
-            return this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id);
+            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id));
         },
         systemUsers() {
             return this.$store.getters.users
@@ -367,6 +385,9 @@ export default {
                 title: currTicketGroup.title
             }
 
+        },
+        reverseChronolgicalActivities(){
+            return _.cloneDeep(this.currBoard.activities.reverse())
         }
     },
     components: {
