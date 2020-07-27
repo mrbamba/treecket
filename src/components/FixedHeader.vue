@@ -2,7 +2,7 @@
     <header class="fixed-header">
             <div>
                 <div class="logo">
-                    <img src="@/assets/logo.png" />
+                    <img src="@/assets/logo/logo.png" />
                     <h1>Treecket</h1>
                 </div>
             </div>
