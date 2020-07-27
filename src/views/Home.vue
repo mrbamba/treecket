@@ -8,7 +8,7 @@
                     <router-link to="/board" class="try-free-main">Try it free</router-link>
                 </div>
                 <div class="img-hero-container">
-                    <img src="@/assets/icons/scrum-board.png" alt />
+                    <img src="@/assets/images/scrum-board.png" alt />
                 </div>
             </section>
 
@@ -20,7 +20,7 @@
 
             <section class="jumbo-white">
                 <div class="img-hero-container">
-                    <img src="@/assets/icons/note-list-mobile.png" alt />
+                    <img src="@/assets/images/note-list-mobile.png" alt />
                 </div>
                 <div>
                     <h2>Real-time communication and full transparency</h2>

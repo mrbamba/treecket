@@ -39,17 +39,17 @@ export default {
     props: ['user'],
     data() {
         return {
-            logoSrc: require('@/assets/logo-white.png'),
+            logoSrc: require('@/assets/logo/logo-white.png'),
         }
     },
     created() {
-        this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
-        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(3));
+        this.logoSrc = require('@/assets/logo/logo-white-bouncing.gif');
+        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo/logo-white.png'), this.gifRepeats(3));
     },
     methods: {
         gifRepeats(count, frames = 11) {
             // 11 frames (1100ms) + 1st frame at end of cycle
-            return frames * count * 100 + 75;
+            return frames * count * 100 + 90;
         },
         clearInput() {
             this.$refs.ticketSearch.value = '';
@@ -61,9 +61,9 @@ export default {
     watch: {
         $route(to, from) {
             // Loading gif
-            this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif'); // 11 frames (1100ms - 1 bounce)
+            this.logoSrc = require('@/assets/logo/logo-white-bouncing.gif'); // 11 frames (1100ms - 1 bounce)
             this.logoTimeout = setTimeout(() =>
-                this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(1));
+                this.logoSrc = require('@/assets/logo/logo-white.png'), this.gifRepeats(1));
         }
     },
     computed: {
