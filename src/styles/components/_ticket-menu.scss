@@ -28,9 +28,30 @@
         font-weight: 500;
         letter-spacing: 0.5px;
         margin-bottom: rem(4px);
+        
 
         .due-date-icon {
             margin-right: 8px;
+        }
+    }
+    .due-date-input{
+        margin-bottom: 10px;
+    }
+
+    .clear-due-date-btn{
+        border: none;
+        background: transparent;
+        color: #ED1C24;
+        padding: 6px 10px;
+        border-radius: 3px;
+        border: 1px solid #ED1C24;
+        text-align: center;
+    
+        &:hover {
+            background: rgb(220, 220, 220);
+            transition: ease-in-out .3s;
+            background-color: #ED1C24;
+            color: #fff;
         }
     }
 

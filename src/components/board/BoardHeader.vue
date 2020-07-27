@@ -45,7 +45,6 @@ export default {
     created() {
         this.logoSrc = require('@/assets/logo-white-bouncing-fast.gif');
         this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo-white.png'), this.gifRepeats(3));
-        console.log(this.user)
     },
     methods: {
         gifRepeats(count, frames = 11) {

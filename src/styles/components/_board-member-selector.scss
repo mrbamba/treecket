@@ -47,7 +47,7 @@
         user-select: none;
 
         .member-list-item {
-            display: flex;
+            display: inline-flex;
             flex-direction: row;
             justify-content: space-between;
             cursor: pointer;
@@ -56,6 +56,7 @@
             font-size: 14px;
             padding: 5px 0px;
             margin: 8px 2px;
+            min-width: 100%;
 
             .member-select-avatar {
                 margin-right: 8px;

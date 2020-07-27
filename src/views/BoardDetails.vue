@@ -75,13 +75,15 @@
         />
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
-        <board-menu
-            :activities="currBoard.activities.reverse()"
-            :boardId="currBoard._id"
-            @editBackground="show.backgroundEditor=!show.backgroundEditor"
-            @setBackground="setBackground"
-            v-if="show.menu"
-        />
+        <transition name="slide-left">
+            <board-menu
+                :activities="currBoard.activities.reverse()"
+                :boardId="currBoard._id"
+                @editBackground="show.backgroundEditor=!show.backgroundEditor"
+                @setBackground="setBackground"
+                v-if="show.menu"
+            />
+        </transition>
     </div>
 </template>
 
@@ -322,7 +324,6 @@ export default {
             if (this.$route.params.boardId) {
                 const board = this.currBoard;
                 if (board) {
-                    console.log(board.background);
                     return board.background + ((board.background.includes('url')) ? ' fixed' : '');
                 }
                 return '';

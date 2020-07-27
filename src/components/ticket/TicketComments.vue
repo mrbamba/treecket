@@ -53,22 +53,18 @@ export default {
     },
     methods: {
         addComment() {
-            if (!this.newCommentText) return
-
+            if (!this.newCommentText) return;
             this.$emit("addComment", this.newCommentText);
-            this.newCommentText = ''
+            this.newCommentText = '';
         },
         deleteComment(commentId) {
-            console.log({ commentId })
-            let commentIdx = this.comments.findIndex((comment) => comment.id === commentId)
-            console.log({ commentIdx })
-
-            if (commentIdx < 0) return
-            this.comments.splice(commentIdx, 1)
-            this.$emit('updateTicket')
+            let commentIdx = this.comments.findIndex((comment) => comment.id === commentId);
+            if (commentIdx < 0) return;
+            this.comments.splice(commentIdx, 1);
+            this.$emit('updateTicket');
         },
         updateTicket() {
-            this.$emit('updateTicket')
+            this.$emit('updateTicket');
         }
     },
     components: {

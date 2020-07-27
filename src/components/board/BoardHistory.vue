@@ -27,9 +27,7 @@ export default {
     },
     methods: {
         openTicket(ticketId) {
-            console.log('activity:', ticketId)
             const newPath = `/board/${this.boardId}/ticket/${ticketId}`;
-            console.log(newPath);
             this.$router.push(newPath);
         }
     }

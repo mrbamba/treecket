@@ -17,7 +17,9 @@
             placeholder="Pick due date"
             format="MMM-dd-yyyy"
             @change="saveTicket"
+            class="due-date-input"
         ></el-date-picker>
+        <!-- <button class="clear-due-date-btn" v-if="ticket.dueDate" @click="clearDueDate">Clear Due Date</button> -->
         
         <h3>ADD TO CARD</h3>
 
@@ -155,6 +157,9 @@ export default {
         },
         moveTicket(newGroupId) {
             this.$emit('moveTicket', newGroupId)
+        },
+        clearDueDate(){
+            this.$emit('clearDueDate')
         }
     },
     components: {

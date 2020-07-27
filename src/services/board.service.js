@@ -140,6 +140,7 @@ function getNewBoard(prefs) {
   return {
     "title": prefs.title,
     "background": prefs.background,
+    "createdAt": Date.now(),
     "members": [],
     "labels": [
       {

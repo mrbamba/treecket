@@ -144,7 +144,6 @@ export default {
             this.$emit('changeLabelsDisplay')
         },
         deleteTicket(ticket) {
-            console.log(ticket);
             this.$emit('deleteTicket', ticket)
         },
 

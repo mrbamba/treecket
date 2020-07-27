@@ -22,7 +22,9 @@ export default {
             labels: members,
             datasets: [{
                 label: this.label,
-                data: ticketCount
+                data: ticketCount,
+                backgroundColor:this.chartData.colors,
+                borderColor:this.chartData.colors,
             }]
         }, this.options)
     }

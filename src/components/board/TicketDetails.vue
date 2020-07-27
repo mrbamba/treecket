@@ -34,10 +34,9 @@
                             :key="member._id"
                             :username="member.fullName"
                             :src="member.imgSrc"
-                            :size="54"
+                            :size="32"
                         />
                     </div>
-                    
                 </div>
                 <section class="ticket-description">
                     <h3>
@@ -73,10 +72,10 @@
                     <h3>Activity</h3>
                     <div class="ticket-activity-selector">
                         <span>Show:</span>
-                        <button @click="logView='Comments'">
+                        <button @click="logView='Comments'" :class="{ selected: logView==='Comments' }">
                             <i class="far fa-comment" /> Comments
                         </button>
-                        <button @click="logView='History'">
+                        <button @click="logView='History'" :class="{ selected: logView==='History' }">
                             <i class="fas fa-history" /> History
                         </button>
                     </div>
@@ -103,15 +102,16 @@
                 :boardMembers="boardMembers"
                 :boardGroupsSummary="boardGroupsSummary"
                 :currGroupSummary="currGroupSummary"
-                @moveTicket="moveTicket"
-                @deleteTicket="deleteTicket"
-                @saveTicket="saveTicket"
-                @addChecklist="addChecklist"
-                @updateTicketLabel="updateTicketLabel"
-                @toggleMember="toggleMember"
                 @changeCoverStatus="changeCoverStatus"
-                @cloneTicket="cloneTicket"
+                @moveTicket="moveTicket"
+                @saveTicket="saveTicket"
+                @toggleMember="toggleMember"
+                @updateTicketLabel="updateTicketLabel"
+                @addChecklist="addChecklist"
                 @addAttachment="addAttachment"
+                @cloneTicket="cloneTicket"
+                @deleteTicket="deleteTicket"
+                @clearDueDate="clearDueDate"
             />
         </main>
     </div>
@@ -207,7 +207,6 @@ export default {
 
         },
         addComment(commentText) {
-            console.log(commentText);
             let newComment = boardService.getNewComment(commentText);
             this.ticket.comments.push(newComment);
             this.addActivity(`Added comment: \"${commentText}\" to ticket: ${this.ticket.id}`)
@@ -282,6 +281,10 @@ export default {
         },
         moveTicket(newGroupId) {
             this.$emit('moveTicket', newGroupId)
+        },
+        clearDueDate(){
+            this.ticket.dueDate='';
+            this.saveTicket();
         }
     },
     components: {

@@ -1,6 +1,4 @@
 <template>
-        <transition name="slide-left">
-
     <div class="board-menu">
         <button @click="toggleTypeMenu" class="board-menu-btn">Background</button>
         <Basic-modal>
@@ -20,9 +18,13 @@
             </div>
         </Basic-Modal>
         <button @click="deleteBoard" class="board-menu-delete">Delete Board</button>
-        <board-history v-for="activity in activities" :key="activity.id" :activity="activity" :boardId="boardId"/>
+        <board-history
+            v-for="activity in activities"
+            :key="activity.id"
+            :activity="activity"
+            :boardId="boardId"
+        />
     </div>
-    </transition>
 </template>
 
 <script>
@@ -31,14 +33,14 @@ import BasicModal from '@/components/BasicModal.vue'
 import BackgroundPalette from '@/components/BackgroundPalette.vue'
 export default {
     name: 'BoardMenu',
-    props:{
-        activities:{
-            type:Array,
-            require:true
+    props: {
+        activities: {
+            type: Array,
+            require: true
         },
-        boardId:{
-            type:String,
-            require:true
+        boardId: {
+            type: String,
+            require: true
         }
     },
     data() {
@@ -50,11 +52,11 @@ export default {
             }
         }
     },
-    methods:{
-        deleteBoard(boardId){
+    methods: {
+        deleteBoard(boardId) {
             this.$emit('deleteBoard');
         },
-        editBackground(){
+        editBackground() {
             this.$emit('editBackground');
         },
         openBackgroundSelector(type){
