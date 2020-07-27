@@ -257,6 +257,7 @@ export default {
             console.log(text)
 
             let newActivity = boardService.getNewActivity(text, ticketId);
+            console.log(newActivity)
             this.currBoard.activities.push(newActivity);
         },
         changeLabelsDisplay() {
