@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-comment">
         <div class="comment-img">
-            <avatar :username="comment.by.fullName" :src="comment.by.imgSrc" :size="32" />
+            <avatar :username="comment.by.fullName" :src="comment.by.imgSrc" :size="32" color="#fff" />
         </div>
         <div>
             <p class="comment-by">

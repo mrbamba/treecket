@@ -1,19 +1,24 @@
 .fixed-header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    text-align: center;
-    transition: box-shadow .3s ease;
     background-color: #fff;
-    max-width: 1200px;
-    margin: 0 auto;
-
+    height: 100px;
+    transition: height 0.5s ease, box-shadow 0.5s ease;
+    // max-width: 1200px;
+    
     .user-options {
         margin-top: 14px;
     }
-
+    
     .logo {
-        margin: rem(4px);
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
         font-family: Lalezar;
+        transition: all .2 ease;
 
         h1 {
             font-size: rem(40px);

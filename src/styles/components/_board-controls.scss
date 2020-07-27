@@ -5,12 +5,38 @@
     display: flex;
     justify-content: space-between;
     line-height: 32px;
-    
+
     .board-member-list {
         display: inline-flex;
         margin-right: 3px;
-        .board-member-avatar{
+
+        .board-member-avatar {
+            // box-shadow: 0 0 0 2px #ffffff;
+            // position: absolute;
             margin-right: 3px;
+
+            &:hover {
+                z-index: 1;
+            }
+        }
+    }
+
+    .board-add-member {
+        border-radius: 50%;
+        width: 32px;
+        background-color: #dfe1e6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // box-shadow: 0 0 0 2px #ffffff;
+        color: #7a869a;
+
+        svg {
+            margin: 0;
+        }
+
+        &:hover {
+            background-color: #cfd0d4;
         }
     }
 
@@ -31,12 +57,12 @@
         border-radius: 4px;
         vertical-align: middle;
         font-weight: 700;
-        
+
         &:hover {
             background-color: rgba(255, 255, 255, 0.32);
         }
     }
-    
+
     .board-title-input {
         font-weight: 700;
         vertical-align: middle;
