@@ -120,7 +120,7 @@ function getNewTicket(title) {
     "members": [],
     "labels": [],
     "createdAt": Date.now(),
-    "by": {},
+    "by": _getMiniUser(),
     "comments": [],
     "checklists": [],
     "attachments": []

@@ -1,6 +1,16 @@
 <template>
     <div class="board-menu">
-        <button @click="toggleTypeMenu" class="board-menu-btn">Background</button>
+        <header>
+        <button class="close-button" @click="closeMenu">
+            <img src="@/assets/icons/close-medium.png" alt="">
+        </button>
+        <h3>Menu</h3>
+        </header>
+        <div class="buttons-container">
+            <div>
+                <span class="background-icon" :style="{background: boardBackground}"></span>
+                <button @click="toggleTypeMenu" class="board-menu-btn">Background</button>
+            </div>
         <Basic-modal>
             <section class="background-type-selector" v-if="show.typeMenu">
                 <div  @click="openBackgroundSelector('images')">
@@ -17,7 +27,15 @@
                 <Background-Palette :type="type" @setBackground="setBackground"/>
             </div>
         </Basic-Modal>
-        <button @click="deleteBoard" class="board-menu-delete">Delete Board</button>
+        <div class="delete-button-container">
+            <button @click="deleteBoard" class="board-menu-delete">Delete Board</button>
+            <i class="far fa-trash-alt" />
+        </div>
+        </div>
+        <div class="activity-header">
+            <i class="fas fa-list-ul" />
+            <h3>Activity</h3>
+        </div>
         <board-history
             v-for="activity in activities"
             :key="activity.id"
@@ -41,6 +59,9 @@ export default {
         boardId: {
             type: String,
             require: true
+        },
+        boardBackground: {
+            type: String
         }
     },
     data() {
@@ -74,6 +95,9 @@ export default {
             // this.show.backgroundSelector = false;
             // this.type = '';
             // this.show.typeMenu = false;
+        },
+        closeMenu() {
+            this.$emit('closeBoardMenu')
         }
     },
     components:{

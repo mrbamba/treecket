@@ -9,7 +9,7 @@
                 {{ activity.createdAt | formatTime }}
             </p>
             <p class="activity-text">{{ activity.txt }}</p>
-            <button @click="openTicket(activity.ticketId)" class="underline-button">View ticket</button>
+            <button v-if="activity.ticketId" @click="openTicket(activity.ticketId)" class="underline-button">View ticket</button>
         </div>
     </div>
 </template>
