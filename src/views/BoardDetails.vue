@@ -48,7 +48,7 @@
             <add-group @addGroup="addGroup" />
         </main>
 
-        <transition name="pop-up-fade" mode="out-in">
+        <transition name="slide-up">
             <ticket-details
                 v-if="selectedTicket"
                 :ticket="selectedTicket"

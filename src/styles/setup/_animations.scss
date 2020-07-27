@@ -41,28 +41,24 @@
 
 
 
-.slide-up-fade-enter-active {
-    transition: all .3s ease;
+.slide-up-enter-active {
+    animation: slide-up-in .3s ease-in-out;
 }
 
-.slide-up-fade-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.25, 1.0);
+.slide-up-leave-active {
+    animation: slide-up-in .2s reverse ease;
 }
 
-.slide-up-fade-leave-to {
-    transform: translateX(400px);
-    opacity: 0;
-    opacity: 0;
+@keyframes slide-up-in {
+    0% {
+        transform: translate(-50%, 60px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
-
-.slide-up-fade-enter
-
-/* .slide-fade-leave-active below version 2.1.8 */
-    {
-    transform: translateY(20px);
-    opacity: 0;
-}
-
 
 
 

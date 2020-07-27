@@ -17,34 +17,41 @@
                     maxlength="36"
                 />
             </div>
-            <button>
+
+            <button class="board-privacy">
                 <!-- <i class="fas fa-user-lock" />
                 <span class="hidden show-normal">Team</span>-->
                 <i class="fas fa-globe-americas" />
                 <span class="hidden show-normal">Public</span>
             </button>
-                <section class="board-members">
-                    <board-member-selector
-                        v-if="show.boardMembers"
-                        :boardMembers="boardMembers"
-                        :systemUsers="systemUsers"
-                        @loadUsers="loadUsers"
-                        @closeBoardMemberSelector="show.boardMembers=false"
-                        @toggleMember="toggleMember"
-                    />
-                </section>
+
+            <section class="board-members">
+                <board-member-selector
+                    v-if="show.boardMembers"
+                    :boardMembers="boardMembers"
+                    :systemUsers="systemUsers"
+                    @loadUsers="loadUsers"
+                    @closeBoardMemberSelector="show.boardMembers=false"
+                    @toggleMember="toggleMember"
+                />
+            </section>
+
             <section class="board-member-list">
                 <avatar
                     class="board-member-avatar"
-                    v-for="member in boardMembers"
+                    v-for="(member, idx) in boardMembers"
                     :key="member._id"
                     :username="member.fullName"
                     :src="member.imgSrc"
                     :size="32"
+                    color="#fff"
                 />
+                    <!-- :style="{'margin-left': idx * 28 + 'px', 'z-index': 10 - idx}" -->
+                    <!-- :customStyle="{ fontWeight: 500, fontFamily: 'Roboto', letterSpacing: '0px', fontSize: '16px' }" -->
+                <button class="board-add-member" @click="show.boardMembers=!show.boardMembers">
+                    <i class="fas fa-user-plus" />
+                </button>
             </section>
-
-            <button @click="show.boardMembers=!show.boardMembers">+</button>
         </div>
         <div class="end-of-board-controls">
             <button @click="showDashboard">
