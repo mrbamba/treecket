@@ -150,7 +150,27 @@ function getNewBoard(prefs) {
       },
       {
         "id": utilService.makeId(),
-        "color": "",
+        "color": "#F2D600",
+        "title": ""
+      },
+      {
+        "id": utilService.makeId(),
+        "color": "#FF9F1A",
+        "title": ""
+      },
+      {
+        "id": utilService.makeId(),
+        "color": "#EB5A46",
+        "title": ""
+      },
+      {
+        "id": utilService.makeId(),
+        "color": "#C377E0",
+        "title": ""
+      },
+      {
+        "id": utilService.makeId(),
+        "color": "#0079BF",
         "title": ""
       }
     ],
