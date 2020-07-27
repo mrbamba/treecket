@@ -144,10 +144,8 @@ export default {
         boardGroupsSummary: Array,
         currGroupSummary: Object,
     },
-    // ['ticket', 'groupId', 'user', 'labels', 'ticketActivities'],
     data() {
         return {
-            // showAddAttachment: false,
             logView: 'Comments',
             isAddingAllow: true
 
@@ -185,7 +183,6 @@ export default {
         deleteTicket(ticketId) {
             this.$emit('addActivity', `Deleted ticket ${this.ticket.title}`, this.ticket.id)
 
-            // this.addActivity(`Deleted ticket ${this.ticket.title}`)
             this.$emit("deleteTicket", { ticketId, groupId: this.groupId });
             this.$emit("closeTicketDetails");
         },
@@ -203,16 +200,12 @@ export default {
             console.log(this.ticket.id)
             this.$emit('addActivity', `Added a checklist to ${this.ticket.title}`, this.ticket.id)
 
-            // this.addActivity(`Added a checklist to ${this.ticket.title}`)
             this.saveTicket();
-            // this.$nextTick(() => this.$nextTick(() => 
             eventBus.$emit('checklistAdded', newChecklist)
             this.isAddingAllow = true;
         },
         checklistDeleted(id) {
             this.$emit('addActivity', `Deleted a checklist on ${this.ticket.title}`, this.ticket.id)
-
-            // this.addActivity(`Deleted a checklist on ${this.ticket.title}`)
         },
         addItem({ itemTxt, checklistId }) {
             const newItem = boardService.getNewChecklistItem(itemTxt);
@@ -222,7 +215,6 @@ export default {
             this.ticket.checklists[checklistIdx].items.push(newItem);
             this.$emit('addActivity', `Added checklist item \"${itemTxt}\" to ${this.ticket.title}`, this.ticket.id)
 
-            // this.addActivity(`Added checklist item \"${itemTxt}\" to ${this.ticket.title}`)
             this.saveTicket();
 
         },
@@ -231,7 +223,6 @@ export default {
             this.ticket.comments.push(newComment);
             this.$emit('addActivity', `Added comment \"${commentText}\" to ${this.ticket.title}`, this.ticket.id)
 
-            // this.addActivity(`Added comment \"${commentText}\" to ${this.ticket.title}`)
             this.saveTicket();
 
 
@@ -253,7 +244,6 @@ export default {
             this.saveTicket();
             this.$emit('addActivity', `Added attachment ${src} to ${this.ticket.title}`, this.ticket.id)
 
-            // this.addActivity(`Added attachment ${src} to ${this.ticket.title}`)
 
         },
         deleteAttachment(id) {
@@ -261,25 +251,17 @@ export default {
             if (attachmentIdx >= 0) {
                 this.$emit('addActivity', `Deleted attachment ${this.ticket.attachments[attachmentIdx].src} on ${this.ticket.title}`, this.ticket.id)
 
-                // this.addActivity(`Deleted attachment ${this.ticket.attachments[attachmentIdx].src} on ${this.ticket.title}`)
                 this.ticket.attachments.splice(attachmentIdx, 1)
                 this.$store.commit('setUserMessage', { msg: 'Attachment deleted' });
             }
             this.saveTicket();
 
         },
-        // addActivity(text) {
-        //     this.$nextTick(() => {
-        //         this.$emit('addActivity', text, this.ticket.id)
-        //     })
-        // },
         makeCover(id) {
             this.ticket.cover = true;
             const attachmentIdx = this.ticket.attachments.findIndex(attachment => attachment.id === id);
             if (attachmentIdx >= 0) {
                 this.$emit('addActivity', `Changed the cover on ${this.ticket.title}`, this.ticket.id)
-
-                // this.addActivity(`Changed the cover on ${this.ticket.title}`)
 
                 const attachment = this.ticket.attachments.splice(attachmentIdx, 1);
                 this.ticket.attachments.unshift(attachment[0]);
@@ -291,9 +273,6 @@ export default {
             if (memberIdx >= 0) {
                 this.ticket.members.splice(memberIdx, 1)
                 this.$emit('addActivity', `Removed ${memberToUpdate.fullName} from ticket ${this.ticket.title}`, this.ticket.id)
-
-                // this.addActivity(`Removed ${memberToUpdate.fullName} from ticket ${this.ticket.title}`)
-
             } else {
                 this.ticket.members.push(memberToUpdate)
                 this.$emit('addActivity', `Assigned ${memberToUpdate.fullName} to ticket ${this.ticket.title}`, this.ticket.id)
@@ -307,27 +286,17 @@ export default {
         },
         cloneTicket(ticket) {
             this.$emit('addActivity', `Cloned ${this.ticket.title}`, this.ticket.id)
-
-            // this.addActivity(`Cloned ${this.ticket.title}`)
-
-
             this.$emit('cloneTicket', ticket, this.ticketIdx, this.groupId);
         },
         moveTicket(newGroupId) {
             this.$emit('moveTicket', newGroupId)
         },
-        // clearDueDate() {
-        //     this.addActivity(`Removed due date ${this.ticket.dueDate}`)
-        //     this.ticket.dueDate = '';
-        //     this.saveTicket();
-        // }
     },
     components: {
         TicketMenu,
         TicketChecklists,
         TicketComments,
         TicketAttachments,
-        // AddAttachment,
         TicketHistory,
         Avatar,
     }
