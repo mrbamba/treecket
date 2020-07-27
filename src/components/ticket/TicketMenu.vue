@@ -1,7 +1,5 @@
 <template>
     <div class="ticket-menu">
-        <Background-palette type="colors"/>
-        <Background-Palette type="images"/>
         <ticket-group-selector
             @moveTicket="moveTicket"
             :boardGroupsSummary="boardGroupsSummary"
