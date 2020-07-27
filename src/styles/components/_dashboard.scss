@@ -10,16 +10,18 @@
     width: calc(100% - 120px);
     height: calc(100% - 120px);
     overflow-y: auto;
-    background-color: #fff;
-    border: 1px solid gray;
+    background-color: rgb(31, 31, 31);
+    // border: 1px solid gray;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.488);
+
     z-index: 7;
     padding: 25px;
     border-radius: 5px;
-    color: rgb(77, 77, 77);
+    color: #fff;
 
     .top-data {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-bottom: 25px;
 
         .data-container {
@@ -27,10 +29,13 @@
             flex-direction: row;
             box-shadow: 0 0 10px rgba(0, 0, 0, .1);
             margin-right: 12px;
+            background-color: #fff;
+        border-radius: 15px;
+
 
 
             .dashboard-data {
-                color: gray;
+                color: #fff;
                 padding: 15px;
 
                 span {
@@ -55,6 +60,8 @@
             display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 2px 0px 0px 2px;
+
         }
 
         .total-board-members-count {
@@ -66,6 +73,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 2px 0px 0px 2px;
 
         }
 
@@ -78,6 +86,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 2px 0px 0px 2px;
 
         }
 
@@ -90,6 +99,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 2px 0px 0px 2px;
 
         }
 
@@ -102,6 +112,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 2px 0px 0px 2px;
 
         }
     }
@@ -127,12 +138,13 @@
         margin-bottom: 50px;
         margin-top: 18px;
         font-size: 32px;
-        color: darkslategray;
+        color: #fff;
     }
 
     .close-dashboard-btn {
         float: right;
-        background-color: #fff;
+        background-color: transparent;
         border: none;
+        color: #fff;
     }
 }

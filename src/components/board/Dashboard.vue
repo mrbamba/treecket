@@ -23,14 +23,14 @@
                     <span>{{board.members.length}}</span> Members
                 </div>
             </div>
-            <div  class="data-container">
+            <!-- <div  class="data-container">
                 <div class="board-created-at">
                     <i class="far fa-clock"></i>
                 </div>
                 <div class="dashboard-data">
                     <span>{{board.createdAt|formatTime}}</span> Created
                 </div>
-            </div>
+            </div> -->
             <div class="data-container">
                 <div class="total-board-activities">
                     <i class="fas fa-history"></i>
@@ -48,11 +48,11 @@
                 </div>
             </div>
         </div>
+        <tickets-by-week :board="board" />
         <div class="chart-section-one">
             <tickets-per-member class="tickets-per-member-chart" :board="board" />
             <tickets-per-group class="tickets-per-group-chart" :board="board" />
         </div>
-        <tickets-by-week :board="board" />
     </section>
 </template>
 
