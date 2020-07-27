@@ -231,7 +231,7 @@ export default {
             return this.currBoard.groups[idx];
         },
         async addGroup(newGroupName) {
-            this.addActivity(`${this.loggedInUser.fullName} added a new group`)
+            // this.addActivity(`${this.loggedInUser.fullName} added a new group`)
             let updatedBoard = this.currBoard;
             let group = boardService.getNewGroup(newGroupName);
             updatedBoard.groups.push(group);
