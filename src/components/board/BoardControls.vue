@@ -39,7 +39,7 @@
             <section class="board-member-list">
                 <avatar
                     class="board-member-avatar"
-                    v-for="(member, idx) in boardMembers"
+                    v-for="member in boardMembers"
                     :key="member._id"
                     :username="member.fullName"
                     :src="member.imgSrc"
@@ -47,7 +47,7 @@
                     color="#fff"
                 />
                     <!-- :style="{'margin-left': idx * 28 + 'px', 'z-index': 10 - idx}" -->
-                    <!-- :customStyle="{ fontWeight: 500, fontFamily: 'Roboto', letterSpacing: '0px', fontSize: '16px' }" -->
+                    <!-- :customStyle="{ fontWeight: 500, fontFamily: 'Roboto', letterSpacing: '0px', fontSize: '14px' }" -->
                 <button class="board-add-member" @click="show.boardMembers=!show.boardMembers">
                     <i class="fas fa-user-plus" />
                 </button>

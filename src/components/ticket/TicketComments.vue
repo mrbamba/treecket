@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-comments">
         <div v-if="comments" class="comment-previews">
-            <transition-group name="slide-up-fade">
+            <transition-group name="slide-up-fade-right">
                 <ticket-comment
                     v-for="comment in comments"
                     :key="comment.id"

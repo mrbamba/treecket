@@ -1,24 +1,4 @@
-// /* Enter and leave animations can use different */
-// /* durations and timing functions.              */
-// .slide-fade-enter-active {
-//     transition: all .3s ease;
-// }
-
-// .slide-fade-leave-active {
-//     transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-// }
-
-// .slide-fade-enter,
-// .slide-fade-leave-to
-
-// /* .slide-fade-leave-active below version 2.1.8 */
-//     {
-//     transform: translateX(10px);
-//     opacity: 0;
-// }
-
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+// Add Group
 .slide-fade-enter-active {
     transition: all .3s ease;
 }
@@ -40,9 +20,9 @@
 }
 
 
-
+// Ticket Details
 .slide-up-enter-active {
-    animation: slide-up-in .3s ease-in-out;
+    animation: slide-up-in .4s ease-in-out;
 }
 
 .slide-up-leave-active {
@@ -58,6 +38,26 @@
     100% {
         transform: translateX(-50%);
     }
+}
+
+// Ticket Comments
+.slide-up-fade-right-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-up-fade-right-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.25, 1.0);
+}
+
+.slide-up-fade-right-leave-to {
+    transform: translateX(400px);
+    opacity: 0;
+    opacity: 0;
+}
+
+.slide-up-fade-right-enter {
+    transform: translateY(20px);
+    opacity: 0;
 }
 
 
@@ -106,14 +106,38 @@
     }
 }
 
+.slide-up-fade-right-enter-active {
+    animation: slide-up-in .4s ease-in-out;
+}
+
+.slide-up-fade-right-active {
+    animation: slide-up-in .2s reverse ease;
+}
+
+@keyframes slide-up-in {
+    0% {
+        transform: translate(-50%, 60px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 
 .component-fade-enter-active {
     transition: opacity .3s ease;
 }
+
 .component-fade-leave-active {
     transition: opacity .1s ease;
-  }
-  .component-fade-enter, .component-fade-leave-to
-  /* .component-fade-leave-active below version 2.1.8 */ {
+}
+
+.component-fade-enter,
+.component-fade-leave-to
+
+/* .component-fade-leave-active below version 2.1.8 */
+    {
     opacity: 0;
-  }
+}
