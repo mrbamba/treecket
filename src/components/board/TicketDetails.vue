@@ -90,9 +90,9 @@
                     v-if="logView==='Comments'"
                     :comments="ticket.comments"
                     :user="user"
-                    @addComment="addComment"
                     @updateTicket="saveTicket"
                 />
+                    <!-- @addComment="addComment" -->
                 <div v-if="logView==='History'">
                     <ticket-history
                         v-for="activity in ticketActivities"
@@ -101,7 +101,6 @@
                     />
                 </div>
             </section>
-
             <ticket-menu
                 :ticket="ticket"
                 :labels="labels"
@@ -119,6 +118,9 @@
                 @deleteTicket="deleteTicket"
             />
         </main>
+        <footer>
+            <add-comment @addComment="addComment" />
+        </footer>
     </div>
 </template>
 
@@ -128,6 +130,7 @@ import TicketChecklists from "@/components/ticket/TicketChecklists.vue";
 import TicketComments from "@/components/ticket/TicketComments.vue";
 import TicketAttachments from "@/components/ticket/TicketAttachments.vue";
 import TicketHistory from '@/components/ticket/TicketHistory.vue';
+import AddComment from '@/components/ticket/AddComment.vue';
 import { boardService } from "@/services/board.service.js";
 import { eventBus } from '@/services/event-bus.service.js';
 import Avatar from 'vue-avatar'
@@ -298,6 +301,7 @@ export default {
         TicketAttachments,
         TicketHistory,
         Avatar,
+        AddComment
     }
 };
 </script>

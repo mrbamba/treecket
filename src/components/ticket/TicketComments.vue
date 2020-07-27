@@ -12,7 +12,7 @@
                 />
             </transition-group>
         </div>
-        <div class="add-comment-input">
+        <!-- <div class="add-comment-input">
             <div class="create-comment-avatar">
                 <avatar
                     v-if="user"
@@ -34,7 +34,7 @@
                     <button class="cancel-button">Cancel</button>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 </template>
 

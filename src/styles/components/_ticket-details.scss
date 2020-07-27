@@ -1,7 +1,9 @@
 .ticket-details {
     position: fixed;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 12px 4fr 20px 1fr 12px;
+    grid-template-rows: 12px 1fr 20px 5fr 1fr 12px;
+    // flex-direction: column;
     border-radius: 3px;
     background-color: #fff;
     color: #5e6c84;
@@ -35,14 +37,14 @@
     }
 
     header {
+        grid-column: 1 / -1;
+        grid-row: 2 / 3;
         display: flex;
         border-bottom: 1px solid #ddd;
-
         .ticket-title {
             font-size: rem(22px);
             display: inline-block;
             flex-grow: 1;
-            padding: 0 rem(24px) 0 0;
             font-weight: 500;
             border: none;
             outline: none;
@@ -65,12 +67,21 @@
         }
     }
 
+    footer {
+        // padding: rem(14px) rem(12px);
+        grid-column: 2 / 3;
+        grid-row: -3 / -2;
+        // padding: 0 rem(200px) 0 1rem;
+    }
+    
     .ticket-body {
+        grid-column: 2 / -2;
+        grid-row: 4 / 5;
         overflow-y: auto;
         flex-grow: 1;
         display: flex;
-        // margin: 0 rem(11px) 0;
-        padding: rem(20px) 0 100px;
+        // padding: rem(20px) 0 100px;
+        // padding: rem(20px) 0;
 
         &::-webkit-scrollbar {
             width: 10px;
@@ -86,10 +97,10 @@
         }
 
         .ticket-content {
-            padding-right: 200px;
+            padding-right: 220px;
             overflow-y: auto;
             flex-grow: 1;
-            padding-inline-start: rem(16px);
+            // padding-inline-start: rem(16px);
 
             .ticket-content-top {
                 display: flex;
@@ -99,8 +110,6 @@
                 .ticket-members {
                     display: inline-flex;
                     flex-direction: row;
-                    // align-items: center;
-
                     .ticket-member-avatar {
                         margin-right: 5px;
 
@@ -134,9 +143,9 @@
 
         .ticket-menu {
             position: fixed;
-            right: 0;
+            right: 38px;
             width: rem(160px);
-            margin-right: 32px;
+            // margin-right: 32px;
         }
     }
 
@@ -176,13 +185,11 @@
 
     .history-icon {
         margin-right: 4px;
-        // align-self: center;
         font-size: rem(14px);
     }
 
     .comments-icon {
         margin-right: 4px;
-        // align-self: center;
         font-size: rem(12px);
     }
 
