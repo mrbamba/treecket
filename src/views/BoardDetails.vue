@@ -358,7 +358,7 @@ export default {
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {
-            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id));
+            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id).reverse());
         },
         systemUsers() {
             return this.$store.getters.users
