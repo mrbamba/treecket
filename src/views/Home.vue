@@ -2,6 +2,17 @@
     <div class="home-container">
         <fixed-header />
         <main>
+            <!-- <section>
+                <div>
+                    <h2>
+                        Forget Everything You Know About Kanban
+                    </h2>
+                    <router-link to="/board" class="try-free-main">Try it free</router-link>
+                </div>
+                <div class="img-hero-container">
+                    <img src="@/assets/images/scrum-board.png" alt />
+                </div>
+            </section> -->
             <section class="jumbo-white">
                 <div>
                     <h2>Probably the best tool for agile software development</h2>
