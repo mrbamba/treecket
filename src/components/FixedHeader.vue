@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         onScroll() {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 this.$refs.fixedHeader.style.height = "70px";
                 this.$refs.fixedHeader.style.boxShadow = "0 2px 7px rgba(9, 33, 66, 0.08)";
                 this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1)';

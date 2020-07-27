@@ -5,7 +5,7 @@
             :boardGroupsSummary="boardGroupsSummary"
             :currGroupSummary="currGroupSummary"
         />
-        
+
         <div class="date-picker-title">
             <i class="far fa-clock" /> Due Date
         </div>
@@ -18,7 +18,7 @@
             class="due-date-input"
         ></el-date-picker>
         <!-- <button class="clear-due-date-btn" v-if="ticket.dueDate" @click="clearDueDate">Clear Due Date</button> -->
-        
+
         <h3>ADD TO CARD</h3>
 
         <button @click="show.memberSelector=!show.memberSelector">
@@ -52,6 +52,9 @@
             @addAttachment="addAttachment"
             @closeAddAttachment="show.addAttachment=false"
         />
+        <button @click="show.addAttachment=!show.addAttachment">
+            <i class="fas fa-palette" /> Background
+        </button>
 
         <h3>ACTIONS</h3>
         <button @click="onClone">
@@ -156,7 +159,7 @@ export default {
         moveTicket(newGroupId) {
             this.$emit('moveTicket', newGroupId)
         },
-        clearDueDate(){
+        clearDueDate() {
             this.$emit('clearDueDate')
         }
     },
