@@ -4,17 +4,46 @@
             <img src="@/assets/logo/logo.png" />
             <h1>Treecket</h1>
         </div>
-        <div></div>
-        <div class="user-options">
-            <router-link to="/login" class="cancel-button">Login</router-link>
-            <router-link to="/signup" class="add-button">Signup</router-link>
+        <nav>
+            <router-link to="/">Home</router-link>
+            <router-link to="/board">Boards</router-link>
+            <a href="https://www.urbandictionary.com/define.php?term=FAQ" target="_blank">FAQ</a>
+            <a href="https://www.google.com/covid19/" target="_blank">COVID-19</a>
+        </nav>
+        <div class="user-action">
+            <div class="logged-in-user-options" v-if="loggedInUser">
+                <router-link to="/login">
+                    <span>My Account</span>
+                    <avatar
+                        class="user-avatar"
+                        :username="loggedInUser.fullName"
+                        :src="loggedInUser.imgSrc"
+                        :size="35"
+                        color="#fff"
+                    />
+                </router-link>
+            </div>
+            <div v-else class="user-options">
+                <router-link to="/login" class="cancel-button">Login</router-link>
+                <router-link to="/signup" class="add-button">Signup</router-link>
+            </div>
+            <transition name="fall">
+                <router-link to="/board" v-if="hiddenTrial" class="trial-secondary">Try it free</router-link>
+            </transition>
         </div>
     </header>
 </template>
 
 <script>
+import Avatar from 'vue-avatar';
 export default {
     name: "BoardPreview",
+    data() {
+        return {
+            loggedInUser: this.$store.getters.loggedInUser,
+            hiddenTrial: false
+        }
+    },
     mounted() {
         this.onScroll();
         window.addEventListener('scroll', this.onScroll)
@@ -30,11 +59,18 @@ export default {
                 this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1)';
                 this.$refs.fixedHeaderLogo.style.marginBottom = '17.5px';
             } else {
+                this.hiddenTrial = false;
                 this.$refs.fixedHeader.style.height = "100px";
                 this.$refs.fixedHeader.style.boxShadow = "none";
-                this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1.25)';
+                this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1.3)';
+            }
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                this.hiddenTrial = true;
             }
         }
+    },
+    components: {
+        Avatar,
     }
 }
 </script>

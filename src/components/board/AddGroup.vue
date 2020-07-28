@@ -46,10 +46,11 @@ export default {
     methods: {
         addGroup() {
             // if (this.addNewGroup) {
-                if (!this.newGroupTitle) return;
-                this.$emit("addGroup", this.newGroupTitle);
-                // this.addNewGroup = false
-                this.newGroupTitle = '';
+            if (!this.newGroupTitle) return;
+            this.$emit("addGroup", this.newGroupTitle);
+            // this.addNewGroup = false
+            this.newGroupTitle = '';
+            if (this.addNewGroup) this.$nextTick(() => this.$refs.newGroupTitle.focus());
             // }
         },
         toggleAddGroup() {

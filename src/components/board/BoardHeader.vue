@@ -17,8 +17,8 @@
         </nav>
 
         <router-link to="/" class="board-header-logo">
-            <img :src="logoSrc" alt ref="logo" />
-            <h1>Treecket</h1>
+            <img @mouseenter="logoBounce(1)" :src="logoSrc" alt ref="logo" />
+            <h1 @mouseenter="logoBounce(1)">Treecket</h1>
         </router-link>
         <avatar
             class="logged-in-user-avatar"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Avatar from 'vue-avatar'
+import Avatar from 'vue-avatar';
 
 export default {
     name: "BoardHeader",
@@ -43,13 +43,14 @@ export default {
         }
     },
     created() {
-        this.logoSrc = require('@/assets/logo/logo-white-bouncing.gif');
-        this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo/logo-white.png'), this.gifRepeats(3));
+        this.logoBounce(3);
     },
     methods: {
-        gifRepeats(count, frames = 11) {
+        logoBounce(count, frames = 11) {
             // 11 frames (1100ms) + 1st frame at end of cycle
-            return frames * count * 100 + 90;
+            const duration = count * frames * 100 + 90;
+            this.logoSrc = require('@/assets/logo/logo-white-bouncing.gif');
+            this.logoTimeout = setTimeout(() => this.logoSrc = require('@/assets/logo/logo-white.png'), duration);
         },
         clearInput() {
             this.$refs.ticketSearch.value = '';
@@ -60,10 +61,7 @@ export default {
     },
     watch: {
         $route(to, from) {
-            // Loading gif
-            this.logoSrc = require('@/assets/logo/logo-white-bouncing.gif'); // 11 frames (1100ms - 1 bounce)
-            this.logoTimeout = setTimeout(() =>
-                this.logoSrc = require('@/assets/logo/logo-white.png'), this.gifRepeats(1));
+            this.logoBounce(1);
         }
     },
     computed: {

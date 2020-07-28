@@ -1,8 +1,8 @@
 <script>
-import { Pie } from 'vue-chartjs'
+import { Pie, Doughnut } from 'vue-chartjs'
 export default {
     name:'TicketsPerMemberChart',
-    extends: Pie,
+    extends: Doughnut,
     props: {
         label: {
             type: String,

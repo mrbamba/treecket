@@ -7,11 +7,11 @@
     height: 100px;
     transition: height 0.5s ease, box-shadow 0.5s ease;
     // max-width: 1200px;
-    
+
     .user-options {
         margin-top: 14px;
     }
-    
+
     .logo {
         position: absolute;
         bottom: 0;
@@ -36,4 +36,70 @@
         }
     }
 
+    nav {
+        margin-top: 27px;
+
+        a {
+            font-weight: bold;
+            color: rgb(74, 74, 74);
+            font-weight: 400;
+            margin-inline-start: rem(23px);
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &.router-link-exact-active {
+                color: rgb(183, 183, 183);
+            }
+        }
+    }
+
+    .user-action {
+        .trial-secondary {
+            display: inline-flex;
+            border: none;
+            background-color: #0052cc;
+            color: white;
+            font-size: rem(16px);
+            padding: 0.5em 1.5em;
+            font-weight: 500;
+            border-radius: 4px;
+            margin-inline-end: 16px;
+            box-shadow: 0 0 12px rgba(9, 33, 66, .08);
+
+            &:hover {
+                background-color: #0048b4;
+
+            }
+        }
+    }
+
+    .logged-in-user-options {
+        display: inline-block;
+        margin: 17.5px 12px 0 0;
+
+        a {
+            display: flex;
+            border-radius: 2em;
+            background-color: rgb(238, 238, 238);
+            transition: all .2s;
+
+            &:hover {
+                background-color: rgb(221, 221, 221);
+            }
+
+            span {
+                display: inline-block;
+                line-height: 35px;
+                vertical-align: middle;
+                color: rgb(74, 74, 74);
+                padding: 0 rem(12px);
+                font-size: rem(14px);
+            }
+
+            // .user-avatar {
+            // }
+        }
+    }
 }
