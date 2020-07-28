@@ -59,7 +59,7 @@ export default {
       commit({ type: 'setBoard', board })
     },
     async addBoard({ dispatch, commit, state }, board) {
-      console.log('adding:', { board })
+      // console.log('adding:', { board })
       try {
         await boardService.addBoard(board);
         // commit({ type: 'addBoard', board });

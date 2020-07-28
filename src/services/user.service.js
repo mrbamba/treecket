@@ -34,7 +34,7 @@ async function logout() {
     sessionStorage.clear();
 }
 function getUsers(usersFilterBy) {
-    console.log('getting users', usersFilterBy);
+    // console.log('getting users', usersFilterBy);
 
 
     return HttpService.get(`user/?txt=${usersFilterBy.txt}`,usersFilterBy)

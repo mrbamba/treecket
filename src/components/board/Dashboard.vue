@@ -75,7 +75,6 @@ export default {
     mounted() {
         this.$watch("overlay", function (newValue, oldValue) {
             this.closeDashboard();
-            console.log('closing')
         });
     },
     destroyed() {

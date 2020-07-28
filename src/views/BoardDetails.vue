@@ -184,11 +184,11 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async deleteTicket({ ticketId, groupId }) {
-            console.log({ ticketId, groupId })
+            // console.log({ ticketId, groupId })
             const groupIdx = this.currBoard.groups.findIndex(group => group.id === groupId);
             const ticketIdx = this.currBoard.groups[groupIdx].tickets.findIndex(ticket => ticket.id === ticketId);
             if (groupIdx < 0 || ticketIdx < 0) return;
-            console.log('got here?')
+
             this.currBoard.groups[groupIdx].tickets.splice(ticketIdx, 1);
             this.addActivity(`deleted a ticket`)
             this.saveBoard()
@@ -253,10 +253,8 @@ export default {
             this.saveBoard()
         },
         addActivity(text, ticketId = null) {
-            console.log(text)
-
             let newActivity = boardService.getNewActivity(text, ticketId);
-            console.log(newActivity)
+            // console.log(newActivity)
             this.currBoard.activities.push(newActivity);
         },
         changeLabelsDisplay() {

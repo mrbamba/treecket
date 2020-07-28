@@ -29,7 +29,7 @@ export default {
     },
     actions: {
         async login(context, {userCred}) {
-            console.log('login at store');
+            // console.log('login at store');
             const user = await UserService.login(userCred);
             context.commit({type: 'setUser', user})
             return user;
@@ -46,7 +46,7 @@ export default {
             context.commit({type: 'setUser', user: null})
         },
         async loadUsers(context,userFilterBy) {
-            console.log('Store users',userFilterBy)
+            // console.log('Store users',userFilterBy)
             const users = await UserService.getUsers(userFilterBy);
             context.commit({type: 'setUsers', users})
         },

@@ -200,7 +200,6 @@ export default {
             const newChecklist = boardService.getNewChecklist();
             this.ticket.checklists.unshift(newChecklist);
             this.$store.commit('setUserMessage', { msg: 'New checklist added to ticket' });
-            console.log(this.ticket.id)
             this.$emit('addActivity', `Added a checklist to ${this.ticket.title}`, this.ticket.id)
 
             this.saveTicket();

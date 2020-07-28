@@ -35,7 +35,6 @@ export default {
     },
     methods: {
         moveTicket(newGroupId) {
-            console.log('running move ticket on group selector')
             this.$emit('moveTicket', newGroupId)
         }
     }

@@ -12,7 +12,6 @@ export default {
     },
     actions: {
         sendUpdateBoardMsg(context, {msg}) {
-            console.log('sending from store')
             socket.emit('sendMsg', msg)
         },
         // getChatHistory(context, {chatId}) {

@@ -67,7 +67,7 @@ export default {
         }
     },
     created() {
-        console.log("this.loggedInUser", this.loggedInUser);
+        // console.log("this.loggedInUser", this.loggedInUser);
         // console.log('Route name',this.$route.name)
         this.setPage();
     },
@@ -113,7 +113,7 @@ export default {
         },
         async onUploadImg(ev) {
             let img = await uploadImg(ev);
-            console.log(img.url);
+            // console.log(img.url);
             this.signupCred.imgSrc = img.url;
         }
     },
