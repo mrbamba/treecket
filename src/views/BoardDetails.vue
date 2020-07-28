@@ -78,8 +78,10 @@
             <board-menu
                 :activities="reverseChronolgicalActivities"
                 :boardId="currBoard._id"
+                :boardBackground ="currBoard.background"
                 @editBackground="show.backgroundEditor=!show.backgroundEditor"
                 @setBackground="setBackground"
+                @closeBoardMenu="show.menu = false"
                 v-if="show.menu"
             />
         </transition>

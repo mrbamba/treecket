@@ -1,6 +1,8 @@
 <script>
 import { Bar } from 'vue-chartjs'
 Chart.defaults.global.defaultFontColor = 'white';
+Chart.defaults.global.elements.point.radius = 8;
+
 
 
 export default {

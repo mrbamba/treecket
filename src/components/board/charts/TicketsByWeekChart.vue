@@ -1,11 +1,11 @@
 <script>
 import { Line, mixins } from "vue-chartjs";
-const { reactiveProp } = mixins;
+// const { reactiveProp } = mixins;
 
 export default {
     name: 'TicketsByWeekChart',
     extends: Line,
-    mixins: [reactiveProp],
+    // mixins: [reactiveProp],
 
     props: {
         label: {
@@ -33,7 +33,7 @@ export default {
 
         const weeks = this.chartData.weeks
         const ticketCount = this.chartData.ticketCount
-        var gradientStroke = this.$refs.canvas.getContext('2d').createLinearGradient(0, 230, 0, 50);
+        // var gradientStroke = this.$refs.canvas.getContext('2d').createLinearGradient(0, 230, 0, 50);
 
         // gradientStroke.addColorStop(1, 'rgba(253,93,147,0.8)');
         // gradientStroke.addColorStop(0, 'rgba(253,93,147,0.8)'); //blue colors
