@@ -105,25 +105,6 @@
     }
 }
 
-.slide-up-fade-right-enter-active {
-    animation: slide-up-in .4s ease-in-out;
-}
-
-.slide-up-fade-right-active {
-    animation: slide-up-in .2s reverse ease;
-}
-
-@keyframes slide-up-in {
-    0% {
-        transform: translate(-50%, 60px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
 
 .component-fade-enter-active {
     transition: opacity .3s ease;
@@ -143,13 +124,12 @@
 
 
 // Try it free
-
 .fall-enter-active {
-    animation: fall-in .2s ease-in-out;
+    animation: fall-in .3s ease-in-out;
 }
 
 .fall-leave-active {
-    animation: fall-in .1s reverse ease;
+    animation: fall-in .15s reverse ease;
 }
 
 @keyframes fall-in {

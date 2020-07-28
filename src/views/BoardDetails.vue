@@ -67,11 +67,14 @@
                 @moveTicket="moveTicket"
             />
         </transition>
+        
+        <transition name="slide-up">
         <dashboard
             :board="currBoard"
             v-if="show.dashboard && currBoard"
             @closeDashboard="show.dashboard=false"
         />
+        </transition>
 
         <user-message v-if="userMessage" :userMessage="userMessage" />
         <transition name="slide-left">

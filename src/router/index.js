@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import BoardList from '../views/BoardList.vue'
 import BoardDetails from '../views/BoardDetails.vue'
 import TicketDetails from '../components/board/TicketDetails.vue'
+import Dashboard from '../components/board/Dashboard.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
@@ -36,7 +37,13 @@ const routes = [
     children: [
       {
         path: 'ticket/:ticketId',
+        name: 'TicketDetails',
         component: TicketDetails
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: Dashboard
       }
     ]
   },

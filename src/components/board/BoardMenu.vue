@@ -11,9 +11,10 @@
                 <span class="background-icon" :style="{background: boardBackground}"></span>
                 <button @click="toggleTypeMenu" class="board-menu-btn">Background</button>
             </div>
-        <Basic-modal>
+        <basic-modal>
+            <transition name="slide-up-fade-right" mode="out-in">
             <section class="background-type-selector" v-if="show.typeMenu">
-                <div  @click="openBackgroundSelector('images')">
+                <div @click="openBackgroundSelector('images')">
                     <div class="images-navigator"></div>
                 <span>Images</span>
                 </div>
@@ -24,9 +25,10 @@
                 </div>
             </section>
             <div v-else-if="show.backgroundSelector">
-                <Background-Palette :type="type" @setBackground="setBackground"/>
+                <background-palette :type="type" @setBackground="setBackground"/>
             </div>
-        </Basic-Modal>
+            </transition>
+        </basic-modal>
         <div class="delete-button-container">
             <button @click="deleteBoard" class="board-menu-delete">Delete Board</button>
             <i class="far fa-trash-alt" />

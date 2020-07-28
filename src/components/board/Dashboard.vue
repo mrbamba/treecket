@@ -1,10 +1,10 @@
 <template>
     <section class="dashboard">
         <button @click="closeDashboard" class="close-dashboard-btn">
-            <i class="fas fa-times" />
+            <img src="@/assets/icons/close-medium-eee.png" alt />
         </button>
         <h2>
-            <i class="fas fa-tachometer-alt"></i> Dashboard
+            <i class="fas fa-chart-area" /> Dashboard
         </h2>
         <div class="top-data">
             <div class="data-container">
@@ -30,7 +30,7 @@
                 <div class="dashboard-data">
                     <span>{{board.createdAt|formatTime}}</span> Created
                 </div>
-            </div> -->
+            </div>-->
             <div class="data-container">
                 <div class="total-board-activities">
                     <i class="fas fa-history"></i>
@@ -69,12 +69,27 @@ export default {
             require: true
         },
     },
+    created() {
+        this.$store.commit("toggleOverlay", true);
+    },
+    mounted() {
+        this.$watch("overlay", function (newValue, oldValue) {
+            this.closeDashboard();
+            console.log('closing')
+        });
+    },
+    destroyed() {
+        this.$store.commit("toggleOverlay", false);
+    },
     methods: {
         closeDashboard() {
             this.$emit('closeDashboard')
         },
     },
     computed: {
+        overlay() {
+            return this.$store.getters.overlay;
+        },
         ticketsCount() {
             let tickets = 0
             this.board.groups.forEach(group => {

@@ -45,7 +45,7 @@ export default {
                     labels: {
                         // This more specific font property overrides the global property
                         fontColor: "white",
-                        fontSize: 24
+                        fontSize: 20
                     }
                 },
                 scales: {
