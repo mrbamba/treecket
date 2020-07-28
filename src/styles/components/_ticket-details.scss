@@ -100,6 +100,7 @@
             padding-right: 220px;
             overflow-y: auto;
             flex-grow: 1;
+            overflow-wrap: anywhere;
             // padding-inline-start: rem(16px);
 
             .ticket-content-top {
