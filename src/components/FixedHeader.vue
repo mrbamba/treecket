@@ -53,19 +53,23 @@ export default {
     },
     methods: {
         onScroll() {
+            // move styling into css class
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 this.$refs.fixedHeader.style.height = "70px";
                 this.$refs.fixedHeader.style.boxShadow = "0 2px 7px rgba(9, 33, 66, 0.08)";
                 this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1)';
                 this.$refs.fixedHeaderLogo.style.marginBottom = '17.5px';
+                this.$refs.fixedHeaderLogo.style.bottom = "0";
+                if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
+                    this.hiddenTrial = true;
+                } else {
+                    this.hiddenTrial = false;
+                }
             } else {
                 this.hiddenTrial = false;
-                this.$refs.fixedHeader.style.height = "100px";
+                this.$refs.fixedHeader.style.height = "120px";
                 this.$refs.fixedHeader.style.boxShadow = "none";
                 this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1.3)';
-            }
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                this.hiddenTrial = true;
             }
         }
     },

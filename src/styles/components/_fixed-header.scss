@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     background-color: #fff;
-    height: 100px;
+    height: 140px;
     transition: height 0.5s ease, box-shadow 0.5s ease;
     // max-width: 1200px;
 
@@ -14,7 +14,7 @@
 
     .logo {
         position: absolute;
-        bottom: 0;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         font-family: Lalezar;
@@ -65,8 +65,9 @@
             padding: 0.5em 1.5em;
             font-weight: 500;
             border-radius: 4px;
-            margin-inline-end: 16px;
-            box-shadow: 0 0 12px rgba(9, 33, 66, .08);
+            margin: 0 20px 0 10px;
+            box-shadow: 0 0 12px rgba(9, 33, 66, .13);
+            transition: background-color .2s;
 
             &:hover {
                 background-color: #0048b4;
@@ -77,7 +78,7 @@
 
     .logged-in-user-options {
         display: inline-block;
-        margin: 17.5px 12px 0 0;
+        margin: 17.5px 6px 0 0;
 
         a {
             display: flex;

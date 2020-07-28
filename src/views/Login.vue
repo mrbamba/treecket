@@ -1,5 +1,7 @@
 <template>
     <div class="login">
+        <!-- <fixed-header /> -->
+
         <h2>{{ msg }}</h2>
 
         <div v-if="loggedInUser" >
@@ -42,7 +44,8 @@
 </template>
 
 <script>
-import { uploadImg } from "@/services/img-upload.service.js";
+import { uploadImg } from '@/services/img-upload.service.js';
+import FixedHeader from '@/components/FixedHeader.vue';
 
 export default {
     name: "test",
@@ -121,6 +124,9 @@ export default {
         $route(to, from) {
             this.setPage();
         }
+    },
+    components: {
+        FixedHeader,
     }
 };
 </script>

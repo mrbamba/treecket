@@ -2,11 +2,11 @@
     <div class="boards-list">
         <fixed-header />
         <div class="boards-list-header">
-            <h2>Boards</h2>
-            <button @click="toggleAddBoard" class="add-board-btn">Create board</button>
+            <h2><i class="fas fa-th-large" /> Boards</h2>
         </div>
         <add-board v-if="showAddBoard" @toggleAddBoard="toggleAddBoard" />
         <section v-if="boards">
+            <button @click="toggleAddBoard" class="add-board-btn"><i class="fas fa-plus" /> Create Board</button>
             <board-preview v-for="board in boards" :board="board" :key="board._id" />
         </section>
     </div>

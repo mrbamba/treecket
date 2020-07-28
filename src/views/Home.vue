@@ -2,30 +2,13 @@
     <div class="home-container">
         <fixed-header />
         <main>
-            <!-- <section>
+            <section class="trial-heading">
                 <div>
                     <h2>
-                        Forget Everything You Know About Kanban
+                        <span>Everything Starts With</span> 
+                        <span>A Great Kanban</span>
                     </h2>
-                    <router-link to="/board" class="try-free-main">Try it free</router-link>
-                </div>
-                <div class="img-hero-container">
-                    <img src="@/assets/images/scrum-board.png" alt />
-                </div>
-            </section> -->
-            <section class="jumbo-white">
-                <div>
-                    <h2>Probably the best tool for agile software development</h2>
-                    <router-link to="/board" class="try-free-main">Try it free</router-link>
-                </div>
-                <div class="img-hero-container">
-                    <img src="@/assets/images/scrum-board.png" alt />
-                </div>
-            </section>
-
-            <section class="jumbo-gray">
-                <div>
-                    <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
+                    <router-link to="/board" class="trial-main">Try it free</router-link>
                 </div>
             </section>
 
@@ -35,6 +18,24 @@
                 </div>
                 <div>
                     <h2>Real-time communication and full transparency</h2>
+                </div>
+                <!-- <div class="img-hero-container">
+                    <img src="@/assets/images/undraw_dashboard_nklg.png" alt />
+                </div> -->
+            </section>
+            
+            <section class="jumbo-gray">
+                <div>
+                    <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
+                </div>
+            </section>
+
+            <section class="jumbo-white">
+                <div>
+                    <h2>Probably the best tool for agile software development</h2>
+                </div>
+                <div class="img-hero-container">
+                    <img src="@/assets/images/scrum-board.png" alt />
                 </div>
             </section>
         </main>
