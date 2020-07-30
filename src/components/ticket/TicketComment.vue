@@ -28,6 +28,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import cloneDeep from 'lodash/cloneDeep';
 
 export default {
     name: "TicketComment",
@@ -39,7 +40,7 @@ export default {
         }
     },
     created() {
-        this.commentEditText = _.cloneDeep(this.comment.txt)
+        this.commentEditText = cloneDeep(this.comment.txt)
     },
     methods: {
         openEdit() {

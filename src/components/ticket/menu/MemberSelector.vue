@@ -36,6 +36,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import cloneDeep from 'lodash/cloneDeep';
 
 export default {
     name: 'MemberSelector',
@@ -59,7 +60,7 @@ export default {
     computed: {
         filteredUsers() {
             // Filters for search string
-            let filtered = _.cloneDeep(this.boardMembers).filter(user => user.fullName.toLowerCase().includes(this.userFilterBy.txt.toLowerCase()))
+            let filtered = cloneDeep(this.boardMembers).filter(user => user.fullName.toLowerCase().includes(this.userFilterBy.txt.toLowerCase()))
             // Sorts by fullName
             filtered.sort((memberA, memberB) =>
                 memberA.fullName.localeCompare(memberB.fullName)
@@ -82,6 +83,8 @@ export default {
     methods: {
         toggleMember(member) {
             this.$emit('toggleMember', member)
+            this.$emit('closeMemberSelect')
+
         },
         closeMemberSelect() {
             this.$emit('closeMemberSelect')

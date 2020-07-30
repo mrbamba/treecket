@@ -1,4 +1,6 @@
-import _ from 'lodash';
+// import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+
 export default {
   makeId,
   srcType,
@@ -8,7 +10,7 @@ export default {
 }
 
 function cloneObj(obj, key = 'id') {
-  const clonedObj = _.cloneDeep(obj);
+  const clonedObj = cloneDeep(obj);
   (function updateKey(obj, key) {
     Object.keys(obj).forEach(currKey => {
       if (currKey === key) obj[currKey] = makeId();

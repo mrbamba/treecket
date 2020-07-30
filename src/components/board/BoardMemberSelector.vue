@@ -2,8 +2,7 @@
     <div class="board-member-selector">
         <h2>Members</h2>
         <button @click="closeBoardMemberSelector" class="close-btn-fa">
-
-        <i class="fas fa-times "  />
+            <i class="fas fa-times" />
         </button>
 
         <input
@@ -28,7 +27,7 @@
                         :size="28"
                         class="member-select-avatar"
                     />
-                    {{member.fullName}} 
+                    {{member.fullName}}
                 </div>
                 <span>{{member | isMember(boardMembers)}}</span>
             </li>
@@ -38,6 +37,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import cloneDeep from 'lodash/cloneDeep';
 
 export default {
     name: 'BoardMemberSelector',
@@ -69,7 +69,7 @@ export default {
             // Array.prototype.push.apply(boardMembersList, systemUsersList);
 
             // Filters for search string
-            let filtered = _.cloneDeep(this.systemUsers)
+            let filtered = cloneDeep(this.systemUsers)
             // Sorts by fullName
             filtered.sort((memberA, memberB) =>
                 memberA.fullName.localeCompare(memberB.fullName)
@@ -99,6 +99,7 @@ export default {
         },
         toggleMember(member) {
             this.$emit('toggleMember', member)
+            this.$emit('closeBoardMemberSelector', this.userFilterBy)
         },
     },
     components: {

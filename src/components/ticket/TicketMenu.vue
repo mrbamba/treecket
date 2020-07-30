@@ -9,14 +9,14 @@
         <div class="date-picker-title">
             <i class="far fa-clock" /> Due Date
         </div>
-        <el-date-picker
+        <date-picker
             v-model="ticket.dueDate"
             type="date"
             placeholder="Pick due date"
             format="MMM-dd-yyyy"
             @change="saveTicket"
             class="due-date-input"
-        ></el-date-picker>
+        ></date-picker>
         <!-- <button class="clear-due-date-btn" v-if="ticket.dueDate" @click="clearDueDate">Clear Due Date</button> -->
 
         <h3>ADD TO CARD</h3>
@@ -72,14 +72,15 @@
 <script>
 import MemberSelector from "@/components/ticket/menu/MemberSelector.vue";
 import LabelSelector from "@/components/ticket/menu/LabelSelector.vue";
-import ChecklistCreator from "@/components/ticket/menu/ChecklistCreator.vue";
-import DateSelector from "@/components/ticket/menu/DateSelector.vue";
+// import ChecklistCreator from "@/components/ticket/menu/ChecklistCreator.vue";
 import BackgroundPalette from '@/components/BackgroundPalette'
 // import AttachmentTool from "@/components/ticket/menu/AttachmentTool.vue";
-import CoverTool from "@/components/ticket/menu/CoverTool.vue";
+// import CoverTool from "@/components/ticket/menu/CoverTool.vue";
 // import labels from "@/components/board/labels.vue";
 import AddAttachment from "@/components/ticket/AddAttachment.vue";
 import TicketGroupSelector from '@/components/ticket/menu/TicketGroupSelector';
+import DatePicker from 'element-ui/lib/date-picker'
+
 
 
 export default {
@@ -166,14 +167,14 @@ export default {
     components: {
         MemberSelector,
         LabelSelector,
-        ChecklistCreator,
-        DateSelector,
+        // ChecklistCreator,
         BackgroundPalette,
         // AttachmentTool,
-        CoverTool,
+        // CoverTool,
         // labels,
         AddAttachment,
         TicketGroupSelector,
+        DatePicker,
 
     }
 };

@@ -12,6 +12,7 @@
 <script>
 import moment from 'moment'
 import TicketsByWeekChart from '@/components/board/charts/TicketsByWeekChart.vue'
+import cloneDeep from 'lodash/cloneDeep';
 
 
 
@@ -65,7 +66,7 @@ export default {
     },
     methods: {
         calculateData() {
-            let board = _.cloneDeep(this.board)
+            let board = cloneDeep(this.board)
             //Create array on all board tickets
             let tickets = []
             board.groups.forEach(group => {
