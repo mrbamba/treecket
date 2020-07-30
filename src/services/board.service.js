@@ -178,7 +178,7 @@ function getNewBoard(prefs) {
     "groups": [
       {
         "id": utilService.makeId(),
-        "title": "To do",
+        "title": "To Do",
         "color": "#eeeeee",
         "tickets": []
       },

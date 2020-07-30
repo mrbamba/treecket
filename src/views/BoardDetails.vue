@@ -110,6 +110,8 @@ import { applyDrag, generateItems } from "@/services/dnd.service.js";
 import { dragscroll } from 'vue-dragscroll';
 import SocketService from "@/services/socket.service.js";
 import { eventBus } from '@/services/event-bus.service.js';
+import cloneDeep from 'lodash/cloneDeep';
+
 
 export default {
     data() {
@@ -328,7 +330,7 @@ export default {
             if (newGroupIdx < 0) return
             this.addActivity(`Moved ${this.selectedTicket.title} from ${this.currBoard.groups[currGroupIdx].title} to ${this.currBoard.groups[newGroupIdx].title}`,this.selectedTicket.id)
 
-            let ticketBackup = _.cloneDeep(this.selectedTicket)
+            let ticketBackup = cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
             this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
             this.saveBoard();
@@ -348,20 +350,20 @@ export default {
             return this.$store.getters.userMessage
         },
         currBoard() {
-            return _.cloneDeep(this.$store.getters.currBoard);
+            return cloneDeep(this.$store.getters.currBoard);
         },
         loggedInUser() {
             return this.$store.getters.loggedInUser;
         },
         ticketActivities() {
-            return _.cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id).reverse());
+            return cloneDeep(this.currBoard.activities.filter(activity => activity.ticketId === this.selectedTicket.id).reverse());
         },
         systemUsers() {
             return this.$store.getters.users
         },
         boardGroupsSummary() {
             let groupsSummary = [];
-            let board = _.cloneDeep(this.currBoard);
+            let board = cloneDeep(this.currBoard);
             board.groups.forEach(group => {
                 groupsSummary.push({
                     id: group.id,
@@ -371,7 +373,7 @@ export default {
             return groupsSummary;
         },
         currGroupSummary() {
-            let board = _.cloneDeep(this.currBoard)
+            let board = cloneDeep(this.currBoard)
             let currTicketGroup = board.groups.find(group => {
                 return group.tickets.find(ticket => {
                     return ticket.id === this.selectedTicket.id
@@ -384,7 +386,7 @@ export default {
 
         },
         reverseChronolgicalActivities(){
-            return _.cloneDeep(this.currBoard.activities.reverse())
+            return cloneDeep(this.currBoard.activities.reverse())
         }
     },
     components: {
