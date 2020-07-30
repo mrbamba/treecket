@@ -1,12 +1,21 @@
 .login {
+    height: 100%;
+    .form-container {
+        position: relative;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        height: 100%;
+        text-align: center;
+    }
     form.login-page {
-        // margin-top: 100px;
+        position: absolute;
+        top: 150px;
+        left: 50%;
+        transform: translateX(-50%);
         width: 300px;
-        margin: 25px auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, .2);
         padding: 40px;
-        text-align: center;
-
 
         h2 {
             margin-bottom: 25px;
@@ -30,7 +39,6 @@
             padding: 15px 10px;
             border-radius: 3px;
 
-            // margin: 8px;
             &:hover {
                 background-color: #0052ee;
                 transition: ease-in-out .3s;
@@ -40,12 +48,13 @@
 
     }
     form.signup-page{
+        position: absolute;
+        top: 150px;
+        left: 50%;
+        transform: translateX(-50%);
         width: 300px;
-        margin: 25px auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, .2);
         padding: 40px;
-        text-align: center;
-
 
         h2 {
             margin-bottom: 25px;

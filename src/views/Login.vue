@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <!-- <fixed-header /> -->
+        <fixed-header />
 
         <h2>{{ msg }}</h2>
 
@@ -13,7 +13,7 @@
                 <button @click="doLogout">Log out</button>
             </h3>
         </div>
-        <div v-else>
+        <div v-else class="form-container">
             <form @submit.prevent="doLogin" v-if="route === 'Login'" class="login-page">
                 <h2>Log in to your account</h2>
                 <input type="text" v-model="loginCred.email" placeholder="Email" class="minimal-input"/>
