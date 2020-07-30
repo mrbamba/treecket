@@ -136,6 +136,7 @@ export default {
     },
     async created() {
         await this.loadBoard();
+        this.openTicket()
         SocketService.setup();
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
@@ -211,20 +212,21 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async loadBoard() {
+            console.log('loading board');
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
 
             // Sets selectedTicket and selectedGroupId
-            if (this.$route.params.ticketId) {
-                this.selectedGroupId = this.currBoard.groups.find(
-                    group =>
-                        (this.selectedTicket = group.tickets.find(
-                            (ticket, idx) => {
-                                this.selectedTicketIdx = idx
-                                return ticket.id === this.$route.params.ticketId
-                            }
-                        ))
-                ).id;
-            }
+            // if (this.$route.params.ticketId) {
+            //     this.selectedGroupId = this.currBoard.groups.find(
+            //         group =>
+            //             (this.selectedTicket = group.tickets.find(
+            //                 (ticket, idx) => {
+            //                     this.selectedTicketIdx = idx
+            //                     return ticket.id === this.$route.params.ticketId
+            //                 }
+            //             ))
+            //     ).id;
+            // }
         },
         async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
@@ -334,6 +336,19 @@ export default {
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
             this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
             this.saveBoard();
+        },
+        openTicket(){
+            if (this.$route.params.ticketId) {
+                this.selectedGroupId = this.currBoard.groups.find(
+                    group =>
+                        (this.selectedTicket = group.tickets.find(
+                            (ticket, idx) => {
+                                this.selectedTicketIdx = idx
+                                return ticket.id === this.$route.params.ticketId
+                            }
+                        ))
+                ).id;
+            }
         }
     },
     computed: {
@@ -407,7 +422,7 @@ export default {
     },
     watch: {
         async $route(to, from) {
-            this.loadBoard();
+            this.openTicket();
         }
     }
 }
