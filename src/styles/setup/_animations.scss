@@ -85,23 +85,23 @@
 }
 
 
-
+// Board Menu
 .slide-left-enter-active {
-    animation: slide-left .5s ease;
+    animation: slide-left 1s ease;
 }
 
 .slide-left-leave-active {
-    animation: slide-left .2s reverse ease;
+    animation: slide-left 0.5s reverse ease;
 }
 
 @keyframes slide-left {
     0% {
-        transform: translateX(200%);
+        transform: translateX(400px);
         opacity: 0;
     }
 
     100% {
-        transform: translateX(0%);
+        transform: translateX(0);
     }
 }
 

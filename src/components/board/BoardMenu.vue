@@ -2,7 +2,7 @@
     <div class="board-menu">
         <header>
         <button class="close-button" @click="closeMenu">
-            <img src="@/assets/icons/close-medium.png" alt="">
+            <img src="@/assets/icons/close-medium.png" alt />
         </button>
         <h3>Menu</h3>
         </header>

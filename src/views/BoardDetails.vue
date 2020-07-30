@@ -76,8 +76,8 @@
             />
         </transition>
 
-        <user-message v-if="userMessage" :userMessage="userMessage" />
-        <transition name="slide-left">
+        <user-message v-show="userMessage" :userMessage="userMessage" />
+        <!-- <transition name="slide-left"> -->
             <board-menu
                 :activities="reverseChronolgicalActivities"
                 :boardId="currBoard._id"
@@ -85,9 +85,9 @@
                 @editBackground="show.backgroundEditor=!show.backgroundEditor"
                 @setBackground="setBackground"
                 @closeBoardMenu="show.menu = false"
-                v-if="show.menu"
+                v-show="show.menu"
             />
-        </transition>
+        <!-- </transition> -->
     </div>
 </template>
 
