@@ -2,7 +2,6 @@
     <div class="login">
         <fixed-header />
 
-        <h2>{{ msg }}</h2>
 
         <div v-if="loggedInUser" >
             <h3>
@@ -16,21 +15,32 @@
         <div v-else class="form-container">
             <form @submit.prevent="doLogin" v-if="route === 'Login'" class="login-page">
                 <h2>Log in to your account</h2>
+                <h2>{{ msg }}</h2>
                 <input type="text" v-model="loginCred.email" placeholder="Email" class="minimal-input"/>
                 <input type="password" v-model="loginCred.password" placeholder="Password"  class="minimal-input"/>
                 <button >Continue</button>
-                <router-link to="/signup" class="cancel-button">Sign up for an account</router-link>
+                <div class="social-login">
+                    <span>or</span>
+                </div>
+                <router-link to="/signup" class="signup-link">Sign up for an account</router-link>
             </form>
             <form @submit.prevent="doSignup" v-else class="signup-page">
                 <h2>Sign up for your account</h2>
                 <input type="text" v-model="signupCred.email" placeholder="Email"  class="minimal-input"/>
                 <input type="password" v-model="signupCred.password" placeholder="Password" class="minimal-input"/>
                 <input type="text" v-model="signupCred.fullName" placeholder="Full name" class="minimal-input"/>
-                <label for="upload-input">Upload your profile</label>
-                <input type="file" id="upload-input" @change="onUploadImg" class="minimal-input" />
-
+                <label for="upload-input" class="upload-btn">
+                    Upload your image profile
+                </label>
+                <input type="file" id="upload-input" @change="onUploadImg" style="display:none" position />
+                <!-- <button @click="openUploadImg"></button> -->
+                <img v-if="signupCred.imgSrc" :src="signupCred.imgSrc" alt="">
+                <img v-if="!loggedInUser && isInUploadImg" src="@/assets/logo/logo-white-bouncing.gif" alt="">
                 <button>Sign up</button>
-                <router-link to="/login">Already have a Treecket account? Log in</router-link>
+                <div class="social-login">
+                    <span>or</span>
+                </div>
+                <router-link to="/login" class="login-link">Already have a Treecket account? Log in</router-link>
             </form>
         </div>
         <!-- <button @click="getAllUsers">Get All Users</button>
@@ -55,7 +65,8 @@ export default {
             loginCred: {},
             signupCred: {},
             msg: "",
-            userToEdit: {}
+            userToEdit: {},
+            isInUploadImg: false,
         };
     },
     computed: {
@@ -91,6 +102,7 @@ export default {
             this.$store.dispatch({ type: "logout" });
         },
         doSignup() {
+            if (this.isInUploadImg) return
             const cred = this.signupCred;
             if (!cred.email || !cred.password || !cred.fullName)
                 return (this.msg = "Please fill up the form");
@@ -112,9 +124,11 @@ export default {
             this.route = this.$route.name;
         },
         async onUploadImg(ev) {
+            this.isInUploadImg = true;
             let img = await uploadImg(ev);
             // console.log(img.url);
             this.signupCred.imgSrc = img.url;
+            this.isInUploadImg = false;
         }
     },
     watch: {
