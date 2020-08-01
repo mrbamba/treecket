@@ -67,27 +67,27 @@
                 @moveTicket="moveTicket"
             />
         </transition>
-        
+
         <transition name="slide-up">
-        <dashboard
-            :board="currBoard"
-            v-if="show.dashboard && currBoard"
-            @closeDashboard="show.dashboard=false"
-        />
+            <dashboard
+                :board="currBoard"
+                v-if="show.dashboard && currBoard"
+                @closeDashboard="show.dashboard=false"
+            />
         </transition>
 
-        <user-message v-if="userMessage" :userMessage="userMessage" />
-        <transition name="slide-left">
+        <user-message v-show="userMessage" :userMessage="userMessage" />
+        <!-- <transition name="slide-left"> -->
             <board-menu
                 :activities="reverseChronolgicalActivities"
                 :boardId="currBoard._id"
-                :boardBackground ="currBoard.background"
+                :boardBackground="currBoard.background"
                 @editBackground="show.backgroundEditor=!show.backgroundEditor"
                 @setBackground="setBackground"
                 @closeBoardMenu="show.menu = false"
-                v-if="show.menu"
+                v-show="show.menu"
             />
-        </transition>
+        <!-- </transition> -->
     </div>
 </template>
 
@@ -125,6 +125,7 @@ export default {
             selectedTicket: null,
             selectedTicketIdx: null,
             selectedGroupId: null,
+            socketSession: null
 
             // NOTICE: Height of groups place-holders are set to the tallest group
             // upperDropPlaceholderOptions: {
@@ -136,6 +137,9 @@ export default {
     },
     async created() {
         await this.loadBoard();
+        this.openTicket()
+        this.socketSession = this.$store.getters.socketId
+        console.log(this.socketSession)
         SocketService.setup();
         SocketService.emit("feed board", this.$route.params.boardId);
         SocketService.on("feed update", this.loadBoard);
@@ -211,20 +215,21 @@ export default {
             SocketService.emit("updateBoard", this.currBoard._id);
         },
         async loadBoard() {
+            console.log('loading board');
             await this.$store.dispatch("loadBoard", this.$route.params.boardId);
 
             // Sets selectedTicket and selectedGroupId
-            if (this.$route.params.ticketId) {
-                this.selectedGroupId = this.currBoard.groups.find(
-                    group =>
-                        (this.selectedTicket = group.tickets.find(
-                            (ticket, idx) => {
-                                this.selectedTicketIdx = idx
-                                return ticket.id === this.$route.params.ticketId
-                            }
-                        ))
-                ).id;
-            }
+            // if (this.$route.params.ticketId) {
+            //     this.selectedGroupId = this.currBoard.groups.find(
+            //         group =>
+            //             (this.selectedTicket = group.tickets.find(
+            //                 (ticket, idx) => {
+            //                     this.selectedTicketIdx = idx
+            //                     return ticket.id === this.$route.params.ticketId
+            //                 }
+            //             ))
+            //     ).id;
+            // }
         },
         async onGroupDrop(dropResult) {
             const newGroups = applyDrag(this.currBoard.groups, dropResult);
@@ -328,12 +333,25 @@ export default {
             const newGroupIdx = this.currBoard.groups.findIndex(
                 group => { return group.id === newGroupId })
             if (newGroupIdx < 0) return
-            this.addActivity(`Moved ${this.selectedTicket.title} from ${this.currBoard.groups[currGroupIdx].title} to ${this.currBoard.groups[newGroupIdx].title}`,this.selectedTicket.id)
+            this.addActivity(`Moved ${this.selectedTicket.title} from ${this.currBoard.groups[currGroupIdx].title} to ${this.currBoard.groups[newGroupIdx].title}`, this.selectedTicket.id)
 
             let ticketBackup = cloneDeep(this.selectedTicket)
             this.currBoard.groups[currGroupIdx].tickets.splice(currTicketIdx, 1)
             this.currBoard.groups[newGroupIdx].tickets.unshift(ticketBackup)
             this.saveBoard();
+        },
+        openTicket() {
+            if (this.$route.params.ticketId) {
+                this.selectedGroupId = this.currBoard.groups.find(
+                    group =>
+                        (this.selectedTicket = group.tickets.find(
+                            (ticket, idx) => {
+                                this.selectedTicketIdx = idx
+                                return ticket.id === this.$route.params.ticketId
+                            }
+                        ))
+                ).id;
+            }
         }
     },
     computed: {
@@ -385,7 +403,7 @@ export default {
             }
 
         },
-        reverseChronolgicalActivities(){
+        reverseChronolgicalActivities() {
             return cloneDeep(this.currBoard.activities.reverse())
         }
     },
@@ -407,7 +425,7 @@ export default {
     },
     watch: {
         async $route(to, from) {
-            this.loadBoard();
+            this.openTicket();
         }
     }
 }
