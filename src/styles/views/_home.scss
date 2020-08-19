@@ -27,9 +27,9 @@
         }
     }
     
-    .trial-main {
+    .trial-btn-main {
         border: none;
-        background-color: #0052cc;
+        background-color: $color-cta;
         color: white;
         font-size: rem(20px);
         padding: 0.8em 3.5em;
@@ -37,12 +37,11 @@
         text-transform: uppercase;
         border-radius: 5px;
         margin-top: 1em;
-        box-shadow: 0 0 35px rgba(0, 0, 0, .25);
-        transition: background-color .2s;
+        box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+        transition: background-color .2s, box-shadow .2s;
         
         &:hover {
-            background-color: #0048b4;
-            
+            background-color: darken($color: $color-cta, $amount: 5);
         }
     }
 
@@ -83,6 +82,7 @@
         display: flex;
         max-width: 1200px;
         padding: 50px rem(12px);
+        justify-content: space-between;;
 
         h2 {
             font-size: calc(1.25vw + 1rem);

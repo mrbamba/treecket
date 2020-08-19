@@ -41,9 +41,7 @@
         margin-top: 27px;
 
         a {
-            font-weight: bold;
             color: rgb(74, 74, 74);
-            font-weight: 400;
             margin-inline-start: rem(23px);
 
             &:hover {
@@ -60,7 +58,7 @@
         .trial-secondary {
             display: inline-flex;
             border: none;
-            background-color: #0052cc;
+            background-color: $color-cta;
             color: white;
             text-transform: uppercase;
             font-size: rem(16px);
@@ -72,7 +70,7 @@
             transition: background-color .2s;
 
             &:hover {
-                background-color: #0048b4;
+                background-color: darken($color: $color-cta, $amount: 5);
 
             }
         }
@@ -82,6 +80,10 @@
         margin: 17.5px 6px 0 0;
         display: inline-block;
         // display: flex;
+        color: rgb(74, 74, 74);
+        margin-top: 27px;
+        // margin-inline-end: rem(16px);
+    
     }
 
     .logged-in-user-options {

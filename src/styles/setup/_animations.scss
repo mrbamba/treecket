@@ -123,7 +123,7 @@
 }
 
 
-// Try it free
+// Try it free btn
 .fall-enter-active {
     animation: fall-in .3s ease-in-out;
 }
@@ -135,10 +135,10 @@
 @keyframes fall-in {
     0% {
         transform: translateY(-200px);
-        opacity: 0;
+        opacity: 0.5;
     }
 
-    80% {
-        transform: translateY(6px)
+    50% {
+        transform: translateY(8px)
     }
 }
