@@ -7,8 +7,8 @@
         <nav>
             <router-link to="/">Home</router-link>
             <router-link to="/board">Boards</router-link>
-            <a href="https://www.urbandictionary.com/define.php?term=FAQ" target="_blank">FAQ</a>
-            <a href="https://www.google.com/covid19/" target="_blank">COVID-19</a>
+            <!-- <a href="https://www.urbandictionary.com/define.php?term=FAQ" target="_blank">FAQ</a>
+            <a href="https://www.google.com/covid19/" target="_blank">COVID-19</a> -->
         </nav>
         <div class="user-action">
             <div class="logged-in-user-options" v-if="loggedInUser">
@@ -24,8 +24,8 @@
                 </router-link>
             </div>
             <div v-else class="user-options">
-                <router-link to="/login" class="cancel-button">Login</router-link>
-                <router-link to="/signup" class="add-button">Signup</router-link>
+                <router-link to="/login">Login</router-link>
+                <!-- <router-link to="/signup" class="add-button">Signup</router-link> -->
             </div>
             <transition name="fall">
                 <router-link to="/board" v-if="hiddenTrial" class="trial-secondary">Try it free</router-link>

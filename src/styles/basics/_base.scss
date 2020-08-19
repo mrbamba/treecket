@@ -4,7 +4,7 @@
 
 ::selection {
     color: #fff;
-    background-color: rgba($color: $color-brand, $alpha: .5) ;
+    background-color: rgba($color: $color-brand, $alpha: .5);
 }
 
 html {
@@ -50,6 +50,10 @@ textarea {
 a {
     text-decoration: none;
     color: inherit;
+
+    &.router-link-exact-active {
+        color: rgb(183, 183, 183);
+    }
 }
 
 iframe {
