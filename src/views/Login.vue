@@ -1,9 +1,29 @@
 <template>
     <div class="login">
-        <fixed-header />
+        <!-- <fixed-header /> -->
 
 
         <div v-if="loggedInUser" >
+            <section>
+                <img :src="loggedInUser.imgSrc" alt="">
+                <h2>{{ loggedInUser.fullName }}</h2>    
+            </section>
+            <section>
+                <h3>About</h3>
+                <form @submit.prevent="updateUser">
+                    <label for="">Full Name</label>
+                    <input type="text" v-model="loggedInUser.fullName">
+                    <label for="">Email</label>
+                    <input type="email" v-model="loggedInUser.email">
+                    <label for="upload-input" class="upload-btn">
+                        Change your image profile
+                    </label>
+                    <input type="file" id="upload-input" @change="onUploadImg" style="display:none" position />
+                    <label for="">Password</label>
+                    <input type="password" v-model="userToEdit.password">
+                    <button>Save changes</button>
+                </form>
+            </section>
             <h3>
                 Logged in user: {{ loggedInUser.fullName }}
                 <form @submit.prevent="updateUser">
@@ -18,7 +38,7 @@
                 <h2>{{ msg }}</h2>
                 <input type="text" v-model="loginCred.email" placeholder="Email" class="minimal-input"/>
                 <input type="password" v-model="loginCred.password" placeholder="Password"  class="minimal-input"/>
-                <button >Continue</button>
+                <button type="submit">Continue</button>
                 <div class="social-login">
                     <span>or</span>
                 </div>
@@ -56,7 +76,7 @@
 <script>
 import { uploadImg } from '@/services/img-upload.service.js';
 import FixedHeader from '@/components/FixedHeader.vue';
-
+import cloneDeep from 'lodash/cloneDeep';
 export default {
     name: "test",
     data() {
@@ -74,7 +94,7 @@ export default {
             return this.$store.getters.users;
         },
         loggedInUser() {
-            return this.$store.getters.loggedInUser;
+            return cloneDeep(this.$store.getters.loggedInUser);
         }
     },
     created() {
@@ -88,7 +108,6 @@ export default {
             if (!cred.email || !cred.password)
                 return (this.msg = "Please enter user/password");
             try {
-
                 await this.$store.dispatch({ type: "login", userCred: cred });
                 this.loginCred = {};
                 this.$router.push('/board');
@@ -118,7 +137,7 @@ export default {
             this.$store.dispatch({ type: "removeUser", userId });
         },
         updateUser() {
-            this.$store.dispatch({ type: "updateUser", user: this.userToEdit });
+            this.$store.dispatch({ type: "updateUser", updatedUser: this.loggedInUser, newPassword: this.userToEdit.password});
         },
         setPage() {
             this.route = this.$route.name;

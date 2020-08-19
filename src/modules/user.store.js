@@ -1,11 +1,11 @@
 import UserService from '../services/user.service.js'
 
-var localLoggedInUser = null;
-if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
+// var localLoggedInUser = null;
+// if (sessionStorage.user) localLoggedInUser = JSON.parse(sessionStorage.user);
 
 export default {
     state: {
-        loggedInUser : localLoggedInUser,
+        loggedInUser: null,
         users: []
     },
     getters: {
@@ -54,9 +54,13 @@ export default {
             await UserService.remove(userId);
             context.commit({type: 'removeUser', userId})
         },
-        async updateUser(context, {user}) {
-            user = await UserService.update(user);
+        async updateUser(context, {updatedUser, newPassword}) {
+            user = await UserService.update(updatedUser, newPassword);
+            console.log(context);
             context.commit({type: 'setUser', user})
+        },
+        loggedInUser() {
+            
         }
     }
 }
