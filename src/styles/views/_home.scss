@@ -88,6 +88,7 @@
         max-width: 1200px;
         padding: 50px rem(12px);
         justify-content: space-between;
+        flex-wrap: wrap;
 
         h2 {
             font-size: calc(1.25vw + 1rem);
@@ -102,6 +103,7 @@
 
         img {
             width: 100%;
+            min-width: 310px;
         }
 
         div {
@@ -110,6 +112,7 @@
             align-items: flex-start;
             justify-content: center;
             padding: 1em;
+            flex: 1;
 
             @include for-normal-layout {}
         }
