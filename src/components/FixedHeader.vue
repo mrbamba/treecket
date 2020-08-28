@@ -4,12 +4,18 @@
             <img src="@/assets/logo/logo.png" />
             <h1>Treecket</h1>
         </div>
+
+        <button class="nav-menu clean-btn">
+            <img class="icon" src="@/assets/icons/hamburger-menu.svg" alt />
+        </button>
+
         <nav>
             <router-link to="/">Home</router-link>
             <router-link to="/board">Boards</router-link>
             <!-- <a href="https://www.urbandictionary.com/define.php?term=FAQ" target="_blank">FAQ</a>
-            <a href="https://www.google.com/covid19/" target="_blank">COVID-19</a> -->
+            <a href="https://www.google.com/covid19/" target="_blank">COVID-19</a>-->
         </nav>
+
         <div class="user-action">
             <div class="logged-in-user-options" v-if="loggedInUser">
                 <router-link to="/login">
@@ -23,12 +29,13 @@
                     />
                 </router-link>
             </div>
-            <div v-else class="user-options">
+            <nav v-else class="guest-user-options">
                 <router-link to="/login">Login</router-link>
-                <!-- <router-link to="/signup" class="add-button">Signup</router-link> -->
-            </div>
+                <router-link to="/signup" class>Sign Up</router-link>
+            </nav>
+
             <transition name="fall">
-                <router-link to="/board" v-if="hiddenTrial" class="trial-secondary">Try it free</router-link>
+                <router-link to="/board" v-show="hiddenTrial" class="trial-secondary">Try it</router-link>
             </transition>
         </div>
     </header>
@@ -53,23 +60,12 @@ export default {
     },
     methods: {
         onScroll() {
-            // move styling into css class
-            if (document.body.scrollTop > 88 || document.documentElement.scrollTop > 88) {
-                this.$refs.fixedHeader.style.height = "70px";
-                this.$refs.fixedHeader.style.boxShadow = "0 2px 7px rgba(9, 33, 66, 0.08)";
-                this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1)';
-                this.$refs.fixedHeaderLogo.style.marginBottom = '17.5px';
-                this.$refs.fixedHeaderLogo.style.bottom = "0";
-                if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
-                    this.hiddenTrial = true;
-                } else {
-                    this.hiddenTrial = false;
-                }
+            if (document.documentElement.scrollTop > 70) {
+                this.$refs.fixedHeader.classList.add('scrolled');
+                this.hiddenTrial = (document.documentElement.scrollTop > 400 && document.documentElement.clientWidth > 720 ||
+                    document.documentElement.scrollTop > 470) ? true : false;
             } else {
-                this.hiddenTrial = false;
-                this.$refs.fixedHeader.style.height = "120px";
-                this.$refs.fixedHeader.style.boxShadow = "none";
-                this.$refs.fixedHeaderLogo.style.transform = 'translateX(-50%) scale(1.3)';
+                this.$refs.fixedHeader.classList.remove('scrolled');
             }
         }
     },

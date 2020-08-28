@@ -1,28 +1,35 @@
 .fixed-header {
     position: fixed;
+    z-index: 2;
+    height: 70px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    font-family: Lato;
+    box-shadow: 0 1px 0 #ddd;
     background-color: #fff;
-    height: 140px;
-    transition: height 0.5s ease, box-shadow 0.5s ease;
-    z-index: 2;
+    transition: height 0.4s ease, box-shadow 0.2s ease;
 
-    .user-options {
-        margin-top: 14px;
+    &.scrolled {
+        height: 70px;
+        box-shadow: 0 1px 0 #ddd;
+
+        .logo {
+            transform: translateX(-50%) scale(0.6);
+        }
     }
 
     .logo {
         position: absolute;
         width: fit-content;
-        bottom: 20px;
+        bottom: 14px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) scale(0.6);
         font-family: Lalezar;
         transition: all 0.2s;
 
         h1 {
-            font-size: rem(40px);
+            font-size: rem(48px);
             text-transform: uppercase;
             letter-spacing: rem(2px);
             padding-inline-start: rem(4px);
@@ -32,13 +39,15 @@
         }
 
         img {
-            width: rem(35px);
+            width: rem(42px);
             vertical-align: middle;
         }
     }
 
     nav {
-        margin-top: 27px;
+        display: none;
+        align-items: center;
+        max-height: 70px;
 
         a {
             color: rgb(74, 74, 74);
@@ -55,40 +64,20 @@
     }
 
     .user-action {
-        .trial-secondary {
-            display: inline-flex;
-            border: none;
-            background-color: $color-cta;
-            color: white;
-            text-transform: uppercase;
-            font-size: rem(16px);
-            padding: 0.5em 1.5em;
-            font-weight: 500;
-            border-radius: 4px;
-            margin: 0 20px 0 10px;
-            box-shadow: 0 0 12px rgba(9, 33, 66, .13);
-            transition: background-color .2s;
-
-            &:hover {
-                background-color: darken($color: $color-cta, $amount: 5);
-
-            }
-        }
+        display: flex;
+        align-items: center;
+        max-height: 70px;
     }
 
-    .user-options {
-        margin: 17.5px 6px 0 0;
-        display: inline-block;
-        // display: flex;
-        color: rgb(74, 74, 74);
-        margin-top: 27px;
-        // margin-inline-end: rem(16px);
-    
+    .guest-user-options {
+        a:last-of-type {
+            margin-inline-end: rem(23px);
+        }
     }
 
     .logged-in-user-options {
         display: inline-block;
-        margin: 17.5px 6px 0 0;
+        margin: 17.5px 12px 0 0;
 
         a {
             display: flex;
@@ -104,13 +93,68 @@
                 display: inline-block;
                 line-height: 35px;
                 vertical-align: middle;
-                color: rgb(74, 74, 74);
-                padding: 0 rem(12px);
+                margin-inline-start: rem(10px);
+                margin-inline-end: rem(6px);
                 font-size: rem(14px);
+                color: rgb(74, 74, 74);
             }
+        }
+    }
 
-            // .user-avatar {
-            // }
+    .trial-secondary {
+        position: relative;
+        display: inline-flex;
+        background-color: $color-cta;
+        padding: 0.8em;
+        border: none;
+        color: white;
+        text-transform: uppercase;
+        font-size: rem(14px);
+        font-weight: bold;
+        font-weight: 700;
+        border-radius: 5px;
+        margin-inline-end: 8px;
+        box-shadow: 0 5px 18px -5px rgba(0, 0, 0, 0.2);
+        transition: background-color .2s;
+
+        &:hover {
+            background-color: darken($color: $color-cta, $amount: 5);
+
+        }
+    }
+
+    .nav-menu {
+        margin-top: 25px;
+        margin-inline-start: 23px;
+    }
+
+    @include for-normal-layout {
+        .trial-secondary {
+            padding: 0.8em 2.4em;
+            margin-inline-end: 16px;
+
+            &::after {
+                content: " free";
+                white-space: pre;
+            }
+        }
+    }
+
+    @include for-wide-layout {
+        height: 130px;
+        box-shadow: none;
+
+        .logo {
+            transform: translateX(-50%) scale(1);
+            bottom: 14px;
+        }
+
+        nav {
+            display: inline-flex;
+        }
+
+        .nav-menu {
+            display: none;
         }
     }
 }

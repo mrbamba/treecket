@@ -18,24 +18,25 @@
                 </div>
                 <div>
                     <h2>Real-time communication and full transparency</h2>
+                    <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
                 </div>
             </section>
             
-            <section class="jumbo-gray">
+            <!-- <section class="jumbo-gray">
                 <div>
                     <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
                 </div>
                 <div class="img-hero-container" style="display: block">
-                    <img src="@/assets/images/dashboard.svg" alt />
+                    <img src="@/assets/images/scrum-board.svg" alt />
                 </div>
-            </section>
+            </section> -->
 
             <section class="jumbo-white">
                 <div>
                     <h2>Probably the best tool for agile software development</h2>
                 </div>
                 <div class="img-hero-container">
-                    <img src="@/assets/images/scrum-board.svg" alt />
+                    <img src="@/assets/images/dashboard.svg" alt />
                 </div>
             </section>
         </main>
