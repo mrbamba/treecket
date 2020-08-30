@@ -17,6 +17,23 @@
         </header>
 
         <main class="ticket-body">
+            <ticket-group-selector
+            @moveTicket="moveTicket"
+            :boardGroupsSummary="boardGroupsSummary"
+            :currGroupSummary="currGroupSummary"
+        />
+
+        <div class="date-picker-title">
+            <i class="far fa-clock" /> Due Date
+        </div>
+        <date-picker
+            class="due-date-input"
+            v-model="ticket.dueDate"
+            type="date"
+            placeholder="Pick due date"
+            format="MMM-dd-yyyy"
+            @change="saveTicket"
+        ></date-picker>
             <section class="ticket-content" ref="ticketContent">
                 <div class="ticket-content-top">
                     <ul class="labels-container clean-list" v-if="getTicketLabels.length > 0">
@@ -100,6 +117,7 @@
                         :activity="activity"
                     />
                 </div>
+            <add-comment @addComment="addComment" />
             </section>
             <ticket-menu
                 :ticket="ticket"
@@ -116,11 +134,8 @@
                 @addAttachment="addAttachment"
                 @cloneTicket="cloneTicket"
                 @deleteTicket="deleteTicket"
-            />
+            />            
         </main>
-        <footer>
-            <add-comment @addComment="addComment" />
-        </footer>
     </div>
 </template>
 
@@ -133,6 +148,8 @@ import TicketHistory from '@/components/ticket/TicketHistory.vue';
 import AddComment from '@/components/ticket/AddComment.vue';
 import { boardService } from "@/services/board.service.js";
 import { eventBus } from '@/services/event-bus.service.js';
+import TicketGroupSelector from '@/components/ticket/menu/TicketGroupSelector';
+import DatePicker from 'element-ui/lib/date-picker'
 import Avatar from 'vue-avatar'
 
 export default {
@@ -300,7 +317,9 @@ export default {
         TicketAttachments,
         TicketHistory,
         Avatar,
-        AddComment
+        AddComment,
+        TicketGroupSelector,
+        DatePicker
     }
 };
 </script>
