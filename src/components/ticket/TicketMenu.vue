@@ -1,6 +1,6 @@
 <template>
     <div class="ticket-menu">
-        <ticket-group-selector
+        <!-- <ticket-group-selector
             @moveTicket="moveTicket"
             :boardGroupsSummary="boardGroupsSummary"
             :currGroupSummary="currGroupSummary"
@@ -10,19 +10,19 @@
             <i class="far fa-clock" /> Due Date
         </div>
         <date-picker
+            class="due-date-input"
             v-model="ticket.dueDate"
             type="date"
             placeholder="Pick due date"
             format="MMM-dd-yyyy"
             @change="saveTicket"
-            class="due-date-input"
-        ></date-picker>
+        ></date-picker> -->
         <!-- <button class="clear-due-date-btn" v-if="ticket.dueDate" @click="clearDueDate">Clear Due Date</button> -->
 
-        <h3>ADD TO CARD</h3>
+        <h3 class="add-to-card-title">ADD TO CARD</h3>
 
-        <button @click="show.memberSelector=!show.memberSelector">
-            <i class="far fa-user" /> Members
+        <button data-txt="Member" class="member-selector-btn content-after" @click="show.memberSelector=!show.memberSelector">
+            <i class="far fa-user" />
         </button>
         <MemberSelector
             v-if="show.memberSelector"
@@ -31,8 +31,8 @@
             @toggleMember="toggleMember"
             @closeMemberSelect="show.memberSelector=false"
         />
-        <button @click="show.labelSelector=!show.labelSelector">
-            <i class="fas fa-tag" /> Labels
+        <button data-txt="Label" class="label-selector content-after" @click="show.labelSelector=!show.labelSelector">
+            <i class="fas fa-tag" />
         </button>
         <label-selector
             v-show="show.labelSelector"
@@ -40,31 +40,31 @@
             @closeLabelSelector="show.labelSelector=false"
             :labels="labels"
         />
-        <button @click="onAddChecklist">
-            <i class="far fa-check-square" /> Checklist
+        <button data-txt="Checklist" class="add-checklist-btn content-after" @click="onAddChecklist">
+            <i class="far fa-check-square" />
         </button>
 
-        <button @click="show.addAttachment=!show.addAttachment">
-            <i class="fas fa-paperclip" /> Attachment
+        <button data-txt="Attachment" class="add-attachment-btn content-after" @click="show.addAttachment=!show.addAttachment">
+            <i class="fas fa-paperclip" />
         </button>
         <add-attachment
             v-if="show.addAttachment"
             @addAttachment="addAttachment"
             @closeAddAttachment="show.addAttachment=false"
         />
-        <button @click="show.addAttachment=!show.addAttachment">
-            <i class="fas fa-palette" /> Background
+        <button data-txt="Background" class="background-btn content-after">
+            <i class="fas fa-palette" />
         </button>
 
-        <h3>ACTIONS</h3>
-        <button @click="onClone">
-            <i class="far fa-clone"></i> Clone
+        <h3 class="actions-title">ACTIONS</h3>
+        <button data-txt="Clone" class="clone-btn content-after" @click="onClone">
+            <i class="far fa-clone"></i>
         </button>
-        <button>
-            <i class="fas fa-share-alt" /> Share
+        <button data-txt="Share" class="share-btn content-after">
+            <i class="fas fa-share-alt" />
         </button>
-        <button @click.stop="onTicketDelete(ticket.id)">
-            <i class="far fa-trash-alt" /> Delete
+        <button data-txt="Delete" class="delete-btn content-after" @click.stop="onTicketDelete(ticket.id)">
+            <i class="far fa-trash-alt" />
         </button>
     </div>
 </template>

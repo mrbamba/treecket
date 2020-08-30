@@ -1,20 +1,60 @@
 .ticket-menu {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(6, fit-content(100px));
+    grid-template-columns: repeat(11, fit-content(100px));
 
-    // button{
-    //     border-radius: 2px;
-    //     margin-block-end: 8px;
-    //     border: none;
-    //     padding: 6px;
-    //     background-color: rgba(9,30,66,.04);
-    //     font-size: 13px;
-    //     &:nth-of-type(5){
-    //         margin-bottom: 20px;
-    //     }
-    //     font-weight: lighter;
-    //     text-align: left;
-    // }
+    button {
+        width: 40px;
+        border-radius: 2px;
+        margin-block-end: 8px;
+        border: none;
+        padding: 6px;
+        background-color: rgba(9, 30, 66, .04);
+        font-size: 13px;
+
+        &:nth-of-type(5) {
+            margin-bottom: 20px;
+        }
+
+        font-weight: lighter;
+        text-align: left;
+    }
+
+    @include for-wide-layout {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            width: unset;
+        }
+
+        .content-after {
+            &::after {
+                content: attr(data-txt);
+            }
+        }
+    }
+
+    .add-to-card-title {
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+    }
+
+    .member-selector-btn {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+    }
+
+    .actions-title {
+        grid-row: 3 / 4;
+        grid-column: 1 / -1;
+    }
+
+    .clone-btn {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+    }
+
     h3 {
         font-size: 12px;
         font-weight: 500;
@@ -24,21 +64,26 @@
     }
 
     .date-picker-title {
+        grid-row: 5 / 6;
+        grid-column: 1 / -1;
         font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.5px;
         margin-bottom: rem(4px);
-        
+
 
         .due-date-icon {
             margin-right: 8px;
         }
     }
-    .due-date-input{
+
+    .due-date-input {
+        grid-row: 6 / 7;
+        grid-column: 1 / 5;
         margin-bottom: 10px;
     }
 
-    .clear-due-date-btn{
+    .clear-due-date-btn {
         border: none;
         background: transparent;
         color: #ED1C24;
@@ -46,7 +91,7 @@
         border-radius: 3px;
         border: 1px solid #ED1C24;
         text-align: center;
-    
+
         &:hover {
             background: rgb(220, 220, 220);
             transition: ease-in-out .3s;
@@ -57,7 +102,6 @@
 
     button {
         border: none;
-        margin-bottom: rem(8px);
         background-color: rgba(9, 33, 66, .08);
         border-radius: 3px;
         text-align: left;
@@ -73,9 +117,15 @@
             margin-inline-end: rem(6px);
         }
     }
+
+    button:not(:last-of-type) {
+        margin-bottom: rem(8px);
+    }
 }
 
 .ticket-group-selector {
+    grid-row: 6 / 7;
+    grid-column: 6 / 11;
     padding: rem(6px) rem(12px);
     border: 1px solid #409eff;
     border-radius: 3px;
