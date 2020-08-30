@@ -173,10 +173,15 @@
 }
 
 .clean-btn {
-    background-color: inherit;
+    background-color: transparent;
     border: none;
     padding: 0;
     height: fit-content;
+}
+
+.container {
+    max-width: $container-primary;
+    margin: 0 auto;
 }
 
 .icon {
