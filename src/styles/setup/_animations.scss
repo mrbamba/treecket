@@ -125,17 +125,17 @@
 
 // Try it free btn
 .fall-enter-active {
-    animation: fall-in .3s ease-in-out;
+    animation: fall-in 0.4s ease-in-out;
 }
 
 .fall-leave-active {
-    animation: fall-in 0.2s reverse ease;
+    animation: fall-in 0.2s reverse ease-in-out;
 }
 
 @keyframes fall-in {
     0% {
         transform: translateY(-200px);
-        opacity: 0.5;
+        opacity: 0.7;
     }
 
     50% {

@@ -67,7 +67,7 @@ export default {
     computed: {
         displayUser() {
             if (this.user) {
-                return this.user
+                return this.user;
             } else {
                 return {
                     fullName: 'Guest',
