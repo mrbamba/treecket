@@ -77,8 +77,8 @@
 
     .logged-in-user-options {
         display: inline-block;
-        margin: 17.5px 12px 0 0;
-
+        margin-inline-end: rem(23px);
+        
         a {
             display: flex;
             border-radius: 2em;
