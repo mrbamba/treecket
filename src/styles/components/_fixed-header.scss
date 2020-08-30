@@ -88,16 +88,16 @@
             &:hover {
                 background-color: rgb(221, 221, 221);
             }
+        }
 
-            span {
-                display: inline-block;
-                line-height: 35px;
-                vertical-align: middle;
-                margin-inline-start: rem(10px);
-                margin-inline-end: rem(6px);
-                font-size: rem(14px);
-                color: rgb(74, 74, 74);
-            }
+        span {
+            display: none;
+            line-height: 35px;
+            vertical-align: middle;
+            margin-inline-start: rem(10px);
+            margin-inline-end: rem(6px);
+            font-size: rem(14px);
+            color: rgb(74, 74, 74);
         }
     }
 
@@ -129,6 +129,7 @@
     }
 
     @include for-normal-layout {
+        
         .trial-secondary {
             padding: 0.8em 2.4em;
             margin-inline-end: 16px;
@@ -151,6 +152,12 @@
 
         nav {
             display: inline-flex;
+        }
+
+        .logged-in-user-options {
+            span {
+                display: inline-block;
+            }
         }
 
         .nav-menu {
