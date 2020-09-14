@@ -34,7 +34,7 @@
                     <button class="cancel-button">Cancel</button>
                 </div>
             </form>
-        </div> -->
+        </div>-->
     </div>
 </template>
 
@@ -57,16 +57,19 @@ export default {
             this.$emit("addComment", this.newCommentText);
             this.newCommentText = '';
         },
+
         deleteComment(commentId) {
             let commentIdx = this.comments.findIndex((comment) => comment.id === commentId);
             if (commentIdx < 0) return;
             this.comments.splice(commentIdx, 1);
             this.$emit('updateTicket');
         },
+
         updateTicket() {
             this.$emit('updateTicket');
         }
     },
+
     components: {
         Avatar,
         TicketComment,

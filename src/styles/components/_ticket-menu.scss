@@ -4,13 +4,16 @@
     grid-template-columns: repeat(11, fit-content(100px));
 
     button {
-        width: 40px;
+        display: flex;
+        // width: fit-content;
         border-radius: 2px;
         margin-block-end: 8px;
         border: none;
         padding: 6px;
         background-color: rgba(9, 30, 66, .04);
         font-size: 13px;
+        margin-right: 10px;
+
 
         &:nth-of-type(5) {
             margin-bottom: 20px;
@@ -20,19 +23,23 @@
         text-align: left;
     }
 
-    @include for-wide-layout {
+    @include for-normal-layout {
         display: flex;
         flex-direction: column;
 
+        
+    }
+    
+    @include for-narrow-layout {
         button {
             width: unset;
         }
-
         .content-after {
             &::after {
                 content: attr(data-txt);
             }
         }
+        
     }
 
     .add-to-card-title {
@@ -54,6 +61,17 @@
         grid-row: 4 / 5;
         grid-column: 1 / 2;
     }
+    
+    .share-btn {
+        grid-row: 4 / 5;
+        grid-column: 2 / 3;
+        
+    }
+    
+    .delete-btn {
+        grid-row: 4 / 5;
+        grid-column: 3 / 4;
+    }
 
     h3 {
         font-size: 12px;
@@ -63,42 +81,42 @@
         margin-top: rem(16px);
     }
 
-    .date-picker-title {
-        grid-row: 5 / 6;
-        grid-column: 1 / -1;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        margin-bottom: rem(4px);
+    // .date-picker-title {
+    //     grid-row: 5 / 6;
+    //     grid-column: 1 / -1;
+    //     font-size: 12px;
+    //     font-weight: 500;
+    //     letter-spacing: 0.5px;
+    //     margin-bottom: rem(4px);
 
 
-        .due-date-icon {
-            margin-right: 8px;
-        }
-    }
+    //     .due-date-icon {
+    //         margin-right: 8px;
+    //     }
+    // }
 
-    .due-date-input {
-        grid-row: 6 / 7;
-        grid-column: 1 / 5;
-        margin-bottom: 10px;
-    }
+    // .due-date-input {
+    //     grid-row: 6 / 7;
+    //     grid-column: 1 / 5;
+    //     margin-bottom: 10px;
+    // }
 
-    .clear-due-date-btn {
-        border: none;
-        background: transparent;
-        color: #ED1C24;
-        padding: 6px 10px;
-        border-radius: 3px;
-        border: 1px solid #ED1C24;
-        text-align: center;
+    // .clear-due-date-btn {
+    //     border: none;
+    //     background: transparent;
+    //     color: #ED1C24;
+    //     padding: 6px 10px;
+    //     border-radius: 3px;
+    //     border: 1px solid #ED1C24;
+    //     text-align: center;
 
-        &:hover {
-            background: rgb(220, 220, 220);
-            transition: ease-in-out .3s;
-            background-color: #ED1C24;
-            color: #fff;
-        }
-    }
+    //     &:hover {
+    //         background: rgb(220, 220, 220);
+    //         transition: ease-in-out .3s;
+    //         background-color: #ED1C24;
+    //         color: #fff;
+    //     }
+    // }
 
     button {
         border: none;

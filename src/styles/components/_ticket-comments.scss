@@ -1,7 +1,11 @@
 .ticket-comments {
-    overflow-x: hidden;
+    // overflow-x: hidden;
     // margin-bottom: 25px;
     margin-bottom: 15px;
+    .comment-previews {
+        overflow: hidden;
+        overflow: hidden;
+    }
     
     .add-comment-input {
         bottom: 20px;

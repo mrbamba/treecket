@@ -3,19 +3,70 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 30px;
+
     li {
         display: flex;
         flex-direction: column;
+
+        &:nth-of-type(odd) {
+            margin-right: 10px;
+            margin-bottom: 15px;
+        }
+
         .file-container {
             margin-bottom: 8px;
-            img, iframe, a {
-                height: 170px;
+
+            img,
+            iframe,
+            a {
+                max-height: 130px;
                 border-radius: 3px;
             }
         }
+
         .btn-container {
             display: flex;
             justify-content: space-between;
+        }
+    }
+
+    @include for-narrow-layout {
+        li {
+            .file-container {
+
+                img,
+                iframe,
+                a {
+                    max-height: 150px;
+                }
             }
+        }
+    }
+    
+    @include for-normal-layout {
+        li {
+            .file-container {
+    
+                img,
+                iframe,
+                a {
+                    max-height: 130px;
+                }
+            }
+        }
+
+    }
+
+    @include for-wide-layout {
+        li {
+            .file-container {
+
+                img,
+                iframe,
+                a {
+                    max-height: 170px;
+                }
+            }
+        }
     }
 }
