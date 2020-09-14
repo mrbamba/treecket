@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="wrapper">
-        <transition name="component-fade" mode="out-in">
+        <transition name="slide-fade" mode="out-in">
             <router-view />
         </transition>
         <div :class="{ overlay }" @click.self="hideOverlay"></div>

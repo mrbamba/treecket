@@ -12,7 +12,6 @@
 }
 
 .slide-fade-enter
-
 /* .slide-fade-leave-active below version 2.1.8 */
     {
     transform: translateY(-100px);
@@ -40,6 +39,7 @@
     }
 }
 
+
 // Ticket Comments
 .slide-up-fade-right-enter-active {
     transition: all .3s ease;
@@ -60,7 +60,7 @@
 }
 
 
-
+// Modal (Swal-like)
 .bounce-enter-active {
     animation: bounce-in .3s ease-in-out;
 }
@@ -106,6 +106,7 @@
 }
 
 
+// Page fade
 .component-fade-enter-active {
     transition: opacity .3s ease;
 }

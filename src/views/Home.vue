@@ -1,42 +1,44 @@
 <template>
     <div class="home-container">
         <fixed-header />
-        <main>
+        <main class="flex column align-center">
             <section class="trial-heading">
                 <div>
-                    <h2>
-                        <span>Everything Starts With</span> 
-                        <span>A Great Kanban</span>
+                    <h2 class="block">
+                        <span class="block">Everything Starts With</span>
+                        <span class="block">A Great Kanban</span>
                     </h2>
                     <router-link to="/board" class="trial-btn-main">Try it free</router-link>
                 </div>
             </section>
 
-            <section class="jumbo-white">
-                <div class="img-hero-container">
-                    <img src="@/assets/images/note-list-mobile.svg" alt />
-                </div>
-                <div>
-                    <h2>Real-time communication and full transparency</h2>
-                    <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
+            <section class="jumbo full-width">
+                <div class="container flex wrap-reverse">
+                    <img class="flex1" src="@/assets/images/note-list-mobile.svg" alt />
+                    <div class="flex column justify-center flex1">
+                        <h2>Real-Time Communication, Full Transparency</h2>
+                        <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
+                    </div>
                 </div>
             </section>
-            
-            <!-- <section class="jumbo-gray">
-                <div>
-                    <h3>Items are represented visually on a kanban board, allowing team members to see the state of every piece of work at any time.</h3>
-                </div>
-                <div class="img-hero-container" style="display: block">
-                    <img src="@/assets/images/scrum-board.svg" alt />
-                </div>
-            </section> -->
 
-            <section class="jumbo-white">
-                <div>
-                    <h2>Probably the best tool for agile software development</h2>
+            <section class="jumbo full-width">
+                <div class="container flex wrap">
+                    <div class="flex column justify-center flex1">
+                        <h2>No Brainer Agile Development, Prototyping to Production</h2>
+                        <h3>Ease of use is our mission, so you can focus more on creation and less on administration.</h3>
+                    </div>
+                    <img class="flex1" src="@/assets/images/prototyping-process.svg" alt />
                 </div>
-                <div class="img-hero-container">
-                    <img src="@/assets/images/dashboard.svg" alt />
+            </section>
+
+            <section class="jumbo full-width">
+                <div class="container flex wrap-reverse">
+                    <img class="flex1" src="@/assets/images/dashboard.svg" alt />
+                    <div class="flex column justify-center flex1">
+                        <h2>Stay On Track as You Plan</h2>
+                        <h3>Achive goals with our advanced system including awesome dashboard and lots of customization options.</h3>
+                    </div>
                 </div>
             </section>
         </main>
@@ -52,6 +54,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-</style>
