@@ -26,7 +26,7 @@
                 <div class="container flex wrap">
                     <div class="flex column justify-center flex1">
                         <h2>No Brainer Agile Development, Prototyping to Production</h2>
-                        <h3>Ease of use is our mission, so you can focus more on creation and less on administration.</h3>
+                        <h3>Ease of use is our mission, so you can stay more focusd on creation and less on administration.</h3>
                     </div>
                     <img class="flex1" src="@/assets/images/prototyping-process.svg" alt />
                 </div>
@@ -37,7 +37,7 @@
                     <img class="flex1" src="@/assets/images/dashboard.svg" alt />
                     <div class="flex column justify-center flex1">
                         <h2>Stay On Track as You Plan</h2>
-                        <h3>Achive goals with our advanced system including awesome dashboard and lots of customization options.</h3>
+                        <h3>Achive your goals with our advanced platform including awesome dashboard and lots of customization options.</h3>
                     </div>
                 </div>
             </section>

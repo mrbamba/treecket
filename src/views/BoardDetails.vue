@@ -78,15 +78,15 @@
 
         <user-message v-show="userMessage" :userMessage="userMessage" />
         <!-- <transition name="slide-left"> -->
-            <board-menu
-                :activities="reverseChronolgicalActivities"
-                :boardId="currBoard._id"
-                :boardBackground="currBoard.background"
-                @editBackground="show.backgroundEditor=!show.backgroundEditor"
-                @setBackground="setBackground"
-                @closeBoardMenu="show.menu = false"
-                v-show="show.menu"
-            />
+        <board-menu
+            :activities="reverseChronolgicalActivities"
+            :boardId="currBoard._id"
+            :boardBackground="currBoard.background"
+            @editBackground="show.backgroundEditor=!show.backgroundEditor"
+            @setBackground="setBackground"
+            @closeBoardMenu="show.menu = false"
+            v-show="show.menu"
+        />
         <!-- </transition> -->
     </div>
 </template>
@@ -120,7 +120,7 @@ export default {
                 dashboard: false,
                 fullLabel: false,
                 menu: false,
-                backgroundEditor: false
+                backgroundEditor: false,
             },
             selectedTicket: null,
             selectedTicketIdx: null,
