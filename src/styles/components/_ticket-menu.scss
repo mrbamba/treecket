@@ -1,45 +1,54 @@
 .ticket-menu {
     display: grid;
     grid-template-rows: repeat(6, fit-content(100px));
-    grid-template-columns: repeat(11, fit-content(100px));
+    grid-template-columns: repeat(5, fit-content(100px));
 
     button {
         display: flex;
-        // width: fit-content;
-        border-radius: 2px;
-        margin-block-end: 8px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
         border: none;
-        padding: 6px;
-        background-color: rgba(9, 30, 66, .04);
         font-size: 13px;
-        margin-right: 10px;
-
-
-        &:nth-of-type(5) {
-            margin-bottom: 20px;
-        }
-
         font-weight: lighter;
-        text-align: left;
+        padding: rem(8px) rem(17px);
+        margin-inline-end: rem(10px);
+        background-color: rgba(9, 33, 66, .08);
+        color: #172b4d;
+        &:hover {
+            background-color: rgba(9, 33, 66, .13);
+        }
+        svg {
+            color: #42526e;
+        }
     }
 
     @include for-normal-layout {
         display: flex;
         flex-direction: column;
 
-        
+        button {
+            justify-content: flex-start;
+            margin-block-end: rem(8px);
+        }
     }
-    
+
     @include for-narrow-layout {
         button {
             width: unset;
+            padding: rem(8px) rem(13px);
+
+            svg {
+                margin-inline-end: rem(6px);
+            }
         }
+
         .content-after {
             &::after {
                 content: attr(data-txt);
             }
         }
-        
+
     }
 
     .add-to-card-title {
@@ -61,13 +70,13 @@
         grid-row: 4 / 5;
         grid-column: 1 / 2;
     }
-    
+
     .share-btn {
         grid-row: 4 / 5;
         grid-column: 2 / 3;
-        
+
     }
-    
+
     .delete-btn {
         grid-row: 4 / 5;
         grid-column: 3 / 4;
@@ -79,65 +88,6 @@
         letter-spacing: 0.5px;
         margin-bottom: rem(4px);
         margin-top: rem(16px);
-    }
-
-    // .date-picker-title {
-    //     grid-row: 5 / 6;
-    //     grid-column: 1 / -1;
-    //     font-size: 12px;
-    //     font-weight: 500;
-    //     letter-spacing: 0.5px;
-    //     margin-bottom: rem(4px);
-
-
-    //     .due-date-icon {
-    //         margin-right: 8px;
-    //     }
-    // }
-
-    // .due-date-input {
-    //     grid-row: 6 / 7;
-    //     grid-column: 1 / 5;
-    //     margin-bottom: 10px;
-    // }
-
-    // .clear-due-date-btn {
-    //     border: none;
-    //     background: transparent;
-    //     color: #ED1C24;
-    //     padding: 6px 10px;
-    //     border-radius: 3px;
-    //     border: 1px solid #ED1C24;
-    //     text-align: center;
-
-    //     &:hover {
-    //         background: rgb(220, 220, 220);
-    //         transition: ease-in-out .3s;
-    //         background-color: #ED1C24;
-    //         color: #fff;
-    //     }
-    // }
-
-    button {
-        border: none;
-        background-color: rgba(9, 33, 66, .08);
-        border-radius: 3px;
-        text-align: left;
-        padding: rem(8px) rem(12px);
-        color: #172b4d;
-
-        &:hover {
-            background-color: rgba(9, 33, 66, .13);
-        }
-
-        svg {
-            color: #42526e;
-            margin-inline-end: rem(6px);
-        }
-    }
-
-    button:not(:last-of-type) {
-        margin-bottom: rem(8px);
     }
 }
 
@@ -161,6 +111,6 @@
         display: block;
         color: #8492a6;
         font-size: 14px;
-        margin-bottom: 20px;
+        margin-block-end: rem(20px);
     }
 }
