@@ -2,12 +2,6 @@
     background-color: #f7f7f7;
     min-height: 100%;
 
-    @media (hover: none) and (pointer: coarse) {
-        min-height: 80%;
-        max-height: 80%;
-        background-color: blue !important;
-    }
-
     // max-width: 1060px;
     // margin-left: 50%;
     // transform: translateX(-50%);

@@ -12,6 +12,10 @@
     overflow-wrap: anywhere;
     position: relative;
 
+    @media (hover: none) and (pointer: coarse) {
+        max-height: calc(100% - 100px);
+    }
+
     .ticket-group-header {
         font-size: rem(14px);
         display: flex;
