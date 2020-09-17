@@ -26,7 +26,7 @@
                 <div class="container flex wrap">
                     <div class="flex column justify-center flex1">
                         <h2>No Brainer Agile Development, Prototyping to Production</h2>
-                        <h3>Ease of use is our mission, so you can stay more focusd on creation and less on administration.</h3>
+                        <h3>Ease of use is our mission, so you can stay focusd more on creation and less on administration.</h3>
                     </div>
                     <img class="flex1" src="@/assets/images/prototyping-process.svg" alt />
                 </div>

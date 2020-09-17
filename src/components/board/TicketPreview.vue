@@ -14,7 +14,7 @@
                     :src="getCoverSrc"
                     frameborder="0"
                 ></iframe>
-                <img v-else :src="getCoverSrc" />
+                <img v-else :src="getCoverSrc" draggable="false" />
             </div>
             <ul class="label-container clean-list">
                 <li class="ticket-label" v-for="label in getTicketLabels" :key="label.id">

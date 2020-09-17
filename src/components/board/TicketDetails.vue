@@ -12,7 +12,8 @@
 
             <button class="close-btn" @click="closeTicketDetails">
                 <!-- <p class="bubble-msg">Press ESC to exit</p> -->
-                <i class="fas fa-times" />
+                <!-- <i class="fas fa-times" /> -->
+                <img src="@/assets/icons/close.svg" class="icon" alt="">
             </button>
         </header>
 
