@@ -13,8 +13,7 @@
     position: relative;
 
     @media (hover: none) and (pointer: coarse) {
-        max-height: 20%;
-        background-color: blue !important;
+        max-height: 100px !important;
     }
 
     .ticket-group-header {
