@@ -1,9 +1,9 @@
 <template>
-    <header class="fixed-header" ref="fixedHeader">
-        <div class="logo" ref="fixedHeaderLogo">
+    <header :class="{scrolled: isSticky}" class="fixed-header" ref="fixedHeader">
+        <router-link to="/" class="logo" ref="fixedHeaderLogo">
             <img src="@/assets/logo/logo.png" />
             <h1>Treecket</h1>
-        </div>
+        </router-link>
 
         <button class="nav-menu clean-btn">
             <img class="icon" src="@/assets/icons/hamburger-menu.svg" alt />
@@ -44,18 +44,26 @@
 <script>
 import Avatar from 'vue-avatar';
 export default {
-    name: "BoardPreview",
+    name: "FixedHeader",
+    props: {
+        isSticky: {
+            default: false,
+            type: Boolean
+        }
+    },
     data() {
         return {
             loggedInUser: this.$store.getters.loggedInUser,
-            hiddenTrial: false
+            hiddenTrial: false,
         }
     },
     mounted() {
+        if (this.isSticky) return;
         this.onScroll();
         window.addEventListener('scroll', this.onScroll)
     },
     destroyed() {
+        if (this.isSticky) return;
         window.removeEventListener('scroll', this.onScroll, false)
     },
     methods: {

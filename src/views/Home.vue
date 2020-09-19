@@ -1,14 +1,15 @@
 <template>
     <div class="home-container">
         <fixed-header />
+
         <main class="flex column align-center">
-            <section class="trial-heading">
+            <section class="heading">
                 <div>
                     <h2 class="block">
                         <span class="block">Everything Starts With</span>
                         <span class="block">A Great Kanban</span>
                     </h2>
-                    <router-link to="/board" class="trial-btn-main">Try it free</router-link>
+                    <router-link to="/board" class="main-trial-link">Try it free</router-link>
                 </div>
             </section>
 

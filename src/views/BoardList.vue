@@ -1,7 +1,7 @@
 <template>
-    <div class="boards-list">
-        <fixed-header />
-        <div class="boards-list-header">
+    <div class="board-list">
+        <fixed-header :isSticky="true" />
+        <div class="board-list-header">
             <h2><i class="fas fa-th-large" /> Boards</h2>
         </div>
         <add-board v-if="showAddBoard" @toggleAddBoard="toggleAddBoard" />
