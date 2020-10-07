@@ -4,9 +4,6 @@
 
     .form-container {
         position: relative;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
         height: 100%;
         text-align: center;
 
@@ -69,10 +66,13 @@
             margin: 0 auto;
             border-radius: 3px;
             margin-bottom: 10px;
+            font-size: rem(15px);
+            font-weight: 500;
         }
 
         button {
             font-size: rem(15px);
+            font-weight: 500;
             width: 100%;
             margin-bottom: 25px;
             border: none;

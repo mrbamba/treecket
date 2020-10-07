@@ -1,5 +1,4 @@
 .ticket-details {
-
     @include for-normal-layout {
         grid-template-rows: 20px fit-content(300px) 12px fit-content(100vh) 12px fit-content(300px) 20px;
         grid-template-columns: 20px 1fr 100px fit-content(100px) 20px;
@@ -109,7 +108,7 @@
         grid-row: 4 / -3;
         grid-column: 2 / -2;
         display: grid;
-        grid-template-rows: repeat(9, fit-content(9999px));
+        grid-template-rows: repeat(9, fit-content(100%));
         grid-template-columns: repeat(9, 1fr) 20px fit-content(200px);
         overflow-y: auto;
         overflow: hidden;
