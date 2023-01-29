@@ -1,4 +1,8 @@
-# treecket
+# Treecket
+The main finals project Dan Haski, Tal Schachar and Yoni Kohn did in the Coding Academy Full stack Bootcamp in 2020. 
+
+To see the final project go to:
+# https://treecket.herokuapp.com/#/
 
 ## Project setup
 ```
